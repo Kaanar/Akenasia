@@ -33,12 +33,4 @@
         android:layout_marginBottom="16dp"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <Button
-        android:id="@+id/buttontest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="test"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="top|center" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

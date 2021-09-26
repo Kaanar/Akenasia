@@ -7,11 +7,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 
 class Position {
 
-    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
 
     fun checkLocationPermission() { //passé en publique pour fonctionner dans MainActivity
@@ -27,9 +28,12 @@ class Position {
         }*/
         Toast.makeText(AppCompatActivity().applicationContext,"test", Toast.LENGTH_SHORT).show()
     }
-
+    fun getFusedLocationProviderClient(): FusedLocationProviderClient {
+        return fusedLocationProviderClient
+    }
     fun getCoordonnees() { //celle là doit demander la permission et si elle est accepté retourner les coordonnées dans un toast
         //dans un toast pour voir si ça marche, après on pourra les stocker ou les mettre ailleurs
+        var fusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity())
         val task = fusedLocationProviderClient.lastLocation
 
         if(ActivityCompat.checkSelfPermission(MainActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -43,6 +47,10 @@ class Position {
         task.addOnSuccessListener {
             if(it != null){
                 Toast.makeText(MainActivity().applicationContext,"${it.latitude} ${it.longitude}", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(MainActivity().applicationContext,"erreur", Toast.LENGTH_SHORT).show()
+
             }
         }
     }

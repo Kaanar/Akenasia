@@ -14,15 +14,20 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.akenasia.databinding.ActivityMainBinding
 import com.example.akenasia.Position
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private val pos = Position()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
