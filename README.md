@@ -45,5 +45,3 @@ Akenasia is a location-based mobile video game in which you have to go to a dete
 * Alexandre RIPERT
 * Cathy SIWATALA
 * Paul GORLICKI
-
->>>>>>> 4fd5ccf (update readme)
