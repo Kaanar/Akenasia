@@ -1,5 +1,6 @@
 package com.example.akenasia
 
+import android.app.Application
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -9,12 +10,16 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.Toast
 import com.example.akenasia.databinding.ActivityMainBinding
+import com.example.akenasia.Position
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val pos = Position()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +36,13 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        }
+
+
+        findViewById<Button>(R.id.buttontest).setOnClickListener{
+            //val pos = Position()
+            pos.getCoordonnees()
+            //Toast.makeText(applicationContext,"test", Toast.LENGTH_SHORT).show()
         }
     }
 
