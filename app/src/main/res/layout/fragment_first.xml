@@ -1,104 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:orientation="vertical"
+    android:fillViewport="true"
     tools:context=".FirstFragment">
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        app:layout_constraintBottom_toTopOf="@id/button_first"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first" />
-
-
-    <TableLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <TableRow>
         <TextView
-            android:text="User Id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1" />
+            android:id="@+id/textview_Coordonnees_Goals"
+            android:layout_width="128dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="25dp"
+            android:text="Position à atteindre:"
+            app:layout_constraintBottom_toTopOf="@id/textview_XCoordonnees_Goals"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-
-            android:id="@+id/u_id"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:layout_marginStart="20sp"
-            android:width="150px" />
-    </TableRow>
-    <TableRow>
         <TextView
-            android:text="User Name"
+            android:id="@+id/textview_XCoordonnees_Goals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="1" />
+            android:padding="12dp"
+            android:text="X:"
+            app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
+            app:layout_constraintEnd_toStartOf="@+id/textview_XCoordonnees_Goals_Value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:id="@+id/textview_XCoordonnees_Goals_Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="start"
+            android:width="150dp"
+            app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
+            app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Goals"
+            app:layout_constraintStart_toEndOf="@id/textview_XCoordonnees_Goals"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
 
-        <EditText
-            android:id="@+id/u_name"
-            android:width="200dp"
+        <TextView
+            android:id="@+id/textview_YCoordonnees_Goals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_marginStart="20sp"
-            android:layout_marginLeft="20sp"/>
-    </TableRow>
+            android:padding="12dp"
+            android:text="Y "
+            app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
+            app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Goals_Value"
+            app:layout_constraintStart_toEndOf="@+id/textview_XCoordonnees_Goals_Value"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/textview_YCoordonnees_Goals_Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="start"
+            android:width="150dp"
+            app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textview_YCoordonnees_Goals"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
 
-    </TableLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="350sp"
-        android:layout_marginTop="20sp">
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="wrap_content"
-            android:layout_height="350sp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40sp"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-        <Button
+        <TextView
+            android:id="@+id/textview_Coordonnees_Current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:onClick="saveRecord"/>
-        <Button
+            android:layout_marginTop="25dp"
+            android:text="Position actuelle:"
+            app:layout_constraintBottom_toTopOf="@id/textview_XCoordonnees_Current"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_YCoordonnees_Goals"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textview_XCoordonnees_Current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View"
-            android:onClick="viewRecord"/>
-        <Button
+            android:padding="12dp"
+            android:text="X :"
+            app:layout_constraintBottom_toTopOf="@id/button_first"
+            app:layout_constraintEnd_toStartOf="@+id/textview_XCoordonnees_Current_Value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Current"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp" />
+        <TextView
+            android:id="@+id/textview_XCoordonnees_Current_Value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:onClick="deleteRecord"/>
-    </LinearLayout>
-</LinearLayout>
+            android:padding="12dp"
+            android:gravity="start"
+            android:width="150dp"
+            app:layout_constraintBottom_toTopOf="@id/button_first"
+            app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Current"
+            app:layout_constraintStart_toEndOf="@id/textview_XCoordonnees_Current"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Current"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/textview_YCoordonnees_Current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Y :"
+            app:layout_constraintBottom_toTopOf="@id/button_first"
+            app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Current_Value"
+            app:layout_constraintStart_toEndOf="@+id/textview_XCoordonnees_Current_Value"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/textview_YCoordonnees_Current_Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:width="150dp"
+            android:gravity="start"
+            app:layout_constraintBottom_toTopOf="@id/button_first"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textview_YCoordonnees_Goals"
+            app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/button_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh"
+            app:layout_constraintTop_toBottomOf="@id/textview_YCoordonnees_Goals_Value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
