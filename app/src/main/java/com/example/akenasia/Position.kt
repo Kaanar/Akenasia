@@ -22,33 +22,7 @@ class Position(context: Context) {
     val context:Context = context
 
 
-    init {
-
-        /*val client= LocationServices.getFusedLocationProviderClient(MainActivity())
-        /*if (ActivityCompat.checkSelfPermission(
-                MainActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                MainActivity(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details
-        }*/
-        client.lastLocation.addOnSuccessListener { position: Location? ->
-            if (position != null) {
-                this.latitude = position.latitude
-                this.longitude = position.longitude
-            } else {
-                this.latitude = 0.0
-                this.longitude = 0.0
-            }
-        }*/
-    }
+    init {}
 
     fun getLatitude(): Double {
         return latitude
@@ -58,33 +32,17 @@ class Position(context: Context) {
         return longitude
     }
 
-    fun checkLocationPermission() { //passé en publique pour fonctionner dans MainActivity
-    //fonction pour test l'appel de fonction d'une classe non activity sur la mainActivity
-        /*if(ActivityCompat.checkSelfPermission(AppCompatActivity() , android.Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                AppCompatActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        )
-        {
-            ActivityCompat.requestPermissions(, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
-            return
-        }*/
-        Toast.makeText(AppCompatActivity().applicationContext,"test", Toast.LENGTH_SHORT).show()
-    //}
-    /*fun getFusedLocationProviderClient(): FusedLocationProviderClient {
-        return fusedLocationProviderClient*/
-    }
 
-    fun refreshLocation() { //celle là doit demander la permission et si elle est accepté retourner les coordonnées dans un toast
-        //dans un toast pour voir si ça marche, après on pourra les stocker ou les mettre ailleurs
-        LocationServices.getFusedLocationProviderClient(context)
+    fun refreshLocation() { //demande la permission de récupérer les coordonnées GPS
+        //Si c'est accepté, récupère les coordonnées GPS de l'appareil et les stocke dans l'instance
+        fusedLocationProviderClient=LocationServices.getFusedLocationProviderClient(context)
 
         if(ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         )
         {
-            //ActivityCompat.requestPermissions(MainActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
+            Toast.makeText(MainActivity().applicationContext,"Vous avez autorisé l'application à récupérer vos coordonnées GPS", Toast.LENGTH_SHORT).show()
             return
         }
         val task = fusedLocationProviderClient.lastLocation.addOnSuccessListener { position: Location? ->

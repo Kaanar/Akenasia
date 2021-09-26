@@ -151,16 +151,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
-        <Button
-            android:id="@+id/buttontest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="test"
-            app:layout_constraintTop_toBottomOf="@id/button_first"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-           />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

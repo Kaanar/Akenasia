@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.example.akenasia.databinding.ActivityMainBinding
 import com.example.akenasia.Position
 
@@ -30,12 +31,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
         setSupportActionBar(binding.toolbar)
 
-        findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text = "0"
-        findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = "0"
+        //Fait le lien avec les éléments du fichier XML
+        findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text = "0.0"
+        findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = "0.0"
         findViewById<TextView>(R.id.textview_XCoordonnees_Goals_Value).text = "48.890900"
         findViewById<TextView>(R.id.textview_YCoordonnees_Goals_Value).text = "2.209300"
+
+
+        findViewById<Button>(R.id.button_first).setOnClickListener{
+            pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
+            findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text =pos.getLatitude().toString()
+            findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = pos.getLongitude().toString()
+
+            //findNavController(nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -46,13 +59,6 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-            findViewById<Button>(R.id.buttontest).setOnClickListener{
-            //val pos = Position()
-            pos.refreshLocation()
-            findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text =pos.getLatitude().toString()
-            findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = pos.getLongitude().toString()
-            //Toast.makeText(applicationContext,"test", Toast.LENGTH_SHORT).show()
-        }
 
     }
 
