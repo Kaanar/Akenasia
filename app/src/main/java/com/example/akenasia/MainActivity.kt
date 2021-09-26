@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.example.akenasia.databinding.ActivityMainBinding
 import com.example.akenasia.Position
@@ -20,14 +21,21 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var pos: Position
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        pos = Position(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+
+        findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text = "0"
+        findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = "0"
+        findViewById<TextView>(R.id.textview_XCoordonnees_Goals_Value).text = "48.890900"
+        findViewById<TextView>(R.id.textview_YCoordonnees_Goals_Value).text = "2.209300"
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -38,7 +46,13 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-
+            findViewById<Button>(R.id.buttontest).setOnClickListener{
+            //val pos = Position()
+            pos.refreshLocation()
+            findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text =pos.getLatitude().toString()
+            findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = pos.getLongitude().toString()
+            //Toast.makeText(applicationContext,"test", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -63,4 +77,5 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
 }
