@@ -18,7 +18,6 @@ import android.widget.TextView
  */
 class FirstFragment : Fragment() {
 
-    private val pos = Position(MainActivity())
 
 
     override fun onCreateView(
@@ -44,10 +43,6 @@ class FirstFragment : Fragment() {
 
 
         }
-        view.findViewById<Button>(R.id.buttontest).setOnClickListener{
-            //val pos = Position()
-            pos.getCoordonnees()
-            //Toast.makeText(applicationContext,"test", Toast.LENGTH_SHORT).show()
-        }
+
     }
 }
