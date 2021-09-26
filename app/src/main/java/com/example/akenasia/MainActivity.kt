@@ -1,15 +1,17 @@
 package com.example.akenasia
 
+import android.content.DialogInterface
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.akenasia.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.fragment_first.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,31 +30,84 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+    }
+
+    fun saveRecord(view: View){
+        val id = u_id.text.toString()
+        val name = u_name.text.toString()
+
+        val databaseHandler: DatabaseHandler= DatabaseHandler(this)
+        if(id.trim()!="" && name.trim()!=""){
+            val status = databaseHandler.addEmployee(User(Integer.parseInt(id),name))
+            if(status > -1){
+                Toast.makeText(applicationContext,"record save", Toast.LENGTH_LONG).show()
+                u_id.text.clear()
+                u_name.text.clear()
+
+            }
+        }else{
+            Toast.makeText(applicationContext,"id or name or email cannot be blank",Toast.LENGTH_LONG).show()
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
     }
+    //method for read records from database in ListView
+    fun viewRecord(view: View){
+        //creating the instance of DatabaseHandler class
+        val databaseHandler: DatabaseHandler= DatabaseHandler(this)
+        //calling the viewEmployee method of DatabaseHandler class to read the records
+        val emp: List<User> = databaseHandler.viewEmployee()
+        val empArrayId = Array<String>(emp.size){"0"}
+        val empArrayName = Array<String>(emp.size){"null"}
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        var index = 0
+        for(e in emp){
+            empArrayId[index] = e.userId.toString()
+            empArrayName[index] = e.userName
+
+            index++
         }
+        //creating custom ArrayAdapter
+        val myListAdapter = MyListAdapter(this,empArrayId,empArrayName)
+        listView.adapter = myListAdapter
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    //method for deleting records based on id
+    fun deleteRecord(view: View){
+        //creating AlertDialog for taking user id
+        val dialogBuilder = AlertDialog.Builder(this)
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.delete_dialog, null)
+        dialogBuilder.setView(dialogView)
+
+        val dltId = dialogView.findViewById(R.id.deleteId) as EditText
+        dialogBuilder.setTitle("Delete Record")
+        dialogBuilder.setMessage("Enter id below")
+        dialogBuilder.setPositiveButton("Delete", DialogInterface.OnClickListener { _, _ ->
+
+            val deleteId = dltId.text.toString()
+            //creating the instance of DatabaseHandler class
+            val databaseHandler: DatabaseHandler= DatabaseHandler(this)
+            if(deleteId.trim()!=""){
+                //calling the deleteEmployee method of DatabaseHandler class to delete record
+                val status = databaseHandler.deleteEmployee(User(Integer.parseInt(deleteId),""))
+                if(status > -1){
+                    Toast.makeText(applicationContext,"record deleted",Toast.LENGTH_LONG).show()
+                }
+            }else{
+                Toast.makeText(applicationContext,"id or name or email cannot be blank",Toast.LENGTH_LONG).show()
+            }
+
+        })
+        dialogBuilder.setNegativeButton("Cancel", DialogInterface.OnClickListener { _, _ ->
+            //pass
+        })
+        val b = dialogBuilder.create()
+        b.show()
     }
 }
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/paulg/Akenasia/Akenasia/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/paulg/Akenasia/Akenasia/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/paulg/Akenasia/Akenasia/app/src/main/res/layout/custom_list.xml" value="0.1" />
+        <entry key="..\:/Users/paulg/Akenasia/Akenasia/app/src/main/res/layout/delete_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/paulg/Akenasia/Akenasia/app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="..\:/Users/paulg/Akenasia/Akenasia/app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="..\:/Users/paulg/Akenasia/Akenasia/app/src/main/res/layout/update_dialog.xml" value="0.14666666666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
