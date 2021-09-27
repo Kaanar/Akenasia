@@ -1,6 +1,5 @@
 package com.example.akenasia
 
-import android.app.Application
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.akenasia.databinding.ActivityMainBinding
-import com.example.akenasia.Position
 
 
 class MainActivity : AppCompatActivity() {
