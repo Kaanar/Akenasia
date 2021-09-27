@@ -33,7 +33,7 @@ class Position(context: Context) {
 
 
     fun refreshLocation() { //demande la permission de récupérer les coordonnées GPS
-        //Si c'est accepté, récupère les coordonnées GPS de l'appareil et les stocke dans l'instance
+        //Si c'est accepté,récupère les coordonnées GPS de l'appareil et les stocke dans l'instance
         fusedLocationProviderClient=LocationServices.getFusedLocationProviderClient(context)
 
         if(ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION)
