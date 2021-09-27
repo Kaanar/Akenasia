@@ -26,6 +26,12 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wraper/
+deploy:
+  github-token: $GITHUB_TOKEN
+  provider: pages
+  skip_cleanup: true
+  true:
+    branch: master
 env:
   global:
     - "ANDROID_API= 30"
