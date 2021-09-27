@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import java.lang.Math.pow
+import java.lang.Math.sqrt
+import kotlin.math.pow
 
 
 class Position(context: Context) {
@@ -53,16 +56,18 @@ class Position(context: Context) {
                 this.longitude = 0.0
             }
         }
-
-
-        /*task.addOnSuccessListener {
-            if(it != null){
-                Toast.makeText(MainActivity().applicationContext,"${it.latitude} ${it.longitude}", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(MainActivity().applicationContext,"erreur", Toast.LENGTH_SHORT).show()
-
-           }
-        }*/
     }
+
+    //calcule la distance en km, x1000 pour l'avoir en mètres, à tester en extérieur pour voir ce que ça donne quand on se déplace
+    fun calcul_distance(lat1 : Double, long1 : Double, lat2 : Double, long2 : Double, d2r : Double = 0.0174532925199433): Double {
+        val dlong: Double = ((long2 - long1) * d2r).pow(2.0)
+        val dlat: Double = (lat2 - lat1) * d2r.pow(2.0)
+        val a: Double = kotlin.math.sin(dlat / 2.0).pow(2.0) + kotlin.math.cos(lat1 * d2r) * kotlin.math.cos(
+            lat2 * d2r
+        ) * kotlin.math.sin(dlong / 2.0).pow(2.0)
+        val c: Double = 2 * kotlin.math.atan2(kotlin.math.sqrt(a), kotlin.math.sqrt(1 - a))
+        val result: Double = sqrt(dlong+dlat)
+        return result* 1000 //pour tester avec les mettre, faudra enlever tout ce qu'il y a après la virgule
+    }
+
 }

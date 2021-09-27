@@ -11,8 +11,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.akenasia.databinding.ActivityMainBinding
+import java.lang.Math.*
+import kotlin.math.pow
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,8 +45,12 @@ class MainActivity : AppCompatActivity() {
             pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
             findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text =pos.getLatitude().toString()
             findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = pos.getLongitude().toString()
+            val distance : Double = pos.calcul_distance(pos.getLatitude(), pos.getLongitude(), 48.890900, 2.209300)
+            Toast.makeText(applicationContext,"$distance", Toast.LENGTH_SHORT).show()
 
-            //findNavController(nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
+            if (distance<1000){
+                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
+            }
         }
 
 
@@ -80,5 +87,6 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
 
 }
