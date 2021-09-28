@@ -10,25 +10,44 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import com.example.akenasia.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.fragment_first.*
+import kotlinx.android.synthetic.main.fragment_second.*
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var pos: Position
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        pos = Position(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+       //Fait le lien avec les éléments du fichier XML
+/*
+        current_X.text = "48.890900"
+        current_Y.text= "2.209300"
+*/
+
+    }
+
+    fun readLocation(view: View){
+        pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
+        current_X.text =pos.getLatitude().toString()
+        current_Y.text = pos.getLongitude().toString()
 
     }
 
@@ -46,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
             }
         }else{
-            Toast.makeText(applicationContext,"id or name or email cannot be blank",Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext,"id or name or email cannot be blank", Toast.LENGTH_LONG).show()
         }
 
     }
@@ -91,10 +110,10 @@ class MainActivity : AppCompatActivity() {
                 //calling the deleteEmployee method of DatabaseHandler class to delete record
                 val status = databaseHandler.deleteEmployee(User(Integer.parseInt(deleteId),""))
                 if(status > -1){
-                    Toast.makeText(applicationContext,"record deleted",Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,"record deleted", Toast.LENGTH_LONG).show()
                 }
             }else{
-                Toast.makeText(applicationContext,"id or name or email cannot be blank",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"id or name or email cannot be blank", Toast.LENGTH_LONG).show()
             }
 
         })
@@ -105,9 +124,3 @@ class MainActivity : AppCompatActivity() {
         b.show()
     }
 }
-
-
-
-
-
-
