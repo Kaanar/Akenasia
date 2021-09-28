@@ -31,7 +31,7 @@ Side information: To test the game, you need to use android studio atm.
 
 ## Context
 ***
-We are four students in the first year of our master, this project is part of our school curriculum.
+We are four students in the first year of our master. This project is part of our school curriculum.
 
 
 1. **What kind of game is Akenasia ?**
