@@ -18,7 +18,9 @@ android:
     - android-$EMULATOR_API_LEVEL
     - extra-google_m2repository
     - extra-android-m2repository
+    - extra-android-support
     - addon-google_apis-google-19
+    - sys-img-armeabi-v7a-android-$ANDROID_API
     - sys-img-armeabli-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
     - sys-img-armeabli-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
   licences: 
