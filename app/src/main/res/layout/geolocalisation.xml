@@ -9,7 +9,7 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:orientation="vertical"
-    tools:context=".SecondFragment">
+    tools:context=".Geolocalisation">
 
 
             <TextView
@@ -141,11 +141,10 @@
                 android:layout_marginTop="15dp"/>
 
             <Button
-                android:id="@+id/u_button_first"
+                android:id="@+id/b_refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Refresh"
-                android:onClick="readLocation"
                 app:layout_constraintTop_toBottomOf="@id/textview_YCoordonnees_Goals_Value"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

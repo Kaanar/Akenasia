@@ -9,7 +9,7 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:orientation="vertical"
-    tools:context=".FirstFragment">
+    tools:context=".Database">
 
     <TextView
         android:id="@+id/textview_first"
@@ -86,19 +86,22 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
         <Button
+            android:id="@+id/b_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:onClick="saveRecord"/>
+            android:text="Save"/>
+            //android:onClick="saveRecord"/>
         <Button
+            android:id="@+id/b_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View"
-            android:onClick="viewRecord"/>
+            android:text="View"/>
+            //android:onClick="viewRecord"/>
         <Button
+            android:id="@+id/b_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:onClick="deleteRecord"/>
+            android:text="Delete"/>
+            //android:onClick="deleteRecord"/>
     </LinearLayout>
 </LinearLayout>
