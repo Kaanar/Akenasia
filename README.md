@@ -1,3 +1,8 @@
+## Akenasia
+https://img.shields.io/github/license/Kaanar/Akenasia
+https://img.shields.io/github/issues/Kaanar/Akenasia
+[![Build Status](https://app.travis-ci.com/Kaanar/Akenasia.svg?branch=develop)](https://app.travis-ci.com/Kaanar/Akenasia)
+
 ## Table of Contents
 1. [General Info](#general-info)
 2. [Technologies](#technologies)
