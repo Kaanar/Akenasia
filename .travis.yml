@@ -28,7 +28,6 @@ before_install:
   - chmod +x gradlew
 
 before_script:
-  - "cd src/client"
   - "android list targets"
   - "echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a"
   - "emulator -avd test -no-window &"
