@@ -9,11 +9,11 @@ language: android
 
 
 android:
-  licences:
+  licenses:
     - 'android-sdk-preview-licence-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
-    -
+
   components: 
     - tools
     - plateform-tools
@@ -44,7 +44,7 @@ branches:
 deploy: 
   github-token: $GITHUB_TOKEN
   provider: pages
-  skip_cleanup: true
+  cleanup: true
   true: 
     branch: master
 
