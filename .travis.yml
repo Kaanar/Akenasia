@@ -44,7 +44,7 @@ deploy:
 
 addons:
   sonarcloud:
-    organization: "Akenasia"
+    organization: Akenasia
     token:
       secure: $SONAR_TOKEN
 
