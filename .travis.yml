@@ -54,8 +54,8 @@ env:
     - EMULATOR_API=30.2.6
     - ANDROID_BUILD_TOOLS=24
     - ADB_INSTALL_TIMEOUT=5
-jdk: oraclejdk8
+jdk: oraclejdk11
 language: android
 script:
-  - "chmod +x ./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
+  - "chmod +x ./gradlew clean build connectedCheck -- stacktrace"
   - sonar-scanner
