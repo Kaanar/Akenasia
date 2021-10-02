@@ -10,6 +10,11 @@ sudo: required
 
 
 android:
+  licences:
+    - 'android-sdk-preview-licence-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+    -
   components: 
     - tools
     - plateform-tools
@@ -23,31 +28,27 @@ android:
     - sys-img-armeabi-v7a-android-$ANDROID_API
     - sys-img-armeabli-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
     - sys-img-armeabli-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
-  licences: 
-    - android-sdk-preview-licence-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
-before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
+
+
 before_script:
   - android list targets
-  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
-  - emulator - avd foo -no-skin -no-audio -no-window &
-  # - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+    - emulator -avd test -no-audio -no-window &
+    - bash android-wait-for-emulator
+    - adb shell input keyevent 82 &
+
 branches: 
   only: 
     - master
     - develop
-cache: 
-  directories: 
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wraper/
+
 deploy: 
   github-token: $GITHUB_TOKEN
   provider: pages
   skip_cleanup: true
   true: 
     branch: master
+
 addons:
   sonarcloud:
     organization: "Akenasia"
@@ -57,3 +58,10 @@ addons:
 script: 
   - "./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
   - sonar-scanner
+
+before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wraper/
