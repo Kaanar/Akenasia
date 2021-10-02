@@ -54,7 +54,7 @@ addons:
   sonarcloud:
     organization: "Akenasia"
     token:
-      secure: $SONARCLOUD_TOKEN
+      secure: $SONAR_TOKEN
 
 script: 
   - "./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
