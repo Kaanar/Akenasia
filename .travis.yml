@@ -1,24 +1,11 @@
-dist: xenial
-
-install: travis_wait mvn install
-
-env:
-  global:
-    - ANDROID_API=24
-    - EMULATOR_API=30.2.6
-    - ANDROID_BUILD_TOOLS=24
-    - ADB_INSTALL_TIMEOUT=5
-jdk: oraclejdk8
-language: android
-
-
+---
+addons:
+  sonarcloud:
+    organization: Akenasia
+    token:
+      secure: $SONAR_TOKEN
 android:
-  licenses:
-    - 'android-sdk-preview-licence-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-
-  components: 
+  components:
     - build-tools-$ANDROID_BUILD_TOOLS
     - android-$ANDROID_API
     - android-$EMULATOR_API_LEVEL
@@ -29,40 +16,41 @@ android:
     - sys-img-armeabi-v7a-android-$ANDROID_API
     - sys-img-armeabli-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
     - sys-img-armeabli-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
-
-
+  licenses:
+    - android-sdk-preview-licence-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 before_script:
-  - android list targets
-  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
-  - emulator -avd test -no-window &
-  - bash android-wait-for-emulator
-  - adb shell input keyevent 82 &
-
-branches: 
-  only: 
+  - "android list targets"
+  - "echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a"
+  - "emulator -avd test -no-window &"
+  - "bash android-wait-for-emulator"
+  - "adb shell input keyevent 82 &"
+branches:
+  only:
     - master
     - develop
-
-deploy: 
-  github-token: $GITHUB_TOKEN
-  provider: pages
-  cleanup: true
-  true: 
-    branch: master
-
-addons:
-  sonarcloud:
-    organization: "Akenasia"
-    token:
-      secure: $SONAR_TOKEN
-
-script:
-  - "./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
-  - sonar-scanner
-
-before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
-
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wraper/
+deploy:
+  cleanup: true
+  github-token: $GITHUB_TOKEN
+  provider: pages
+  true:
+    branch: master
+dist: xenial
+env:
+  global:
+    - ANDROID_API=24
+    - EMULATOR_API=30.2.6
+    - ANDROID_BUILD_TOOLS=24
+    - ADB_INSTALL_TIMEOUT=5
+install: "travis_wait mvn install"
+jdk: oraclejdk8
+language: android
+script:
+  - "./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
+  - sonar-scanner
