@@ -55,6 +55,5 @@ env:
 jdk: oraclejdk8
 language: android
 script:
-  - "chmod +x ./gradlew build connectedCheck"
-  - "./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
+  - "chmod +x ./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
   - sonar-scanner
