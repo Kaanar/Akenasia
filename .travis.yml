@@ -5,6 +5,8 @@ addons:
       secure: $SONAR_TOKEN
 android:
   components:
+    - tools
+    - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS
     - android-$ANDROID_API
     - android-$EMULATOR_API_LEVEL
@@ -23,7 +25,8 @@ before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOM
 before_install:
   - pwd
   - "ls -la"
-  - "chmod +x /.gradlew"
+  - chmod +x gradlew
+
 before_script:
   - "cd src/client"
   - "android list targets"
