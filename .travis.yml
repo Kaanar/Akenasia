@@ -30,6 +30,14 @@ android:
     - sys-img-armeabli-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
     - sys-img-armeabli-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
 
+
+before_script:
+  - android list targets
+  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
+  - bash android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
 branches: 
   only: 
     - master
@@ -44,21 +52,13 @@ deploy:
 
 addons:
   sonarcloud:
-    organization: Akenasia
+    organization: "Akenasia"
     token:
       secure: $SONAR_TOKEN
 
 script:
-  - ./gradlew clean build -PdisablePreDex -- stacktrace
+  - "./gradlew clean build connectedCheck -PdisablePreDex -- stacktrace"
   - sonar-scanner
-
-after_script:
-  - android list targets
-  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
-  - bash android-wait-for-emulator
-  - adb shell input keyevent 82 &
-  - ./gradlew connectedCheck
 
 before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 
