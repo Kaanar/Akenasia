@@ -1,5 +1,7 @@
 dist: xenial
 
+install: travis_wait mvn install
+
 env:
   global:
     - ANDROID_API=24
