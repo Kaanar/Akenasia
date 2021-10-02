@@ -1,6 +1,6 @@
 addons:
   sonarcloud:
-    organization: Akenasia
+    organization: akenasia
     token: ${SONAR_TOKEN}
 android:
   components:
