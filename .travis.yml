@@ -60,6 +60,7 @@ env:
     - ADB_INSTALL_TIMEOUT=5
 jdk: oraclejdk11
 language: android
+os: linux
 script:
   - ./gradlew clean
   - ./gradlew build
