@@ -22,8 +22,8 @@ android:
     - google-gdk-license-.+
 before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 before_install:
-  - pwd
-  - "ls -la"
+  - chmod +x gradlew
+
 
 before_script:
   - "android list targets"
@@ -31,7 +31,6 @@ before_script:
   - "emulator -avd test -no-window &"
   - "bash android-wait-for-emulator"
   - "adb shell input keyevent 82 &"
-  - chmod +x gradlew
 
 branches:
   only:
