@@ -3,6 +3,7 @@
 
 # IDEs
 .idea
+.idea/workspace.xml
 *.iml
 build/
 .classpath
