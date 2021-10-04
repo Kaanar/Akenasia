@@ -28,9 +28,6 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 before_install:
-  - touch $HOME/.android/repositories.cfg
-  - yes | sdkmanager "platforms;android-24"
-  - yes | sdkmanager "build-tools;24"
   - chmod +x gradlew
 addons:
   sonarcloud:
