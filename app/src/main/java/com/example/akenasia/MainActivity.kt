@@ -1,5 +1,6 @@
 package com.example.akenasia
 
+import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             101
         )
         setSupportActionBar(binding.toolbar)
