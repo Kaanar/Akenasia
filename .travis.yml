@@ -7,11 +7,6 @@ android:
     - tools
     - platform-tools
     - tools
-    - build-tools-$ANDROID_BUILD_TOOLS
-    - build-tools-30.0.2
-    - android-$ANDROID_API
-    - android-30
-    - android-$EMULATOR_API_LEVEL
     - extra-google_m2repository
     - extra-android-m2repository
     - extra-android-support
@@ -26,8 +21,11 @@ android:
     - 'google-gdk-license-.+'
 before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 before_install:
-  - chmod +x gradlew
+  - touch $HOME/.android/repositories.cfg
   - yes | sdkmanager "platforms;android-30"
+  - yes | sdkmanager "build-tools;30.0.2"
+  - chmod +x gradlew
+
 
 before_script:
   - "android list targets"
@@ -49,6 +47,8 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wraper/
+    - $HOME/.android/build-cache
+
 deploy:
   cleanup: true
   github-token: $GITHUB_TOKEN
