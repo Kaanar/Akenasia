@@ -56,5 +56,5 @@ env:
 jdk: oraclejdk11
 language: android
 script:
-  - "chmod +x ./gradlew clean build connectedCheck -- stacktrace"
+  - "./gradlew clean build connectedCheck -- stacktrace"
   - sonar-scanner
