@@ -17,13 +17,15 @@ android:
     - sys-img-armeabli-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
     - sys-img-armeabli-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
   licenses:
-    - android-sdk-preview-licence-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
+    - 'android-sdk-preview-licence-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+    - '.+'
 before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 before_install:
-  - yes | sdkmanager "platforms;android-$ANDROID_API"
   - chmod +x gradlew
+  #- yes | sdkmanager "platforms;android-24"
+  #- yes | sdkmanager "build-tools;24"
 
 
 before_script:
@@ -47,7 +49,7 @@ deploy:
   provider: pages
   true:
     branch: master
-dist: xenial
+dist: trusty
 env:
   global:
     - ANDROID_API=24
