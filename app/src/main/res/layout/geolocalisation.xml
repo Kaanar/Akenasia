@@ -25,55 +25,28 @@
 
             <TextView
                 android:id="@+id/textview_XCoordonnees_Goals"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="X:"
-                app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
-                app:layout_constraintEnd_toStartOf="@+id/textview_XCoordonnees_Goals_Value"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp" />
-            <TextView
-                android:id="@+id/goal_X"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:gravity="start"
-                android:width="150dp"
-                app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
-                app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Goals"
-                app:layout_constraintStart_toEndOf="@id/textview_XCoordonnees_Goals"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="0sp"
+                android:text="X :" />
 
-            <TextView
+    <TextView
+        android:id="@+id/goal_X"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30sp" />
+
+    <TextView
                 android:id="@+id/textview_YCoordonnees_Goals"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="Y "
-                app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
-                app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Goals_Value"
-                app:layout_constraintStart_toEndOf="@+id/textview_XCoordonnees_Goals_Value"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:text="Y :" />
             <TextView
                 android:id="@+id/goal_Y"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:gravity="start"
-                android:width="150dp"
-                app:layout_constraintBottom_toTopOf="@id/textview_Coordonnees_Current"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textview_YCoordonnees_Goals"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"/>
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30sp"/>
 
             <TextView
                 android:id="@+id/textview_Coordonnees_Current"
@@ -90,62 +63,33 @@
 
             <TextView
                 android:id="@+id/textview_XCoordonnees_Current"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="X :"
-                app:layout_constraintBottom_toTopOf="@id/button_first"
-                app:layout_constraintEnd_toStartOf="@+id/textview_XCoordonnees_Current_Value"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Current"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="0sp"
+                android:text="X :"/>
             <TextView
                 android:id="@+id/current_X"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:gravity="start"
-                android:width="150dp"
-                app:layout_constraintBottom_toTopOf="@id/button_first"
-                app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Current"
-                app:layout_constraintStart_toEndOf="@id/textview_XCoordonnees_Current"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Current"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"/>
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30sp"/>
 
             <TextView
                 android:id="@+id/textview_YCoordonnees_Current"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="Y :"
-                app:layout_constraintBottom_toTopOf="@id/button_first"
-                app:layout_constraintEnd_toStartOf="@+id/textview_YCoordonnees_Current_Value"
-                app:layout_constraintStart_toEndOf="@+id/textview_XCoordonnees_Current_Value"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="0sp"
+                android:text="Y :"/>
             <TextView
                 android:id="@+id/current_Y"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:width="150dp"
-                android:gravity="start"
-                app:layout_constraintBottom_toTopOf="@id/button_first"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textview_YCoordonnees_Goals"
-                app:layout_constraintTop_toBottomOf="@id/textview_Coordonnees_Goals"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="15dp"/>
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30sp"/>
 
             <Button
                 android:id="@+id/b_refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Refresh"
-                app:layout_constraintTop_toBottomOf="@id/textview_YCoordonnees_Goals_Value"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

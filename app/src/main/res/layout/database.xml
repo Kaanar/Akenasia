@@ -92,12 +92,6 @@
             android:text="Save"/>
             //android:onClick="saveRecord"/>
         <Button
-            android:id="@+id/b_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View"/>
-            //android:onClick="viewRecord"/>
-        <Button
             android:id="@+id/b_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

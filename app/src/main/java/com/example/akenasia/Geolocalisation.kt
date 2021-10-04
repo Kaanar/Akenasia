@@ -43,8 +43,8 @@ class Geolocalisation : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         current_X.text = "-1"
         current_Y.text= "-1"
-        goal_X.text = "48.890900"
-        goal_Y.text = "2.209300"
+        goal_X.text = "48.90432845480199"
+        goal_Y.text = "2.216647218942868"
 
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
@@ -59,16 +59,16 @@ class Geolocalisation : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
+    //maison de l'étudiant 48.902656120835665, 2.2134736447569447
     fun readLocation(){
         pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
         current_X.text =pos.getLatitude().toString()
         current_Y.text = pos.getLongitude().toString()
-        val distance : Double = pos.calcul_distance(pos.getLatitude(), pos.getLongitude(), 48.890900, 2.209300)
+        val distance : Double = pos.calcul_distance(48.902656120835665, 2.2134736447569447, 48.90432845480199, 2.216647218942868)
         Toast.makeText(activity,"$distance", Toast.LENGTH_SHORT).show()
 
         if (distance<1000){
-            Toast.makeText(activity,"<1000 bravo", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(activity,"<1000 bravo", Toast.LENGTH_SHORT).show()
         }
     }
 }
