@@ -24,6 +24,9 @@ android:
 before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 before_install:
   - chmod +x gradlew
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo -e "\n504667f4c0de7af1a06de9f4b1727b84351f2910" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 
 
 
@@ -33,8 +36,7 @@ before_script:
   - "emulator -avd test -no-window &"
   - "bash android-wait-for-emulator"
   - "adb shell input keyevent 82 &"
-  - mkdir -p "$ANDROID_HOME/licenses"
-  - cp ./android-licenses/ "$ANDROID_HOME/licenses/"
+
 
 branches:
   only:
