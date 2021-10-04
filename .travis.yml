@@ -7,11 +7,14 @@ android:
     - tools
     - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS
+    - build-tools-30.0.2
     - android-$ANDROID_API
+    - android-30
     - android-$EMULATOR_API_LEVEL
     - extra-google_m2repository
     - extra-android-m2repository
     - extra-android-support
+    - extra-google-google_play_services
     - addon-google_apis-google-19
     - sys-img-armeabi-v7a-android-$ANDROID_API
     - sys-img-armeabli-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
@@ -20,11 +23,9 @@ android:
     - 'android-sdk-preview-licence-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
-    - '.+'
 before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 before_install:
   - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-30"
 install:
   - yes | sdkmanager --licenses >/dev/null
 
