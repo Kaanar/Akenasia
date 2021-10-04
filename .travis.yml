@@ -13,6 +13,8 @@ android:
     - tools
     - platform-tools
     - tools
+    - build-tools-$ANDROID_BUILD_TOOLS
+    - android-$ANDROID_API
     - extra-google_m2repository
     - extra-android-m2repository
     - extra-android-support
@@ -59,6 +61,5 @@ deploy:
     branch: master
 script:
   - ./gradlew clean
-  - ./gradlew build
-  - ./gradlew connectedCheck --stacktrace
+  - gradle build connectedCheck
   - sonar-scanner
