@@ -1,7 +1,13 @@
-addons:
-  sonarcloud:
-    organization: akenasia
-    token: ${SONAR_TOKEN}
+language: android
+sudo: required
+dist: trusty
+jdk: oraclejdk11
+env:
+  global:
+    - ANDROID_API=24
+    - EMULATOR_API=30.2.6
+    - ANDROID_BUILD_TOOLS=24
+    - ADB_INSTALL_TIMEOUT=5
 android:
   components:
     - tools
@@ -19,51 +25,38 @@ android:
     - 'android-sdk-preview-licence-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
-before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 before_install:
   - touch $HOME/.android/repositories.cfg
   - yes | sdkmanager "platforms;android-24"
   - yes | sdkmanager "build-tools;24"
   - chmod +x gradlew
+addons:
+  sonarcloud:
+    organization: akenasia
+    token: ${SONAR_TOKEN}
 
-
+before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wraper/
+    - $HOME/.android/build-cache
 before_script:
   - "android list targets"
   - "echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a"
   - "emulator -avd test -no-window &"
   - "bash android-wait-for-emulator"
   - "adb shell input keyevent 82 &"
-  # Ensure signing configuration is present
-  - mv app/gradle.properties.example app/gradle.properties
-  # Reduce memory usage / avoid OutOfMemoryError with Gradle 4.10.3
-  - echo "org.gradle.jvmargs=-Xmx2048m -Xms512m -XX:MaxPermSize=768m" >> gradle.properties
-
-
 branches:
   only:
     - master
     - develop
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wraper/
-    - $HOME/.android/build-cache
-
 deploy:
   cleanup: true
   github-token: $GITHUB_TOKEN
   provider: pages
   true:
     branch: master
-dist: trusty
-env:
-  global:
-    - ANDROID_API=24
-    - EMULATOR_API=30.2.6
-    - ANDROID_BUILD_TOOLS=24
-    - ADB_INSTALL_TIMEOUT=5
-jdk: oraclejdk11
-language: android
 script:
   - ./gradlew clean
   - ./gradlew build
