@@ -58,5 +58,6 @@ deploy:
     branch: master
 script:
   - ./gradlew clean
-  - gradle build connectedCheck
+  - ./gradlew build
+  - ./gradlew connectedCheck --stacktrace --info --debug
   - sonar-scanner
