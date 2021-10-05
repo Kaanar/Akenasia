@@ -1,6 +1,5 @@
 ---
 language: android
-jdk: oraclejdk16
 
 android:
   licenses:
