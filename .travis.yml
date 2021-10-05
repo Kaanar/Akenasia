@@ -1,6 +1,6 @@
 language: android
 dist: focal
-jdk: oraclejdk16
+
 env:
   global:
     - ANDROID_API=24
@@ -28,6 +28,7 @@ android:
 before_install:
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-30"
+  jdk: oraclejdk16
 addons:
   sonarcloud:
     organization: akenasia
