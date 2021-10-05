@@ -58,6 +58,6 @@ deploy:
     branch: master
 script:
   - ./gradlew clean
-  - ./gradlew build
-  - ./gradlew connectedCheck --stacktrace --info --debug
+  - ./gradlew build --warning-mode all
+  - ./gradlew connectedCheck --warning-mode all
   - sonar-scanner
