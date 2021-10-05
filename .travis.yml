@@ -38,7 +38,7 @@ android:
     - 'google-gdk-license-.+'
 before_install:
   - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-30" --stacktrace
+  - yes | sdkmanager "platforms;android-30"
 addons:
   sonarcloud:
     organization: akenasia
