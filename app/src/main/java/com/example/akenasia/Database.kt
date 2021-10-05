@@ -40,7 +40,7 @@ class Database : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewRecord()
+        //viewRecord()
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
@@ -60,10 +60,12 @@ class Database : Fragment() {
     private fun saveRecord() {
         val id = u_id.text.toString()
         val name = u_name.text.toString()
+        val latitude = "salit"
+        val longitude = "salut"
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
-        if (id.trim() != "" && name.trim() != "") {
-            val status = databaseHandler.addEmployee(User(Integer.parseInt(id), name))
+        if (id.trim() != "" && name.trim() != "" && latitude.trim() !="" && longitude.trim() != "") {
+            val status = databaseHandler.addEmployee(Place(Integer.parseInt(id), name, latitude, longitude))
             if (status > -1) {
                 Toast.makeText(activity, "record save", Toast.LENGTH_LONG).show()
                 u_id.text.clear()
@@ -83,19 +85,23 @@ class Database : Fragment() {
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<User> = databaseHandler.viewEmployee()
+        val emp: List<Place> = databaseHandler.viewEmployee()
         val empArrayId = Array<String>(emp.size){"0"}
         val empArrayName = Array<String>(emp.size){"null"}
+        val empArrayLat = Array<String>(emp.size){"null"}
+        val empArrayLong = Array<String>(emp.size){"null"}
 
         var index = 0
         for(e in emp){
-            empArrayId[index] = e.userId.toString()
-            empArrayName[index] = e.userName
+            empArrayId[index] = e.placeId.toString()
+            empArrayName[index] = e.placeName
+            //empArrayLat[index] = e.placeLat
+            //empArrayLong[index] = e.placeLong
 
             index++
         }
         //creating custom ArrayAdapter
-        val myListAdapter = MyListAdapter(this.requireActivity(),empArrayId,empArrayName)
+        val myListAdapter = MyListAdapter(this.requireActivity(),empArrayId,empArrayName, empArrayLat, empArrayLong)
         listView.adapter = myListAdapter
     }
     private fun deleteRecord(){
@@ -115,7 +121,7 @@ class Database : Fragment() {
             val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
             if(deleteId.trim()!=""){
                 //calling the deleteEmployee method of DatabaseHandler class to delete record
-                val status = databaseHandler.deleteEmployee(User(Integer.parseInt(deleteId),""))
+                val status = databaseHandler.deleteEmployee(Place(Integer.parseInt(deleteId),"", "",""))
                 if(status > -1){
                     Toast.makeText(activity,"record deleted", Toast.LENGTH_LONG).show()
                 }
