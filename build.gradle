@@ -16,7 +16,6 @@ buildscript {
     }
 }
 
-apply plugin: 'jacoco'
 apply plugin: 'org.sonarqube'
 
 task clean(type: Delete) {

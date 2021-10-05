@@ -1,7 +1,7 @@
 language: android
 sudo: required
 dist: trusty
-jdk: oraclejdk11
+jdk: oraclejdk8
 env:
   global:
     - ANDROID_API=24
@@ -41,6 +41,8 @@ cache:
     - $HOME/.gradle/wraper/
     - $HOME/.android/build-cache
 before_script:
+  - sudo apt install openjdk-16-jdk
+  - sudo apt install openjdk-8-jdk
   - "android list targets"
   - "echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a"
   - "emulator -avd test -no-window &"
