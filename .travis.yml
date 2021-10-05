@@ -1,5 +1,16 @@
 language: android
+jdk:
+  - openjdk8
+  - openjdk11
+  - openjdk-ea
+  - oraclejdk8
+  - oraclejdk11
+  - oraclejdk-ea
 dist: focal
+
+matrix:
+  allow_failures:
+    - jdk: openjdk-ea
 
 env:
   global:
@@ -27,13 +38,11 @@ android:
     - 'google-gdk-license-.+'
 before_install:
   - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-30"
-  jdk: oraclejdk16
+  - yes | sdkmanager "platforms;android-30" --stacktrace
 addons:
   sonarcloud:
     organization: akenasia
     token: ${SONAR_TOKEN}
-
 before_cache:
   -rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   -rm -fr $HOME/.gradle/caches/*/plugin-resolution/
