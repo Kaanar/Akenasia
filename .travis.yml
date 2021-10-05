@@ -1,22 +1,13 @@
 language: android
-jdk:
-  - openjdk8
-  - openjdk11
-  - openjdk-ea
-  - oraclejdk8
-  - oraclejdk11
-  - oraclejdk-ea
-dist: focal
-
-matrix:
-  allow_failures:
-    - jdk: openjdk-ea
-
+sudo: required
+dist: trusty
+jdk: oraclejdk11
 env:
   global:
     - ANDROID_API=24
     - EMULATOR_API=30.2.6
     - ANDROID_BUILD_TOOLS=24
+    - ADB_INSTALL_TIMEOUT=5
 android:
   components:
     - tools
@@ -38,19 +29,23 @@ android:
     - 'google-gdk-license-.+'
 before_install:
   - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-30"
 addons:
   sonarcloud:
     organization: akenasia
     token: ${SONAR_TOKEN}
-before_cache:
-  -rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  -rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+before_cache: "-rm -f $HOME/.gradle/caches/modules-2/modules-2.lock -rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wraper/
     - $HOME/.android/build-cache
+before_script:
+  - "android list targets"
+  - "echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a"
+  - "emulator -avd test -no-window &"
+  - "bash android-wait-for-emulator"
+  - "adb shell input keyevent 82 &"
 branches:
   only:
     - master
@@ -63,5 +58,5 @@ deploy:
     branch: master
 script:
   - ./gradlew clean
-  - ./gradlew build
+  - gradle build
   - sonar-scanner
