@@ -4,9 +4,9 @@ dist: trusty
 jdk: oraclejdk11
 env:
   global:
-    - ANDROID_API=24
+    - ANDROID_API=30
     - EMULATOR_API=30.2.6
-    - ANDROID_BUILD_TOOLS=24
+    - ANDROID_BUILD_TOOLS=30.0.2
     - ADB_INSTALL_TIMEOUT=5
 android:
   components:
@@ -42,7 +42,7 @@ cache:
     - $HOME/.android/build-cache
 before_script:
   - "android list targets"
-  - "echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a"
+  - "echo no | android create avd --force -n test -t android-30 --abi armeabi-v7a"
   - "emulator -avd test -no-window &"
   - "bash android-wait-for-emulator"
   - "adb shell input keyevent 82 &"
