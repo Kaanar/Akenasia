@@ -41,7 +41,7 @@ cache:
     - $HOME/.gradle/wraper/
     - $HOME/.android/build-cache
 before_script:
-  - sudo apt install openjdk-16-jdk
+  - sudo apt install openjdk-11-jdk
   - sudo apt install openjdk-8-jdk
   - "android list targets"
   - "echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a"
