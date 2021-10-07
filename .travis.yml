@@ -65,5 +65,5 @@ deploy:
     branch: master
 script:
   - ./gradlew clean
-  - gradle build
+  - ./gradlew build
   - sonar-scanner
