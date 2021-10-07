@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.database.*
 class Database : Fragment() {
 
     private var _binding: DatabaseBinding? = null
+    private lateinit var pos: Position
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -30,9 +31,10 @@ class Database : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        pos = Position(this.requireActivity())
         if (container != null) {
             thiscontext = container.getContext()
-        };
+        }
         _binding = DatabaseBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -40,7 +42,7 @@ class Database : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewRecord()
+        viewRecord()
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
@@ -58,24 +60,27 @@ class Database : Fragment() {
     }
 
     private fun saveRecord() {
-        val id = u_id.text.toString()
+        pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
         val name = u_name.text.toString()
-        val latitude = "salit"
-        val longitude = "salut"
+        val latitude = pos.getLatitude().toString()
+        val longitude = pos.getLongitude().toString()
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
-        if (id.trim() != "" && name.trim() != "" && latitude.trim() !="" && longitude.trim() != "") {
-            val status = databaseHandler.addEmployee(Place(Integer.parseInt(id), name, latitude, longitude))
-            if (status > -1) {
-                Toast.makeText(activity, "record save", Toast.LENGTH_LONG).show()
-                u_id.text.clear()
-                u_name.text.clear()
+        val emp: List<Place> = databaseHandler.viewEmployee()
 
+        val id = emp.size.toString()
+
+        if (id.trim() != "" && name.trim() != "" && latitude.trim() !="" && longitude.trim() != "") {
+            val status = databaseHandler.addEmployee(Place(Integer.parseInt(id), name, latitude.toDouble(), longitude.toDouble()))
+            if (status > -1) {
+                Toast.makeText(activity, "Place added", Toast.LENGTH_LONG).show()
+                u_name.text.clear()
+                viewRecord()
             }
         } else {
             Toast.makeText(
                 activity,
-                "id or name or email cannot be blank",
+                "Name cannot be blank",
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -95,8 +100,8 @@ class Database : Fragment() {
         for(e in emp){
             empArrayId[index] = e.placeId.toString()
             empArrayName[index] = e.placeName
-            //empArrayLat[index] = e.placeLat
-            //empArrayLong[index] = e.placeLong
+            empArrayLat[index] = e.placeLat.toString()
+            empArrayLong[index] = e.placeLong.toString()
 
             index++
         }
@@ -104,6 +109,7 @@ class Database : Fragment() {
         val myListAdapter = MyListAdapter(this.requireActivity(),empArrayId,empArrayName, empArrayLat, empArrayLong)
         listView.adapter = myListAdapter
     }
+
     private fun deleteRecord(){
         //creating AlertDialog for taking user id
         val dialogBuilder = AlertDialog.Builder(thiscontext!!)
@@ -112,8 +118,8 @@ class Database : Fragment() {
         dialogBuilder.setView(dialogView)
 
         val dltId = dialogView.findViewById(R.id.deleteId) as EditText
-        dialogBuilder.setTitle("Delete Record")
-        dialogBuilder.setMessage("Enter id below")
+        dialogBuilder.setTitle("Delete Place")
+        dialogBuilder.setMessage("Enter Id below")
         dialogBuilder.setPositiveButton("Delete", DialogInterface.OnClickListener { _, _ ->
 
             val deleteId = dltId.text.toString()
@@ -121,12 +127,13 @@ class Database : Fragment() {
             val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
             if(deleteId.trim()!=""){
                 //calling the deleteEmployee method of DatabaseHandler class to delete record
-                val status = databaseHandler.deleteEmployee(Place(Integer.parseInt(deleteId),"", "",""))
+                val status = databaseHandler.deleteEmployee(Place(Integer.parseInt(deleteId), "", placeLat = 0.0, placeLong = 0.0))
                 if(status > -1){
-                    Toast.makeText(activity,"record deleted", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity,"Place deleted", Toast.LENGTH_LONG).show()
+                    viewRecord()
                 }
             }else{
-                Toast.makeText(activity,"id or name or email cannot be blank", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity,"Id cannot be blank", Toast.LENGTH_LONG).show()
             }
 
         })
@@ -135,5 +142,6 @@ class Database : Fragment() {
         })
         val b = dialogBuilder.create()
         b.show()
+        viewRecord()
     }
 }

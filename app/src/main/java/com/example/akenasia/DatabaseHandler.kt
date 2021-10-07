@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteException
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
-        private val DATABASE_VERSION = 3
+        private val DATABASE_VERSION = 5
         private val DATABASE_NAME = "EmployeeDatabase"
         private val TABLE_CONTACTS = "EmployeeTable"
         private val KEY_ID = "id"
@@ -22,7 +22,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         //creating table with fields
         val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + KEY_LATITUDE + " TEXT " + KEY_LONGITUDE + " TEXT " + ")")
+                + KEY_ID + " INTEGER PRIMARY," + KEY_NAME + " TEXT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE  + " DOUBLE" + ")")
         db?.execSQL(CREATE_CONTACTS_TABLE)
     }
 
@@ -37,11 +37,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.placeId)
         contentValues.put(KEY_NAME, emp.placeName) // EmpModelClass Name
-        contentValues.put(KEY_LATITUDE, "salit")
-        contentValues.put(KEY_LONGITUDE, "salut")
+        contentValues.put(KEY_LATITUDE, emp.placeLat)
+        contentValues.put(KEY_LONGITUDE, emp.placeLong)
 
         // Inserting Row
-        val success = db.insert(TABLE_CONTACTS, null, contentValues)
+        val success = db.insert(TABLE_CONTACTS, null,  contentValues)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
@@ -60,21 +60,36 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         }
         var placeId: Int
         var placeName: String
-        var placeLat: String
-        var placeLong: String
+        var placeLat: Double
+        var placeLong: Double
 
         if (cursor.moveToFirst()) {
             do {
                 placeId = cursor.getInt(cursor.getColumnIndex("id"))
                 placeName = cursor.getString(cursor.getColumnIndex("name"))
-                placeLat = cursor.getString(cursor.getColumnIndex("latitude"))
-                placeLong = cursor.getString(cursor.getColumnIndex("longitude"))
+                placeLat = cursor.getDouble(cursor.getColumnIndex("latitude"))
+                placeLong = cursor.getDouble(cursor.getColumnIndex("longitude"))
 
                 val emp= Place(placeId = placeId, placeName = placeName, placeLat = placeLat, placeLong = placeLong)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
         return empList
+    }
+
+    fun updatePlace(emp: Place):Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID, emp.placeId)
+        contentValues.put(KEY_NAME, emp.placeName)
+        contentValues.put(KEY_LATITUDE, emp.placeLat)
+        contentValues.put(KEY_LONGITUDE, emp.placeLong)
+
+        // Updating Row
+        val success = db.update(TABLE_CONTACTS, contentValues,"id="+emp.placeId,null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
     }
     //method to delete data
     fun deleteEmployee(emp: Place):Int{

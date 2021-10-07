@@ -38,22 +38,6 @@
 
         <TableRow>
             <TextView
-                android:text="User Id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1" />
-
-            <EditText
-
-                android:id="@+id/u_id"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_marginStart="20sp"
-                android:width="150px" />
-        </TableRow>
-        <TableRow>
-            <TextView
                 android:text="User Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
