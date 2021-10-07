@@ -4,9 +4,9 @@ plugins {
 }
 
 android {
-    compileSdk 30
+   compileSdkVersion 30
 
-    defaultConfig {
+   defaultConfig {
         applicationId "com.example.akenasia"
         minSdk 24
         targetSdk 30
