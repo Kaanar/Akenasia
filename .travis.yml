@@ -29,6 +29,7 @@ android:
     - google-gdk-license-.+
 before_install:
   - chmod +x gradlew
+  - yes '' | sdkmanager "platforms;android-30"
 addons:
   sonarcloud:
     organization: akenasia
@@ -44,7 +45,6 @@ cache:
     - $HOME/.android/build-cache
 before_script:
   - sudo apt-get install --reinstall ca-certificates
-  - yes '' | sdkmanager "platforms;android-30"
   - yes '' | sudo -E add-apt-repository ppa:openjdk-r/ppa
   - yes '' | sudo apt-get update
   - yes '' | sudo apt-get install openjdk-11-jdk
