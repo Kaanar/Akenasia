@@ -3,7 +3,7 @@ buildscript {
     dependencies {
         classpath "xml-apis:xml-apis:2.0.2"
 
-        classpath "com.android.tools.build:gradle:7.0.2"
+        classpath "com.android.tools.build:gradle:3.5.4"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
         classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7'
 
