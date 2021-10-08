@@ -86,6 +86,43 @@ class Database : Fragment() {
         }
     }
 
+    private fun orderRecord(deleteId: Int) {
+        val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
+        //calling the viewEmployee method of DatabaseHandler class to read the records
+        val emp: List<Place> = databaseHandler.viewEmployee()
+        val empArrayId = Array<String>(emp.size) { "0" }
+        val empArrayName = Array<String>(emp.size) { "null" }
+        val empArrayLat = Array<String>(emp.size) { "null" }
+        val empArrayLong = Array<String>(emp.size) { "null" }
+
+        var index = 0
+        for (e in emp) {
+            empArrayId[index] = e.placeId.toString()
+            empArrayName[index] = e.placeName
+            empArrayLat[index] = e.placeLat.toString()
+            empArrayLong[index] = e.placeLong.toString()
+            if (e.placeId < deleteId) {
+                Toast.makeText(activity, e.placeId.toString(), Toast.LENGTH_LONG).show()
+            } else {
+                if (e.placeId.toString().trim() != "") {
+                    val status = databaseHandler.updatePlace(
+                        Place(e.placeId,
+                            e.placeName,
+                            e.placeLat,
+                            e.placeLong
+                        )
+                    )
+                    if (status > -1) {
+                        Toast.makeText(activity, "record update", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Toast.makeText(activity, "Id cannot be blank", Toast.LENGTH_LONG).show()
+                }
+            }
+            index++
+        }
+    }
+
     private fun viewRecord(){
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
@@ -130,6 +167,7 @@ class Database : Fragment() {
                 val status = databaseHandler.deleteEmployee(Place(Integer.parseInt(deleteId), "", placeLat = 0.0, placeLong = 0.0))
                 if(status > -1){
                     Toast.makeText(activity,"Place deleted", Toast.LENGTH_LONG).show()
+                    orderRecord(Integer.parseInt(deleteId))
                     viewRecord()
                 }
             }else{
@@ -142,6 +180,5 @@ class Database : Fragment() {
         })
         val b = dialogBuilder.create()
         b.show()
-        viewRecord()
     }
 }

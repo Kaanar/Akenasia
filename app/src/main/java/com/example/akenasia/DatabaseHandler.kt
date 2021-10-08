@@ -80,7 +80,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     fun updatePlace(emp: Place):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_ID, emp.placeId)
+        contentValues.put(KEY_ID, emp.placeId-1)
         contentValues.put(KEY_NAME, emp.placeName)
         contentValues.put(KEY_LATITUDE, emp.placeLat)
         contentValues.put(KEY_LONGITUDE, emp.placeLong)
