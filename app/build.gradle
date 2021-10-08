@@ -3,13 +3,13 @@ plugins {
     id 'kotlin-android'
 }
 
-android {
-    compileSdkVersion 30
+aaptOptions   {
+    compileSdkVersion 24
 
     defaultConfig {
         applicationId "com.example.akenasia"
         minSdk 24
-        targetSdk 30
+        targetSdk 24
         versionCode 1
         versionName "1.0"
 
