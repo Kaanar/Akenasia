@@ -2,15 +2,15 @@
   <library name="Gradle: androidx.viewpager2:viewpager2:1.0.0@aar">
     <ANNOTATIONS>
       <root url="jar://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/6992373c65c655b5c4a348ed8d0b6cf5/transformed/jetified-viewpager2-1.0.0/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/db388ffd65901328917dd4c4c7bfd7c6/transformed/jetified-viewpager2-1.0.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/11d63593187579f3eab2795ea19976ea/transformed/viewpager2-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/6992373c65c655b5c4a348ed8d0b6cf5/transformed/jetified-viewpager2-1.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/6992373c65c655b5c4a348ed8d0b6cf5/transformed/jetified-viewpager2-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/6992373c65c655b5c4a348ed8d0b6cf5/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/db388ffd65901328917dd4c4c7bfd7c6/transformed/jetified-viewpager2-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/db388ffd65901328917dd4c4c7bfd7c6/transformed/jetified-viewpager2-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/db388ffd65901328917dd4c4c7bfd7c6/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/11d63593187579f3eab2795ea19976ea/transformed/viewpager2-1.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/11d63593187579f3eab2795ea19976ea/transformed/viewpager2-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/11d63593187579f3eab2795ea19976ea/transformed/viewpager2-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

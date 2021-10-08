@@ -2,15 +2,15 @@
   <library name="Gradle: androidx.coordinatorlayout:coordinatorlayout:1.1.0@aar">
     <ANNOTATIONS>
       <root url="jar://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/560a0e3ef9231676fff3f4983a716e2c/transformed/coordinatorlayout-1.1.0/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/35f5786a1f56a48e8be33f34422334c9/transformed/coordinatorlayout-1.1.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8c124b39aa4a56034f33bd1f1047a687/transformed/coordinatorlayout-1.1.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/560a0e3ef9231676fff3f4983a716e2c/transformed/coordinatorlayout-1.1.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/560a0e3ef9231676fff3f4983a716e2c/transformed/coordinatorlayout-1.1.0/res" />
       <root url="file://$PROJECT_DIR$/../../../../../Outils code/JDK 11/caches/transforms-3/560a0e3ef9231676fff3f4983a716e2c/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/35f5786a1f56a48e8be33f34422334c9/transformed/coordinatorlayout-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/35f5786a1f56a48e8be33f34422334c9/transformed/coordinatorlayout-1.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/35f5786a1f56a48e8be33f34422334c9/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8c124b39aa4a56034f33bd1f1047a687/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8c124b39aa4a56034f33bd1f1047a687/transformed/coordinatorlayout-1.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8c124b39aa4a56034f33bd1f1047a687/transformed/coordinatorlayout-1.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

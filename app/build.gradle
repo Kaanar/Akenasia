@@ -3,13 +3,13 @@ plugins {
     id 'kotlin-android'
 }
 
-aaptOptions   {
-    compileSdkVersion 24
+android {
+    compileSdkVersion 30
 
-    defaultConfig {
+   /* defaultConfig {
         applicationId "com.example.akenasia"
         minSdk 24
-        targetSdk 24
+        targetSdk 30
         versionCode 1
         versionName "1.0"
 
@@ -26,12 +26,12 @@ aaptOptions   {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-   /* kotlinOptions {
+    kotlinOptions {
         jvmTarget = '1.8'
-    }*/
+    }
     buildFeatures {
         viewBinding true
-    }
+    }*/
 }
 
 dependencies {
