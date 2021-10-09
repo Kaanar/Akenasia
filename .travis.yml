@@ -7,6 +7,29 @@ android:
     - build-tools-27.0.3
     - android-27
 before_install:
+  - chmod +x gradlew
+  - touch ~/.android/repositories.cfg
   - yes | sdkmanager "platforms;android-27"
+before_script:
+  - sudo apt-get install --reinstall ca-certificates
+  - yes '' | sudo -E add-apt-repository ppa:openjdk-r/ppa
+  - yes '' | sudo apt-get update
+  - yes '' | sudo apt-get install openjdk-8-jdk
+  - yes '' | sudo apt-get install openjdk-11-jdk
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+  - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
+  - export JAVA_HOME=$HOME/openjdk11
+  - $TRAVIS_BUILD_DIR/install-jdk.sh -F 11 --target $JAVA_HOME
+branches:
+  only:
+    - master
+    - develop
+deploy:
+  cleanup: true
+  github-token: $GITHUB_TOKEN
+  provider: pages
+  true:
+    branch: master
 script:
   - ./gradlew build connectedCheck
+  - sonar-scanner
