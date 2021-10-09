@@ -37,5 +37,5 @@ deploy:
   true:
     branch: master
 script:
-  - ./gradlew build connectedCheck
+  - ./gradlew build
   - sonar-scanner
