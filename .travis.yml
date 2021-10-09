@@ -1,75 +1,12 @@
 language: android
-sudo: required
-dist: trusty
-jdk: openjdk8
-env:
-  global:
-    - ANDROID_API=24
-    - EMULATOR_API=30.2.6
-    - ANDROID_BUILD_TOOLS=24
-    - ADB_INSTALL_TIMEOUT=5
 android:
   components:
-    - tools
+    - tools # to get the new `repository-11.xml`
+    - tools # see https://github.com/travis-ci/travis-ci/issues/6040#issuecomment-219367943)
     - platform-tools
-    - tools
-    - build-tools-$ANDROID_BUILD_TOOLS
-    - android-$ANDROID_API
-    - extra-google_m2repository
-    - extra-android-m2repository
-    - extra-android-support
-    - extra-google-google_play_services
-    - addon-google_apis-google-19
-    - sys-img-armeabi-v7a-android-$ANDROID_API
-    - sys-img-armeabli-v7a-addon-google_apis-google-$ANDROID_API
-    - sys-img-armeabli-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
-  licenses:
-    - android-sdk-preview-licence-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
+    - build-tools-27.0.3
+    - android-27
 before_install:
-  - chmod +x gradlew
-  - touch ~/.android/repositories.cfg
-  - yes '' | sdkmanager "build-tools;28.0.3" "platforms;android-30"
-addons:
-  sonarcloud:
-    organization: akenasia
-    token: ${SONAR_TOKEN}
-
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wraper/
-    - $HOME/.android/build-cache
-before_script:
-  - sudo apt-get install --reinstall ca-certificates
-  - yes '' | sudo -E add-apt-repository ppa:openjdk-r/ppa
-  - yes '' | sudo apt-get update
-  - yes '' | sudo apt-get install openjdk-8-jdk
-  - yes '' | sudo apt-get install openjdk-11-jdk
-  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-  - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
-  - export JAVA_HOME=$HOME/openjdk11
-  - $TRAVIS_BUILD_DIR/install-jdk.sh -F 11 --target $JAVA_HOME
-  - android list targets
-  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
-  - emulator -avd test -no-window &
-  - bash android-wait-for-emulator
-  - adb shell input keyevent 82 &
-branches:
-  only:
-    - master
-    - develop
-deploy:
-  cleanup: true
-  github-token: $GITHUB_TOKEN
-  provider: pages
-  true:
-    branch: master
+  - yes | sdkmanager "platforms;android-27"
 script:
-  - ./gradlew clean
-  - ./gradlew build
-  - sonar-scanner
+  - ./gradlew build connectedCheck
