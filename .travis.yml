@@ -29,7 +29,12 @@ android:
     - google-gdk-license-.+
 before_install:
   - chmod +x gradlew
-  - yes '' | sdkmanager "platforms;android-30"
+  - yes | sdkmanager --licenses && yes | sdkmanager --update
+  - sudo apt-get install --reinstall ca-certificates
+  - yes '' | sudo -E add-apt-repository ppa:openjdk-r/ppa
+  - yes '' | sudo apt-get update
+  - yes '' | sudo apt-get install openjdk-11-jdk
+  - yes '' | sudo apt-get install openjdk-8-jdk
 addons:
   sonarcloud:
     organization: akenasia
@@ -44,11 +49,6 @@ cache:
     - $HOME/.gradle/wraper/
     - $HOME/.android/build-cache
 before_script:
-  - sudo apt-get install --reinstall ca-certificates
-  - yes '' | sudo -E add-apt-repository ppa:openjdk-r/ppa
-  - yes '' | sudo apt-get update
-  - yes '' | sudo apt-get install openjdk-11-jdk
-  - yes '' | sudo apt-get install openjdk-8-jdk
   - android list targets
   - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
   - emulator -avd test -no-window &
