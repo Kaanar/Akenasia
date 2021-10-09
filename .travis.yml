@@ -1,7 +1,7 @@
 language: android
 sudo: required
 dist: trusty
-jdk: oraclejdk8
+jdk: openjdk8
 env:
   global:
     - ANDROID_API=24
@@ -50,7 +50,10 @@ before_script:
   - yes '' | sudo apt-get update
   - yes '' | sudo apt-get install openjdk-8-jdk
   - yes '' | sudo apt-get install openjdk-11-jdk
-  - jdk_switcher use openjdk11
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+  - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
+  - export JAVA_HOME=$HOME/openjdk11
+  - $TRAVIS_BUILD_DIR/install-jdk.sh -F 11 --target $JAVA_HOME
   - android list targets
   - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
   - emulator -avd test -no-window &
