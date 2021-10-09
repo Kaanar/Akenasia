@@ -29,7 +29,7 @@ android:
     - google-gdk-license-.+
 before_install:
   - chmod +x gradlew
-  - yes | sdkmanager --licenses && yes | sdkmanager --update
+  - yes '' | sdkmanager --licenses && yes | sdkmanager --update
   - sudo apt-get install --reinstall ca-certificates
   - yes '' | sudo -E add-apt-repository ppa:openjdk-r/ppa
   - yes '' | sudo apt-get update
