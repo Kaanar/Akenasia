@@ -1,5 +1,4 @@
 language: android
-sudo: false
 env:
   global:
     - ANDROID_API=24
@@ -13,7 +12,7 @@ android:
     - tools # see https://github.com/travis-ci/travis-ci/issues/6040#issuecomment-219367943)
     - platform-tools
     - build-tools-27.0.3
-    - android-30
+    - android-$ANDROID_API
     - extra
     - add-on
     - extra-google-m2repository
@@ -38,14 +37,16 @@ before_script:
   - yes '' | sudo apt-get update
   - yes '' | sudo apt-get install openjdk-8-jdk
   - yes '' | sudo apt-get install openjdk-11-jdk
+  #Switch au jdk 11
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
   - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
   - export JAVA_HOME=$HOME/openjdk11
   - $TRAVIS_BUILD_DIR/install-jdk.sh -F 11 --target $JAVA_HOME
+  #démarrage de l'émulateur
   - android list targets
   - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
+  - emulator -avd test -no-window &
+  - bash android-wait-for-emulator
   - adb shell input keyevent 82 &
 addons:
   sonarcloud:
@@ -62,5 +63,5 @@ deploy:
   true:
     branch: master
 script:
-  - ./gradlew build
+  - ./gradlew clean build
   - sonar-scanner
