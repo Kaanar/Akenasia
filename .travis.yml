@@ -11,12 +11,9 @@ android:
     - tools # to get the new `repository-11.xml`
     - tools # see https://github.com/travis-ci/travis-ci/issues/6040#issuecomment-219367943)
     - platform-tools
-    - build-tools-27.0.3
+    - build-tools-$ANDROID_BUILD_TOOLS
     - android-$ANDROID_API
-    - extra
-    - add-on
     - extra-google-m2repository
-    - extra-android-m2repository
     # Google Play Services
     - extra-google-google_play_services
     # Support library
