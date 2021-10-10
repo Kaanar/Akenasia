@@ -10,7 +10,7 @@ import android.widget.TextView
 class MyListAdapter(private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val lat: Array<String>, private val long: Array<String>)
     : ArrayAdapter<String>(context, R.layout.custom_list, name) {
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams")
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.custom_list, null, true)

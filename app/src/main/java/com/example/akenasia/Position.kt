@@ -10,7 +10,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import java.lang.Math.*
 import kotlin.math.atan2
-import kotlin.math.pow
 import kotlin.math.sqrt
 
 
