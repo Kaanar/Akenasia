@@ -1,0 +1,39 @@
+@startuml test
+left to right direction
+
+class Position {
+  delta : DOUBLE
+  Position() 
+}
+
+class Player {
+  id : INTEGER
+  name : STRING
+  position : POSITION
+  Player()
+  getPosition()
+}
+
+class Game {
+  Game()
+  start()
+  status()
+  win()
+  diffPlayerPlace()
+}
+
+class Place {
+    id : INTEGER
+    name : STRING
+    Position : POSITION
+    Place()
+    getPosition()
+
+}
+
+Player <|-- Game
+Place <|-- Game
+Position <|-- Place
+Position <|-- Player
+
+@enduml
