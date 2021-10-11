@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id "org.sonarqube"
 }
 
 android {
@@ -31,6 +32,12 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "Kaanar_Akenasia"
     }
 }
 

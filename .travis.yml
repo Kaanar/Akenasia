@@ -71,4 +71,4 @@ deploy:
     branch: master
 script:
   - ./gradlew clean build connectedCheck
-  - sonar-scanner
+  - ./gradlew sonarqube
