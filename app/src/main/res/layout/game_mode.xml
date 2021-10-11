@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.Akenasia.AppBarOverlay"
+            tools:ignore="MissingConstraints"
+            android:id="@+id/Appbar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.Akenasia.PopupOverlay" />
+
+            <TextView
+                android:id="@+id/HomepageAkenasiaTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="Mode de jeu"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toTopOf="@id/toolbar"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/Appbar"
+            android:layout_marginTop="150sp">
+            <Button
+                android:id="@+id/GameModeChronoBT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chronomètre"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+            <Button
+                android:id="@+id/GameModeCountBT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chaud/Froid"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -66,12 +66,12 @@ class Database : Fragment() {
         val longitude = pos.getLongitude().toString()
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
-        val emp: List<Place> = databaseHandler.viewEmployee()
+        val emp: List<Place> = databaseHandler.viewPlace()
 
         val id = emp.size.toString()
 
         if (id.trim() != "" && name.trim() != "" && latitude.trim() !="" && longitude.trim() != "") {
-            val status = databaseHandler.addEmployee(Place(Integer.parseInt(id), name, latitude.toDouble(), longitude.toDouble()))
+            val status = databaseHandler.addPlace(Place(Integer.parseInt(id), name, latitude.toDouble(), longitude.toDouble()))
             if (status > -1) {
                 Toast.makeText(activity, "Place added", Toast.LENGTH_LONG).show()
                 u_name.text.clear()
@@ -89,7 +89,7 @@ class Database : Fragment() {
     private fun orderRecord(deleteId: Int) {
         val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<Place> = databaseHandler.viewEmployee()
+        val emp: List<Place> = databaseHandler.viewPlace()
         val empArrayId = Array<String>(emp.size) { "0" }
         val empArrayName = Array<String>(emp.size) { "null" }
         val empArrayLat = Array<String>(emp.size) { "null" }
@@ -127,7 +127,7 @@ class Database : Fragment() {
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<Place> = databaseHandler.viewEmployee()
+        val emp: List<Place> = databaseHandler.viewPlace()
         val empArrayId = Array<String>(emp.size){"0"}
         val empArrayName = Array<String>(emp.size){"null"}
         val empArrayLat = Array<String>(emp.size){"null"}
@@ -164,7 +164,7 @@ class Database : Fragment() {
             val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
             if(deleteId.trim()!=""){
                 //calling the deleteEmployee method of DatabaseHandler class to delete record
-                val status = databaseHandler.deleteEmployee(Place(Integer.parseInt(deleteId), "", placeLat = 0.0, placeLong = 0.0))
+                val status = databaseHandler.deletePlace(Place(Integer.parseInt(deleteId), "", placeLat = 0.0, placeLong = 0.0))
                 if(status > -1){
                     Toast.makeText(activity,"Place deleted", Toast.LENGTH_LONG).show()
                     orderRecord(Integer.parseInt(deleteId))

@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteException
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
         private val DATABASE_VERSION = 5
-        private val DATABASE_NAME = "EmployeeDatabase"
-        private val TABLE_CONTACTS = "EmployeeTable"
+        private val DATABASE_NAME = "AkenasiaDatabase"
+        private val TABLE_CONTACTS = "PlaceTable"
         private val KEY_ID = "id"
         private val KEY_NAME = "name"
         private val KEY_LATITUDE = "latitude"
@@ -19,10 +19,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         //creating table with fields
         val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_ID + " INTEGER PRIMARY," + KEY_NAME + " TEXT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE  + " DOUBLE" + ")")
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE  + " DOUBLE" + ")")
         db?.execSQL(CREATE_CONTACTS_TABLE)
     }
 
@@ -32,7 +31,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
     //method to insert data
-    fun addEmployee(emp: Place):Long{
+    fun addPlace(emp: Place):Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.placeId)
@@ -47,7 +46,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return success
     }
     //method to read data
-    fun viewEmployee():List<Place>{
+    fun viewPlace():List<Place>{
         val empList:ArrayList<Place> = ArrayList()
         val selectQuery = "SELECT  * FROM $TABLE_CONTACTS"
         val db = this.readableDatabase
@@ -92,7 +91,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return success
     }
     //method to delete data
-    fun deleteEmployee(emp: Place):Int{
+    fun deletePlace(emp: Place):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.placeId) // EmpModelClass UserId

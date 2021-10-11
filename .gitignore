@@ -28,3 +28,6 @@ hs_err_pid*
 # note: some other rules could/should be in your HOME .gitignore_global file
 # *~
 # .DS_Store
+/app/.idea/
+/.idea/
+/.idea/

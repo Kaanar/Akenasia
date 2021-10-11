@@ -1,7 +1,6 @@
 package com.example.akenasia
 
 import android.content.Context
-import androidx.test.platform.app.InstrumentationRegistry
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.core.IsEqual
 import org.junit.Test

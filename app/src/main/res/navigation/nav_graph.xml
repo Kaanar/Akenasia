@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.akenasia.Database"
+        android:name="com.example.akenasia.MainActivity"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/database">
 
@@ -19,10 +19,14 @@
         android:id="@+id/SecondFragment"
         android:name="com.example.akenasia.Geolocalisation"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/GPS">
+        tools:layout="@layout/database">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ThirdFragment"
+        tools:layout="">
     </fragment>
 </navigation>
