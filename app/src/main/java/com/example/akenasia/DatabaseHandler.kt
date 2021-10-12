@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import kotlin.system.exitProcess
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
@@ -44,6 +45,33 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
+    }
+
+    //methode to get data
+    fun getPlace(id: Int):Place{
+        val db = this.readableDatabase
+        val selectQuery = "SELECT  * FROM $TABLE_CONTACTS WHERE $KEY_ID = $id"
+        var cursor: Cursor? = null
+        try{
+            cursor = db.rawQuery(selectQuery, null)
+        }catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+        }
+        val placeId: Int
+        val placeName: String
+        val placeLat: Double
+        val placeLong: Double
+
+        if (cursor != null) {
+            cursor.moveToPosition(id)
+            placeId = cursor.getInt(cursor.getColumnIndex("id"))
+            placeName = cursor.getString(cursor.getColumnIndex("name"))
+            placeLat = cursor.getDouble(cursor.getColumnIndex("latitude"))
+            placeLong = cursor.getDouble(cursor.getColumnIndex("longitude"))
+            val emp= Place(placeId = placeId, placeName = placeName, placeLat = placeLat, placeLong = placeLong)
+            return emp
+        }
+        exitProcess(0)
     }
     //method to read data
     fun viewPlace():List<Place>{

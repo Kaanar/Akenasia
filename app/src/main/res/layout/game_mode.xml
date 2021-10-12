@@ -24,7 +24,7 @@
                 app:popupTheme="@style/Theme.Akenasia.PopupOverlay" />
 
             <TextView
-                android:id="@+id/HomepageAkenasiaTV"
+                android:id="@+id/GameModeTitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

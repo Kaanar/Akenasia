@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 
 class MyListAdapter(private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val lat: Array<String>, private val long: Array<String>)
     : ArrayAdapter<String>(context, R.layout.custom_list, name) {
@@ -23,12 +25,17 @@ class MyListAdapter(private val context: Activity, private val id: Array<String>
         val longText = rowView.findViewById(R.id.longitude) as TextView
         val choisirButton = rowView.findViewById(R.id.choisir) as Button
 
-        idText.text = "Id: ${id[position]}"
+        idText.text = "Id:${id[position]}"
         nameText.text = "Name: ${name[position]}"
         latText.text = "Latitude: ${lat[position]}"
         longText.text = "Longitude: ${long[position]}"
+
+        //Envoie l'ID de la Place choisie au fragment suivant
         choisirButton.setOnClickListener(){
-            Toast.makeText(context,"hello",Toast.LENGTH_LONG).show()
+            val delimiter = ":"
+            val id= id[position]
+            val bundle = bundleOf("id" to id)
+            rowView.findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment, bundle)
         }
 
         return rowView

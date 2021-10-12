@@ -3,6 +3,7 @@ package com.example.akenasia
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,32 @@ class Database : Fragment() {
         viewRecord()
         // Instanciation des positions en dur
         places = ArrayList<Place>()
-        val id1: Long = dbHandler.addPlace(
+        if(dbHandler.viewPlace().isEmpty()){
+            val id1: Long = dbHandler.addPlace(Place(
+                0,
+                "BU",
+                48.905273887110944,
+                2.2156870365142827
+            )
+            )
+            val id2: Long = dbHandler.addPlace(
+                Place(
+                    1,
+                    "Crous",
+                    48.904096168019976,
+                    2.216480970382691
+                )
+            )
+            val id3: Long = dbHandler.addPlace(
+                Place(
+                    2,
+                    "Bat G",
+                    48.903158204219174,
+                    2.2155475616455083
+                )
+            )
+        }
+        places.add(
             Place(
                 0,
                 "BU",
@@ -63,30 +89,6 @@ class Database : Fragment() {
                 2.2156870365142827
             )
         )
-        val id2: Long = dbHandler.addPlace(
-            Place(
-                1,
-                "Crous",
-                48.904096168019976,
-                2.216480970382691
-            )
-        )
-        val id3: Long = dbHandler.addPlace(
-            Place(
-                2,
-                "Bat G",
-                48.903158204219174,
-                2.2155475616455083
-            )
-        )
-        places.add(
-            Place(
-                0,
-                "BU",
-                48.905273887110944,
-                2.2156870365142827
-            )
-        )
         places.add(
             Place(
                 1,
@@ -103,18 +105,7 @@ class Database : Fragment() {
                 2.2155475616455083
             )
         )
-        /*placeListView = binding.listView as ListView
-        placeAdapter = PlaceAdapter()
-        placeAdapter.context=thiscontext!!
-        placeAdapter.place=places
-        placeAdapter.inflater=LayoutInflater.from(context)
-        placeAdapter.DbContext=dbHandler*/
         viewRecord()
-
-        //placeListView.setAdapter(placeAdapter)
-       /* binding.listView.name.setOnClickListener {
-            //findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment)
-        }*/
         binding.bSave.setOnClickListener {
             saveRecord()
         }

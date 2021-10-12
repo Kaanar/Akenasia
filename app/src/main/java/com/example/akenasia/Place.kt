@@ -1,6 +1,6 @@
 package com.example.akenasia
 
-class Place (var placeId: Int, var placeName: String, var placeLat: Double, var placeLong: Double) {
+data class Place (var placeId: Int, var placeName: String, var placeLat: Double, var placeLong: Double) {
     @JvmName("getPlaceId1")
     fun getPlaceId(): Int {
         return placeId

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical"
+    tools:context=".Game">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Akenasia.AppBarOverlay"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/Appbar">
+
+
+    <TextView
+        android:id="@+id/ChTv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:text="Chronomètre"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@id/toolbar"
+        android:textAppearance="?attr/textAppearanceHeadline6" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/ChPosGoalTv"
+        android:layout_width="128dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:text="Position à atteindre:"
+        app:layout_constraintBottom_toTopOf="@id/textview_XCoordonnees_Goals"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ChXGoalTv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="0sp"
+        android:layout_gravity="center"
+        android:text="X :" />
+
+    <TextView
+        android:id="@+id/Chgoal_X"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30sp" />
+
+    <TextView
+        android:id="@+id/ChYGoalTv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="Y :" />
+
+    <TextView
+        android:id="@+id/Chgoal_Y"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30sp" />
+
+    <TextView
+        android:id="@+id/ChPosCurTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Position actuelle:"
+        app:layout_constraintBottom_toTopOf="@id/textview_XCoordonnees_Current"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_YCoordonnees_Goals"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/ChXCurTv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="0sp"
+        android:layout_gravity="center"
+        android:text="X :"/>
+
+    <TextView
+        android:id="@+id/Chcurrent_X"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30sp" />
+
+    <TextView
+        android:id="@+id/ChYCurTv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="0sp"
+        android:text="Y :"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/Chcurrent_Y"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30sp" />
+
+    <Button
+        android:id="@+id/ChRefreshBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"/>
+
+
+
+    <Button
+        android:id="@+id/ChQuitGameBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/previous"
+        app:layout_constraintTop_toBottomOf="@id/b_refresh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="center"/>
+</LinearLayout>

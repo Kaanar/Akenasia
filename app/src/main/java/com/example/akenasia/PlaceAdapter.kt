@@ -66,7 +66,7 @@ class PlaceAdapter : BaseAdapter() {
 
         val choisir = conView.findViewById<View>(R.id.choisir) as Button
         choisir.setOnClickListener(){
-            //conView.findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            conView.findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment)
         }
         return conView
     }
