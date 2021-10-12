@@ -17,6 +17,7 @@ import com.example.akenasia.databinding.DatabaseBinding
 import kotlinx.android.synthetic.main.database.*
 import java.util.ArrayList
 import com.example.akenasia.PlaceAdapter
+import kotlinx.android.synthetic.main.place_listview.view.*
 
 
 /**
@@ -112,9 +113,9 @@ class Database : Fragment() {
         placeAdapter.DbContext=dbHandler
 
         placeListView.setAdapter(placeAdapter)
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment)
-        }
+       /* binding.listView.name.setOnClickListener {
+            //findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment)
+        }*/
         binding.bSave.setOnClickListener {
             saveRecord()
         }
@@ -134,13 +135,12 @@ class Database : Fragment() {
         val latitude = pos.getLatitude().toString()
         val longitude = pos.getLongitude().toString()
 
-        val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
-        val emp: List<Place> = databaseHandler.viewPlace()
+        val emp: List<Place> = dbHandler.viewPlace()
 
         val id = emp.size.toString()
 
         if (id.trim() != "" && name.trim() != "" && latitude.trim() !="" && longitude.trim() != "") {
-            val status = databaseHandler.addPlace(Place(Integer.parseInt(id), name, latitude.toDouble(), longitude.toDouble()))
+            val status = dbHandler.addPlace(Place(Integer.parseInt(id), name, latitude.toDouble(), longitude.toDouble()))
             if (status > -1) {
                 Toast.makeText(activity, "Place added", Toast.LENGTH_LONG).show()
                 u_name.text.clear()
@@ -237,7 +237,7 @@ class Database : Fragment() {
                 if(status > -1){
                     Toast.makeText(activity,"Place deleted", Toast.LENGTH_LONG).show()
                     orderRecord(Integer.parseInt(deleteId))
-                    viewRecord()
+                    placeAdapter.notifyDataSetChanged()
                 }
             }else{
                 Toast.makeText(activity,"Id cannot be blank", Toast.LENGTH_LONG).show()

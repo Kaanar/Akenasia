@@ -29,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:textSize="10sp"
                 android:text=""
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
@@ -37,13 +38,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:textSize="10sp"
                 android:text=""
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
             <Button
                 android:id="@+id/choisir"
                 android:layout_width="wrap_content"
@@ -52,7 +51,7 @@
                 android:text="Choisir"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
-        </LinearLayout>
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

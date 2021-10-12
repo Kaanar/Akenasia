@@ -11,16 +11,6 @@
     android:orientation="vertical"
     tools:context=".Database">
 
-    <Button
-        android:id="@+id/button_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"/>
-
 
     <TableLayout
         android:layout_width="match_parent"
@@ -28,7 +18,7 @@
 
         <TableRow tools:ignore="UselessParent">
             <TextView
-                android:text="User Name"
+                android:text="Nom de ma position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"/>
@@ -63,7 +53,7 @@
             android:id="@+id/b_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="Ajouter ma position"
             style="?android:attr/buttonBarButtonStyle"/>
         <Button
             android:id="@+id/b_delete"
