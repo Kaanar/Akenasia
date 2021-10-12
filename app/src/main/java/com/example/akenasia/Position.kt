@@ -1,16 +1,23 @@
 package com.example.akenasia
 
 
+import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager
+import android.os.Looper
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import androidx.core.content.ContextCompat.getSystemService
 import java.lang.Math.*
 import kotlin.math.atan2
 import kotlin.math.sqrt
+import com.example.akenasia.MainActivity.*
+import com.google.android.gms.location.*
 
 
 class Position(context: Context) {
@@ -19,6 +26,8 @@ class Position(context: Context) {
     private var latitude=0.0
     private var longitude=0.0
     val context:Context = context
+    val PERMISSION_ID = 1010
+    private lateinit var activity :MainActivity
 
 
     init {}
@@ -35,7 +44,12 @@ class Position(context: Context) {
     fun refreshLocation() { //demande la permission de récupérer les coordonnées GPS
         //Si c'est accepté, récupère les coordonnées GPS de l'appareil et les stocke dans l'instance
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+        Log.d("Debug:",CheckPermission().toString())
+        Log.d("Debug:",isLocationEnabled().toString())
+        RequestPermission()
+        getLastLocation()
 
+        /*fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         if (ActivityCompat.checkSelfPermission(
                 context,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -54,7 +68,8 @@ class Position(context: Context) {
             return
         }
         val task =
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { position: Location? ->
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { task ->
+                var position:Position?= task.result
                 if (position != null) {
                     this.latitude = position.latitude
                     this.longitude = position.longitude
@@ -63,7 +78,7 @@ class Position(context: Context) {
                     this.longitude = 0.0
                 }
             }
-    }
+    */}
     /*fun calcul_distance(lat1 : Double, long1 : Double, lat2 : Double, long2 : Double, d2r : Double = 0.0174532925199433): Double {
         val dlong: Double = ((long2 - long1) * d2r).pow(2.0)
         val dlat: Double = (lat2 - lat1) * d2r.pow(2.0)
@@ -92,5 +107,88 @@ class Position(context: Context) {
 
        }
     }*/
+    fun CheckPermission():Boolean{
+        //this function will return a boolean
+        //true: if we have permission
+        //false if not
+        if(
+            ActivityCompat.checkSelfPermission(context,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(context,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        ){
+            return true
+        }
+
+        return false
+    }
+
+    fun RequestPermission(){
+        //this function will allows us to tell the user to requesut the necessary permsiion if they are not garented
+        ActivityCompat.requestPermissions(
+            context as Activity,
+            arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_ID
+        )
+    }
+    fun isLocationEnabled():Boolean{
+        //this function will return to us the state of the location service
+        //if the gps or the network provider is enabled then it will return true otherwise it will return false
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    fun getLastLocation(){
+        if(CheckPermission()){
+            if(isLocationEnabled()){
+                if (ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
+                        val location: Location? = task.result
+                        if (location == null) {
+                            NewLocationData()
+                        }
+                    }
+                }
+            }else {
+                Toast.makeText(context,"Veuillez activer votre position",Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            RequestPermission()
+        }
+    }
+
+    fun NewLocationData(){
+        val locationRequest =  LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 0
+        locationRequest.fastestInterval = 0
+        locationRequest.numUpdates = 1
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationProviderClient!!.requestLocationUpdates(
+                locationRequest,locationCallback, Looper.myLooper()
+            )
+        }
+    }
+
+
+    private val locationCallback = object : LocationCallback(){
+        override fun onLocationResult(locationResult: LocationResult) {
+            var lastLocation: Location = locationResult.lastLocation
+            Log.d("Debug:","Votre position: "+ lastLocation.longitude.toString())
+        }
+    }
 }
 
