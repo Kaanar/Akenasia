@@ -2,7 +2,7 @@
 
 == Synthèse
 === Projet
-Jeu mobile centré sur l'utilisation des coordonnées GPS de son appareil. Le nom de notre jeu est Akenasia. 
+Jeu mobile centré sur l'utilisation des coordonnées GPS de son appareil. Le nom de notre jeu est Akenasia.
 
 
 === Membres
@@ -20,10 +20,10 @@ Notre but est de pouvoir livrer un produit fini fonctionnel capable d’afficher
 Notre équipe est assez inexpérimentée dans le domaine des applications mobiles mais le défi est intéressant et nous avons la volonté de réaliser un jeu fun, agréable à jouer et intuitif.
 
 Nous présentons ce jeu comme un jeu dans le style de Pokemon GO mais en réalité cela se traduit juste par l’utilisation de l’emplacement GPS, il n’y a pas de créatures à attraper ou d’arènes à conquérir. Nous encourageons les joueurs à découvrir des lieux et à se balader en ville tout en essayant de battre leur record. Il est également possible d’affronter ses amis en regardant qui a obtenu le meilleur score ou le temps le plus rapide. Pour cela il faut passer par le service Google de géolocalisation et autoriser l’application à accéder à son emplacement.
- 
+
 Notre jeu s’adresse à tout type de joueur. Lorsqu’on lance le jeu, on a tout d’abord le choix entre différents lieux enregistrés dans une liste. Une fois un lieu choisit, on doit sélectionner le mode de jeu : chrono ou tentatives. Il faut ensuite se déplacer jusqu’à son objectif et appuyer sur le bouton pour déclencher l’actualisation de sa position. Une fois la partie terminée, on peut choisir un autre lieu et le schéma se répète. Il pourrait aussi y avoir la possibilité d’ajouter soi-même un lieu et de gérer sa liste de lieux.
 
-Pour faire connaître le jeu et gagner de nouveaux joueurs nous allons principalement utiliser les réseaux sociaux, en parler à notre entourage et les encourager à diffuser le jeu. Le monde doit connaître l’existence d’Akenasia ! 
+Pour faire connaître le jeu et gagner de nouveaux joueurs nous allons principalement utiliser les réseaux sociaux, en parler à notre entourage et les encourager à diffuser le jeu. Le monde doit connaître l’existence d’Akenasia !
 
 
 == Aspects techniques
@@ -52,7 +52,7 @@ Plateforme opérationnelle :
 
 Interconnexion des systèmes /API distantes : ? +
 
-Acquisition de données, usage intelligent des données : ? 
+Acquisition de données, usage intelligent des données : ?
 
 
 == Modélisation
