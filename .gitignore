@@ -1,18 +1,33 @@
-*.iml
-.idea
+*.class
 .gradle
-.idea/misc.xml
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-.idea/gradle.xml
+
+# IDEs
+.idea
+.idea/workspace.xml
+*.iml
+build/
+.classpath
+.project
+.settings/
+bin/
+.vscode/
 local.properties
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# note: some other rules could/should be in your HOME .gitignore_global file
+# *~
+# .DS_Store
+/app/.idea/
+/.idea/
+/.idea/

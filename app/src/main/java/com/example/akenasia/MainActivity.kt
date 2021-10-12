@@ -1,92 +1,144 @@
 package com.example.akenasia
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.os.Looper
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.akenasia.databinding.ActivityMainBinding
-import java.lang.Math.*
-import kotlin.math.pow
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.gms.location.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var pos: Position
-
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    lateinit var locationRequest: LocationRequest
+    val PERMISSION_ID = 1010
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pos = Position(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
-        setSupportActionBar(binding.toolbar)
 
-        //Fait le lien avec les éléments du fichier XML
-        findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text = "0.0"
-        findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = "0.0"
-        findViewById<TextView>(R.id.textview_XCoordonnees_Goals_Value).text = "48.890900"
-        findViewById<TextView>(R.id.textview_YCoordonnees_Goals_Value).text = "2.209300"
+        //setSupportActionBar(binding.toolbar)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.include) as NavHostFragment?
+        val navController = navHostFragment?.navController
+        if (navController != null) {
+            appBarConfiguration = AppBarConfiguration(navController.graph)
+        }
+        if (navController != null) {
+            setupActionBarWithNavController(navController, appBarConfiguration)
+        }
+    }
 
+    //Vérifie que l'application a bien les permissions requises pour récupérer la localisation de l'appareil//
+    fun CheckPermission():Boolean{
+        //this function will return a boolean
+        //true: if we have permission
+        //false if not
+        if(
+            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        ){
+            return true
+        }
 
-        findViewById<Button>(R.id.button_first).setOnClickListener{
-            pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
-            findViewById<TextView>(R.id.textview_XCoordonnees_Current_Value).text =pos.getLatitude().toString()
-            findViewById<TextView>(R.id.textview_YCoordonnees_Current_Value).text = pos.getLongitude().toString()
-            val distance : Double = pos.calcul_distance(pos.getLatitude(), pos.getLongitude(), 48.890900, 2.209300)
-            Toast.makeText(applicationContext,"$distance", Toast.LENGTH_SHORT).show()
+        return false
+    }
 
-            if (distance<1000){
-                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
+    //Demande les permissions nécessaires à l'utilisateur//
+    fun RequestPermission(){
+        //this function will allows us to tell the user to requesut the necessary permsiion if they are not garented
+        ActivityCompat.requestPermissions(
+            this as Activity,
+            arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_ID
+        )
+    }
+
+    //Vérifie si la localisation de l'appareil est activée//
+    fun isLocationEnabled():Boolean{
+        //this function will return to us the state of the location service
+        //if the gps or the network provider is enabled then it will return true otherwise it will return false
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    // Récupère la position actuelle de l'appareil//
+    fun getLastLocation(){
+        if(CheckPermission()){
+            if(isLocationEnabled()){
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
+                        val location: Location? = task.result
+                        if (location == null) {
+                            NewLocationData()
+                        }
+                    }
+                }
+            }else {
+                Toast.makeText(this,"Veuillez activer votre position",Toast.LENGTH_SHORT).show()
             }
-        }
-
-
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will //
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        }else{
+            RequestPermission()
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    //Récupère une nouvelle instance de Location
+    fun NewLocationData(){
+        val locationRequest =  LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 0
+        locationRequest.fastestInterval = 0
+        locationRequest.numUpdates = 1
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationProviderClient.requestLocationUpdates(
+                locationRequest,locationCallback, Looper.myLooper()
+            )
+        }
     }
 
+    // Fait un callback pour récupérer la position actuelle de l'appareil//
+    private val locationCallback = object : LocationCallback(){
+        override fun onLocationResult(locationResult: LocationResult) {
+            var lastLocation: Location = locationResult.lastLocation
+            Log.d("Debug:","Votre position: "+ lastLocation.longitude.toString())
+        }
+    }
 
 }
+
+
+
