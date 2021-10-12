@@ -7,14 +7,17 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/res" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../Outils code/JDK 11/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/../Outils code/JDK 11/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../Outils code/JDK 11/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../Android/Akenasia/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../Android/Akenasia/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../Android/Akenasia/caches/transforms-3/abee30f5fdc381c37ccc79c3b75076bb/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Outils code/JDK 11/caches/modules-2/files-2.1/com.google.android.gms/play-services-location/18.0.0/21c0fe95fc8d679c87e65c85129c1191a8ca8625/play-services-location-18.0.0-javadoc.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-location/18.0.0/21c0fe95fc8d679c87e65c85129c1191a8ca8625/play-services-location-18.0.0-javadoc.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/modules-2/files-2.1/com.google.android.gms/play-services-location/18.0.0/21c0fe95fc8d679c87e65c85129c1191a8ca8625/play-services-location-18.0.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Outils code/JDK 11/caches/modules-2/files-2.1/com.google.android.gms/play-services-location/18.0.0/21c0fe95fc8d679c87e65c85129c1191a8ca8625/play-services-location-18.0.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Android/Akenasia/caches/modules-2/files-2.1/com.google.android.gms/play-services-location/18.0.0/21c0fe95fc8d679c87e65c85129c1191a8ca8625/play-services-location-18.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>
