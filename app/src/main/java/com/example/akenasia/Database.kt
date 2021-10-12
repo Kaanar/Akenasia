@@ -44,7 +44,7 @@ class Database : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewRecord()
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
         binding.bSave.setOnClickListener {
             saveRecord()
