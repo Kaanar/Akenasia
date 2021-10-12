@@ -7,9 +7,11 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3a8607876260cae6cf9af286bed37b63/transformed/jetified-core-1.4.0/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/3a8607876260cae6cf9af286bed37b63/transformed/jetified-core-1.4.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3a8607876260cae6cf9af286bed37b63/transformed/jetified-core-1.4.0/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/3a8607876260cae6cf9af286bed37b63/transformed/jetified-core-1.4.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/3a8607876260cae6cf9af286bed37b63/transformed/jetified-core-1.4.0/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/3a8607876260cae6cf9af286bed37b63/transformed/jetified-core-1.4.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/6c50a5673aed46634623bc9c76567d2e/transformed/jetified-core-1.4.0/res" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/cfd372a7c85dd392fa87661e7b9cb6c9/transformed/jetified-core-1.4.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/cfd372a7c85dd392fa87661e7b9cb6c9/transformed/jetified-core-1.4.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/cfd372a7c85dd392fa87661e7b9cb6c9/transformed/jetified-core-1.4.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/Outils code/JDK 11/caches/modules-2/files-2.1/androidx.test/core/1.4.0/96b4d161def059d92989a352500d05d215c33d5e/core-1.4.0-javadoc.jar!/" />

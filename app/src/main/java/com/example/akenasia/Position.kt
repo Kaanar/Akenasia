@@ -81,7 +81,7 @@ class Position(context: Context) {
         val dlat: Double = (lat2 - lat1) * d2r
         val a: Double = pow(sin(dlat / 2.0), 2.0) + cos(lat1 * d2r) * cos(lat2 * d2r) * pow(sin(dlong / 2.0), 2.0)
         val c: Double = 2 * atan2(sqrt(a), sqrt(1 - a))
-        return 6367 * c * 1000 //pour tester avec les mettre, faudra enlever tout ce qu'il y a après la virgule
+        return 6371 * c * 1000 //pour tester avec les mettre, faudra enlever tout ce qu'il y a après la virgule
     }
 
     /*task.addOnSuccessListener {

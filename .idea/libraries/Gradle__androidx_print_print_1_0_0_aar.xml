@@ -3,7 +3,7 @@
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Outils code/JDK 11/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/annotations.zip!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/63e7d0ffd75e23637a325b06dfc24e77/transformed/print-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/Outils code/JDK 11/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/jars/classes.jar!/" />
@@ -12,9 +12,11 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/res" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/res" />
-      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/64b40f86ad418a55531931148e4a58e7/transformed/print-1.0.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/5ea8f0ed332b1b269256d53965ad5d08/transformed/print-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/63e7d0ffd75e23637a325b06dfc24e77/transformed/print-1.0.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/63e7d0ffd75e23637a325b06dfc24e77/transformed/print-1.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../../Outils code/JDK 11/caches/transforms-3/63e7d0ffd75e23637a325b06dfc24e77/transformed/print-1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

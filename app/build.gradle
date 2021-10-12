@@ -3,9 +3,10 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
 }
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.akenasia"
@@ -48,7 +49,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
 }
+
 
