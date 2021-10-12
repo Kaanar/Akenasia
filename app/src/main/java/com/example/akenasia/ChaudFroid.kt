@@ -43,14 +43,14 @@ class ChaudFroid: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         dbHandler = DatabaseHandler(thiscontext!!)
 
-        binding.CfessaisTV.text="Il vous reste"+essais+" essais"
+       /* binding.CfessaisTV.text="Il vous reste"+essais+" essais"
 
         firstDistance=pos.calcul_distance(pos.getLatitude(),
             pos.getLongitude(),
             Cfgoal_Y.text.toString().toDouble(),
             Cfgoal_X.text.toString().toDouble())
 
-        binding.CfRefreshBT.setOnClickListener {
+            CfRefreshBT.setOnClickListener {
             if(essais==0){
                 Toast.makeText(context, "Vous avez perdu!",Toast.LENGTH_LONG).show()
                 val intent = Intent(context, MainActivity::class.java)
@@ -81,5 +81,5 @@ class ChaudFroid: Fragment() {
                 binding.CfessaisTV.text="Il vous reste"+essais+" essais"
             }
         }
-    }
+    */}
 }

@@ -1,6 +1,7 @@
 package com.example.akenasia
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,7 +27,8 @@ class Game : AppCompatActivity() {
     private lateinit var _binding: ChaudFroidBinding
     private lateinit var dbHandler : DatabaseHandler
     private lateinit var place: Place
-    public var idplace=0
+    private var essais=10
+    private var firstDistance=0.0
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -35,8 +37,8 @@ class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         dbHandler = DatabaseHandler(this)
+        pos = Position(this)
         place= dbHandler.getPlace(intent.getIntExtra("id",0))
-        idplace=intent.getIntExtra("id",0)
 
         if(intent.getStringExtra("mode").toString()=="chronometre"){
             binding = ChronometreBinding.inflate(layoutInflater)
@@ -49,7 +51,21 @@ class Game : AppCompatActivity() {
             setContentView(_binding.root)
             Cfgoal_X.text=place.getPlaceLat().toString()
             Cfgoal_Y.text=place.getPlaceLong().toString()
+
+            firstDistance=pos.calcul_distance(pos.getLatitude(),
+                pos.getLongitude(),
+                Cfgoal_Y.text.toString().toDouble(),
+                Cfgoal_X.text.toString().toDouble())
+
+
+            CfRefreshBT.setOnClickListener {
+                nouvelEssai()
+            }
+
         }
+
+
+
 
     }
 
@@ -67,6 +83,39 @@ class Game : AppCompatActivity() {
 
         if (distance<1000){
             //Toast.makeText(activity,"<1000 bravo", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    fun nouvelEssai(){
+        if(essais==0){
+            Toast.makeText(this, "Vous avez perdu!",Toast.LENGTH_LONG).show()
+            val intent = Intent(this, MainActivity::class.java)
+            this.startActivity(intent)
+        }
+        else{
+            pos.refreshLocation()
+            _binding.CfcurrentX.text=pos.getLatitude().toString()
+            _binding.CfcurrentY.text = pos.getLongitude().toString()
+            val distance : Double =pos.calcul_distance(pos.getLatitude(),
+                pos.getLongitude(),
+                Cfgoal_X.text.toString().toDouble(),
+                Cfgoal_Y.text.toString().toDouble())
+            if(distance<1500){
+                Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                this.startActivity(intent)
+            }
+            else{
+                if(distance<firstDistance){
+                    Toast.makeText(this, "Vous chauffez!",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(this, "Vous refroidissez!",Toast.LENGTH_SHORT).show()
+                }
+            }
+            essais--
+            _binding.CfessaisTV.text="Il vous reste "+essais+" essais"
         }
     }
 }
