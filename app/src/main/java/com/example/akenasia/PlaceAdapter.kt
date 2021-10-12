@@ -28,9 +28,9 @@ import kotlinx.android.synthetic.main.place_listview.latitude;
 
 
 class PlaceAdapter : BaseAdapter() {
-    private lateinit var context: Context
-    private lateinit var place: ArrayList<Place>
-    private lateinit var inflater: LayoutInflater
+    lateinit var context: Context
+    lateinit var place: ArrayList<Place>
+    lateinit var inflater: LayoutInflater
     lateinit var DbContext: DatabaseHandler
 
     fun PlaceAdapter(context: Context,places: ArrayList<Place>) {
@@ -66,7 +66,7 @@ class PlaceAdapter : BaseAdapter() {
 
         val choisir = conView.findViewById<View>(R.id.choisir) as Button
         choisir.setOnClickListener(){
-            conView.findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            //conView.findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
         return conView
     }

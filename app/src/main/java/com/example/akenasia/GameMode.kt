@@ -12,13 +12,11 @@ import androidx.navigation.fragment.findNavController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.akenasia.databinding.DatabaseBinding
-import com.example.akenasia.databinding.HomepageBinding
+import com.example.akenasia.databinding.GameModeBinding
 import kotlinx.android.synthetic.main.database.*
 
-
-class HomePage : Fragment(){
-
-    private var _binding: HomepageBinding? = null
+class GameMode : Fragment(){
+    private var _binding: GameModeBinding? = null
     private lateinit var pos: Position
 
     // This property is only valid between onCreateView and
@@ -34,15 +32,18 @@ class HomePage : Fragment(){
         if (container != null) {
             thiscontext = container.getContext()
         }
-        _binding = HomepageBinding.inflate(inflater, container, false)
+        _binding = GameModeBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.HomepageJouerBT.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        binding.GameModeChronoBT.setOnClickListener {
+            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+        binding.GameModeCountBT.setOnClickListener {
+            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 

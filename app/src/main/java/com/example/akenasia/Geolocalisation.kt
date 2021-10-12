@@ -47,7 +47,7 @@ class Geolocalisation : Fragment() {
         goal_Y.text = "2.216647218942868"
 
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment)
         }
 
         binding.bRefresh.setOnClickListener {

@@ -2,17 +2,21 @@ package com.example.akenasia
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.akenasia.databinding.DatabaseBinding
 import kotlinx.android.synthetic.main.database.*
+import java.util.ArrayList
+import com.example.akenasia.PlaceAdapter
 
 
 /**
@@ -22,7 +26,10 @@ class Database : Fragment() {
 
     private var _binding: DatabaseBinding? = null
     private lateinit var pos: Position
-
+    private lateinit var places: ArrayList<Place>
+    private lateinit var dbHandler : DatabaseHandler
+    private lateinit var placeListView : ListView
+    private lateinit var placeAdapter: PlaceAdapter
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -34,17 +41,79 @@ class Database : Fragment() {
         pos = Position(this.requireActivity())
         if (container != null) {
             thiscontext = container.getContext()
+            dbHandler = DatabaseHandler(thiscontext!!)
+
         }
         _binding = DatabaseBinding.inflate(inflater, container, false)
         return binding.root
+
+
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewRecord()
+        // Instanciation des positions en dur
+        places = ArrayList<Place>()
+        val id1: Long = dbHandler.addPlace(
+            Place(
+                1,
+                "BU",
+                48.905273887110944,
+                2.2156870365142827
+            )
+        )
+        val id2: Long = dbHandler.addPlace(
+            Place(
+                2,
+                "Crous",
+                48.904096168019976,
+                2.216480970382691
+            )
+        )
+        val id3: Long = dbHandler.addPlace(
+            Place(
+                3,
+                "Bat G",
+                48.903158204219174,
+                2.2155475616455083
+            )
+        )
+        places.add(
+            Place(
+                1,
+                "BU",
+                48.905273887110944,
+                2.2156870365142827
+            )
+        )
+        places.add(
+            Place(
+                2,
+                "Crous",
+                48.904096168019976,
+                2.216480970382691
+            )
+        )
+        places.add(
+            Place(
+                3,
+                "Bat G",
+                48.903158204219174,
+                2.2155475616455083
+            )
+        )
+        placeListView = binding.listView as ListView
+        placeAdapter = PlaceAdapter()
+        placeAdapter.context=thiscontext!!
+        placeAdapter.place=places
+        placeAdapter.inflater=LayoutInflater.from(context)
+        placeAdapter.DbContext=dbHandler
+
+        placeListView.setAdapter(placeAdapter)
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment)
         }
         binding.bSave.setOnClickListener {
             saveRecord()
@@ -126,7 +195,7 @@ class Database : Fragment() {
     private fun viewRecord(){
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
-        //calling the viewEmployee method of DatabaseHandler class to read the records
+        //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Place> = databaseHandler.viewPlace()
         val empArrayId = Array<String>(emp.size){"0"}
         val empArrayName = Array<String>(emp.size){"null"}
