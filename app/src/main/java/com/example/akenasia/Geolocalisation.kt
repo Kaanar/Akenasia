@@ -61,14 +61,16 @@ class Geolocalisation : Fragment() {
     }
     //maison de l'étudiant 48.902656120835665, 2.2134736447569447
     fun readLocation(){
-        pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
+        /*pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
         current_X.text =pos.getLatitude().toString()
         current_Y.text = pos.getLongitude().toString()
         val distance : Double = pos.calcul_distance(48.902656120835665, 2.2134736447569447, 48.90432845480199, 2.216647218942868)
+        Toast.makeText(activity,"$distance", Toast.LENGTH_SHORT).show()*/
+        val distance : Double = pos.calcul_distance(1.0, 2.0, 1.0, 3.0)
         Toast.makeText(activity,"$distance", Toast.LENGTH_SHORT).show()
 
-        if (distance<1000){
+        //if (distance<1000){
             //Toast.makeText(activity,"<1000 bravo", Toast.LENGTH_SHORT).show()
-        }
+        //}
     }
 }
