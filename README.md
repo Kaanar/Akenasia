@@ -29,6 +29,10 @@ Android Studio settings:
 You can download the project and execute it with Android Studio. 
 ```
 $ git clone https://github.com/Kaanar/Akenasia
+$ On AndroidStudio: File > New > Project from Version Control
+$ Sync Android SDKs: change if is not the SDK path in local.properties file.
+$ Experimental Feature Alert: accept the terms of legal notice of the beta Java specification.
+$ git clone https://github.com/Kaanar/Akenasia
 $ cd ../path/to/the/file
 $ gradle build
 ```
