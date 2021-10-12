@@ -1,0 +1,76 @@
+@startuml Akenasia
+left to right direction
+
+enum Gamemode {
+  CHRONOMETRE
+  CHAUD_FROID
+}
+
+class Chrono {
+  temps : FLOAT
+  timer()
+}
+
+class Place {
+  placeId : INTEGER
+  placeName : STRING
+  placeLat : DOUBLE
+  placeLong : DOUBLE
+  Place()
+}
+
+class Database {
+  saveRecord()
+  orderRecord()
+  viewRecord()
+  deleteRecord()
+}
+
+class Position {
+  context : CONTEXT
+  latitude : DOUBLE
+  longitude : DOUBLE
+  Position()
+  refreshLocation()
+  calcul_distance() : DOUBLE
+}
+
+class User {
+  userId : INTEGER
+  userName : STRING
+  User()
+}
+
+interface MyListAdapter {
+  getView()
+}
+
+class Game {
+  Game()
+  start()
+  status()
+  win()
+}
+
+class ChaudFroid {
+  tentatives : INTEGER
+}
+
+class DatabaseHandler {
+  addPlace()
+  viewPlace()
+  updatePlace()
+  deletePlace()
+}
+
+Database <|-- MyListAdapter
+DatabaseHandler <|-- Database
+Place <|-- Database
+Position <|-- Place
+Place <|-- Game
+Position <|-- User
+User <|-- Game
+Game <|-- Chrono
+Game <|-- ChaudFroid
+
+@enduml
