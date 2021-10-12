@@ -17,6 +17,14 @@
             android:padding="16dp">
             <!-- Title, secondary and supporting text -->
             <TextView
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                />
+            <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

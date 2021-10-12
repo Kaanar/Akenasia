@@ -48,8 +48,6 @@ class Database : Fragment() {
         _binding = DatabaseBinding.inflate(inflater, container, false)
         return binding.root
 
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,7 +57,7 @@ class Database : Fragment() {
         places = ArrayList<Place>()
         val id1: Long = dbHandler.addPlace(
             Place(
-                1,
+                0,
                 "BU",
                 48.905273887110944,
                 2.2156870365142827
@@ -67,7 +65,7 @@ class Database : Fragment() {
         )
         val id2: Long = dbHandler.addPlace(
             Place(
-                2,
+                1,
                 "Crous",
                 48.904096168019976,
                 2.216480970382691
@@ -75,7 +73,7 @@ class Database : Fragment() {
         )
         val id3: Long = dbHandler.addPlace(
             Place(
-                3,
+                2,
                 "Bat G",
                 48.903158204219174,
                 2.2155475616455083
@@ -83,7 +81,7 @@ class Database : Fragment() {
         )
         places.add(
             Place(
-                1,
+                0,
                 "BU",
                 48.905273887110944,
                 2.2156870365142827
@@ -91,7 +89,7 @@ class Database : Fragment() {
         )
         places.add(
             Place(
-                2,
+                1,
                 "Crous",
                 48.904096168019976,
                 2.216480970382691
@@ -99,20 +97,21 @@ class Database : Fragment() {
         )
         places.add(
             Place(
-                3,
+                2,
                 "Bat G",
                 48.903158204219174,
                 2.2155475616455083
             )
         )
-        placeListView = binding.listView as ListView
+        /*placeListView = binding.listView as ListView
         placeAdapter = PlaceAdapter()
         placeAdapter.context=thiscontext!!
         placeAdapter.place=places
         placeAdapter.inflater=LayoutInflater.from(context)
-        placeAdapter.DbContext=dbHandler
+        placeAdapter.DbContext=dbHandler*/
+        viewRecord()
 
-        placeListView.setAdapter(placeAdapter)
+        //placeListView.setAdapter(placeAdapter)
        /* binding.listView.name.setOnClickListener {
             //findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment)
         }*/
@@ -237,7 +236,7 @@ class Database : Fragment() {
                 if(status > -1){
                     Toast.makeText(activity,"Place deleted", Toast.LENGTH_LONG).show()
                     orderRecord(Integer.parseInt(deleteId))
-                    placeAdapter.notifyDataSetChanged()
+                    viewRecord()
                 }
             }else{
                 Toast.makeText(activity,"Id cannot be blank", Toast.LENGTH_LONG).show()
