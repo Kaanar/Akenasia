@@ -26,6 +26,7 @@ class Game : AppCompatActivity() {
     private lateinit var _binding: ChaudFroidBinding
     private lateinit var dbHandler : DatabaseHandler
     private lateinit var place: Place
+    public var idplace=0
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -35,18 +36,19 @@ class Game : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         dbHandler = DatabaseHandler(this)
         place= dbHandler.getPlace(intent.getIntExtra("id",0))
+        idplace=intent.getIntExtra("id",0)
 
         if(intent.getStringExtra("mode").toString()=="chronometre"){
             binding = ChronometreBinding.inflate(layoutInflater)
             setContentView(binding.root)
-            Chgoal_X.text=place.getPlaceLong().toString()
-            Chgoal_Y.text=place.getPlaceLat().toString()
+            Chgoal_X.text=place.getPlaceLat().toString()
+            Chgoal_Y.text=place.getPlaceLong().toString()
         }
         else if (intent.getStringExtra("mode").toString()=="c/f"){
             _binding = ChaudFroidBinding.inflate(layoutInflater)
             setContentView(_binding.root)
-            Cfgoal_X.text=place.getPlaceLong().toString()
-            Cfgoal_Y.text=place.getPlaceLat().toString()
+            Cfgoal_X.text=place.getPlaceLat().toString()
+            Cfgoal_Y.text=place.getPlaceLong().toString()
         }
 
     }
