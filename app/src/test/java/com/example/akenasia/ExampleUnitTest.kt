@@ -1,0 +1,36 @@
+package com.example.akenasia
+
+import android.content.Context
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.core.IsEqual
+import org.junit.Test
+
+import org.junit.Assert.*
+import org.junit.Before
+
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    lateinit var pos :Position
+    private lateinit var instrumentationContext: Context
+
+    @Before public fun initialize(){
+        // pos= Position(instrumentationContext)
+    }
+
+    @Test
+    fun position_Is_Correct() {
+        /*assertEquals(pos.getLatitude(), 0.0)
+        assertEquals(pos.getLongitude(),0.0)*/
+    }
+
+    /*@Test
+    fun distance_test_1(){
+        lateinit var pos: Position
+        assertEquals(0.0, pos.calcul_distance(1.0, 1.0, 1.0, 1.0),0.5)
+    }*/
+}
