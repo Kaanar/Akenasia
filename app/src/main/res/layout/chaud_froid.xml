@@ -32,6 +32,16 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/resultTV"
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_marginStart="0dp" />
+
     <TextView
         android:id="@+id/CfPosGoalTV"
         android:layout_width="128dp"

@@ -16,6 +16,8 @@ import com.example.akenasia.databinding.ChaudFroidBinding
 import com.example.akenasia.databinding.ChronometreBinding
 import kotlinx.android.synthetic.main.chaud_froid.*
 import kotlinx.android.synthetic.main.chronometre.*
+import kotlin.math.atan2
+import kotlin.math.sqrt
 
 
 class Game : AppCompatActivity() {
@@ -33,7 +35,6 @@ class Game : AppCompatActivity() {
     // This property is only valid between onCreateView and
     // onDestroyView.
 
-
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         dbHandler = DatabaseHandler(this)
@@ -46,33 +47,35 @@ class Game : AppCompatActivity() {
             Chgoal_X.text=place.getPlaceLat().toString()
             Chgoal_Y.text=place.getPlaceLong().toString()
         }
-        else if (intent.getStringExtra("mode").toString()=="c/f"){
+        else if (intent.getStringExtra("mode").toString()=="c/f") {
             _binding = ChaudFroidBinding.inflate(layoutInflater)
             setContentView(_binding.root)
-            Cfgoal_X.text=place.getPlaceLat().toString()
-            Cfgoal_Y.text=place.getPlaceLong().toString()
+            Cfgoal_X.text = place.getPlaceLat().toString()
+            Cfgoal_Y.text = place.getPlaceLong().toString()
 
-            firstDistance=pos.calcul_distance(pos.getLatitude(),
+            firstDistance = pos.calcul_distance(
+                pos.getLatitude(),
                 pos.getLongitude(),
                 Cfgoal_Y.text.toString().toDouble(),
-                Cfgoal_X.text.toString().toDouble())
+                Cfgoal_X.text.toString().toDouble()
+            )
+
+            CfQuitGameBT.setOnClickListener {
+                val intent = Intent(this, MainActivity::class.java)
+                this.startActivity(intent)
+            }
 
 
             CfRefreshBT.setOnClickListener {
                 nouvelEssai()
             }
-
         }
-
-
-
-
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
     }
+
     //maison de l'étudiant 48.902656120835665, 2.2134736447569447
     fun readLocation(){
         pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
@@ -80,18 +83,17 @@ class Game : AppCompatActivity() {
        // current_Y.text = pos.getLongitude().toString()
         val distance : Double = pos.calcul_distance(48.902656120835665, 2.2134736447569447, 48.90432845480199, 2.216647218942868)
         Toast.makeText(this,"$distance", Toast.LENGTH_SHORT).show()
-
-        if (distance<1000){
-            //Toast.makeText(activity,"<1000 bravo", Toast.LENGTH_SHORT).show()
-        }
     }
 
-
     fun nouvelEssai(){
-        if(essais==0){
-            Toast.makeText(this, "Vous avez perdu!",Toast.LENGTH_LONG).show()
-            val intent = Intent(this, MainActivity::class.java)
-            this.startActivity(intent)
+        val distance : Double =pos.calcul_distance(pos.getLatitude(),
+            pos.getLongitude(),
+            Cfgoal_X.text.toString().toDouble(),
+            Cfgoal_Y.text.toString().toDouble())
+        if(essais==1 && distance >= 1500){
+            _binding.resultTV.text="Dommage ! vous avez perdu ;_;"
+            CfRefreshBT.setVisibility(View.GONE);
+            CfQuitGameBT.setVisibility(View.VISIBLE)
         }
         else{
             pos.refreshLocation()
@@ -102,9 +104,10 @@ class Game : AppCompatActivity() {
                 Cfgoal_X.text.toString().toDouble(),
                 Cfgoal_Y.text.toString().toDouble())
             if(distance<1500){
-                Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                this.startActivity(intent)
+                //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
+                _binding.resultTV.text="Bravo ! vous avez gagné"
+                CfRefreshBT.setVisibility(View.GONE);
+                CfQuitGameBT.setVisibility(View.VISIBLE)
             }
             else{
                 if(distance<firstDistance){
