@@ -71,6 +71,14 @@ class Position(context: Context) {
             }
     }
 
+    fun setLatitude(latitude : Double) {
+        this.latitude = latitude
+    }
+
+    fun setLongitude(longitude : Double) {
+        this.longitude = longitude
+    }
+
         fun getLatitude(): Double {
             return latitude
         }
