@@ -1,4 +1,5 @@
 = Akenasia
+:toc:
 
 == Synthèse
 === Projet
@@ -33,7 +34,7 @@ Type d’application : Mobile +
 
 Schéma architectural de l’application :
 
-image::schema.jpg[]
+image::images\schema.jpg[]
 
 Plateforme technologique : +
 
@@ -58,27 +59,41 @@ Acquisition de données, usage intelligent des données : ?
 == Modélisation
 Page de géolocalisation, appuyer sur le bouton refresh permet de récupérer ses coordonnées.
 
-image::Akenasia_GPS.jpg[alt=GPS,width=160,height=120]
+image::images\Akenasia_GPS.jpg[alt=GPS,width=160,height=120]
 
 Lorsque l'on appuie sur le bouton, on a également la fonction de calcule de distance qui s'exécute. La distance est affichée en mètre en bas de l'application.
 
-image::Akenasia_distance.jpg[alt=Distance,width=160,height=120]
+image::images\Akenasia_distance.jpg[alt=Distance,width=160,height=120]
 
 
 Modèle UML :
 
-image::Diagramme.png
+image::images\Diagramme.png[]
 
 == Features
-* Lancer une partie. Au début de la partie, l'utilisateur choisit dans la liste proposée un lieu qui sera sa destination. Une partie peut se jouer sous deux modes de jeux différents. Le premier mode de jeu est une partie contre la montre, avec un temps limité pour rejoindre le lieux fixer au début de la partie.Le deuxième mode de jeux est une partie avec un nombre de coups limités pour rejoindre le lieux fixer au début de la partie.
-image::ListePositions.png
-image::ModeJeu.png
-Dans un mode de jeu contre la montre un chronomètre sera activé pendant le déroulement de la partie. Dans ce mode la partie s'arrête soit lorsque le chronomètre indique que le temps est dépassé, soit lorsque l'utilisateur arrive près du lieux avant la fin du chronomètre. Dans un mode de jeux à coups limités, un coup correspond à un rafraichissement de position du joueur en appuyant sur le bouton "raffraichir". Lorsque l'utilisateur dépasse le nombre de coup autorisé la partie s'arrête. Dans ce monde la partie s'arrête egalement lorsque l'utilisateur arrive près de lieu de destination choisi.
-image::Timer.png
 
-* L'utilisateur peut crée son parcours personnalisé. Dans le menu il choisit parcour personnalisé. Pour ajouter un lieu l'utilisateur doit se déplacer jusqu'au lieu et cliquer sur le bouton "ajouter ce lieu". Dans un parcours personnalisé l'utilisateur peut ajouter 5 lieux. Lorsque le parcours personnalisé a finit d'être enregistrer l'utilisateur appuye sur le bouton "Fin".
-image::ParcoursPerso.png
-* A la fin d'une partie, une map s'affihe avec le lieu de départ de l'utilisateur, et les lieux où il a rafraichi sa position.
+* Page d'accueil de l'application, il suffit de cliquer sur le bouton afin d'accéder à la liste des lieux.
+
+image::images\Accueil.png[alt=Timer,width=160,height=120]
+
+* Lancer une partie. Au début de la partie, l'utilisateur choisit dans la liste proposée un lieu qui sera sa destination. Une partie peut se jouer sous deux modes de jeux différents. Le premier mode de jeu est une partie contre la montre, avec un temps limité pour rejoindre le lieux fixer au début de la partie. Le deuxième mode de jeux est une partie avec un nombre de coups limités pour rejoindre le lieux fixé au début de la partie.
+
+image:images\ListePositions.png[alt=Position,width=160,height=120] 
+image:images\ModeJeu.png[alt=GPS,width=160,height=120]
+
+* Dans un mode de jeu contre la montre, un chronomètre sera activé pendant le déroulement de la partie. Dans ce mode la partie s'arrête soit lorsque le chronomètre indique que le temps est dépassé, soit lorsque l'utilisateur arrive près du lieux avant la fin du chronomètre. 
+
+image::images\Timer.png[alt=Timer,width=160,height=120]
+
+* Dans un mode de jeux à coups limités, un coup correspond à un rafraichissement de la position du joueur en appuyant sur le bouton "raffraichir". Dans ce mode la partie s'arrête lorsque l'utilisateur est suffisamment proche de la destination choisie. A chaque actualisation, le jeu indique si le joueur se rapproche ou s'éloigne de son objectif [1]. Le nombre de tentatives se met à jour lors de chaque récupération de la position [2] et une fois le compteur à 0, la partie est perdue.
+
+image::images\CF.png[alt=Timer,width=160,height=120]
+
+* L'utilisateur peut créer son parcours personnalisé. Lorsque l'on arrive sur la page contenant la liste des lieux proposés, on remarque la présence d'une entrée de texte. Pour ajouter un lieu l'utilisateur doit se déplacer jusqu'au lieu (les coordonnées enregistrées seront celles de la position actuelle du joueur). Il faut ensuite entrer un nom [1] et cliquer sur "ajouter ma position" [2]. Il est possible de supprimer un lieu avec "delete" en entrant l'id du lieu que l'on veut supprimer [3].
+
+image::images\ParcoursPerso.png[alt=Parcours,width=160,height=120]
+
+* A la fin d'une partie, une map s'affiche avec le lieu de départ de l'utilisateur, ainsque que les lieux où il a rafraichi sa position.
 
 
 
