@@ -63,7 +63,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         val placeLong: Double
 
         if (cursor != null) {
-            cursor.moveToPosition(id)
+            cursor.moveToFirst()
             placeId = cursor.getInt(cursor.getColumnIndex("id"))
             placeName = cursor.getString(cursor.getColumnIndex("name"))
             placeLat = cursor.getDouble(cursor.getColumnIndex("latitude"))

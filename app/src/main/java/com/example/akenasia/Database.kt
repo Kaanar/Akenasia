@@ -57,14 +57,14 @@ class Database : Fragment() {
         // Instanciation des positions en dur
         places = ArrayList<Place>()
         if(dbHandler.viewPlace().isEmpty()){
-            val id1: Long = dbHandler.addPlace(Place(
+            dbHandler.addPlace(Place(
                 0,
                 "BU",
                 48.905273887110944,
                 2.2156870365142827
             )
             )
-            val id2: Long = dbHandler.addPlace(
+            dbHandler.addPlace(
                 Place(
                     1,
                     "Crous",
@@ -72,7 +72,7 @@ class Database : Fragment() {
                     2.216480970382691
                 )
             )
-            val id3: Long = dbHandler.addPlace(
+            dbHandler.addPlace(
                 Place(
                     2,
                     "Bat G",

@@ -47,7 +47,7 @@ class Game : AppCompatActivity() {
             Chgoal_X.text=place.getPlaceLat().toString()
             Chgoal_Y.text=place.getPlaceLong().toString()
         }
-        else if (intent.getStringExtra("mode").toString()=="c/f") {
+        else if (intent.getStringExtra("mode").toString()=="coups") {
             _binding = CoupsLimitesBinding.inflate(layoutInflater)
             setContentView(_binding.root)
             Cfgoal_X.text = place.getPlaceLat().toString()

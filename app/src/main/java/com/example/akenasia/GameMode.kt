@@ -44,27 +44,29 @@ class GameMode : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id= arguments?.getInt("id")
+        val id= this.arguments?.getInt("id")
         //On récupère les infos de la place
         val place = dbHandler.getPlace(id!!)
         val tv = view.findViewById<TextView>(R.id.GameModeTitleTV)
-        tv.text = "Mode de jeu: Go to "+place.placeName
+        tv.text = "Mode de jeu: Go to "+place!!.placeName
 
         //Si le joueur clique sur chronomètre, la partie se lance selon son choix
         binding.GameModeChronoBT.setOnClickListener {
 
             //On envoie dans l'activité de jeu le mode choisi + l'id de la place//
-            val intent = Intent(context, Game::class.java)
-            intent.putExtra("mode","chronometre")
-            intent.putExtra("id",id)
+            val intent = Intent(context, Game::class.java).apply {
+                putExtra("mode","chronometre")
+                putExtra("id",id)
+            }
             activity?.startActivity(intent)
-            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        //Si le joueur clique sur chaud/froid, la partie se lance selon son choix
+        //Si le joueur clique sur coups limités, la partie se lance selon son choix
         binding.GameModeCountBT.setOnClickListener {
-            val intent = Intent(context, Game::class.java)
-            intent.putExtra("mode","c/f")
+            val intent = Intent(context, Game::class.java).apply {
+                putExtra("mode","coups")
+                putExtra("id",id)
+            }
             activity?.startActivity(intent)
         }
     }
