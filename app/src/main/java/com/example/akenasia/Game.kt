@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.databinding.ActivityMainBinding
-import com.example.akenasia.databinding.ChaudFroidBinding
+import com.example.akenasia.databinding.CoupsLimitesBinding
 import com.example.akenasia.databinding.ChronometreBinding
-import kotlinx.android.synthetic.main.chaud_froid.*
+import kotlinx.android.synthetic.main.coups_limites.*
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlin.math.atan2
 import kotlin.math.sqrt
@@ -26,7 +26,7 @@ class Game : AppCompatActivity() {
 
     private lateinit var pos: Position
     private lateinit var binding: ChronometreBinding
-    private lateinit var _binding: ChaudFroidBinding
+    private lateinit var _binding: CoupsLimitesBinding
     private lateinit var dbHandler : DatabaseHandler
     private lateinit var place: Place
     private var essais=10
@@ -48,7 +48,7 @@ class Game : AppCompatActivity() {
             Chgoal_Y.text=place.getPlaceLong().toString()
         }
         else if (intent.getStringExtra("mode").toString()=="c/f") {
-            _binding = ChaudFroidBinding.inflate(layoutInflater)
+            _binding = CoupsLimitesBinding.inflate(layoutInflater)
             setContentView(_binding.root)
             Cfgoal_X.text = place.getPlaceLat().toString()
             Cfgoal_Y.text = place.getPlaceLong().toString()
