@@ -31,6 +31,9 @@ class Game : AppCompatActivity() {
     private lateinit var place: Place
     private var essais=10
     private var lastDistance=0.0
+    private var lat = ArrayList<Double>()
+    private var long = ArrayList<Double>()
+    private var i = 0
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -64,8 +67,11 @@ class Game : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 this.startActivity(intent)
             }
-
-
+            CfPositionBT.setOnClickListener {
+                if (i==lat.size) {i=0}
+                liste(lat, long, i)
+                i++
+            }
             CfRefreshBT.setOnClickListener {
                 nouvelEssai()
             }
@@ -89,7 +95,7 @@ class Game : AppCompatActivity() {
         pos.refreshLocation()
         Cfcurrent_X.text = pos.getLatitude().toString()
         Cfcurrent_Y.text = pos.getLongitude().toString()
-        /*
+
         //tests on simule des positions voir si on obtient les résulats attendus
         if (essais == 9) {
             pos.setLatitude(1.0)
@@ -129,8 +135,13 @@ class Game : AppCompatActivity() {
             pos.setLongitude(2.21568703652)
         }
 
-        Cfcurrent_X.text = pos.getLatitude().toString()
-        Cfcurrent_Y.text = pos.getLongitude().toString() */
+        var a = pos.getLatitude()
+        var b = pos.getLongitude()
+        lat.add(a)
+        long.add(b)
+
+        //Cfcurrent_X.text = pos.getLatitude().toString()
+        //Cfcurrent_Y.text = pos.getLongitude().toString()
 
         val distance : Double =pos.calcul_distance(pos.getLatitude(),
             pos.getLongitude(),
@@ -142,6 +153,7 @@ class Game : AppCompatActivity() {
             _binding.resultTV.text="Dommage ! vous avez perdu ;_;"
             CfRefreshBT.setVisibility(View.GONE);
             CfQuitGameBT.setVisibility(View.VISIBLE)
+            CfPositionBT.setVisibility(View.VISIBLE)
         }
         //else{
             //pos.refreshLocation()
@@ -156,6 +168,7 @@ class Game : AppCompatActivity() {
                 _binding.resultTV.text="Bravo ! vous avez gagné"
             CfRefreshBT.setVisibility(View.GONE);
             CfQuitGameBT.setVisibility(View.VISIBLE)
+            CfPositionBT.setVisibility(View.VISIBLE)
             }
         else{
             if (essais in 2..9) {
@@ -176,5 +189,8 @@ class Game : AppCompatActivity() {
         essais--
         _binding.CfessaisTV.text="Il vous reste "+essais+" essais"
         Toast.makeText(this, distance.toString(),Toast.LENGTH_SHORT).show()
+    }
+    fun liste(lat : ArrayList<Double>, long : ArrayList<Double>, i : Int) {
+        _binding.CfessaisTV.text="Position " + (i+1) + "X : " + lat[i].toString()+ " Y : " + long[i].toString()
     }
 }
