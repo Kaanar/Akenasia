@@ -11,25 +11,52 @@
     android:orientation="vertical"
     tools:context=".Game">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="35dp"
+        android:elevation="19dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/shape_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.Akenasia.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/Appbar">
-
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Chronomètre"
+            android:gravity="center"
+            android:padding="6dp"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:elevation="15dp"
+            android:background="@color/purple_500"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Chronometer
+            android:id="@+id/chronoMterPlay"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple_500"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_background"
+            android:backgroundTint="@color/white"
+            android:elevation="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/ChTv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/ChresultTV"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:text="Chronomètre"
         android:textAlignment="center"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/toolbar"
-        android:textAppearance="?attr/textAppearanceHeadline6" />
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_marginStart="0dp" />
 
     <TextView
         android:id="@+id/ChPosGoalTv"
@@ -74,43 +101,7 @@
         android:textAlignment="center"
         android:layout_marginStart="30sp" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_margin="35dp"
-        android:elevation="19dp"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/shape_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Chronomètre"
-            android:gravity="center"
-            android:padding="6dp"
-            android:layout_margin="20dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:elevation="15dp"
-            android:background="@color/purple_500"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <Chronometer
-            android:id="@+id/chronoMterPlay"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/purple_500"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape_background"
-            android:backgroundTint="@color/white"
-            android:elevation="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+
     <TextView
         android:id="@+id/ChPosCurTv"
         android:layout_width="wrap_content"
@@ -156,6 +147,14 @@
         android:layout_gravity="center"
         android:textAlignment="center"
         android:layout_marginStart="30sp" />
+
+    <TextView
+        android:id="@+id/ChessaisTV"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30sp"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/ChRefreshBT"

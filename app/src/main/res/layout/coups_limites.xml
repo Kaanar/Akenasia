@@ -33,7 +33,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
     <TextView
-        android:id="@+id/resultTV"
+        android:id="@+id/CfresultTV"
         android:layout_width="400dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
