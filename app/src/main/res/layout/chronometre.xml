@@ -1,183 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
     android:orientation="vertical"
     tools:context=".Game">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_margin="35dp"
-        android:elevation="19dp"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/shape_background"
+        android:id="@+id/LayoutChronometre"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_background"
+        android:backgroundTint="@color/white"
+        android:elevation="19dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="35dp">
+
         <TextView
-            android:text="Chronomètre"
+            android:id="@+id/ChresultTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:translationZ="90dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@color/purple_500"
+            android:elevation="15dp"
             android:gravity="center"
             android:padding="6dp"
-            android:layout_margin="20dp"
+            android:text="Chronomètre"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textSize="18sp"
-            android:elevation="15dp"
-            android:background="@color/purple_500"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
+
         <Chronometer
             android:id="@+id/chronoMterPlay"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/purple_500"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/shape_background"
             android:backgroundTint="@color/white"
             android:elevation="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/purple_500"
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/ChresultTV"
-        android:layout_width="400dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:layout_marginStart="0dp" />
 
     <TextView
         android:id="@+id/ChPosGoalTv"
         android:layout_width="128dp"
         android:layout_height="20dp"
-        android:layout_marginTop="25dp"
         android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:text="Position à atteindre:"
-        app:layout_constraintBottom_toTopOf="@id/textview_XCoordonnees_Goals"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/LayoutChronometre" />
 
     <TextView
         android:id="@+id/ChXGoalTv"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="0sp"
         android:layout_gravity="center"
-        android:text="X :" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:text="X :"
+        app:layout_constraintEnd_toStartOf="@+id/ChPosGoalTv"
+        app:layout_constraintTop_toBottomOf="@+id/ChPosGoalTv" />
 
     <TextView
         android:id="@+id/Chgoal_X"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginStart="30sp" />
+        android:layout_width="310dp"
+        android:layout_height="29dp"
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/ChXGoalTv"
+        app:layout_constraintTop_toTopOf="@+id/ChXGoalTv" />
 
     <TextView
         android:id="@+id/ChYGoalTv"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:text="Y :" />
+        android:text="Y :"
+        app:layout_constraintStart_toStartOf="@+id/ChXGoalTv"
+        app:layout_constraintTop_toBottomOf="@+id/ChXGoalTv" />
 
     <TextView
         android:id="@+id/Chgoal_Y"
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginStart="30sp" />
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/ChYGoalTv"
+        app:layout_constraintTop_toBottomOf="@+id/ChXGoalTv" />
 
 
     <TextView
         android:id="@+id/ChPosCurTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
         android:text="Position actuelle:"
-        app:layout_constraintBottom_toTopOf="@id/textview_XCoordonnees_Current"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_YCoordonnees_Goals"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:layout_gravity="center" />
+        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/ChXCurTv"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="0sp"
         android:layout_gravity="center"
-        android:text="X :"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="60dp"
+        android:text="X :"
+        app:layout_constraintEnd_toStartOf="@+id/ChPosCurTv"
+        app:layout_constraintTop_toBottomOf="@+id/ChPosCurTv" />
 
     <TextView
         android:id="@+id/Chcurrent_X"
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginStart="30sp" />
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/ChXCurTv"
+        app:layout_constraintTop_toTopOf="@+id/ChXCurTv" />
 
     <TextView
         android:id="@+id/ChYCurTv"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="0sp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="60dp"
         android:text="Y :"
-        android:layout_gravity="center" />
+        app:layout_constraintEnd_toStartOf="@+id/ChPosCurTv"
+        app:layout_constraintTop_toBottomOf="@+id/ChXCurTv" />
 
     <TextView
         android:id="@+id/Chcurrent_Y"
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginStart="30sp" />
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/ChYCurTv"
+        app:layout_constraintTop_toBottomOf="@+id/ChXCurTv" />
 
     <TextView
         android:id="@+id/ChessaisTV"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_gravity="center"
-        android:layout_marginStart="30sp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/Chcurrent_Y"
+        tools:layout_editor_absoluteX="51dp" />
 
     <Button
         android:id="@+id/ChRefreshBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:text="Refresh"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="25dp"
-        android:layout_gravity="center"/>
-
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
 
 
     <Button
         android:id="@+id/ChQuitGameBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintTop_toBottomOf="@id/b_refresh"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_gravity="center"
-        android:visibility="invisible"/>
-</LinearLayout>
+        android:layout_marginTop="8dp"
+        android:text="@string/previous"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChRefreshBT" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
