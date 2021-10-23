@@ -30,19 +30,6 @@ class Position(context: Context) {
     val PERMISSION_ID = 1010
     private lateinit var activity: MainActivity
 
-    //classe pour tester la fonction de calcul de distance
-    class PositionTest () {
-        fun calcul_distance(lat1 : Double, long1 : Double, lat2 : Double, long2 : Double): Double {
-            val d2r = 0.0174532925199433
-            val dlong: Double = (long2 - long1) * d2r
-            val dlat: Double = (lat2 - lat1) * d2r
-            val a: Double = pow(sin(dlat / 2.0), 2.0) + cos(lat1 * d2r) * cos(lat2 * d2r) * pow(sin(dlong / 2.0), 2.0)
-            val c: Double = 2 * atan2(sqrt(a), sqrt(1 - a))
-            return 6367 * c * 1000 //pour tester avec les mettre, faudra enlever tout ce qu'il y a après la virgule
-        }
-    }
-
-
     init {
 
             if (ActivityCompat.checkSelfPermission(
@@ -69,6 +56,18 @@ class Position(context: Context) {
                     this.longitude = 0.0
                 }
             }
+    }
+
+    //classe pour tester la fonction de calcul de distance
+    class PositionTest () {
+        fun calcul_distance(lat1 : Double, long1 : Double, lat2 : Double, long2 : Double): Double {
+            val d2r = 0.0174532925199433
+            val dlong: Double = (long2 - long1) * d2r
+            val dlat: Double = (lat2 - lat1) * d2r
+            val a: Double = pow(sin(dlat / 2.0), 2.0) + cos(lat1 * d2r) * cos(lat2 * d2r) * pow(sin(dlong / 2.0), 2.0)
+            val c: Double = 2 * atan2(sqrt(a), sqrt(1 - a))
+            return 6367 * c * 1000 //pour tester avec les mettre, faudra enlever tout ce qu'il y a après la virgule
+        }
     }
 
     fun setLatitude(latitude : Double) {

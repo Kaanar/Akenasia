@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="35dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/shape_background"
         android:backgroundTint="@color/white"
         android:elevation="19dp"
@@ -121,12 +120,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:text="Position actuelle:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y" />
 
     <TextView
         android:id="@+id/ChXCurTv"
@@ -181,7 +179,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:text="Refresh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -191,15 +188,26 @@
 
     <Button
         android:id="@+id/ChQuitGameBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:text="@string/previous"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChRefreshBT" />
+        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
+
+    <Button
+        android:id="@+id/ChPositionBT"
+        android:layout_width="192dp"
+        android:layout_height="29dp"
+        android:layout_gravity="center"
+        android:text="Voir l'historique"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChQuitGameBT" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

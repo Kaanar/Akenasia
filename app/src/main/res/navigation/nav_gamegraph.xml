@@ -2,43 +2,39 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    android:id="@+id/nav_gamegraph"
+    app:startDestination="@id/Chronometre">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.akenasia.HomePage"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/homepage">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.akenasia.Database"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/database">
-        <action
-            android:id="@+id/action_SecondFragment_to_ThirdFragment"
-            app:destination="@id/ThirdFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/ThirdFragment"
-        android:name="com.example.akenasia.GameMode"
-        android:label="@string/third_fragment_label"
-        tools:layout="@layout/game_mode">
-    <argument
-        android:name="PlaceID"
-        app:argType="integer"
-        android:defaultValue="0"/>
-    <action
-        android:id="@+id/action_ThirdFragment_to_SecondFragment"
-        app:destination="@id/SecondFragment" />
-    </fragment>
     <fragment
         android:id="@+id/Chronometre"
+        android:name="com.example.akenasia.Chronometre"
+        android:label="Chrono"
+        tools:layout="@layout/regles_generales">
+        <argument
+            android:name="PlaceID"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_Regles_to_Chrono"
+            app:destination="@id/HistoChrono" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CoupsLimites"
+        android:name="com.example.akenasia.CoupsLimites"
+        android:label="Chrono"
+        tools:layout="@layout/regles_generales">
+        <argument
+            android:name="PlaceID"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_Regles_to_Chrono"
+            app:destination="@id/CoupsLimitesHisto" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ChronoHisto"
         android:name="com.example.akenasia.Chronometre"
         android:label="Chrono"
         tools:layout="@layout/chronometre">
@@ -62,11 +58,11 @@
             android:defaultValue="0"/>
         <action
             android:id="@+id/action_Histo_to_Chrono"
-            app:destination="@id/Chronometre" />
+            app:destination="@id/ChronoHisto" />
     </fragment>
 
     <fragment
-        android:id="@+id/CoupsLimites"
+        android:id="@+id/CoupsLimitesHisto"
         android:name="com.example.akenasia.CoupsLimites"
         android:label="Coups_limites"
         tools:layout="@layout/coups_limites">
@@ -90,6 +86,6 @@
             android:defaultValue="0"/>
         <action
             android:id="@+id/action_Histo_to_CoupsLimites"
-            app:destination="@id/CoupsLimites" />
+            app:destination="@id/CoupsLimitesHisto" />
     </fragment>
 </navigation>

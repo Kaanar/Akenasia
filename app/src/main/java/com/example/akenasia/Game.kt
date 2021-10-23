@@ -8,30 +8,38 @@ import android.view.View
 import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.akenasia.databinding.CoupsLimitesBinding
-import com.example.akenasia.databinding.ChronometreBinding
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import kotlinx.android.synthetic.main.coups_limites.*
 import kotlinx.android.synthetic.main.chronometre.*
+import kotlinx.android.synthetic.main.content_game.*
 import kotlinx.android.synthetic.main.historique.*
-
-
-
-
+import android.app.PendingIntent.getActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.akenasia.databinding.*
+import kotlinx.android.synthetic.main.regles_generales.*
 
 
 class Game : AppCompatActivity() {
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var pos: Position
-    private lateinit var binding: ChronometreBinding
-    private lateinit var _binding: CoupsLimitesBinding
+    private lateinit var binding: ReglesGeneralesBinding
+    private lateinit var Chronobinding: ChronometreBinding
+    private lateinit var CLbinding: CoupsLimitesBinding
     private lateinit var dbHandler : DatabaseHandler
     private lateinit var place: Place
     private lateinit var chronometre: Chronometer
     var isPlay = false
     private var essais=10
     private var lastDistance=0.0
-    private var lat = ArrayList<Double>()
-    private var long = ArrayList<Double>()
+    //private var lat = ArrayList<Double>()
+    //private var long = ArrayList<Double>()
     private var i = 0
 
     // This property is only valid between onCreateView and
@@ -39,13 +47,36 @@ class Game : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
+        binding = ReglesGeneralesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         dbHandler = DatabaseHandler(this)
         pos = Position(this)
         place= dbHandler.getPlace(intent.getIntExtra("id",0))
 
-        if(intent.getStringExtra("mode").toString()=="chronometre"){
-            binding = ChronometreBinding.inflate(layoutInflater)
-            setContentView(binding.root)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.content_game) as NavHostFragment?
+        val navController = navHostFragment?.navController
+        if (navController != null) {
+            appBarConfiguration = AppBarConfiguration(navController.graph)
+        }
+        if (navController != null) {
+            setupActionBarWithNavController(navController, appBarConfiguration)
+        }
+
+        begin_game.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id", place.getPlaceId().toInt())
+            if (intent.getStringExtra("mode").toString() == "chronometre") {
+                binding.beginGame.findNavController().navigate(R.id.Chronometre, bundle)
+            } else {
+                binding.beginGame.findNavController().navigate(R.id.CoupsLimites, bundle)
+            }
+        }
+        /*if(intent.getStringExtra("mode").toString()=="chronometre"){
+
+            Chronobinding = ChronometreBinding.inflate(layoutInflater)
+            setContentView(Chronobinding.root)
             chronometre = findViewById(R.id.chronoMterPlay)
             Chgoal_X.text=place.getPlaceLat().toString()
             Chgoal_Y.text=place.getPlaceLong().toString()
@@ -54,17 +85,30 @@ class Game : AppCompatActivity() {
                 chronometre.start()
                 isPlay = true
             }
+            //Rafraîchit la position de l'utilisateur
             ChRefreshBT.setOnClickListener {
                 nouvelEssai()
             }
+            //Quitte la partie
             ChQuitGameBT.setOnClickListener {
                 val intent = Intent(this, MainActivity::class.java)
                 this.startActivity(intent)
             }
-        }
-        else if (intent.getStringExtra("mode").toString()=="coups") {
-            _binding = CoupsLimitesBinding.inflate(layoutInflater)
-            setContentView(_binding.root)
+            //Envoie vers le fragment d'affichage des positions raffraîchies
+            ChPositionBT.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putInt("id",1)
+                val fragment: Fragment = Chronometre()
+                val fragmentManager: FragmentManager = this.supportFragmentManager
+                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.Historique, fragment)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()            }
+        }*/
+        if (intent.getStringExtra("mode").toString()=="coups") {
+
+            CLbinding = CoupsLimitesBinding.inflate(layoutInflater)
+            setContentView(CLbinding.root)
             Cfgoal_X.text = place.getPlaceLat().toString()
             Cfgoal_Y.text = place.getPlaceLong().toString()
 
@@ -75,23 +119,24 @@ class Game : AppCompatActivity() {
                 Cfgoal_X.text.toString().toDouble()
             )
 
+            //Quitte la partie
             CfQuitGameBT.setOnClickListener {
                 val intent = Intent(this, MainActivity::class.java)
                 this.startActivity(intent)
             }
+
+            //Envoie vers le fragment d'affichage des positions raffraîchies
             CfPositionBT.setOnClickListener {
-                if (i==lat.size) {i=0}
-                liste(lat, long, i)
-                i++
+                val bundle = Bundle()
+                bundle.putInt("id",1)
+                //CLbinding.CfPositionBT.findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment, bundle)
             }
+
+            //Rafraîchit la position de l'utilisateur
             CfRefreshBT.setOnClickListener {
                 nouvelEssai()
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     //maison de l'étudiant 48.902656120835665, 2.2134736447569447
@@ -147,10 +192,19 @@ class Game : AppCompatActivity() {
             pos.setLongitude(2.21568703652)
         }
 
-        var a = pos.getLatitude()
+       /* var a = pos.getLatitude()
         var b = pos.getLongitude()
         lat.add(a)
-        long.add(b)
+        long.add(b)*/
+
+        //Ajoute la position récupérée dans la base de données
+        dbHandler.addPosition(PositionTable(
+            10-essais,
+            pos.getLatitude(),
+            pos.getLongitude(),
+            1
+        )
+        )
 
         if (intent.getStringExtra("mode").toString()=="chronometre") {
             Chcurrent_X.text = pos.getLatitude().toString()
@@ -165,36 +219,38 @@ class Game : AppCompatActivity() {
             if(essais==1 && distance >= 1500){
                 isPlay = false
                 chronometre.stop()
-                binding.ChresultTV.text="Dommage ! vous avez perdu ;_;"
+                Chronobinding.ChresultTV.text="Dommage ! vous avez perdu ;_;"
                 ChRefreshBT.setVisibility(View.GONE);
                 ChQuitGameBT.setVisibility(View.VISIBLE)
+
             }
             if(distance<1500){
                 //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
                 isPlay = false
                 chronometre.stop()
-                binding.ChresultTV.text= chronometre.getText().toString()
+                Chronobinding.ChresultTV.text= chronometre.getText().toString()
                 ChRefreshBT.setVisibility(View.GONE);
                 ChQuitGameBT.setVisibility(View.VISIBLE)
+                ChPositionBT.setVisibility(View.VISIBLE)
             }
             else{
                 if (essais in 2..9) {
 
 
                     if (distance < lastDistance) {
-                        binding.ChresultTV.text="Vous chauffez !"
+                        Chronobinding.ChresultTV.text="Vous chauffez !"
                     }
                     if (distance == lastDistance) {
-                        binding.ChresultTV.text="AFK ?"
+                        Chronobinding.ChresultTV.text="AFK ?"
                     }
                     if (distance > lastDistance) {
-                        binding.ChresultTV.text="Vous refroidissez"
+                        Chronobinding.ChresultTV.text="Vous refroidissez"
                     }
                 }
             }
             lastDistance = distance
             essais--
-            binding.ChessaisTV.text="Il vous reste "+essais+" essais"
+            Chronobinding.ChessaisTV.text="Il vous reste "+essais+" essais"
             Toast.makeText(this, distance.toString(),Toast.LENGTH_SHORT).show()
         }
 
@@ -209,7 +265,7 @@ class Game : AppCompatActivity() {
 
 
             if(essais==1 && distance >= 1500){
-                _binding.CfresultTV.text="Dommage ! vous avez perdu ;_;"
+                CLbinding.CfresultTV.text="Dommage ! vous avez perdu ;_;"
                 CfRefreshBT.setVisibility(View.GONE);
                 CfQuitGameBT.setVisibility(View.VISIBLE)
                 CfPositionBT.setVisibility(View.VISIBLE)
@@ -224,34 +280,32 @@ class Game : AppCompatActivity() {
             // Cfgoal_Y.text.toString().toDouble())
             if(distance<1500){
                 //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
-                _binding.CfresultTV.text="Bravo ! vous avez gagné"
+                CLbinding.CfresultTV.text="Bravo ! vous avez gagné"
                 CfRefreshBT.setVisibility(View.GONE);
                 CfQuitGameBT.setVisibility(View.VISIBLE)
                 CfPositionBT.setVisibility(View.VISIBLE)
             }
             else{
                 if (essais in 2..9) {
-
-
                     if (distance < lastDistance) {
-                        _binding.CfresultTV.text="Vous chauffez !"
+                        CLbinding.CfresultTV.text="Vous chauffez !"
                     }
                     if (distance == lastDistance) {
-                        _binding.CfresultTV.text="AFK ?"
+                        CLbinding.CfresultTV.text="AFK ?"
                     }
                     if (distance > lastDistance) {
-                        _binding.CfresultTV.text="Vous refroidissez"
+                        CLbinding.CfresultTV.text="Vous refroidissez"
                     }
                 }
             }
             lastDistance = distance
             essais--
-            _binding.CfessaisTV.text="Il vous reste "+essais+" essais"
+            CLbinding.CfessaisTV.text="Il vous reste "+essais+" essais"
             Toast.makeText(this, distance.toString(),Toast.LENGTH_SHORT).show()
         }
     }
-
-    fun liste(lat : ArrayList<Double>, long : ArrayList<Double>, i : Int) {
+    /*fun liste(lat : ArrayList<Double>, long : ArrayList<Double>, i : Int) {
         _binding.CfessaisTV.text ="Position " + (i+1) + " | X : " + lat[i].toString()+ " Y : " + long[i].toString()
-    }
+    }*/
+
 }
