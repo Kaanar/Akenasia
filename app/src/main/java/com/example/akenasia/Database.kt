@@ -2,8 +2,6 @@ package com.example.akenasia
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +9,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ListView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.akenasia.databinding.DatabaseBinding
 import kotlinx.android.synthetic.main.database.*
 import java.util.ArrayList
-import com.example.akenasia.PlaceAdapter
-import kotlinx.android.synthetic.main.place_listview.view.*
 
 
 /**
@@ -31,7 +26,7 @@ class Database : Fragment() {
     private lateinit var places: ArrayList<Place>
     private lateinit var dbHandler : DatabaseHandler
     private lateinit var placeListView : ListView
-    private lateinit var placeAdapter: PlaceAdapter
+    private lateinit var positionAdapter: PositionAdapter
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -81,30 +76,6 @@ class Database : Fragment() {
                 )
             )
         }
-        places.add(
-            Place(
-                0,
-                "BU",
-                48.905273887110944,
-                2.2156870365142827
-            )
-        )
-        places.add(
-            Place(
-                1,
-                "Crous",
-                48.904096168019976,
-                2.216480970382691
-            )
-        )
-        places.add(
-            Place(
-                2,
-                "Bat G",
-                48.903158204219174,
-                2.2155475616455083
-            )
-        )
         viewRecord()
         binding.bSave.setOnClickListener {
             saveRecord()

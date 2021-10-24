@@ -57,14 +57,6 @@ Acquisition de données, usage intelligent des données : ?
 
 
 == Modélisation
-Page de géolocalisation, appuyer sur le bouton refresh permet de récupérer ses coordonnées.
-
-image::images\Akenasia_GPS.jpg[alt=GPS,width=160,height=120]
-
-Lorsque l'on appuie sur le bouton, on a également la fonction de calcule de distance qui s'exécute. La distance est affichée en mètre en bas de l'application.
-
-image::images\Akenasia_distance.jpg[alt=Distance,width=160,height=120]
-
 
 Modèle UML :
 
@@ -72,29 +64,69 @@ image::images\Diagramme.png[]
 
 == Features
 
-* Page d'accueil de l'application, il suffit de cliquer sur le bouton afin d'accéder à la liste des lieux.
+=== Accueil
+* Page d'accueil de l'application, il suffit de cliquer sur le bouton "Jouer" afin d'accéder à la liste des lieux.
 
+[[]]
+.Menu principal
 image::images\Accueil.png[alt=Timer,width=160,height=120]
 
-* Lancer une partie. Au début de la partie, l'utilisateur choisit dans la liste proposée un lieu qui sera sa destination. Une partie peut se jouer sous deux modes de jeux différents. Le premier mode de jeu est une partie contre la montre, avec un temps limité pour rejoindre le lieux fixer au début de la partie. Le deuxième mode de jeux est une partie avec un nombre de coups limités pour rejoindre le lieux fixé au début de la partie.
+=== Liste de lieux
+* Au début de la partie, l'utilisateur choisit dans la liste proposée un lieu qui sera sa destination. Une partie peut se jouer sous deux modes de jeux différents. Le premier mode de jeu est une partie chronomètre, le but est de rejoindre la destination le plus rapidement possible. Le deuxième mode de jeux est une partie avec un nombre de coups limités pour rejoindre le lieux fixé au début de la partie.
 
-image:images\ListePositions.png[alt=Position,width=160,height=120] 
-image:images\ModeJeu.png[alt=GPS,width=160,height=120]
+[[]]
+.Liste des lieux 
+image::images\ListePositions.png[alt=Position,width=160,height=120] 
 
-* Dans un mode de jeu contre la montre, un chronomètre sera activé pendant le déroulement de la partie. Dans ce mode la partie s'arrête soit lorsque le chronomètre indique que le temps est dépassé, soit lorsque l'utilisateur arrive près du lieux avant la fin du chronomètre. 
+[[]]
+.Choix du mode de jeu
+image::images\ModeJeu.png[alt=GPS,width=160,height=120]
 
+=== Chronomètre
+* Dans un mode de jeu contre la montre, un chronomètre sera activé au début de la partie. Dans ce mode la partie s'arrête soit lorsque le nombre de tentatives est dépassé, soit lorsque l'utilisateur arrive près de sa destination. Il pourra ensuite observer combien de temps il a mis à se rendre à son objectif. 
+
+[[]]
+.Blueprint du chronomètre
 image::images\Timer.png[alt=Timer,width=160,height=120]
 
-* Dans un mode de jeux à coups limités, un coup correspond à un rafraichissement de la position du joueur en appuyant sur le bouton "raffraichir". Dans ce mode la partie s'arrête lorsque l'utilisateur est suffisamment proche de la destination choisie. A chaque actualisation, le jeu indique si le joueur se rapproche ou s'éloigne de son objectif [1]. Le nombre de tentatives se met à jour lors de chaque récupération de la position [2] et une fois le compteur à 0, la partie est perdue.
+[[]]
+.Mode chronomètre
+image::images\Chrono.png[alt=Timer,width=160,height=120]
 
+=== Coups limités
+* Dans un mode de jeux à coups limités, un coup correspond à un rafraichissement de la position du joueur en appuyant sur le bouton "Refresh". Dans ce mode, la partie s'arrête lorsque l'utilisateur est suffisamment proche de la destination choisie. A chaque actualisation, le jeu indique si le joueur se rapproche ou s'éloigne de son objectif [1]. Le nombre de tentatives se met à jour lors de chaque récupération de la position [2] et une fois le compteur à 0, la partie est perdue.
+
+[[]]
+.Mode coups limités
 image::images\CF.png[alt=Timer,width=160,height=120]
 
-* L'utilisateur peut créer son parcours personnalisé. Lorsque l'on arrive sur la page contenant la liste des lieux proposés, on remarque la présence d'une entrée de texte. Pour ajouter un lieu l'utilisateur doit se déplacer jusqu'au lieu (les coordonnées enregistrées seront celles de la position actuelle du joueur). Il faut ensuite entrer un nom [1] et cliquer sur "ajouter ma position" [2]. Il est possible de supprimer un lieu avec "delete" en entrant l'id du lieu que l'on veut supprimer [3].
+=== Personnaliser sa liste
+* L'utilisateur peut créer son parcours personnalisé. Lorsque l'on arrive sur la page contenant la liste des lieux proposés, on remarque la présence d'une entrée de texte. Pour ajouter un lieu, l'utilisateur doit se déplacer jusqu'au lieu (les coordonnées enregistrées seront celles de la position actuelle du joueur). Il faut ensuite entrer un nom [1] et cliquer sur "ajouter ma position" [2]. Il est possible de supprimer un lieu avec "delete" en entrant l'id du lieu que l'on veut supprimer [3].
 
+[[]]
+.Ajout de lieu
 image::images\ParcoursPerso.png[alt=Parcours,width=160,height=120]
 
-* A la fin d'une partie, une map s'affiche avec le lieu de départ de l'utilisateur, ainsque que les lieux où il a rafraichi sa position.
+=== Map
+* Au cours de la partie, le joueur peut voir sa position centrée sur une map. Lorsqu'il rafraichit sa position, l'affichage de la map s'actualise. 
 
+[[]]
+.Position de l'utilisateur sur une map
+image::images\map.png[alt=Parcours,width=160,height=120]
+
+=== Historique des positions
+* Il est possible d'accéder à l'historique de ses positions lors de ses refresh effectués au cours d'une partie à coups limités. 
+
+[[]]
+.Blueprint de traçage des positions
+image::images\traçage.png[alt=Parcours,width=160,height=120]
+
+
+* A la fin d'une partie, une map s'affiche avec le lieu de départ de l'utilisateur, ainsi que que les lieux où il a rafraichi sa position.
+
+[[]]
+.Blueprint des marqueurs sur map
+image::images\marqueur.png[alt=Parcours,width=160,height=120]
 
 
 

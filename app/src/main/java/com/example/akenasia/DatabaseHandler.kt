@@ -10,28 +10,94 @@ import kotlin.system.exitProcess
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
-        private val DATABASE_VERSION = 5
+        private val DATABASE_VERSION = 6
         private val DATABASE_NAME = "AkenasiaDatabase"
-        private val TABLE_CONTACTS = "PlaceTable"
+        private val TABLE_PLACE = "PlaceTable"
+        private val TABLE_POSITION = "PositionTable"
         private val KEY_ID = "id"
         private val KEY_NAME = "name"
         private val KEY_LATITUDE = "latitude"
         private val KEY_LONGITUDE = "longitude"
+        private val KEY_PARTIE = "partie"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
         //creating table with fields
-        val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "("
+        val CREATE_PLACE_TABLE = ("CREATE TABLE " + TABLE_PLACE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE  + " DOUBLE" + ")")
-        db?.execSQL(CREATE_CONTACTS_TABLE)
+        db?.execSQL(CREATE_PLACE_TABLE)
+
+        val CREATE_POSITION_TABLE =("CREATE TABLE " + TABLE_POSITION + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_PARTIE + " INTEGER" + ")" )
+        db?.execSQL(CREATE_POSITION_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS)
+
+        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE)
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION)
         onCreate(db)
     }
 
-    //method to insert data
+    //method to insert a Position
+    fun addPosition(emp: PositionTable):Long{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID, emp.posId)
+        contentValues.put(KEY_LATITUDE, emp.posLat)
+        contentValues.put(KEY_LONGITUDE, emp.posLong)
+        contentValues.put(KEY_PARTIE, emp.partie)
+
+        // Inserting Row
+        val success = db.insert(TABLE_POSITION, null,  contentValues)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    //method to read a list of Position
+    fun viewPosition(partie: Int):List<PositionTable>{
+        val empList:ArrayList<PositionTable> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_POSITION WHERE $KEY_PARTIE=$partie"
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try{
+            cursor = db.rawQuery(selectQuery, null)
+        }catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        var posId: Int
+        var posLat: Double
+        var posLong: Double
+        var posPartie: Int
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                posId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+                posLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
+                posLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
+                posPartie = cursor.getInt(cursor.getColumnIndex("partie").toInt())
+                val emp= PositionTable(posId= posId, posLat= posLat, posLong= posLong, partie=posPartie)
+                empList.add(emp)
+            } while (cursor.moveToNext())
+        }
+        return empList
+    }
+
+    //method to delete Positions refreshed during a game
+    fun deletePosition(emp: Int):Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_PARTIE, emp)
+        // Deleting Row
+        val success = db.delete(TABLE_POSITION,"partie="+emp,null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    //method to insert a Place
     fun addPlace(emp: Place):Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
@@ -41,16 +107,16 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         contentValues.put(KEY_LONGITUDE, emp.placeLong)
 
         // Inserting Row
-        val success = db.insert(TABLE_CONTACTS, null,  contentValues)
+        val success = db.insert(TABLE_PLACE, null,  contentValues)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
     }
 
-    //methode to get data
+    //methode to get a Place
     fun getPlace(id: Int):Place{
         val db = this.readableDatabase
-        val selectQuery = "SELECT  * FROM $TABLE_CONTACTS WHERE $KEY_ID = $id"
+        val selectQuery = "SELECT  * FROM $TABLE_PLACE WHERE $KEY_ID = $id"
         var cursor: Cursor? = null
         try{
             cursor = db.rawQuery(selectQuery, null)
@@ -64,19 +130,19 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         if (cursor != null) {
             cursor.moveToFirst()
-            placeId = cursor.getInt(cursor.getColumnIndex("id"))
-            placeName = cursor.getString(cursor.getColumnIndex("name"))
-            placeLat = cursor.getDouble(cursor.getColumnIndex("latitude"))
-            placeLong = cursor.getDouble(cursor.getColumnIndex("longitude"))
+            placeId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+            placeName = cursor.getString(cursor.getColumnIndex("name").toInt())
+            placeLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
+            placeLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
             val emp= Place(placeId = placeId, placeName = placeName, placeLat = placeLat, placeLong = placeLong)
             return emp
         }
         exitProcess(0)
     }
-    //method to read data
+    //method to read a Place
     fun viewPlace():List<Place>{
         val empList:ArrayList<Place> = ArrayList()
-        val selectQuery = "SELECT  * FROM $TABLE_CONTACTS"
+        val selectQuery = "SELECT  * FROM $TABLE_PLACE"
         val db = this.readableDatabase
         var cursor: Cursor? = null
         try{
@@ -92,10 +158,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         if (cursor.moveToFirst()) {
             do {
-                placeId = cursor.getInt(cursor.getColumnIndex("id"))
-                placeName = cursor.getString(cursor.getColumnIndex("name"))
-                placeLat = cursor.getDouble(cursor.getColumnIndex("latitude"))
-                placeLong = cursor.getDouble(cursor.getColumnIndex("longitude"))
+                placeId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+                placeName = cursor.getString(cursor.getColumnIndex("name").toInt())
+                placeLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
+                placeLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
 
                 val emp= Place(placeId = placeId, placeName = placeName, placeLat = placeLat, placeLong = placeLong)
                 empList.add(emp)
@@ -113,18 +179,18 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         contentValues.put(KEY_LONGITUDE, emp.placeLong)
 
         // Updating Row
-        val success = db.update(TABLE_CONTACTS, contentValues,"id="+emp.placeId,null)
+        val success = db.update(TABLE_PLACE, contentValues,"id="+emp.placeId,null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
     }
-    //method to delete data
+    //method to delete a Place
     fun deletePlace(emp: Place):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.placeId) // EmpModelClass UserId
         // Deleting Row
-        val success = db.delete(TABLE_CONTACTS,"id="+emp.placeId,null)
+        val success = db.delete(TABLE_PLACE,"id="+emp.placeId,null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
