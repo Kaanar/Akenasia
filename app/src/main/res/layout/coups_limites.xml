@@ -9,7 +9,7 @@
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
     android:orientation="vertical"
-    tools:context=".Game">
+    tools:context=".CoupsLimites">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/Appbar"
@@ -66,7 +66,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="52dp"
-        android:text="X :"
+        android:text="Lat:"
         app:layout_constraintEnd_toStartOf="@+id/CfPosGoalTV"
         app:layout_constraintTop_toBottomOf="@+id/CfPosGoalTV" />
 
@@ -84,7 +84,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:text="Y :"
+        android:text="Lon:"
         app:layout_constraintStart_toStartOf="@+id/CfXGoalTV"
         app:layout_constraintTop_toBottomOf="@+id/CfXGoalTV" />
 
@@ -104,7 +104,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="60dp"
-        android:text="X :"
+        android:text="Lat:"
         app:layout_constraintEnd_toStartOf="@+id/CfPosCurTV"
         app:layout_constraintTop_toBottomOf="@+id/CfPosCurTV" />
 
@@ -134,7 +134,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:text="Y :"
+        android:text="Lon:"
         app:layout_constraintStart_toStartOf="@+id/CfXCurTV"
         app:layout_constraintTop_toBottomOf="@+id/CfXCurTV" />
 

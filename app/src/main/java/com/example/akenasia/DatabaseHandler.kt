@@ -10,7 +10,7 @@ import kotlin.system.exitProcess
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
-        private val DATABASE_VERSION = 5
+        private val DATABASE_VERSION = 6
         private val DATABASE_NAME = "AkenasiaDatabase"
         private val TABLE_PLACE = "PlaceTable"
         private val TABLE_POSITION = "PositionTable"
@@ -27,13 +27,13 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE  + " DOUBLE" + ")")
         db?.execSQL(CREATE_PLACE_TABLE)
 
-        val CREATE_POSITION_TABLE =("CREATE TABLE +" + TABLE_POSITION + "("
+        val CREATE_POSITION_TABLE =("CREATE TABLE " + TABLE_POSITION + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_PARTIE + " INTEGER" + ")" )
         db?.execSQL(CREATE_POSITION_TABLE)
-
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION)
         onCreate(db)
@@ -58,7 +58,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     //method to read a list of Position
     fun viewPosition(partie: Int):List<PositionTable>{
         val empList:ArrayList<PositionTable> = ArrayList()
-        val selectQuery = "SELECT  * FROM $TABLE_POSITION WHERE $KEY_PARTIE=$partie"
+        val selectQuery = "SELECT * FROM $TABLE_POSITION WHERE $KEY_PARTIE=$partie"
         val db = this.readableDatabase
         var cursor: Cursor? = null
         try{
@@ -83,6 +83,18 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
             } while (cursor.moveToNext())
         }
         return empList
+    }
+
+    //method to delete Positions refreshed during a game
+    fun deletePosition(emp: Int):Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_PARTIE, emp)
+        // Deleting Row
+        val success = db.delete(TABLE_POSITION,"partie="+emp,null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
     }
 
     //method to insert a Place

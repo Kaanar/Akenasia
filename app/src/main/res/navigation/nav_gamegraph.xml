@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/Chronometre"
-        android:name="com.example.akenasia.Chronometre"
+        android:name="com.example.akenasia.ReglesGenerales"
         android:label="Chrono"
         tools:layout="@layout/regles_generales">
         <argument
@@ -16,20 +16,9 @@
             android:defaultValue="0"/>
         <action
             android:id="@+id/action_Regles_to_Chrono"
-            app:destination="@id/HistoChrono" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/CoupsLimites"
-        android:name="com.example.akenasia.CoupsLimites"
-        android:label="Chrono"
-        tools:layout="@layout/regles_generales">
-        <argument
-            android:name="PlaceID"
-            app:argType="integer"
-            android:defaultValue="0"/>
+            app:destination="@id/ChronoHisto" />
         <action
-            android:id="@+id/action_Regles_to_Chrono"
+            android:id="@+id/action_Regles_to_CL"
             app:destination="@id/CoupsLimitesHisto" />
     </fragment>
 
@@ -44,21 +33,7 @@
             android:defaultValue="0"/>
         <action
             android:id="@+id/action_Chronometre_to_Historique"
-            app:destination="@id/HistoChrono" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/HistoChrono"
-        android:name="com.example.akenasia.Historique"
-        android:label="@string/fourth_fragment_label"
-        tools:layout="@layout/historique">
-        <argument
-            android:name="PartieID"
-            app:argType="integer"
-            android:defaultValue="0"/>
-        <action
-            android:id="@+id/action_Histo_to_Chrono"
-            app:destination="@id/ChronoHisto" />
+            app:destination="@id/Histo" />
     </fragment>
 
     <fragment
@@ -72,11 +47,11 @@
             android:defaultValue="0"/>
         <action
             android:id="@+id/action_Coups_limites_to_Historique"
-            app:destination="@id/HistoCoupsLimites" />
+            app:destination="@id/Histo" />
     </fragment>
 
     <fragment
-        android:id="@+id/HistoCoupsLimites"
+        android:id="@+id/Histo"
         android:name="com.example.akenasia.Historique"
         android:label="@string/fourth_fragment_label"
         tools:layout="@layout/historique">
@@ -85,7 +60,12 @@
             app:argType="integer"
             android:defaultValue="0"/>
         <action
+            android:id="@+id/action_Histo_to_Chrono"
+            app:destination="@id/ChronoHisto" />
+        <action
             android:id="@+id/action_Histo_to_CoupsLimites"
             app:destination="@id/CoupsLimitesHisto" />
     </fragment>
+
+
 </navigation>

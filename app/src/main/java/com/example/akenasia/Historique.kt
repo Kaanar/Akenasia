@@ -1,24 +1,22 @@
 package com.example.akenasia
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.akenasia.databinding.HistoriqueBinding
 import kotlinx.android.synthetic.main.database.*
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.historique.*
 
 class Historique: Fragment() {
     private var _binding: HistoriqueBinding? = null
     private lateinit var pos: Position
-    private lateinit var positions: ArrayList<PositionTable>
     private lateinit var dbHandler: DatabaseHandler
-    private lateinit var positionListView: ListView
-    private lateinit var positionAdapter: PositionAdapter
-
+    private var PartieId=0
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -32,23 +30,25 @@ class Historique: Fragment() {
         if (container != null) {
             thiscontext = container.getContext()
             dbHandler = DatabaseHandler(thiscontext!!)
-
+            PartieId= requireArguments().getInt("id")
         }
         _binding = HistoriqueBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewRecord()
+        RetourBT.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun viewRecord() {
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
         //calling the viewPlace method of DatabaseHandler class to read the records
-        val emp: List<PositionTable> = databaseHandler.viewPosition(1)
+        val emp: List<PositionTable> = databaseHandler.viewPosition(PartieId)
         val empArrayId = Array<String>(emp.size) { "0" }
         val empArrayLat = Array<String>(emp.size) { "null" }
         val empArrayLong = Array<String>(emp.size) { "null" }
@@ -71,6 +71,6 @@ class Historique: Fragment() {
             empArrayLong,
             empArrayPartie
         )
-        listView.adapter = myPositionAdapter
+        PosView.adapter = myPositionAdapter
     }
 }
