@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - develop
+      - Test_GithubAction
     tags:
       - 'v*'
 
