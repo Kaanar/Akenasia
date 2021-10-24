@@ -25,7 +25,7 @@ class Chronometre : Fragment(){
     private lateinit var place: Place
     private lateinit var chronometre: Chronometer
     var isPlay = false
-    private var essais=10
+    private var i=0
     private var lastDistance=0.0
 
     override fun onCreateView(
@@ -50,7 +50,7 @@ class Chronometre : Fragment(){
         Chgoal_Y.text=place.getPlaceLong().toString()
 
         if (!isPlay) {
-            chronometre.base = SystemClock.elapsedRealtime() + 300000
+            chronometre.base = SystemClock.elapsedRealtime() + 5000
             chronometre.start()
             isPlay = true
         }
@@ -70,7 +70,6 @@ class Chronometre : Fragment(){
             bundle.putString("mode","Chronometre")
             findNavController().navigate(R.id.Histo,bundle)
         }
-
         //Vérifie chaque tick du chrono
         chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
             val currentTime: String = chronometre.getText().toString()
@@ -81,6 +80,7 @@ class Chronometre : Fragment(){
                 ChresultTV.text = "Temps écoulé, c'est perdu ;_;"
                 ChRefreshBT.setVisibility(View.GONE)
                 ChQuitGameBT.setVisibility(View.VISIBLE)
+                ChPositionBT.setVisibility(View.VISIBLE)
             }
         }
     }
@@ -88,52 +88,10 @@ class Chronometre : Fragment(){
     fun nouvelEssai() {
         pos.refreshLocation()
 
-        //Cfcurrent_X.text = pos.getLatitude().toString()
-        //Cfcurrent_Y.text = pos.getLongitude().toString()
-
-        //tests on simule des positions voir si on obtient les résulats attendus
-        if (essais == 9) {
-            pos.setLatitude(1.0)
-            pos.setLongitude(1.0)
-
-        }
-        if (essais == 8) {
-            pos.setLatitude(0.5)
-            pos.setLongitude(2.0)
-        }
-        if (essais == 7) {
-            pos.setLatitude(0.0)
-            pos.setLongitude(1.0)
-        }
-        if (essais == 6) {
-            pos.setLatitude(30.0)
-            pos.setLongitude(2.0)
-        }
-        if (essais == 5) {
-            pos.setLatitude(31.0)
-            pos.setLongitude(2.0)
-        }
-        if (essais == 4) {
-            pos.setLatitude(32.0)
-            pos.setLongitude(2.0)
-        }
-        if (essais == 3) {
-            pos.setLatitude(31.0)
-            pos.setLongitude(2.0)
-        }
-        if (essais == 2) {
-            pos.setLatitude(31.0)
-            pos.setLongitude(2.0)
-        }
-        if (essais == 1) {
-            pos.setLatitude(48.90527388944)
-            pos.setLongitude(2.21568703652)
-        }
-
         //Ajoute la position récupérée dans la base de données
         dbHandler.addPosition(
             PositionTable(
-                10 - essais,
+                i,
                 pos.getLatitude(),
                 pos.getLongitude(),
                 1
@@ -142,20 +100,14 @@ class Chronometre : Fragment(){
         Chcurrent_X.text = pos.getLatitude().toString()
         Chcurrent_Y.text = pos.getLongitude().toString()
 
+        //calcul de la distance
         val distance: Double = pos.calcul_distance(
             pos.getLatitude(),
             pos.getLongitude(),
             Chgoal_X.text.toString().toDouble(),
             Chgoal_Y.text.toString().toDouble()
         )
-        if (essais == 1 && distance >= 1500) {
-            isPlay = false
-            chronometre.stop()
-            ChresultTV.text = "Dommage ! vous avez perdu ;_;"
-            ChRefreshBT.setVisibility(View.GONE);
-            ChQuitGameBT.setVisibility(View.VISIBLE)
-            ChPositionBT.setVisibility(View.VISIBLE)
-        }
+        //Condition d'arrêt -> Victoire
         if (distance < 1500) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
             isPlay = false
@@ -165,7 +117,7 @@ class Chronometre : Fragment(){
             ChQuitGameBT.setVisibility(View.VISIBLE)
             ChPositionBT.setVisibility(View.VISIBLE)
         } else {
-            if (essais in 2..9) {
+            if(i>0) {
                 if (distance < lastDistance) {
                     ChresultTV.text = "Vous chauffez !"
                 }
@@ -177,18 +129,8 @@ class Chronometre : Fragment(){
                 }
             }
         }
-        if(essais==0){
-            ChRefreshBT.setVisibility(View.GONE);
-            ChQuitGameBT.setVisibility(View.VISIBLE)
-            ChPositionBT.setVisibility(View.VISIBLE)
-            ChessaisTV.text = "Il vous reste " + essais + " essais"
-            chronometre.stop()
-        }
-        else{
-            lastDistance = distance
-            essais--
-            ChessaisTV.text = "Il vous reste " + essais + " essais"
-            Toast.makeText(context,distance.toString(),Toast.LENGTH_SHORT).show()
-        }
+        lastDistance = distance
+        //incrémentation de l'id de la position
+        i++
     }
 }

@@ -2,6 +2,7 @@ package com.example.akenasia
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +41,8 @@ class Historique: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewRecord()
         RetourBT.setOnClickListener {
-            findNavController().popBackStack()
+            val intent = Intent(context, MainActivity::class.java)
+            this.startActivity(intent)
         }
     }
 
