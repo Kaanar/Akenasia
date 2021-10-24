@@ -1,17 +1,45 @@
-name: GitHub Actions Demo
-on: [push]
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+    tags:
+      - 'v*'
+
 jobs:
-  Explore-GitHub-Actions:
+  test:
+    name: Build Run UnitTests
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Run Tests
+        run: bash - ./gradlew clean build connectedCheck
+             bash - ./gradlew sonarqube
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  apk:
+    name: Generate APK
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Build APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
