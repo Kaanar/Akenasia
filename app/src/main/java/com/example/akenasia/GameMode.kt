@@ -55,6 +55,7 @@ class GameMode : Fragment(){
 
             //On envoie dans l'activité de jeu le mode choisi + l'id de la place//
             val intent = Intent(context, Game::class.java).apply {
+                dbHandler.deletePosition(1)
                 putExtra("mode","chronometre")
                 putExtra("id",id)
             }
@@ -63,6 +64,7 @@ class GameMode : Fragment(){
 
         //Si le joueur clique sur coups limités, la partie se lance selon son choix
         binding.GameModeCountBT.setOnClickListener {
+            dbHandler.deletePosition(1)
             val intent = Intent(context, Game::class.java).apply {
                 putExtra("mode","coups")
                 putExtra("id",id)

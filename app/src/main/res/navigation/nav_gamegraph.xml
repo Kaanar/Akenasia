@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_gamegraph"
+    app:startDestination="@id/Chronometre">
+
+    <fragment
+        android:id="@+id/Chronometre"
+        android:name="com.example.akenasia.ReglesGenerales"
+        android:label="Chrono"
+        tools:layout="@layout/regles_generales">
+        <argument
+            android:name="PlaceID"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_Regles_to_Chrono"
+            app:destination="@id/ChronoHisto" />
+        <action
+            android:id="@+id/action_Regles_to_CL"
+            app:destination="@id/CoupsLimitesHisto" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ChronoHisto"
+        android:name="com.example.akenasia.Chronometre"
+        android:label="Chrono"
+        tools:layout="@layout/chronometre">
+        <argument
+            android:name="PartieID"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_Chronometre_to_Historique"
+            app:destination="@id/Histo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CoupsLimitesHisto"
+        android:name="com.example.akenasia.CoupsLimites"
+        android:label="Coups_limites"
+        tools:layout="@layout/coups_limites">
+        <argument
+            android:name="PartieID"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_Coups_limites_to_Historique"
+            app:destination="@id/Histo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/Histo"
+        android:name="com.example.akenasia.Historique"
+        android:label="@string/fourth_fragment_label"
+        tools:layout="@layout/historique">
+        <argument
+            android:name="PartieID"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_Histo_to_Chrono"
+            app:destination="@id/ChronoHisto" />
+        <action
+            android:id="@+id/action_Histo_to_CoupsLimites"
+            app:destination="@id/CoupsLimitesHisto" />
+    </fragment>
+
+
+</navigation>
