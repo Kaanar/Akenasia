@@ -3,7 +3,6 @@ package com.example.akenasia
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
-
 import android.view.View
 import android.widget.Chronometer
 import android.widget.Toast
@@ -13,8 +12,7 @@ import com.example.akenasia.databinding.ChronometreBinding
 import kotlinx.android.synthetic.main.coups_limites.*
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.historique.*
-
-
+import android.widget.Chronometer.OnChronometerTickListener
 
 
 
@@ -50,7 +48,7 @@ class Game : AppCompatActivity() {
             Chgoal_X.text=place.getPlaceLat().toString()
             Chgoal_Y.text=place.getPlaceLong().toString()
             if (!isPlay) {
-                chronometre.base = SystemClock.elapsedRealtime()
+                chronometre.base = SystemClock.elapsedRealtime() + 300000
                 chronometre.start()
                 isPlay = true
             }
@@ -61,7 +59,18 @@ class Game : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 this.startActivity(intent)
             }
-        }
+            chronometre.onChronometerTickListener = OnChronometerTickListener {
+                val currentTime: String = chronometre.getText().toString()
+                if (currentTime == "00:00") {
+                        chronometre.stop()
+                        isPlay = false
+                        binding.ChresultTV.text = "Temps écoulé, c'est perdu ;_;"
+                        ChRefreshBT.setVisibility(View.GONE)
+                        ChQuitGameBT.setVisibility(View.VISIBLE)
+                }
+            }
+        };
+
         else if (intent.getStringExtra("mode").toString()=="coups") {
             _binding = CoupsLimitesBinding.inflate(layoutInflater)
             setContentView(_binding.root)
@@ -161,19 +170,18 @@ class Game : AppCompatActivity() {
                 Chgoal_X.text.toString().toDouble(),
                 Chgoal_Y.text.toString().toDouble())
 
-
             if(essais==1 && distance >= 1500){
                 isPlay = false
                 chronometre.stop()
                 binding.ChresultTV.text="Dommage ! vous avez perdu ;_;"
-                ChRefreshBT.setVisibility(View.GONE);
+                ChRefreshBT.setVisibility(View.GONE)
                 ChQuitGameBT.setVisibility(View.VISIBLE)
             }
             if(distance<1500){
                 //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
                 isPlay = false
                 chronometre.stop()
-                binding.ChresultTV.text= chronometre.getText().toString()
+                binding.ChresultTV.text= "Bravo ! Vous avez gagné"
                 ChRefreshBT.setVisibility(View.GONE);
                 ChQuitGameBT.setVisibility(View.VISIBLE)
             }
