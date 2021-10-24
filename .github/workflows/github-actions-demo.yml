@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: 11
       - name: Run Tests
-        run: bash - ./gradlew clean build connectedCheck sonarqube
+        run: bash - ./gradlew clean build connectedCheck
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
