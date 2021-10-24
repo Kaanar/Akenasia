@@ -9,21 +9,22 @@
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
     android:orientation="vertical"
-    tools:context=".Game">
+    tools:context=".Chronometre">
 
     <LinearLayout
         android:id="@+id/LayoutChronometre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="0dp"
         android:background="@drawable/shape_background"
         android:backgroundTint="@color/white"
-        android:elevation="19dp"
+        android:elevation="10dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="35dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/ChresultTV"
@@ -72,7 +73,6 @@
         android:layout_width="128dp"
         android:layout_height="20dp"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:text="Position à atteindre:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -86,7 +86,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="52dp"
-        android:text="X :"
+        android:text="Lat:"
         app:layout_constraintEnd_toStartOf="@+id/ChPosGoalTv"
         app:layout_constraintTop_toBottomOf="@+id/ChPosGoalTv" />
 
@@ -104,7 +104,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:text="Y :"
+        android:text="Lon:"
         app:layout_constraintStart_toStartOf="@+id/ChXGoalTv"
         app:layout_constraintTop_toBottomOf="@+id/ChXGoalTv" />
 
@@ -123,12 +123,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:text="Position actuelle:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y" />
 
     <TextView
         android:id="@+id/ChXCurTv"
@@ -137,7 +136,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="60dp"
-        android:text="X :"
+        android:text="Lat:"
         app:layout_constraintEnd_toStartOf="@+id/ChPosCurTv"
         app:layout_constraintTop_toBottomOf="@+id/ChPosCurTv" />
 
@@ -156,7 +155,7 @@
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginEnd="60dp"
-        android:text="Y :"
+        android:text="Lon:"
         app:layout_constraintEnd_toStartOf="@+id/ChPosCurTv"
         app:layout_constraintTop_toBottomOf="@+id/ChXCurTv" />
 
@@ -183,7 +182,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:text="Refresh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -193,15 +191,26 @@
 
     <Button
         android:id="@+id/ChQuitGameBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:text="@string/previous"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChRefreshBT" />
+        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
+
+    <Button
+        android:id="@+id/ChPositionBT"
+        android:layout_width="220dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:text="Voir l'historique"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChQuitGameBT" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
