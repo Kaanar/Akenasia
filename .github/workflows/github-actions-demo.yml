@@ -6,8 +6,6 @@ on:
       - master
       - develop
       - Test_GithubAction
-    tags:
-      - 'v*'
 
 jobs:
   test:

@@ -64,10 +64,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         if (cursor != null) {
             cursor.moveToFirst()
-            placeId = cursor.getInt(cursor.getColumnIndex("id"))
-            placeName = cursor.getString(cursor.getColumnIndex("name"))
-            placeLat = cursor.getDouble(cursor.getColumnIndex("latitude"))
-            placeLong = cursor.getDouble(cursor.getColumnIndex("longitude"))
+            placeId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+            placeName = cursor.getString(cursor.getColumnIndex("name").toInt())
+            placeLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
+            placeLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
             val emp= Place(placeId = placeId, placeName = placeName, placeLat = placeLat, placeLong = placeLong)
             return emp
         }
@@ -92,10 +92,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         if (cursor.moveToFirst()) {
             do {
-                placeId = cursor.getInt(cursor.getColumnIndex("id"))
-                placeName = cursor.getString(cursor.getColumnIndex("name"))
-                placeLat = cursor.getDouble(cursor.getColumnIndex("latitude"))
-                placeLong = cursor.getDouble(cursor.getColumnIndex("longitude"))
+                placeId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+                placeName = cursor.getString(cursor.getColumnIndex("name").toInt())
+                placeLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
+                placeLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
 
                 val emp= Place(placeId = placeId, placeName = placeName, placeLat = placeLat, placeLong = placeLong)
                 empList.add(emp)
