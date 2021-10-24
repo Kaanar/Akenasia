@@ -60,7 +60,7 @@ Acquisition de données, usage intelligent des données : ?
 
 Modèle UML :
 
-image::images\Diagramme.png[]
+image::images\Akenasia.png[]
 
 == Features
 
@@ -83,7 +83,7 @@ image::images\ListePositions.png[alt=Position,width=160,height=120]
 image::images\ModeJeu.png[alt=GPS,width=160,height=120]
 
 === Chronomètre
-* Dans un mode de jeu contre la montre, un chronomètre sera activé au début de la partie. Dans ce mode la partie s'arrête soit lorsque le nombre de tentatives est dépassé, soit lorsque l'utilisateur arrive près de sa destination. Il pourra ensuite observer combien de temps il a mis à se rendre à son objectif. 
+* Dans un mode de jeu contre la montre, un chronomètre sera activé au début de la partie. Dans ce mode la partie s'arrête soit lorsque le compte à rebours tombe à 0, soit lorsque l'utilisateur arrive près de sa destination. Il pourra ensuite observer combien de temps il lui restait pour se rendre à son objectif. 
 
 [[]]
 .Blueprint du chronomètre
