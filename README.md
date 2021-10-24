@@ -2,6 +2,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/Kaanar/Akenasia)](https://github.com/Kaanar/Akenasia/issues)
 [![GitHub license](https://img.shields.io/github/license/Kaanar/Akenasia)](https://github.com/Kaanar/Akenasia/blob/master/LICENSE)
 [![Build Status](https://app.travis-ci.com/Kaanar/Akenasia.svg?branch=develop)](https://app.travis-ci.com/Kaanar/Akenasia)
+![https://app.travis-ci.com/Kaanar/Akenasia.svg?branch=master](https://github.com/Kaanar/Akenasia/actions/workflows/.github/workflows/github-actions-demo.yml/badge.svg)
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Kaanar_Akenasia)](https://sonarcloud.io/dashboard?id=Kaanar_Akenasia)
 ## Table of Contents
 1. [General Info](#general-info)

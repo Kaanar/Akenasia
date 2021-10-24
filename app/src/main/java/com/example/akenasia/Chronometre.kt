@@ -50,7 +50,7 @@ class Chronometre : Fragment(){
         Chgoal_Y.text=place.getPlaceLong().toString()
 
         if (!isPlay) {
-            chronometre.base = SystemClock.elapsedRealtime() + 5000
+            chronometre.base = SystemClock.elapsedRealtime() + 300000
             chronometre.start()
             isPlay = true
         }
