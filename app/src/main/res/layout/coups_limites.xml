@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical"
+    tools:context=".CoupsLimites">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/Appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Akenasia.AppBarOverlay"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/CfTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="Coups limités"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@id/toolbar" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/CfresultTV"
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:translationZ="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/CfPosGoalTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Appbar" />
+
+    <TextView
+        android:id="@+id/CfPosGoalTV"
+        android:layout_width="128dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="Position à atteindre:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CfresultTV" />
+
+    <TextView
+        android:id="@+id/CfXGoalTV"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:text="Lat:"
+        app:layout_constraintEnd_toStartOf="@+id/CfPosGoalTV"
+        app:layout_constraintTop_toBottomOf="@+id/CfPosGoalTV" />
+
+    <TextView
+        android:id="@+id/Cfgoal_X"
+        android:layout_width="285dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/CfXGoalTV"
+        app:layout_constraintTop_toTopOf="@+id/CfXGoalTV" />
+
+    <TextView
+        android:id="@+id/CfYGoalTV"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="Lon:"
+        app:layout_constraintStart_toStartOf="@+id/CfXGoalTV"
+        app:layout_constraintTop_toBottomOf="@+id/CfXGoalTV" />
+
+    <TextView
+        android:id="@+id/Cfgoal_Y"
+        android:layout_width="285dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/CfYGoalTV"
+        app:layout_constraintTop_toBottomOf="@+id/CfXGoalTV" />
+
+    <TextView
+        android:id="@+id/CfXCurTV"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="60dp"
+        android:text="Lat:"
+        app:layout_constraintEnd_toStartOf="@+id/CfPosCurTV"
+        app:layout_constraintTop_toBottomOf="@+id/CfPosCurTV" />
+
+    <TextView
+        android:id="@+id/CfPosCurTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="Position actuelle:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Cfgoal_Y" />
+
+    <TextView
+        android:id="@+id/Cfcurrent_X"
+        android:layout_width="285dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/CfXCurTV"
+        app:layout_constraintTop_toTopOf="@+id/CfXCurTV" />
+
+    <TextView
+        android:id="@+id/CfYCurTV"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="Lon:"
+        app:layout_constraintStart_toStartOf="@+id/CfXCurTV"
+        app:layout_constraintTop_toBottomOf="@+id/CfXCurTV" />
+
+    <TextView
+        android:id="@+id/Cfcurrent_Y"
+        android:layout_width="285dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toEndOf="@+id/CfYCurTV"
+        app:layout_constraintTop_toBottomOf="@+id/CfXCurTV" />
+
+    <TextView
+        android:id="@+id/CfessaisTV"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/Cfcurrent_Y" />
+
+
+    <Button
+        android:id="@+id/CfRefreshBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CfessaisTV" />
+
+    <Button
+        android:id="@+id/CfQuitGameBT"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:text="@string/previous"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CfessaisTV" />
+
+    <Button
+        android:id="@+id/CfPositionBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:text="Voir l'historique"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CfQuitGameBT" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

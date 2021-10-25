@@ -2,6 +2,7 @@ package com.example.akenasia
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -34,7 +35,8 @@ class MyListAdapter(private val context: Activity, private val id: Array<String>
         choisirButton.setOnClickListener(){
             val delimiter = ":"
             val id= id[position]
-            val bundle = bundleOf("id" to id)
+            val bundle = Bundle()
+            bundle.putInt("id",id.toInt())
             rowView.findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment, bundle)
         }
 

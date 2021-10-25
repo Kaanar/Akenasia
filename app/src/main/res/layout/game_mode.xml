@@ -54,7 +54,7 @@
                 android:id="@+id/GameModeCountBT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chaud/Froid"
+                android:text="Coups limités"
                 android:textAppearance="?attr/textAppearanceHeadline6"/>
         </LinearLayout>
 

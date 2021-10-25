@@ -1,121 +1,75 @@
 package com.example.akenasia
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.os.SystemClock
+
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.example.akenasia.databinding.ActivityMainBinding
-import com.example.akenasia.databinding.ChaudFroidBinding
-import com.example.akenasia.databinding.ChronometreBinding
-import kotlinx.android.synthetic.main.chaud_froid.*
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import kotlinx.android.synthetic.main.coups_limites.*
 import kotlinx.android.synthetic.main.chronometre.*
+import kotlinx.android.synthetic.main.content_game.*
+import kotlinx.android.synthetic.main.historique.*
+import com.example.akenasia.databinding.*
+import kotlinx.android.synthetic.main.regles_generales.*
 
 
 class Game : AppCompatActivity() {
 
-
-
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var pos: Position
-    private lateinit var binding: ChronometreBinding
-    private lateinit var _binding: ChaudFroidBinding
+    private lateinit var Reglesbinding: ReglesGeneralesBinding
+    private lateinit var binding: ActivityGameBinding
+    private lateinit var Chronobinding: ChronometreBinding
+    private lateinit var CLbinding: CoupsLimitesBinding
     private lateinit var dbHandler : DatabaseHandler
     private lateinit var place: Place
+    private lateinit var chronometre: Chronometer
+    var isPlay = false
     private var essais=10
-    private var firstDistance=0.0
+    private var lastDistance=0.0
+    //private var lat = ArrayList<Double>()
+    //private var long = ArrayList<Double>()
+    private var i = 0
 
     // This property is only valid between onCreateView and
     // onDestroyView.
 
-
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
+        binding = ActivityGameBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         dbHandler = DatabaseHandler(this)
         pos = Position(this)
         place= dbHandler.getPlace(intent.getIntExtra("id",0))
 
-        if(intent.getStringExtra("mode").toString()=="chronometre"){
-            binding = ChronometreBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-            Chgoal_X.text=place.getPlaceLat().toString()
-            Chgoal_Y.text=place.getPlaceLong().toString()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.include2) as NavHostFragment?
+        val navController = navHostFragment?.navController
+        if (navController != null) {
+            appBarConfiguration = AppBarConfiguration(navController.graph)
         }
-        else if (intent.getStringExtra("mode").toString()=="c/f"){
-            _binding = ChaudFroidBinding.inflate(layoutInflater)
-            setContentView(_binding.root)
-            Cfgoal_X.text=place.getPlaceLat().toString()
-            Cfgoal_Y.text=place.getPlaceLong().toString()
-
-            firstDistance=pos.calcul_distance(pos.getLatitude(),
-                pos.getLongitude(),
-                Cfgoal_Y.text.toString().toDouble(),
-                Cfgoal_X.text.toString().toDouble())
-
-
-            CfRefreshBT.setOnClickListener {
-                nouvelEssai()
-            }
-
+        if (navController != null) {
+            setupActionBarWithNavController(navController, appBarConfiguration)
         }
-
-
-
 
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
     //maison de l'étudiant 48.902656120835665, 2.2134736447569447
     fun readLocation(){
         pos.refreshLocation()//appel de la méthode qui récupère les coordonnées GPS de l'appareil
         //current_X.text =pos.getLatitude().toString()
-       // current_Y.text = pos.getLongitude().toString()
+        // current_Y.text = pos.getLongitude().toString()
         val distance : Double = pos.calcul_distance(48.902656120835665, 2.2134736447569447, 48.90432845480199, 2.216647218942868)
         Toast.makeText(this,"$distance", Toast.LENGTH_SHORT).show()
-
-        if (distance<1000){
-            //Toast.makeText(activity,"<1000 bravo", Toast.LENGTH_SHORT).show()
-        }
     }
 
-
-    fun nouvelEssai(){
-        if(essais==0){
-            Toast.makeText(this, "Vous avez perdu!",Toast.LENGTH_LONG).show()
-            val intent = Intent(this, MainActivity::class.java)
-            this.startActivity(intent)
-        }
-        else{
-            pos.refreshLocation()
-            _binding.CfcurrentX.text=pos.getLatitude().toString()
-            _binding.CfcurrentY.text = pos.getLongitude().toString()
-            val distance : Double =pos.calcul_distance(pos.getLatitude(),
-                pos.getLongitude(),
-                Cfgoal_X.text.toString().toDouble(),
-                Cfgoal_Y.text.toString().toDouble())
-            if(distance<1500){
-                Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                this.startActivity(intent)
-            }
-            else{
-                if(distance<firstDistance){
-                    Toast.makeText(this, "Vous chauffez!",Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    Toast.makeText(this, "Vous refroidissez!",Toast.LENGTH_SHORT).show()
-                }
-            }
-            essais--
-            _binding.CfessaisTV.text="Il vous reste "+essais+" essais"
-        }
-    }
 }

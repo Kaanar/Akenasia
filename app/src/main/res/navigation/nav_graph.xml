@@ -28,7 +28,7 @@
         android:id="@+id/ThirdFragment"
         android:name="com.example.akenasia.GameMode"
         android:label="@string/third_fragment_label"
-        tools:layout="@layout/game_mode"/>
+        tools:layout="@layout/game_mode">
     <argument
         android:name="PlaceID"
         app:argType="integer"
@@ -36,4 +36,5 @@
     <action
         android:id="@+id/action_ThirdFragment_to_SecondFragment"
         app:destination="@id/SecondFragment" />
+    </fragment>
 </navigation>
