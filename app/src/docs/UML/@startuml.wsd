@@ -1,14 +1,12 @@
 @startuml Akenasia
 left to right direction
 
-enum Gamemode {
-  CHRONOMETRE
-  CHAUD_FROID
-}
-
-class Chrono {
-  temps : FLOAT
-  timer()
+class Chronometre {
+  chronometre : CHRONOMETER
+  pos : POSITION
+  place : PLACE
+  Chronometre()
+  nouvelEssai()
 }
 
 class Place {
@@ -27,7 +25,6 @@ class Database {
 }
 
 class Position {
-  context : CONTEXT
   latitude : DOUBLE
   longitude : DOUBLE
   Position()
@@ -35,25 +32,39 @@ class Position {
   calcul_distance() : DOUBLE
 }
 
-class User {
-  userId : INTEGER
-  userName : STRING
-  User()
-}
-
 interface MyListAdapter {
   getView()
 }
 
 class Game {
+  pos : POSITION
+  place : PLACE
   Game()
-  start()
-  status()
-  win()
 }
 
-class ChaudFroid {
-  tentatives : INTEGER
+class CoupsLimites {
+  essais : INTEGER
+  pos : POSITION
+  place : PLACE
+  lastDistance : DOUBLE
+  CoupsLimites()
+  nouvelEssai()
+}
+
+class PositionTable {
+  posId : INTEGER
+  posLat : DOUBLE
+  posLong : DOUBLE
+  partieId : INTEGER
+}
+
+interface PositionAdapter {
+  getView()
+}
+
+class Historique {
+  partieId : INTEGER
+  viewRecord()
 }
 
 class DatabaseHandler {
@@ -68,9 +79,11 @@ DatabaseHandler <|-- Database
 Place <|-- Database
 Position <|-- Place
 Place <|-- Game
-Position <|-- User
-User <|-- Game
-Game <|-- Chrono
-Game <|-- ChaudFroid
+Game <|-- Chronometre
+Game <|-- CoupsLimites
+Chronometre <|-- PositionTable
+CoupsLimites <|-- PositionTable
+PositionTable <|-- PositionAdapter
+PositionTable <|-- Historique
 
 @enduml
