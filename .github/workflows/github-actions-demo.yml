@@ -5,7 +5,8 @@ on:
     branches:
       - master
       - develop
-      - Test_GithubAction
+    tags:
+      - 'v*'
 
 jobs:
   test:
@@ -41,3 +42,30 @@ jobs:
         with:
           name: apk
           path: app/build/outputs/apk/debug/app-debug.apk
+  release:
+    name: Release APK
+    needs: apk
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
+        with:
+          name: apk
+      - name: Gets latest created release info
+        id: latest_release_info
+        uses: jossef/action-latest-release-info@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
+          asset_path: apk/app-debug.apk
+          asset_name: Akenasia.apk
+          asset_content_type: application/zip
+      - name: Checkout code
+        uses: actions/checkout@v2
