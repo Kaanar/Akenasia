@@ -14,9 +14,10 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
         <action
-            android:id="@+id/action_FirstFragment_to_map1"
-            app:destination="@id/map1" />
+            android:id="@+id/action_FirstFragment_to_map_fragment"
+            app:destination="@id/map_fragment" />
     </fragment>
 
     <fragment
@@ -42,14 +43,17 @@
         app:destination="@id/SecondFragment" />
     </fragment>
 
+
     <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/map1">
+        android:id="@+id/map_fragment"
+        android:name="com.example.akenasia.MapsFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_maps">
         <action
-            android:id="@+id/action_map1_to_FirstFragment"
+            android:id="@+id/action_map_fragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+
+
 
 </navigation>
