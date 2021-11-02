@@ -53,7 +53,7 @@ class HomePage : Fragment(){
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
         binding.btnMap.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_map1)
+            findNavController().navigate(R.id.action_FirstFragment_to_map_fragment)
         }
     }
 
