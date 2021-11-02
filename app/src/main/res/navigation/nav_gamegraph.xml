@@ -34,6 +34,7 @@
         <action
             android:id="@+id/action_Chronometre_to_Historique"
             app:destination="@id/Histo" />
+
     </fragment>
 
     <fragment
@@ -48,6 +49,7 @@
         <action
             android:id="@+id/action_Coups_limites_to_Historique"
             app:destination="@id/Histo" />
+
     </fragment>
 
     <fragment
@@ -66,6 +68,8 @@
             android:id="@+id/action_Histo_to_CoupsLimites"
             app:destination="@id/CoupsLimitesHisto" />
     </fragment>
+
+
 
 
 </navigation>

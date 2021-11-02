@@ -10,13 +10,23 @@ import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.databinding.ChronometreBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.coups_limites.*
 
 
 class Chronometre : Fragment(){
+
+    lateinit var mapFragment: SupportMapFragment
+    lateinit var googleMap: GoogleMap
+
     private var _binding: ChronometreBinding? = null
     private lateinit var pos: Position
     private val binding get() = _binding!!
@@ -41,6 +51,7 @@ class Chronometre : Fragment(){
         }
         _binding = ChronometreBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,6 +81,8 @@ class Chronometre : Fragment(){
             bundle.putString("mode","Chronometre")
             findNavController().navigate(R.id.Histo,bundle)
         }
+
+
         //Vérifie chaque tick du chrono
         chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
             val currentTime: String = chronometre.getText().toString()
