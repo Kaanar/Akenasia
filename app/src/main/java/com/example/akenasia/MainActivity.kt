@@ -20,9 +20,15 @@ import com.example.akenasia.databinding.ActivityMainBinding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.location.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 
 class MainActivity : AppCompatActivity() {
+
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -46,6 +52,8 @@ class MainActivity : AppCompatActivity() {
         if (navController != null) {
             setupActionBarWithNavController(navController, appBarConfiguration)
         }
+
+
     }
 
     //Vérifie que l'application a bien les permissions requises pour récupérer la localisation de l'appareil//

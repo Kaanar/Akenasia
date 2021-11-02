@@ -177,27 +177,29 @@
         app:layout_constraintTop_toBottomOf="@+id/Chcurrent_Y"
         tools:layout_editor_absoluteX="51dp" />
 
+
     <Button
         android:id="@+id/ChRefreshBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="24dp"
         android:text="Refresh"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
-
 
     <Button
         android:id="@+id/ChQuitGameBT"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
+        android:layout_marginTop="24dp"
         android:text="@string/previous"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
 
@@ -212,5 +214,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ChQuitGameBT" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

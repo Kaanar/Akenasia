@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/activity_countdown_timer.xml" value="0.1" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/activity_maps.xml" value="0.25416666666666665" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/chronometre.xml" value="0.25416666666666665" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/fragment_maps.xml" value="0.24010416666666667" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/historique.xml" value="0.25416666666666665" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/homepage.xml" value="0.264" />
+        <entry key="..\:/Akenasia/app/src/main/res/layout/regles_generales.xml" value="0.264" />
         <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/chronometre.xml" value="0.1" />
-        <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/content_main.xml" value="0.12" />
-        <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/coups_limites.xml" value="0.1" />
         <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/geolocalisation.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/chaud_froid.xml" value="0.22" />
       </map>

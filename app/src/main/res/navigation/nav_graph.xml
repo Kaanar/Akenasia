@@ -14,7 +14,11 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_map1"
+            app:destination="@id/map1" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.akenasia.Database"
@@ -37,4 +41,15 @@
         android:id="@+id/action_ThirdFragment_to_SecondFragment"
         app:destination="@id/SecondFragment" />
     </fragment>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/map1">
+        <action
+            android:id="@+id/action_map1_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
 </navigation>
