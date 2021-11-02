@@ -56,6 +56,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location1,17f))
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location2,17f))
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location3,17f))
         }
 
     }
