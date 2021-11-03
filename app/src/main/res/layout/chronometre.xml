@@ -200,7 +200,8 @@
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toEndOf="@+id/ChRefreshBT"
         app:layout_constraintTop_toBottomOf="@+id/ChessaisTV"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintVertical_bias="0.134"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/ChQuitGameBT"
