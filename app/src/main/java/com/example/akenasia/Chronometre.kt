@@ -82,6 +82,10 @@ class Chronometre : Fragment(){
             findNavController().navigate(R.id.Histo,bundle)
         }
 
+        binding.btnMap2.setOnClickListener {
+            findNavController().navigate(R.id.action_ChronoHisto_to_map_fragment)
+        }
+
 
         //Vérifie chaque tick du chrono
         chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {

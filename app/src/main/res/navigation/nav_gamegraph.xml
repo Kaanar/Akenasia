@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_Chronometre_to_Historique"
             app:destination="@id/Histo" />
+        <action
+            android:id="@+id/action_ChronoHisto_to_map_fragment"
+            app:destination="@id/map_fragment" />
 
     </fragment>
 
@@ -49,6 +52,12 @@
         <action
             android:id="@+id/action_Coups_limites_to_Historique"
             app:destination="@id/Histo" />
+        <action
+            android:id="@+id/action_CoupsLimitesHisto_to_map_fragment"
+            app:destination="@id/map_fragment" />
+        <action
+            android:id="@+id/action_CoupsLimitesHisto_to_map_fragment2"
+            app:destination="@id/map_fragment" />
 
     </fragment>
 
@@ -66,6 +75,20 @@
             app:destination="@id/ChronoHisto" />
         <action
             android:id="@+id/action_Histo_to_CoupsLimites"
+            app:destination="@id/CoupsLimitesHisto" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/map_fragment"
+        android:name="com.example.akenasia.MapsFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_maps">
+
+        <action
+            android:id="@+id/action_map_fragment_to_ChronoHisto"
+            app:destination="@id/ChronoHisto" />
+        <action
+            android:id="@+id/action_map_fragment_to_CoupsLimitesHisto"
             app:destination="@id/CoupsLimitesHisto" />
     </fragment>
 
