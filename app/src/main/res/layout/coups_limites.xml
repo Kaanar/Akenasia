@@ -162,9 +162,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="16dp"
         android:text="Refresh"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CfessaisTV" />
 
@@ -173,12 +174,26 @@
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
+        android:layout_marginTop="84dp"
         android:text="@string/previous"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CfessaisTV" />
+
+    <Button
+        android:id="@+id/btn_map3"
+        android:layout_width="87dp"
+        android:layout_height="42dp"
+        android:text="MAP"
+        app:layout_constraintBottom_toTopOf="@+id/CfPositionBT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toEndOf="@+id/CfRefreshBT"
+        app:layout_constraintTop_toBottomOf="@+id/CfessaisTV"
+        app:layout_constraintVertical_bias="0.186"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/CfPositionBT"
