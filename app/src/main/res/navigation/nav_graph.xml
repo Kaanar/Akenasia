@@ -44,16 +44,6 @@
     </fragment>
 
 
-    <fragment
-        android:id="@+id/map_fragment"
-        android:name="com.example.akenasia.MapsFragment"
-        android:label="MapFragment"
-        tools:layout="@layout/fragment_maps">
-        <action
-            android:id="@+id/action_map_fragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
-
 
 
 </navigation>

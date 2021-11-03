@@ -52,9 +52,7 @@ class HomePage : Fragment(){
         binding.HomepageJouerBT.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        binding.btnMap.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_map_fragment)
-        }
+
     }
 
     override fun onDestroyView() {
