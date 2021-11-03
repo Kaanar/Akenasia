@@ -40,11 +40,7 @@ class Position(context: Context) {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Toast.makeText(
-                MainActivity().applicationContext,
-                "Vous avez autorisé l'application à récupérer vos coordonnées GPS",
-                Toast.LENGTH_SHORT
-            ).show()
+
         }
         fusedLocationProviderClient= FusedLocationProviderClient(context)
         val task =fusedLocationProviderClient.lastLocation.addOnSuccessListener { position: Location? ->
@@ -100,11 +96,7 @@ class Position(context: Context) {
             )
             != PackageManager.PERMISSION_GRANTED
         ) {
-            Toast.makeText(
-                MainActivity().applicationContext,
-                "Vous avez autorisé l'application à récupérer vos coordonnées GPS",
-                Toast.LENGTH_SHORT
-            ).show()
+
             return
         }
         val task =

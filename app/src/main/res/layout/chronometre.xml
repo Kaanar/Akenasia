@@ -177,61 +177,27 @@
         app:layout_constraintTop_toBottomOf="@+id/Chcurrent_Y"
         tools:layout_editor_absoluteX="51dp" />
 
-
-    <Button
-        android:id="@+id/ChRefreshBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:text="Refresh"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.146"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
-
-    <Button
-        android:id="@+id/btn_map2"
-        android:layout_width="87dp"
-        android:layout_height="42dp"
-        android:text="MAP"
-        app:layout_constraintBottom_toTopOf="@+id/ChPositionBT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toEndOf="@+id/ChRefreshBT"
-        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV"
-        app:layout_constraintVertical_bias="0.134"
-        tools:ignore="TouchTargetSizeCheck" />
-
     <Button
         android:id="@+id/ChQuitGameBT"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="50dp"
         android:text="@string/previous"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV"
-        app:layout_constraintVertical_bias="0.042" />
-
+        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV"/>
     <Button
         android:id="@+id/ChPositionBT"
         android:layout_width="220dp"
         android:layout_height="37dp"
         android:layout_gravity="center"
-        android:layout_marginTop="64dp"
         android:text="Voir l'historique"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChQuitGameBT"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
