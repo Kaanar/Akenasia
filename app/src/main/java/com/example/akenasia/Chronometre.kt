@@ -24,9 +24,6 @@ import kotlinx.android.synthetic.main.coups_limites.*
 
 class Chronometre : Fragment(){
 
-    lateinit var mapFragment: SupportMapFragment
-    lateinit var googleMap: GoogleMap
-
     private var _binding: ChronometreBinding? = null
     private lateinit var pos: Position
     private val binding get() = _binding!!
@@ -36,7 +33,6 @@ class Chronometre : Fragment(){
     private lateinit var chronometre: Chronometer
     var isPlay = false
     private var i=0
-    private var lastDistance=0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,15 +56,17 @@ class Chronometre : Fragment(){
         Chgoal_X.text=place.getPlaceLat().toString()
         Chgoal_Y.text=place.getPlaceLong().toString()
 
+        pos.refreshLocation()
+        Chcurrent_X.text = pos.getLatitude().toString()
+        Chcurrent_Y.text = pos.getLongitude().toString()
+
         if (!isPlay) {
             chronometre.base = SystemClock.elapsedRealtime() + 5000
             chronometre.start()
             isPlay = true
         }
         //Rafraîchit la position de l'utilisateur
-        ChRefreshBT.setOnClickListener {
-            nouvelEssai()
-        }
+
         //Quitte la partie
         ChQuitGameBT.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
@@ -82,20 +80,15 @@ class Chronometre : Fragment(){
             findNavController().navigate(R.id.Histo,bundle)
         }
 
-        binding.btnMap2.setOnClickListener {
-            findNavController().navigate(R.id.action_ChronoHisto_to_map_fragment)
-        }
-
-
         //Vérifie chaque tick du chrono
         chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
+            nouvelEssai()
             val currentTime: String = chronometre.getText().toString()
             //On arrête la partie lorsque le chrono arrive à 0
             if (currentTime == "00:00") {
                 chronometre.stop()
                 isPlay = false
                 ChresultTV.text = "Temps écoulé, c'est perdu ;_;"
-                ChRefreshBT.setVisibility(View.GONE)
                 ChQuitGameBT.setVisibility(View.VISIBLE)
                 ChPositionBT.setVisibility(View.VISIBLE)
             }
@@ -105,7 +98,6 @@ class Chronometre : Fragment(){
     fun nouvelEssai() {
         pos.refreshLocation()
 
-        //Ajoute la position récupérée dans la base de données
         dbHandler.addPosition(
             PositionTable(
                 i,
@@ -130,24 +122,9 @@ class Chronometre : Fragment(){
             isPlay = false
             chronometre.stop()
             ChresultTV.text = "Bravo ! Vous avez gagné"
-            ChRefreshBT.setVisibility(View.GONE);
             ChQuitGameBT.setVisibility(View.VISIBLE)
             ChPositionBT.setVisibility(View.VISIBLE)
-        } else {
-            if(i>0) {
-                if (distance < lastDistance) {
-                    ChresultTV.text = "Vous chauffez !"
-                }
-                if (distance == lastDistance) {
-                    ChresultTV.text = "AFK ?"
-                }
-                if (distance > lastDistance) {
-                    ChresultTV.text = "Vous refroidissez"
-                }
-            }
         }
-        lastDistance = distance
-        //incrémentation de l'id de la position
         i++
     }
 }

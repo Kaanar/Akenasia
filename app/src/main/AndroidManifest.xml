@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.akenasia">
 
     <!--
@@ -29,12 +30,13 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyC2b2TDA9rI-A7u5ACrscijqN79dd_b5lI" />
 
         <activity
             android:name=".MapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="MapsActivity"
+            tools:ignore="Instantiatable" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -43,7 +45,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,7 +56,8 @@
         <activity
             android:name=".Game"
             android:exported="true"
-            android:label="game" />
+            android:label="game"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>
