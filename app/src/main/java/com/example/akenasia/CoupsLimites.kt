@@ -78,13 +78,13 @@ class CoupsLimites: Fragment() {
 
         //tests on simule des positions voir si on obtient les résulats attendus
         if (essais == 9) {
-            pos.setLatitude(1.0)
-            pos.setLongitude(1.0)
+            pos.setLatitude(10.0)
+            pos.setLongitude(10.0)
 
         }
         if (essais == 8) {
-            pos.setLatitude(0.5)
-            pos.setLongitude(2.0)
+            pos.setLatitude(-10.5)
+            pos.setLongitude(-2.0)
         }
         if (essais == 7) {
             pos.setLatitude(0.0)
@@ -95,15 +95,15 @@ class CoupsLimites: Fragment() {
             pos.setLongitude(2.0)
         }
         if (essais == 5) {
-            pos.setLatitude(31.0)
+            pos.setLatitude(50.0)
             pos.setLongitude(2.0)
         }
         if (essais == 4) {
             pos.setLatitude(32.0)
-            pos.setLongitude(2.0)
+            pos.setLongitude(-2.0)
         }
         if (essais == 3) {
-            pos.setLatitude(31.0)
+            pos.setLatitude(-31.0)
             pos.setLongitude(2.0)
         }
         if (essais == 2) {
