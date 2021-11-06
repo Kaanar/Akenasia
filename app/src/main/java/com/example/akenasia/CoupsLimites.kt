@@ -64,10 +64,6 @@ class CoupsLimites: Fragment() {
             bundle.putString("mode","CL")
             findNavController().navigate(R.id.action_Coups_limites_to_Historique,bundle)
         }
-
-        binding.btnMap3.setOnClickListener {
-            findNavController().navigate(R.id.action_CoupsLimitesHisto_to_map_fragment)
-        }
     }
 
     fun nouvelEssai() {
