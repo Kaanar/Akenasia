@@ -66,6 +66,10 @@ class CoupsLimites: Fragment() {
         }
     }
 
+    fun getEssais(): Int {
+        return essais
+    }
+
     fun nouvelEssai() {
         pos.refreshLocation()
 
