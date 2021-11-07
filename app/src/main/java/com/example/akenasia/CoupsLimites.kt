@@ -73,8 +73,8 @@ class CoupsLimites: Fragment() {
     fun nouvelEssai() {
         pos.refreshLocation()
 
-        Cfcurrent_X.text = pos.getLatitude().toString()
-        Cfcurrent_Y.text = pos.getLongitude().toString()
+        //Cfcurrent_X.text = pos.getLatitude().toString() servait avec les coordonnées en texte
+        //Cfcurrent_Y.text = pos.getLongitude().toString()
 
         //tests on simule des positions voir si on obtient les résulats attendus
        /* if (essais == 9) {
@@ -124,8 +124,8 @@ class CoupsLimites: Fragment() {
                 1
             )
         )
-        Cfcurrent_X.text = pos.getLatitude().toString()
-        Cfcurrent_Y.text = pos.getLongitude().toString()
+        pos.getLatitude().toString()
+        pos.getLongitude().toString()
 
         val distance: Double = pos.calcul_distance(
             pos.getLatitude(),

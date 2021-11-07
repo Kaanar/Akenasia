@@ -57,8 +57,8 @@ class Chronometre : Fragment(){
         Chgoal_Y.text=place.getPlaceLong().toString()
 
         pos.refreshLocation()
-        Chcurrent_X.text = pos.getLatitude().toString()
-        Chcurrent_Y.text = pos.getLongitude().toString()
+        //Chcurrent_X.text = pos.getLatitude().toString() servait quand pour les coordonnées en texte
+        //Chcurrent_Y.text = pos.getLongitude().toString()
 
         if (!isPlay) {
             chronometre.base = SystemClock.elapsedRealtime() + 5000
@@ -106,8 +106,8 @@ class Chronometre : Fragment(){
                 1
             )
         )
-        Chcurrent_X.text = pos.getLatitude().toString()
-        Chcurrent_Y.text = pos.getLongitude().toString()
+        //Chcurrent_X.text = pos.getLatitude().toString()
+        //Chcurrent_Y.text = pos.getLongitude().toString() servait pour les coordonnées en texte
 
         //calcul de la distance
         val distance: Double = pos.calcul_distance(
