@@ -108,13 +108,15 @@
         app:layout_constraintTop_toBottomOf="@+id/Cfgoal_Y"
         tools:layout_editor_absoluteX="16dp" />
 
-    <fragment
-        android:id="@+id/mapsFragment"
-        android:name="com.example.akenasia.MapsFragment"
-        android:layout_width="389dp"
-        android:layout_height="239dp"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/cfmap_view"
+        android:layout_width="393dp"
+        android:layout_height="281dp"
+        android:labelFor="@+id/CfessaisTV"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CfessaisTV" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Cfgoal_Y" />
 
     <Button
         android:id="@+id/CfQuitGameBT"
@@ -132,11 +134,12 @@
         android:layout_width="196dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:text="Refresh"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapsFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/cfmap_view" />
 
     <Button
         android:id="@+id/CfPositionBT"

@@ -15,17 +15,26 @@ import com.example.akenasia.databinding.CoupsLimitesBinding
 import kotlinx.android.synthetic.main.coups_limites.*
 import com.example.akenasia.Game.*
 import com.example.akenasia.databinding.ChronometreBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.chronometre.*
 
-class CoupsLimites: Fragment() {
+class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
+
+    override lateinit var pos: Position
+    override lateinit var dbHandler: DatabaseHandler
+    override lateinit var place: Place
+    override var isPlay: Boolean = false
+    override var i: Int = 0
+    override lateinit var googleMap: GoogleMap
     private var _binding: CoupsLimitesBinding? = null
-    private lateinit var pos: Position
     private val binding get() = _binding!!
     private var thiscontext: Context? = null
-    private lateinit var dbHandler : DatabaseHandler
-    private lateinit var place: Place
-    private var essais=10
     private var lastDistance=0.0
+    private var essais=10
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +51,14 @@ class CoupsLimites: Fragment() {
         return binding.root
     }
 
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        cfmap_view.onCreate(savedInstanceState)
+        cfmap_view.onResume()
+        cfmap_view.getMapAsync(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,43 +94,43 @@ class CoupsLimites: Fragment() {
         //Cfcurrent_Y.text = pos.getLongitude().toString()
 
         //tests on simule des positions voir si on obtient les résulats attendus
-       /* if (essais == 9) {
-            //pos.setLatitude(10.0)
-            //pos.setLongitude(10.0)
+       /*if (essais == 9) {
+            pos.setLatitude(10.0)
+            pos.setLongitude(10.0)
 
         }
         if (essais == 8) {
-            //pos.setLatitude(-10.5)
-            //pos.setLongitude(-2.0)
+            pos.setLatitude(-10.5)
+            pos.setLongitude(-2.0)
         }
         if (essais == 7) {
-            //pos.setLatitude(0.0)
-            //pos.setLongitude(1.0)
+            pos.setLatitude(0.0)
+            pos.setLongitude(1.0)
         }
         if (essais == 6) {
-            //pos.setLatitude(30.0)
-            //pos.setLongitude(2.0)
+            pos.setLatitude(30.0)
+            pos.setLongitude(2.0)
         }
         if (essais == 5) {
-            //pos.setLatitude(50.0)
-            //pos.setLongitude(2.0)
+            pos.setLatitude(50.0)
+            pos.setLongitude(2.0)
         }
         if (essais == 4) {
-            //pos.setLatitude(32.0)
-            //pos.setLongitude(-2.0)
+            pos.setLatitude(32.0)
+            pos.setLongitude(-2.0)
         }
         if (essais == 3) {
-            //pos.setLatitude(-31.0)
-            //pos.setLongitude(2.0)
+            pos.setLatitude(-31.0)
+            pos.setLongitude(2.0)
         }
         if (essais == 2) {
-            //pos.setLatitude(31.0)
-            //pos.setLongitude(2.0)
+            pos.setLatitude(31.0)
+            pos.setLongitude(2.0)
         }
         if (essais == 1) {
-            //pos.setLatitude(48.90527388944)
-            //pos.setLongitude(2.21568703652)
-        } */
+            pos.setLatitude(48.90527388944)
+            pos.setLongitude(2.21568703652)
+        }*/
 
         //Ajoute la position récupérée dans la base de données
         dbHandler.addPosition(
@@ -135,13 +152,13 @@ class CoupsLimites: Fragment() {
         )
 
 
-        if (essais == 1 && distance >= 1500) {
+        if (essais == 1 && distance >= 2) {
             CfresultTV.text = "Dommage ! vous avez perdu ;_;"
             CfRefreshBT.setVisibility(View.GONE);
             CfQuitGameBT.setVisibility(View.VISIBLE)
             CfPositionBT.setVisibility(View.VISIBLE)
         }
-        if (distance < 1500) {
+        if (distance < 2) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
             CfresultTV.text = "Bravo ! Vous avez gagné"
             CfRefreshBT.setVisibility(View.GONE);
@@ -171,6 +188,15 @@ class CoupsLimites: Fragment() {
             essais--
             CfessaisTV.text = "Il vous reste " + essais + " essais"
             Toast.makeText(context,distance.toString(),Toast.LENGTH_SHORT).show()
+        }
+        val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
+        googleMap.addMarker(MarkerOptions().position(location).title("Position"+(10-i).toString()))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,17f))
+    }
+
+    override fun onMapReady(map: GoogleMap) {
+        map?.let {
+            googleMap = it
         }
     }
 }

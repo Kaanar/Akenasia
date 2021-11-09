@@ -15,24 +15,30 @@ import androidx.navigation.fragment.findNavController
 import com.example.akenasia.databinding.ChronometreBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.chronometre.*
+import kotlinx.android.synthetic.main.chronometre.map_view
 import kotlinx.android.synthetic.main.coups_limites.*
+import kotlinx.android.synthetic.main.fragment_maps.*
 
 
-class Chronometre : Fragment(){
+class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
 
+
+    override lateinit var pos: Position
+    override lateinit var dbHandler: DatabaseHandler
+    override lateinit var place: Place
+    override var isPlay: Boolean = false
+    override var i: Int = 0
+    override lateinit var googleMap: GoogleMap
     private var _binding: ChronometreBinding? = null
-    private lateinit var pos: Position
     private val binding get() = _binding!!
     private var thiscontext: Context? = null
-    private lateinit var dbHandler : DatabaseHandler
-    private lateinit var place: Place
     private lateinit var chronometre: Chronometer
-    var isPlay = false
-    private var i=0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +54,14 @@ class Chronometre : Fragment(){
         _binding = ChronometreBinding.inflate(inflater, container, false)
         return binding.root
 
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        map_view.onCreate(savedInstanceState)
+        map_view.onResume()
+        map_view.getMapAsync(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,6 +107,8 @@ class Chronometre : Fragment(){
                 ChPositionBT.setVisibility(View.VISIBLE)
             }
         }
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
     }
 
     fun nouvelEssai() {
@@ -116,6 +132,7 @@ class Chronometre : Fragment(){
             Chgoal_X.text.toString().toDouble(),
             Chgoal_Y.text.toString().toDouble()
         )
+
         //Condition d'arrêt -> Victoire
         if (distance < 1500) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
@@ -126,5 +143,15 @@ class Chronometre : Fragment(){
             ChPositionBT.setVisibility(View.VISIBLE)
         }
         i++
+        val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
+        googleMap.addMarker(MarkerOptions().position(location).title("Position"+(10-i).toString()))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,17f))
+
+    }
+
+    override fun onMapReady(map: GoogleMap) {
+        map?.let {
+            googleMap = it
+        }
     }
 }
