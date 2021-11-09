@@ -57,19 +57,6 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         Chmap_view.onCreate(savedInstanceState)
         Chmap_view.onResume()
         Chmap_view.getMapAsync(this)
-        //Vérifie chaque tick du chrono
-        chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
-
-            val currentTime: String = chronometre.getText().toString()
-            //On arrête la partie lorsque le chrono arrive à 0
-            if (currentTime == "00:00") {
-                chronometre.stop()
-                isPlay = false
-                ChresultTV.text = "Temps écoulé, c'est perdu ;_;"
-                ChQuitGameBT.setVisibility(View.VISIBLE)
-                ChPositionBT.setVisibility(View.VISIBLE)
-            }
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -142,6 +129,19 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
     override fun onMapReady(p0: GoogleMap) {
         p0.let {
             googleMap = it
+        }
+        //Vérifie chaque tick du chrono
+        chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
+            nouvelEssai()
+            val currentTime: String = chronometre.getText().toString()
+            //On arrête la partie lorsque le chrono arrive à 0
+            if (currentTime == "00:00") {
+                chronometre.stop()
+                isPlay = false
+                ChresultTV.text = "Temps écoulé, c'est perdu ;_;"
+                ChQuitGameBT.setVisibility(View.VISIBLE)
+                ChPositionBT.setVisibility(View.VISIBLE)
+            }
         }
     }
 
