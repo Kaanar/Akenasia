@@ -110,7 +110,7 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/cfmap_view"
-        android:layout_width="393dp"
+        android:layout_width="0dp"
         android:layout_height="281dp"
         android:labelFor="@+id/CfessaisTV"
         app:layout_constraintEnd_toEndOf="parent"

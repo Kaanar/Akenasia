@@ -114,42 +114,44 @@ class Position(context: Context) {
     }
 
     fun refreshLocation() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
 
-                LocationServices.getFusedLocationProviderClient(context)
-                    .requestLocationUpdates(locationRequest, object : LocationCallback() {
-                        override fun onLocationResult(locationResult: LocationResult) {
-                            super.onLocationResult(locationResult)
-                            LocationServices.getFusedLocationProviderClient(context)
-                                .removeLocationUpdates(this)
-                            if (locationResult != null && locationResult.locations.size > 0) {
-                                val index = locationResult.locations.size - 1
-                                val latitude= locationResult.locations[index].latitude
-                                val longitude= locationResult.locations[index].longitude
-                                setLatitude(latitude)
-                                setLongitude(longitude)
-                            }
-                            else{
-                                latitude=0.0
-                                longitude=0.0
-                            }
+            LocationServices.getFusedLocationProviderClient(context)
+                .requestLocationUpdates(locationRequest, object : LocationCallback() {
+                    override fun onLocationResult(locationResult: LocationResult) {
+                        super.onLocationResult(locationResult)
+                        LocationServices.getFusedLocationProviderClient(context)
+                            .removeLocationUpdates(this)
+                        if (locationResult.locations.size > 0) {
+                            locationResult.lastLocation.latitude
+                            val latitude= locationResult.lastLocation.latitude
+                            val longitude= locationResult.lastLocation.longitude
+                            setLatitude(latitude)
+                            setLongitude(longitude)
                         }
-                    }, Looper.getMainLooper())
-            } else {
-                turnOnGPS();
-            }
-
+                        else{
+                            setLatitude(0.0)
+                            setLongitude(0.0)
+                        }
+                    }
+                }, Looper.getMainLooper())
         } else {
-            //
+            turnOnGPS();
+            requestPermissions(
+                context as Activity,
+                arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSION_ID
+            )
         }
+
     }
 
     private fun turnOnGPS() {
+
         val builder = LocationSettingsRequest.Builder()
             .addLocationRequest(locationRequest)
         builder.setAlwaysShow(true)
@@ -158,8 +160,6 @@ class Position(context: Context) {
         result.addOnCompleteListener(OnCompleteListener<LocationSettingsResponse?> { task ->
             try {
                 val response = task.getResult(ApiException::class.java)
-                Toast.makeText(context, "GPS is already tured on", Toast.LENGTH_SHORT)
-                    .show()
             } catch (e: ApiException) {
                 when (e.statusCode) {
                     LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {

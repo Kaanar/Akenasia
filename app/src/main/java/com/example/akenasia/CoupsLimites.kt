@@ -89,15 +89,10 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
 
     fun nouvelEssai() {
         pos.refreshLocation()
-
-        //Cfcurrent_X.text = pos.getLatitude().toString() servait avec les coordonnées en texte
-        //Cfcurrent_Y.text = pos.getLongitude().toString()
-
         //tests on simule des positions voir si on obtient les résulats attendus
        /*if (essais == 9) {
             pos.setLatitude(10.0)
             pos.setLongitude(10.0)
-
         }
         if (essais == 8) {
             pos.setLatitude(-10.5)
@@ -144,6 +139,7 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
         pos.getLatitude().toString()
         pos.getLongitude().toString()
 
+        //Calcule de la distance entre la position actuelle et la position objectif
         val distance: Double = pos.calcul_distance(
             pos.getLatitude(),
             pos.getLongitude(),
@@ -151,7 +147,7 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
             Cfgoal_Y.text.toString().toDouble()
         )
 
-
+        //Distinction des cas de victoire/défaite
         if (essais == 1 && distance >= 2) {
             CfresultTV.text = "Dommage ! vous avez perdu ;_;"
             CfRefreshBT.setVisibility(View.GONE);
@@ -189,13 +185,15 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
             CfessaisTV.text = "Il vous reste " + essais + " essais"
             Toast.makeText(context,distance.toString(),Toast.LENGTH_SHORT).show()
         }
+        //Affichage de la position actuelle sur la map avec un marqueur
         val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
-        googleMap.addMarker(MarkerOptions().position(location).title("Position"+(10-i).toString()))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,17f))
+        googleMap.clear()
+        googleMap.addMarker(MarkerOptions().position(location).title("Position"+(11-essais).toString()))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
     }
 
     override fun onMapReady(map: GoogleMap) {
-        map?.let {
+        map.let {
             googleMap = it
         }
     }

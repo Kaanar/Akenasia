@@ -75,14 +75,6 @@ class Database : Fragment() {
                     2.2155475616455083
                 )
             )
-            dbHandler.addPlace(
-                Place(
-                    3,
-                    "Center",
-                    0.0,
-                    0.0
-                )
-            )
         }
         viewRecord()
         binding.bSave.setOnClickListener {

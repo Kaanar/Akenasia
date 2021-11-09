@@ -8,21 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.databinding.ChronometreBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.chronometre.*
-import kotlinx.android.synthetic.main.chronometre.map_view
-import kotlinx.android.synthetic.main.coups_limites.*
-import kotlinx.android.synthetic.main.fragment_maps.*
+import kotlinx.android.synthetic.main.chronometre.Chmap_view
 
 
 class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
@@ -59,21 +54,32 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        map_view.onCreate(savedInstanceState)
-        map_view.onResume()
-        map_view.getMapAsync(this)
+        Chmap_view.onCreate(savedInstanceState)
+        Chmap_view.onResume()
+        Chmap_view.getMapAsync(this)
+        //Vérifie chaque tick du chrono
+        chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
+
+            val currentTime: String = chronometre.getText().toString()
+            //On arrête la partie lorsque le chrono arrive à 0
+            if (currentTime == "00:00") {
+                chronometre.stop()
+                isPlay = false
+                ChresultTV.text = "Temps écoulé, c'est perdu ;_;"
+                ChQuitGameBT.setVisibility(View.VISIBLE)
+                ChPositionBT.setVisibility(View.VISIBLE)
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        chronometre = binding.chronoMterPlay
+        chronometre = chronoMterPlay
         Chgoal_X.text=place.getPlaceLat().toString()
         Chgoal_Y.text=place.getPlaceLong().toString()
 
+        //Actualisation de la position du joueur
         pos.refreshLocation()
-        //Chcurrent_X.text = pos.getLatitude().toString() servait quand pour les coordonnées en texte
-        //Chcurrent_Y.text = pos.getLongitude().toString()
-
         if (!isPlay) {
             chronometre.base = SystemClock.elapsedRealtime() + 300000
             chronometre.start()
@@ -93,22 +99,6 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
             bundle.putString("mode","Chronometre")
             findNavController().navigate(R.id.Histo,bundle)
         }
-
-        //Vérifie chaque tick du chrono
-        chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
-            nouvelEssai()
-            val currentTime: String = chronometre.getText().toString()
-            //On arrête la partie lorsque le chrono arrive à 0
-            if (currentTime == "00:00") {
-                chronometre.stop()
-                isPlay = false
-                ChresultTV.text = "Temps écoulé, c'est perdu ;_;"
-                ChQuitGameBT.setVisibility(View.VISIBLE)
-                ChPositionBT.setVisibility(View.VISIBLE)
-            }
-        }
-
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
     }
 
     fun nouvelEssai() {
@@ -122,8 +112,6 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
                 1
             )
         )
-        //Chcurrent_X.text = pos.getLatitude().toString()
-        //Chcurrent_Y.text = pos.getLongitude().toString() servait pour les coordonnées en texte
 
         //calcul de la distance
         val distance: Double = pos.calcul_distance(
@@ -143,15 +131,18 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
             ChPositionBT.setVisibility(View.VISIBLE)
         }
         i++
+        //Affichage de la position actuelle sur la map avec un marqueur
         val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
+        googleMap.clear()
         googleMap.addMarker(MarkerOptions().position(location).title("Position"+(10-i).toString()))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,17f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
 
     }
 
-    override fun onMapReady(map: GoogleMap) {
-        map?.let {
+    override fun onMapReady(p0: GoogleMap) {
+        p0.let {
             googleMap = it
         }
     }
+
 }
