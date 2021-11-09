@@ -46,7 +46,7 @@ jobs:
   release:
     name: Release APK
     needs: apk
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/V')
     runs-on: ubuntu-latest
     steps:
       - name: Download APK from build
