@@ -109,7 +109,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         )
 
         //Condition d'arrêt -> Victoire
-        if (distance < 1500) {
+        if (distance < 100) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
             isPlay = false
             chronometre.stop()
