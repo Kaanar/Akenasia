@@ -148,13 +148,13 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
         )
 
         //Distinction des cas de victoire/défaite
-        if (essais == 1 && distance >= 2) {
+        if (essais == 1 && distance >= 100) {
             CfresultTV.text = "Dommage ! vous avez perdu ;_;"
             CfRefreshBT.setVisibility(View.GONE);
             CfQuitGameBT.setVisibility(View.VISIBLE)
             CfPositionBT.setVisibility(View.VISIBLE)
         }
-        if (distance < 2) {
+        if (distance < 100) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
             CfresultTV.text = "Bravo ! Vous avez gagné"
             CfRefreshBT.setVisibility(View.GONE);
