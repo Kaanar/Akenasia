@@ -35,8 +35,8 @@
 
     <TextView
         android:id="@+id/CfresultTV"
-        android:layout_width="400dp"
-        android:layout_height="80dp"
+        android:layout_width="393dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:textSize="25sp"
@@ -97,101 +97,61 @@
         app:layout_constraintStart_toEndOf="@+id/CfYGoalTV"
         app:layout_constraintTop_toBottomOf="@+id/CfXGoalTV" />
 
-    <TextView
-        android:id="@+id/CfXCurTV"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="60dp"
-        android:text="Lat:"
-        app:layout_constraintEnd_toStartOf="@+id/CfPosCurTV"
-        app:layout_constraintTop_toBottomOf="@+id/CfPosCurTV" />
-
-    <TextView
-        android:id="@+id/CfPosCurTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:text="Position actuelle:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Cfgoal_Y" />
-
-    <TextView
-        android:id="@+id/Cfcurrent_X"
-        android:layout_width="285dp"
-        android:layout_height="30dp"
-        android:layout_gravity="start"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toEndOf="@+id/CfXCurTV"
-        app:layout_constraintTop_toTopOf="@+id/CfXCurTV" />
-
-    <TextView
-        android:id="@+id/CfYCurTV"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:text="Lon:"
-        app:layout_constraintStart_toStartOf="@+id/CfXCurTV"
-        app:layout_constraintTop_toBottomOf="@+id/CfXCurTV" />
-
-    <TextView
-        android:id="@+id/Cfcurrent_Y"
-        android:layout_width="285dp"
-        android:layout_height="30dp"
-        android:layout_gravity="start"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toEndOf="@+id/CfYCurTV"
-        app:layout_constraintTop_toBottomOf="@+id/CfXCurTV" />
 
     <TextView
         android:id="@+id/CfessaisTV"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/Cfcurrent_Y" />
+        app:layout_constraintTop_toBottomOf="@+id/Cfgoal_Y"
+        tools:layout_editor_absoluteX="16dp" />
 
-
-    <Button
-        android:id="@+id/CfRefreshBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Refresh"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/cfmap_view"
+        android:layout_width="0dp"
+        android:layout_height="281dp"
+        android:labelFor="@+id/CfessaisTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CfessaisTV" />
+        app:layout_constraintTop_toBottomOf="@+id/Cfgoal_Y" />
 
     <Button
         android:id="@+id/CfQuitGameBT"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="8dp"
         android:text="@string/previous"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CfessaisTV" />
+        app:layout_constraintTop_toBottomOf="@+id/CfRefreshBT" />
+
+    <Button
+        android:id="@+id/CfRefreshBT"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="Refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cfmap_view" />
 
     <Button
         android:id="@+id/CfPositionBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="Voir l'historique"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CfQuitGameBT" />
+        app:layout_constraintTop_toBottomOf="@+id/CfRefreshBT" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

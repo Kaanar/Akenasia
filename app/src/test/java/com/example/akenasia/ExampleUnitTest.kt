@@ -15,7 +15,16 @@ import org.junit.Before
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+    lateinit var pos :Position
     private lateinit var instrumentationContext: Context
 
+    @Before public fun initialize(){
+        // pos= Position(instrumentationContext)
+    }
 
+    @Test
+    fun position_Is_Correct() {
+        /*assertEquals(pos.getLatitude(), 0.0)
+        assertEquals(pos.getLongitude(),0.0)*/
+    }
 }

@@ -9,6 +9,11 @@ class Chronometre {
   nouvelEssai()
 }
 
+class MapsFragment {
+  googleMap : GOOGLEMAP
+  onMapReady()
+}
+
 class Place {
   placeId : INTEGER
   placeName : STRING
@@ -36,10 +41,8 @@ interface MyListAdapter {
   getView()
 }
 
-class Game {
-  pos : POSITION
-  place : PLACE
-  Game()
+class Gamemode {
+  Gamemode()
 }
 
 class CoupsLimites {
@@ -64,7 +67,8 @@ interface PositionAdapter {
 
 class Historique {
   partieId : INTEGER
-  viewRecord()
+  googleMap : GOOGLEMAP
+  onMapReady()
 }
 
 class DatabaseHandler {
@@ -78,12 +82,14 @@ Database <|-- MyListAdapter
 DatabaseHandler <|-- Database
 Place <|-- Database
 Position <|-- Place
-Place <|-- Game
-Game <|-- Chronometre
-Game <|-- CoupsLimites
+Place <|-- Gamemode
+Gamemode <|-- Chronometre
+Gamemode <|-- CoupsLimites
 Chronometre <|-- PositionTable
 CoupsLimites <|-- PositionTable
 PositionTable <|-- PositionAdapter
 PositionTable <|-- Historique
+Chronometre <|-- MapsFragment
+CoupsLimites <|-- MapsFragment
 
 @enduml

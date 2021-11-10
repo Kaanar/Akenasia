@@ -13,36 +13,29 @@
     android:orientation="vertical"
     tools:context=".Historique">
 
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/Appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
             android:theme="@style/Theme.Akenasia.AppBarOverlay"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ListView
-            android:id="@+id/PosView"
-            android:layout_width="wrap_content"
-            android:layout_height="350sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/Appbar" />
-
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map_h"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <Button
             android:id="@+id/RetourBT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_width="83dp"
+            android:layout_height="35dp"
             android:text="Quitter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PosView" />
-
+            app:layout_constraintEnd_toEndOf="@+id/map_h"
+            app:layout_constraintTop_toBottomOf="@+id/Appbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
