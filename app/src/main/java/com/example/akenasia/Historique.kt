@@ -9,18 +9,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import com.example.akenasia.databinding.HistoriqueBinding
-
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import kotlinx.android.synthetic.main.chronometre.*
-import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.android.synthetic.main.historique.*
+import com.google.android.gms.maps.model.LatLng
+
+import com.google.android.gms.maps.model.PolylineOptions
+
+
 
 class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
 
@@ -86,14 +84,15 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
                 empArrayPartie[index] = e.getpartie().toString()
 
                 val marker = LatLng(empArrayLat[index].toDouble(), empArrayLong[index].toDouble())
-                googleMap.addMarker(MarkerOptions()
-                    .position(marker)
-                    .title("Position : "+(1+e.getposId()).toString())
-                    .snippet("X : " + empArrayLat[index].toString() + "\n Y : " + empArrayLong[index])
-                
-                )
-                index++
 
+
+               googleMap.addMarker(MarkerOptions()
+                   .position(marker)
+                   .title("Position : "+(1+e.getposId()).toString())
+                   .snippet("X : " + empArrayLat[index] +"\n")
+                   .snippet("Y : " + empArrayLong[index])
+               )
+                index++
             }
             googleMap.setOnInfoWindowClickListener(this)
         }
@@ -101,9 +100,6 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
 
     }
     override fun onInfoWindowClick(marker: Marker) {
-        Toast.makeText(
-            this.context, marker.title,
-            Toast.LENGTH_SHORT
-        ).show()
+        marker.showInfoWindow()
     }
 }

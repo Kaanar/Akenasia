@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.databinding.ChronometreBinding
@@ -16,11 +17,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.chronometre.Chmap_view
 
 
-class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
+class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnPoiClickListener {
 
 
     override lateinit var pos: Position
@@ -68,7 +70,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         //Actualisation de la position du joueur
         pos.refreshLocation()
         if (!isPlay) {
-            chronometre.base = SystemClock.elapsedRealtime() + 10000
+            chronometre.base = SystemClock.elapsedRealtime() + 300000
             chronometre.start()
             isPlay = true
         }
@@ -121,14 +123,13 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         //Affichage de la position actuelle sur la map avec un marqueur
         val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
         googleMap.clear()
-        googleMap.addMarker(MarkerOptions().position(location).title("Position"+(10-i).toString()))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
-
+        googleMap.addMarker(MarkerOptions().position(location).title("Position"))
     }
 
     override fun onMapReady(p0: GoogleMap) {
         p0.let {
             googleMap = it
+            googleMap.setOnPoiClickListener(this)
         }
         //Vérifie chaque tick du chrono
         chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
@@ -143,6 +144,13 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
                 ChPositionBT.setVisibility(View.VISIBLE)
             }
         }
+    }
+
+    override fun onPoiClick(poi: PointOfInterest) {
+        Toast.makeText(this.context, """Clicked: ${poi.name}
+            Latitude:${poi.latLng.latitude} Longitude:${poi.latLng.longitude}""",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 }
