@@ -68,7 +68,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         //Actualisation de la position du joueur
         pos.refreshLocation()
         if (!isPlay) {
-            chronometre.base = SystemClock.elapsedRealtime() + 300000
+            chronometre.base = SystemClock.elapsedRealtime() + 10000
             chronometre.start()
             isPlay = true
         }

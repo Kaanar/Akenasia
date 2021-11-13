@@ -2,12 +2,14 @@ package com.example.akenasia
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.akenasia.databinding.HistoriqueBinding
 
@@ -15,13 +17,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.android.synthetic.main.historique.*
 
-class Historique : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
+class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private lateinit var pos: Position
@@ -30,6 +31,7 @@ class Historique : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private var thiscontext: Context? = null
+    private lateinit var polylineOptions: PolylineOptions
 
 
 
@@ -84,10 +86,24 @@ class Historique : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
                 empArrayPartie[index] = e.getpartie().toString()
 
                 val marker = LatLng(empArrayLat[index].toDouble(), empArrayLong[index].toDouble())
-                googleMap.addMarker(MarkerOptions().position(marker).title(empArrayId[index].toString()))
-
+                googleMap.addMarker(MarkerOptions()
+                    .position(marker)
+                    .title("Position : "+(1+e.getposId()).toString())
+                    .snippet("X : " + empArrayLat[index].toString() + "\n Y : " + empArrayLong[index])
+                
+                )
                 index++
+
             }
+            googleMap.setOnInfoWindowClickListener(this)
         }
+
+
+    }
+    override fun onInfoWindowClick(marker: Marker) {
+        Toast.makeText(
+            this.context, marker.title,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

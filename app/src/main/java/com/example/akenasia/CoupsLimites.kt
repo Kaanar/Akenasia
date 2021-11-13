@@ -90,7 +90,7 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
     fun nouvelEssai() {
         pos.refreshLocation()
         //tests on simule des positions voir si on obtient les résulats attendus
-       /*if (essais == 9) {
+       if (essais == 9) {
             pos.setLatitude(10.0)
             pos.setLongitude(10.0)
         }
@@ -125,7 +125,7 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
         if (essais == 1) {
             pos.setLatitude(48.90527388944)
             pos.setLongitude(2.21568703652)
-        }*/
+        }
 
         //Ajoute la position récupérée dans la base de données
         dbHandler.addPosition(
@@ -148,13 +148,13 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
         )
 
         //Distinction des cas de victoire/défaite
-        if (essais == 1 && distance >= 2) {
+        if (essais == 1 && distance >= 150) {
             CfresultTV.text = "Dommage ! vous avez perdu ;_;"
             CfRefreshBT.setVisibility(View.GONE);
             CfQuitGameBT.setVisibility(View.VISIBLE)
             CfPositionBT.setVisibility(View.VISIBLE)
         }
-        if (distance < 2) {
+        if (distance < 150) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
             CfresultTV.text = "Bravo ! Vous avez gagné"
             CfRefreshBT.setVisibility(View.GONE);
@@ -183,13 +183,13 @@ class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
             lastDistance = distance
             essais--
             CfessaisTV.text = "Il vous reste " + essais + " essais"
-            Toast.makeText(context,distance.toString(),Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context,distance.toString(),Toast.LENGTH_SHORT).show()
         }
         //Affichage de la position actuelle sur la map avec un marqueur
         val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
         googleMap.clear()
-        googleMap.addMarker(MarkerOptions().position(location).title("Position"+(11-essais).toString()))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
+        googleMap.addMarker(MarkerOptions().position(location).title("Position"+(10-essais).toString()))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,10f))
     }
 
     override fun onMapReady(map: GoogleMap) {
