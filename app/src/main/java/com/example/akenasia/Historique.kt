@@ -2,13 +2,12 @@ package com.example.akenasia
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -16,22 +15,13 @@ import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.historique.*
 import com.google.android.gms.maps.model.LatLng
 
-import com.google.android.gms.maps.model.PolylineOptions
-
-
-
 class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private lateinit var pos: Position
     private lateinit var dbHandler: DatabaseHandler
     private var PartieId=0
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private var thiscontext: Context? = null
-    private lateinit var polylineOptions: PolylineOptions
-
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -86,12 +76,11 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
                 val marker = LatLng(empArrayLat[index].toDouble(), empArrayLong[index].toDouble())
 
 
-               googleMap.addMarker(MarkerOptions()
-                   .position(marker)
-                   .title("Position : "+(1+e.getposId()).toString())
-                   .snippet("X : " + empArrayLat[index] +"\n")
-                   .snippet("Y : " + empArrayLong[index])
-               )
+                googleMap.addMarker(MarkerOptions()
+                    .position(marker)
+                    .title("Voir info")
+                    .snippet("Position : "+(1+e.getposId()).toString())
+                )
                 index++
             }
             googleMap.setOnInfoWindowClickListener(this)
@@ -100,6 +89,18 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
 
     }
     override fun onInfoWindowClick(marker: Marker) {
-        marker.showInfoWindow()
+        var dialog = MarkerDialog()
+        dialog.setTitle(updateTitle(marker))
+        dialog.setInfo(updateInfo(marker))
+        updateInfo(marker)
+        dialog.show(parentFragmentManager, "MarkerDialog")
+    }
+    fun updateTitle(marker : Marker) : String {
+        return marker.snippet.toString()
+    }
+
+    fun updateInfo(marker: Marker) : String {
+        return marker.position.toString()
     }
 }
+
