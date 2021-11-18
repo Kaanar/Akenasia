@@ -6,37 +6,20 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.os.Build
 import android.os.Looper
 import androidx.core.app.ActivityCompat
-import com.example.akenasia.MainActivity.*
 import com.google.android.gms.location.*
 import java.lang.Math.*
 import kotlin.math.atan2
 import kotlin.math.sqrt
 import com.google.android.gms.location.LocationSettingsStatusCodes
-
-import android.content.IntentSender
 import android.content.IntentSender.SendIntentException
-
 import com.google.android.gms.common.api.ResolvableApiException
-
 import com.google.android.gms.common.api.ApiException
-
-import android.widget.Toast
-
 import com.google.android.gms.location.LocationSettingsResponse
-
-import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.test.core.app.ApplicationProvider
-
 import com.google.android.gms.tasks.OnCompleteListener
-
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
-
 import com.google.android.gms.location.LocationServices
-
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.tasks.Task
 

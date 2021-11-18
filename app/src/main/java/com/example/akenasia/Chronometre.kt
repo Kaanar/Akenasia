@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.android.synthetic.main.chronometre.*
@@ -124,6 +125,8 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
         val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
         googleMap.clear()
         googleMap.addMarker(MarkerOptions().position(location).title("Position"))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,20f))
+
     }
 
     override fun onMapReady(p0: GoogleMap) {
@@ -147,10 +150,18 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
     }
 
     override fun onPoiClick(poi: PointOfInterest) {
-        Toast.makeText(this.context, """Clicked: ${poi.name}
-            Latitude:${poi.latLng.latitude} Longitude:${poi.latLng.longitude}""",
-            Toast.LENGTH_SHORT
-        ).show()
+        var dialog = PoiDialog()
+        dialog.setName(updateTitle(poi))
+        dialog.setLatLong(updateInfo(poi))
+        dialog.show(parentFragmentManager, "PoiDialog")
+    }
+
+    fun updateTitle(poi: PointOfInterest) : String {
+        return poi.name
+    }
+
+    fun updateInfo(poi: PointOfInterest) : String {
+        return poi.latLng.latitude.toString() +"\n" + poi.latLng.longitude.toString()
     }
 
 }
