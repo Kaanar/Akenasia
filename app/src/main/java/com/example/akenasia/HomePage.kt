@@ -2,6 +2,7 @@ package com.example.akenasia
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +58,9 @@ class HomePage : Fragment(){
         }
 
         binding.settings.setOnClickListener{
-            findNavController().navigate(R.id.action_FirstFragment_to_SettingsFragment)
+            val intent = Intent(context, Reglages::class.java).apply {
+            }
+            activity?.startActivity(intent)
         }
 
     }
