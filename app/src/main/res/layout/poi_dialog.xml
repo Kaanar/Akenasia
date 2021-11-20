@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="26sp"
-        android:hint="Vous allez attaquer le lieu suivant : " />
+        android:hint="Vous obtenez un Paul ! Félicitations ! "
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/PoiName"
@@ -31,20 +31,29 @@
 
     <Button
         android:id="@+id/PoiOk"
-        android:layout_width="wrap_content"
+        android:layout_width="71dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="8dp"
         android:layout_below="@+id/PoiLatLong"
-        android:text="Ok"/>
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Ok" />
 
     <Button
         android:id="@+id/PoiCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="162dp"
         android:layout_below="@+id/PoiLatLong"
-        android:text="Annuler"/>
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="32dp"
+        android:text="Annuler" />
+
+    <Button
+        android:id="@+id/goBag"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PoiLatLong"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="32dp"
+        android:text="Sac" />
 
 </RelativeLayout>

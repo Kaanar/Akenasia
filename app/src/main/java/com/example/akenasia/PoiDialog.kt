@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.marker_dialog.*
 import kotlinx.android.synthetic.main.marker_dialog.view.*
 import kotlinx.android.synthetic.main.poi_dialog.*
@@ -30,6 +32,12 @@ class PoiDialog : DialogFragment () {
             //Pour fermer le dialogue
             dismiss()
         }
+
+        rootView.goBag.setOnClickListener{
+            val bundle = Bundle()
+            findNavController().navigate(R.id.bag,bundle)
+        }
+
         return rootView
     }
 
