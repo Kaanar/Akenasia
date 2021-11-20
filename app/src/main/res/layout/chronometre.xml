@@ -79,6 +79,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LayoutChronometre" />
 
+    <Button
+        android:id="@+id/button_sac"
+        android:layout_width="119dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:text="Sac"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Chgoal_Y"
+        app:layout_constraintTop_toTopOf="@+id/ChPosGoalTv" />
+
     <TextView
         android:id="@+id/ChXGoalTv"
         android:layout_width="30dp"
@@ -92,8 +103,8 @@
 
     <TextView
         android:id="@+id/Chgoal_X"
-        android:layout_width="310dp"
-        android:layout_height="29dp"
+        android:layout_width="190dp"
+        android:layout_height="30dp"
         android:layout_gravity="start"
         android:textAlignment="textStart"
         app:layout_constraintStart_toEndOf="@+id/ChXGoalTv"
@@ -110,8 +121,8 @@
 
     <TextView
         android:id="@+id/Chgoal_Y"
-        android:layout_width="310dp"
-        android:layout_height="30dp"
+        android:layout_width="194dp"
+        android:layout_height="37dp"
         android:layout_gravity="start"
         android:textAlignment="textStart"
         app:layout_constraintStart_toEndOf="@+id/ChYGoalTv"
@@ -131,11 +142,13 @@
         android:id="@+id/Chmap_view"
         android:layout_width="0dp"
         android:layout_height="184dp"
+        android:layout_marginTop="4dp"
         android:labelFor="@+id/ChessaisTV"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y" />
+        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/ChQuitGameBT"

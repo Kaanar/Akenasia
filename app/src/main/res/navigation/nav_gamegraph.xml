@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_Regles_to_CL"
             app:destination="@id/CoupsLimitesHisto" />
+        <action
+            android:id="@+id/action_Chronometre_to_bag"
+            app:destination="@id/bag" />
     </fragment>
 
     <fragment
@@ -91,8 +94,11 @@
             android:id="@+id/action_map_fragment_to_CoupsLimitesHisto"
             app:destination="@id/CoupsLimitesHisto" />
     </fragment>
-
-
+    <activity
+        android:id="@+id/bag"
+        android:name="com.example.akenasia.Bag"
+        android:label="activity_bag"
+        tools:layout="@layout/activity_bag" />
 
 
 </navigation>

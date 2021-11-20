@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.chronometre.Chmap_view
 
 
+
 class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnPoiClickListener {
 
 
@@ -49,6 +50,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
             dbHandler = DatabaseHandler(thiscontext!!)
             place= dbHandler.getPlace(id!!)
         }
+
         _binding = ChronometreBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -88,6 +90,11 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
             bundle.putInt("id",1)
             bundle.putString("mode","Chronometre")
             findNavController().navigate(R.id.Histo,bundle)
+        }
+
+        button_sac.setOnClickListener{
+            val bundle = Bundle()
+            findNavController().navigate(R.id.bag,bundle)
         }
     }
 
