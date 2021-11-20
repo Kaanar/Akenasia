@@ -39,7 +39,19 @@
             android:id="@+id/DarkRadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Male theme" />
+            android:text="Dark theme" />
     </RadioGroup>
+
+    <Button
+        android:id="@+id/ReglagesReturnButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Retour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ThemeRadioGroup" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

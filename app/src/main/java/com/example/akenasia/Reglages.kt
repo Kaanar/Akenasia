@@ -17,8 +17,7 @@ import kotlinx.android.synthetic.main.reglages.*
 import android.widget.Toast
 
 import android.R
-
-
+import androidx.navigation.fragment.findNavController
 
 
 class Reglages: Fragment(com.example.akenasia.R.layout.reglages) {
@@ -40,9 +39,9 @@ class Reglages: Fragment(com.example.akenasia.R.layout.reglages) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        RetourBT.setOnClickListener {
-            val intent = Intent(context, MainActivity::class.java)
-            this.startActivity(intent)
+
+        ReglagesReturnButton.setOnClickListener{
+            findNavController().navigate(com.example.akenasia.R.id.action_SettingsFragment_to_FirstFragment)
         }
 
         ThemeRadioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->

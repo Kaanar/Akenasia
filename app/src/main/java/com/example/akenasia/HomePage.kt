@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import android.widget.Toast
@@ -18,7 +19,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.database.*
+import kotlinx.android.synthetic.main.homepage.*
 
 
 class HomePage : Fragment(){
@@ -53,7 +56,12 @@ class HomePage : Fragment(){
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
+        binding.settings.setOnClickListener{
+            findNavController().navigate(R.id.action_FirstFragment_to_SettingsFragment)
+        }
+
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
