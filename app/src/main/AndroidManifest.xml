@@ -56,7 +56,8 @@
             android:name=".Game"
             android:exported="true"
             android:label="game"
-            tools:ignore="Instantiatable" />
+            tools:ignore="Instantiatable"
+            />
     </application>
 
 </manifest>

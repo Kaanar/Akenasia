@@ -25,6 +25,11 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import android.R
+import android.view.Menu
+
+import android.view.MenuInflater
+import org.junit.experimental.categories.Categories.CategoryFilter.include
 
 
 class MainActivity : AppCompatActivity() {
@@ -52,8 +57,12 @@ class MainActivity : AppCompatActivity() {
         if (navController != null) {
             setupActionBarWithNavController(navController, appBarConfiguration)
         }
+    }
 
-
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
     //Vérifie que l'application a bien les permissions requises pour récupérer la localisation de l'appareil//
