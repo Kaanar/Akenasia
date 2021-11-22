@@ -32,9 +32,9 @@
             android:value="AIzaSyC2b2TDA9rI-A7u5ACrscijqN79dd_b5lI" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Reglages"
             android:exported="false"
-            android:label="MapsActivity"
+            android:label="Reglages"
             tools:ignore="Instantiatable" />
 
         <uses-library
@@ -56,7 +56,8 @@
             android:name=".Game"
             android:exported="true"
             android:label="game"
-            tools:ignore="Instantiatable" />
+            tools:ignore="Instantiatable"
+            />
     </application>
 
 </manifest>

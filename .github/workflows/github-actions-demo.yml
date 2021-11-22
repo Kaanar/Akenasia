@@ -6,7 +6,8 @@ on:
       - master
       - develop
     tags:
-      - 'v*'
+      - 'V*'
+
 
 jobs:
   test:
@@ -20,7 +21,7 @@ jobs:
         with:
           java-version: 11
       - name: Run Tests
-        run: bash - ./gradlew clean build sonarqube -Pandroid.debug.obsoleteApi=true
+        run: bash - ./gradlew clean build test sonarqube 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -68,3 +69,12 @@ jobs:
           asset_content_type: application/zip
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Build PDF
+        uses: avattathil/asciidoctor-action@master
+        with:
+          program: "asciidoctor-pdf Doc/AkenasiaDoc.adoc"
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF document
+          path: Doc/akenasiaDoc.pdf

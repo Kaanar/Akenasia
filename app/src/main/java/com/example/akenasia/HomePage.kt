@@ -2,11 +2,13 @@ package com.example.akenasia
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import android.widget.Toast
@@ -18,7 +20,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.database.*
+import kotlinx.android.synthetic.main.homepage.*
 
 
 class HomePage : Fragment(){
@@ -53,7 +57,14 @@ class HomePage : Fragment(){
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
+        binding.settings.setOnClickListener{
+            val intent = Intent(context, Reglages::class.java).apply {
+            }
+            activity?.startActivity(intent)
+        }
+
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

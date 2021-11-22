@@ -16,8 +16,8 @@
             app:destination="@id/SecondFragment" />
 
         <action
-            android:id="@+id/action_FirstFragment_to_map_fragment"
-            app:destination="@id/map_fragment" />
+            android:id="@+id/action_FirstFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
     </fragment>
 
     <fragment
@@ -41,6 +41,16 @@
     <action
         android:id="@+id/action_ThirdFragment_to_SecondFragment"
         app:destination="@id/SecondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.example.akenasia.Reglages"
+        android:label="paramètres"
+        tools:layout="@layout/reglages">
+        <action
+            android:id="@+id/action_SettingsFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
 
