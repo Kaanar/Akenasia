@@ -14,11 +14,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         private val DATABASE_NAME = "AkenasiaDatabase"
         private val TABLE_PLACE = "PlaceTable"
         private val TABLE_POSITION = "PositionTable"
+        private val TABLE_ITEM = "PositionTable"
         private val KEY_ID = "id"
         private val KEY_NAME = "name"
         private val KEY_LATITUDE = "latitude"
         private val KEY_LONGITUDE = "longitude"
         private val KEY_PARTIE = "partie"
+        private val KEY_DESC = "description"
+
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -30,12 +33,16 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         val CREATE_POSITION_TABLE =("CREATE TABLE " + TABLE_POSITION + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_PARTIE + " INTEGER" + ")" )
         db?.execSQL(CREATE_POSITION_TABLE)
+        val CREATE_ITEM_TABLE =("CREATE TABLE " + TABLE_ITEM + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + ")" )
+        db?.execSQL(CREATE_ITEM_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION)
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEM)
         onCreate(db)
     }
 
@@ -195,4 +202,22 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db.close() // Closing database connection
         return success
     }
+
+
+    //method to insert an Item
+    fun addItem(emp: Item):Long{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID, emp.itemId)
+        contentValues.put(KEY_NAME, emp.itemName) // EmpModelClass Name
+        contentValues.put(KEY_DESC, emp.itemDesc)
+
+        // Inserting Row
+        val success = db.insert(TABLE_ITEM, null,  contentValues)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+
 }

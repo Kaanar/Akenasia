@@ -94,7 +94,7 @@
             android:id="@+id/action_map_fragment_to_CoupsLimitesHisto"
             app:destination="@id/CoupsLimitesHisto" />
     </fragment>
-    <activity
+    <fragment
         android:id="@+id/bag"
         android:name="com.example.akenasia.Bag"
         android:label="activity_bag"
