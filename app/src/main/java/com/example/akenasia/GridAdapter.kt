@@ -1,34 +1,36 @@
 package com.example.akenasia
 
 import android.R
+import android.app.Activity
 import android.content.Context
 
 import android.widget.TextView
 
 import android.view.LayoutInflater
+import android.view.View
 
 import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.ImageView
 
 
+class GridAdapter : BaseAdapter() {
 
 
-class GridAdapter {
+    private var context: Activity? = null
+    lateinit var name: Array<String>
+    lateinit var description: Array<String>
 
+    lateinit var inflater: LayoutInflater
 
-    var context: Context? = null
-    lateinit var flowerName: Array<String>
-    lateinit var image: IntArray
-
-    var inflater: LayoutInflater? = null
-
-    fun GridAdapter(context: Context?, flowerName: Array<String>, image: IntArray) {
+    fun GridAdapter(context: Activity?, name: Array<String>, description: Array<String>) {
         this.context = context
-        this.flowerName = flowerName
-        this.image = image
+        this.name = name
+        this.description = description
     }
 
     fun getCount(): Int {
-        return flowerName.size
+        return name.size
     }
 
     fun getItem(position: Int): Any? {
@@ -41,14 +43,13 @@ class GridAdapter {
 
     fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var convertView: View? = convertView
-        if (inflater == null) inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.grid_item, null)
+            convertView = inflater.inflate(R.layout.bag_cardview, null)
         }
-        val imageView: ImageView = convertView.findViewById(R.id.grid_image)
-        val textView: TextView = convertView.findViewById(R.id.item_name)
-        imageView.setImageResource(image[position])
-        textView.text = flowerName[position]
+        val name: TextView? = convertView?.findViewById(R.id.name) ?
+        val desc: TextView? = convertView?.findViewById(R.id.desc) ?
+        name.text= name[position]
+        desc.text = description[position]
         return convertView
     }
 }
