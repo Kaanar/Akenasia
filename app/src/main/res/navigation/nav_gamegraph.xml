@@ -98,7 +98,7 @@
         android:id="@+id/bag"
         android:name="com.example.akenasia.Bag"
         android:label="activity_bag"
-        tools:layout="@layout/activity_bag" />
+        tools:layout="@layout/bag_cardview" />
     <dialog
         android:id="@+id/poiDialog"
         android:name="com.example.akenasia.PoiDialog"

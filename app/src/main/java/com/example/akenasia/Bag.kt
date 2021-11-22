@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.akenasia.databinding.ActivityBagBinding
+import com.example.akenasia.databinding.BagCardviewBinding
 import com.example.akenasia.databinding.ChronometreBinding
 
 class Bag : Fragment() {
-    private var _binding: ActivityBagBinding? = null
+    private var _binding: BagCardviewBinding? = null
 
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class Bag : Fragment() {
             val id= this.arguments?.getInt("id")
         }
 
-        _binding = ActivityBagBinding.inflate(inflater, container, false)
+        _binding = BagCardviewBinding.inflate(inflater, container, false)
         return _binding!!.root
 
     }
