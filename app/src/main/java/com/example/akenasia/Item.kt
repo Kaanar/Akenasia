@@ -1,18 +1,12 @@
 package com.example.akenasia
 
-data class Item(var itemId: Int, var itemName: String, var itemDesc: String){
-    @JvmName("getItemId1")
-    fun getItemId1(): Int {
-        return itemId
-    }
+class Item{
 
-    @JvmName("getItemName1")
-    fun getItemName1(): String {
-        return itemName
-    }
+    var icons:Int ? = 0
+    var name:String ? = null
 
-    @JvmName("getItemDesc1")
-    fun getItemDesc1(): String {
-        return itemDesc
+    constructor(icons: Int?, name: String?) {
+        this.icons = icons
+        this.name = name
     }
 }
