@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.database.*
 
 
@@ -51,6 +52,11 @@ class HomePage : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         binding.HomepageJouerBT.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
+        binding.homepageOpenWorld.setOnClickListener{
+            val bundle = Bundle()
+            findNavController().navigate(R.id.openWorld,bundle)
         }
 
     }
