@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.akenasia.databinding.ActivityOpenworldBinding
 import com.example.akenasia.databinding.BagCardviewBinding
 import com.example.akenasia.databinding.ChronometreBinding
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 
 class Bag : AppCompatActivity() {
     private lateinit var binding: BagCardviewBinding
@@ -19,4 +21,5 @@ class Bag : AppCompatActivity() {
         binding = BagCardviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
+
 }

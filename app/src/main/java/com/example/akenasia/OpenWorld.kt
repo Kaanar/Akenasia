@@ -18,6 +18,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PointOfInterest
+import kotlinx.android.synthetic.main.chronometre.*
+import kotlinx.android.synthetic.main.content_map.*
 
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener {
@@ -36,7 +38,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         binding = ActivityOpenworldBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //setSupportActionBar(binding.toolbar)
+        //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.include3) as NavHostFragment?
         val navController = navHostFragment?.navController
@@ -47,7 +49,19 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             setupActionBarWithNavController(navController, appBarConfiguration)
         }
 
+        //Initialisation de la position
+        pos = Position(this)
 
+        //démarrage du chrono
+        chronometre = binding.OWChrono
+        chronometre.start()
+
+        //Initialisation de la map
+        OWmap_view.onCreate(savedInstanceState)
+        OWmap_view.onResume()
+        OWmap_view.getMapAsync(this)
+
+        //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                     R.id.QuitClick -> {
@@ -68,24 +82,16 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             true
         }
     }
+
+
     override fun onMapReady(map: GoogleMap) {
         map?.let {
             googleMap = it
             googleMap.setOnPoiClickListener(this)
 
-            val location1= LatLng(48.905273887110944, 2.2156870365142827)
-            val location2 = LatLng(48.904096168019976, 2.216480970382691)
-            val location3 = LatLng(48.903158204219174, 2.2155475616455083)
-            googleMap.addMarker(MarkerOptions().position(location1).title("BU"))
-            googleMap.addMarker(MarkerOptions().position(location2).title("Crous"))
-            googleMap.addMarker(MarkerOptions().position(location3).title("Bat G"))
-
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location1,17f))
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location2,17f))
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location3,17f))
-
-            //Vérifie chaque tick du chrono
+            //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
+                pos.refreshLocation()
                 val currentTime: String = chronometre.getText().toString()
                 val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
                 googleMap.clear()
@@ -98,6 +104,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
 
     }
 
+    //Implémentation de la méthode lorsqu'on click sur un POI
     override fun onPoiClick(poi: PointOfInterest) {
         pos.refreshLocation()
         //calcul de la distance

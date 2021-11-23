@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".OpenWorld">
 
+    <Chronometer
+        android:id="@+id/OWChrono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        tools:targetApi="24"
+        android:visibility="gone"/>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
