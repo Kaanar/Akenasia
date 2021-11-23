@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -8,7 +8,10 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import kotlin.system.exitProcess
 
-class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
+class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
+    DATABASE_NAME,null,
+    DATABASE_VERSION
+) {
     companion object {
         private val DATABASE_VERSION = 6
         private val DATABASE_NAME = "AkenasiaDatabase"
@@ -121,7 +124,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
     //methode to get a Place
-    fun getPlace(id: Int):Place{
+    fun getPlace(id: Int): Place {
         val db = this.readableDatabase
         val selectQuery = "SELECT  * FROM $TABLE_PLACE WHERE $KEY_ID = $id"
         var cursor: Cursor? = null

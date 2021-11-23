@@ -1,5 +1,6 @@
 package com.example.akenasia
 
+import com.example.akenasia.database.Place
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.game
 
 import android.os.Bundle
 
@@ -8,12 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.android.synthetic.main.coups_limites.*
-import kotlinx.android.synthetic.main.chronometre.*
-import kotlinx.android.synthetic.main.content_game.*
-import kotlinx.android.synthetic.main.historique.*
+import com.example.akenasia.R
+import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.Place
+import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.*
-import kotlinx.android.synthetic.main.regles_generales.*
 
 
 class Game : AppCompatActivity() {

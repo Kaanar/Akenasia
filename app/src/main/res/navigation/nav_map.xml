@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/MapFragment"
-        android:name="com.example.akenasia.Bag"
+        android:name="com.example.akenasia.openworld.Bag"
         android:label="bagFragment"
         tools:layout="@layout/fragment_maps">
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/BagFragment"
-        android:name="com.example.akenasia.Bag"
+        android:name="com.example.akenasia.openworld.Bag"
         android:label="bagFragment"
         tools:layout="@layout/bag">
         <action

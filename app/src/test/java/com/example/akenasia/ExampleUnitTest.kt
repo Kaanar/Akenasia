@@ -1,11 +1,9 @@
 package com.example.akenasia
 
 import android.content.Context
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.core.IsEqual
+import com.example.akenasia.database.Position
 import org.junit.Test
 
-import org.junit.Assert.*
 import org.junit.Before
 
 
@@ -15,7 +13,7 @@ import org.junit.Before
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-    lateinit var pos :Position
+    lateinit var pos : Position
     private lateinit var instrumentationContext: Context
 
     @Before public fun initialize(){

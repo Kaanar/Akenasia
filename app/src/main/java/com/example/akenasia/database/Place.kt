@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.database
 
 data class Place (var placeId: Int, var placeName: String, var placeLat: Double, var placeLong: Double) {
     @JvmName("getPlaceId1")

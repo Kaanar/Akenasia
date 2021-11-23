@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.game
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.akenasia.R
+import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.GameModeBinding
-import kotlinx.android.synthetic.main.database.*
 
 class GameMode : Fragment(){
     private var _binding: GameModeBinding? = null

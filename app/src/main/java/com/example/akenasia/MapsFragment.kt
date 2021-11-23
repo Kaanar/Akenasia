@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
 import android.widget.Toast
+import com.example.akenasia.database.Position
+import com.example.akenasia.openworld.PoiDialog
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

@@ -1,27 +1,22 @@
-package com.example.akenasia
+package com.example.akenasia.openworld
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.GridView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.example.akenasia.databinding.ActivityMainBinding
+import com.example.akenasia.database.ItemBag
+import com.example.akenasia.R
+import com.example.akenasia.adapter.ItemAdapter
 import com.example.akenasia.databinding.BagBinding
-import com.example.akenasia.databinding.BagCardviewBinding
-import com.example.akenasia.databinding.ChronometreBinding
 
 class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
     private lateinit var binding: BagBinding
 
     private var gridView:GridView ? = null
     private var arrayList : ArrayList<ItemBag> ? = null
-    private var itemAdapter:ItemAdapter ? = null
+    private var itemAdapter: ItemAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +48,7 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
 
-        var itemBag:ItemBag = arrayList!!.get(position)
+        var itemBag: ItemBag = arrayList!!.get(position)
         Toast.makeText(applicationContext, itemBag.name, Toast.LENGTH_LONG).show()
     }
 }

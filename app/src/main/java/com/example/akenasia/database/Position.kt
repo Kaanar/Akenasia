@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.database
 
 
 import android.Manifest
@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.LocationSettingsResponse
 import androidx.core.app.ActivityCompat.requestPermissions
+import com.example.akenasia.home.MainActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest

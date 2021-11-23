@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.game
 
 
 import android.content.Context
@@ -9,17 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.akenasia.home.MainActivity
+import com.example.akenasia.database.PositionTable
+import com.example.akenasia.R
 import com.example.akenasia.databinding.CoupsLimitesBinding
 import kotlinx.android.synthetic.main.coups_limites.*
-import com.example.akenasia.Game.*
+import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.Place
+import com.example.akenasia.database.Position
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.chronometre.*
 
-class CoupsLimites() : Fragment(),GameFactory, OnMapReadyCallback {
+class CoupsLimites() : Fragment(), GameFactory, OnMapReadyCallback {
 
     override lateinit var pos: Position
     override lateinit var dbHandler: DatabaseHandler

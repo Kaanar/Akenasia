@@ -1,28 +1,16 @@
-package com.example.akenasia
+package com.example.akenasia.home
 
-import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Resources
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.historique.*
 import kotlinx.android.synthetic.main.reglages.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.akenasia.databinding.ActivityMainBinding
+import com.example.akenasia.R
 import com.example.akenasia.databinding.ReglagesBinding
 
 

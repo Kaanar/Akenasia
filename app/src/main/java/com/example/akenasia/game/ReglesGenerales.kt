@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.game
 
 import android.content.Context
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.akenasia.R
+import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.ReglesGeneralesBinding
-import kotlinx.android.synthetic.main.database.*
 import kotlinx.android.synthetic.main.regles_generales.*
 
 

@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.database
 
 class ItemBag{
 
