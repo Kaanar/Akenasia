@@ -17,4 +17,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="@+id/Chmap_view"
+        app:menu="@menu/menu_navigateur"
+        tools:layout_editor_absoluteX="-16dp"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="NavigationView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

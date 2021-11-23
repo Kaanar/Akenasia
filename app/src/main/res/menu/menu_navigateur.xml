@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/RencontreClick"
+        android:title="Quitter"
+        android:icon="@drawable/ic_quit"/>
+    <item
+        android:id="@+id/HomeClick"
+        android:title="Sac"
+        android:icon="@drawable/ic_bag"/>
+    <item
+        android:id="@+id/ProfilClick"
+        android:title="Mon profil"
+        android:icon="@drawable/ic_profil"/>
+
+</menu>
