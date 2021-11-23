@@ -1,5 +1,6 @@
 package com.example.akenasia
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,8 +35,8 @@ class PoiDialog : DialogFragment () {
         }
 
         rootView.goBag.setOnClickListener{
-            val bundle = Bundle()
-            findNavController().navigate(R.id.bag,bundle)
+            val intent = Intent(context, Bag::class.java)
+            activity?.startActivity(intent)
         }
 
         return rootView

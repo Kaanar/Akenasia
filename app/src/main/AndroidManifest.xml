@@ -57,6 +57,14 @@
             android:exported="true"
             android:label="game"
             tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".Bag"
+            android:exported="true"
+            android:label="bag"
+            tools:ignore="Instantiatable" />
+
+
     </application>
 
 </manifest>
