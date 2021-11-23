@@ -4,33 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpenWorld">
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical"
+    tools:context=".Chronometre">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/Chmap_view"
-        android:layout_width="358dp"
-        android:layout_height="561dp"
+        android:layout_width="0dp"
+        android:layout_height="450dp"
         android:labelFor="@+id/ChessaisTV"
-        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/NavigationView"
-        android:layout_width="358dp"
-        android:layout_height="77dp"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navigateur" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
+    <Chronometer
+        android:id="@+id/chronoMterPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="NavigationView" />
+        android:countDown="true"
+        tools:targetApi="24"
+        tools:ignore="MissingConstraints" />
+
+    <Switch
+        android:id="@+id/CameraSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Chmap_view"
+        android:text="FreeCam"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chmap_view"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
