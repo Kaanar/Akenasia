@@ -1,34 +1,45 @@
+
 package com.example.akenasia
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
+import android.content.Context
+import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 
-class ItemAdapter(private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val desc: Array<String>) : ArrayAdapter<String>(context, R.layout.bag_cardview, id) {
-    lateinit var inflater: LayoutInflater
-    lateinit var DbContext: DatabaseHandler
-
-    @SuppressLint("ViewHolder")
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-        val inflater = context.layoutInflater
-        val rowView = inflater.inflate(R.layout.bag_cardview, null, true)
-
-        //Lie les éléments xml à l'adapter
-        val idText = rowView.findViewById(R.id.id) as TextView
-        val nameText = rowView.findViewById(R.id.name) as TextView
-        val descText = rowView.findViewById(R.id.description) as TextView
-
-        //remplit les TextView par les valeurs des positions
-        idText.text = (id[position].toInt()+1).toString()
-        nameText.text = name[position]
-        descText.text = desc[position]
-
-        return rowView
+class ItemAdapter(var context:Context, var arrayList: ArrayList<ItemBag>) : BaseAdapter() {
+    override fun getCount(): Int {
+        return arrayList.size
     }
+
+    override fun getItem(position: Int): Any {
+        return arrayList.get(position)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        var view:View = View.inflate(context,R.layout.bag_cardview,null)
+
+        var icons:ImageView = view.findViewById(R.id.grid_img)
+        var names:TextView =view.findViewById(R.id.grid_tv)
+
+        var item:ItemBag = arrayList.get(position)
+
+        icons.setImageResource(item.icons!!)
+        names.text = item.name
+
+        return view
+    }
+
 
 }
