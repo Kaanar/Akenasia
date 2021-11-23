@@ -111,7 +111,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     //Implémentation de la méthode lorsqu'on click sur un POI
     override fun onPoiClick(poi: PointOfInterest) {
         pos.refreshLocation()
-        //calcul de la distance
+        val navHostFragment = supportFragmentManager       //calcul de la distance
         val distance: Double = pos.calcul_distance(
             pos.getLatitude(),
             pos.getLongitude(),
@@ -122,7 +122,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             var dialog = PoiDialog()
             dialog.setName(updateTitle(poi))
             dialog.setLatLong(updateInfo(poi))
-            //dialog.show(parentFragmentManager, "PoiDialog") //ça pareil ça compile pas
+            dialog.show(navHostFragment, "PoiDialog") //ça pareil ça compile pas
         }
         else {
             Toast.makeText(this, "Trop loin", Toast.LENGTH_SHORT).show()

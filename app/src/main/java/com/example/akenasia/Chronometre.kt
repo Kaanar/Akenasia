@@ -91,11 +91,6 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
             bundle.putString("mode","Chronometre")
             findNavController().navigate(R.id.Histo,bundle)
         }
-
-        button_sac.setOnClickListener{
-            val bundle = Bundle()
-            findNavController().navigate(R.id.bag,bundle)
-        }
     }
 
     fun nouvelEssai() {

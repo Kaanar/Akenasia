@@ -79,16 +79,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LayoutChronometre" />
 
-    <Button
-        android:id="@+id/button_sac"
-        android:layout_width="119dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="56dp"
-        android:text="Sac"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/Chgoal_Y"
-        app:layout_constraintTop_toTopOf="@+id/ChPosGoalTv" />
 
     <TextView
         android:id="@+id/ChXGoalTv"
