@@ -1,15 +1,10 @@
 package com.example.akenasia
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
 
-import android.view.View
 import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController

@@ -25,7 +25,7 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = BagCardviewBinding.inflate(layoutInflater)
-        setContentView(R.layout.bag)
+        setContentView(binding.root)
 
         gridView = findViewById(R.id.grid_v)
         arrayList = ArrayList()

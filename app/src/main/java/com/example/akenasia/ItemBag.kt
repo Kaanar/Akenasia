@@ -1,6 +1,6 @@
 package com.example.akenasia
 
-class Item{
+class ItemBag{
 
     var icons:Int ? = 0
     var name:String ? = null

@@ -203,7 +203,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return success
     }
 
-
+    /*
     //method to insert an Item
     fun addItem(emp: Item):Long{
         val db = this.writableDatabase
@@ -218,6 +218,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db.close() // Closing database connection
         return success
     }
+
 
     //methode to get an Item
     fun getItem(id: Int):Item{
@@ -296,5 +297,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db.close() // Closing database connection
         return success
     }
+
+     */
 
 }

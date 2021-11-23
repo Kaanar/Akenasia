@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 
-
+/*
 class GridAdapter : BaseAdapter() {
 
 
@@ -29,19 +29,19 @@ class GridAdapter : BaseAdapter() {
         this.description = description
     }
 
-    fun getCount(): Int {
+    override fun getCount(): Int {
         return name.size
     }
 
-    fun getItem(position: Int): Any? {
+    override fun getItem(position: Int): Any? {
         return null
     }
 
-    fun getItemId(position: Int): Long {
+    override fun getItemId(position: Int): Long {
         return 0
     }
 
-    fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var convertView: View? = convertView
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.bag_cardview, null)
@@ -52,4 +52,4 @@ class GridAdapter : BaseAdapter() {
         desc.text = description[position]
         return convertView
     }
-}
+}*/

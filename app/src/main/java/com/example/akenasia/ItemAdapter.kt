@@ -3,7 +3,9 @@ package com.example.akenasia
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
 import android.content.Context
+import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +14,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class ItemAdapter(var context:Context, var arrayList: ArrayList<Item>) : BaseAdapter() {
+class ItemAdapter(var context:Context, var arrayList: ArrayList<ItemBag>) : BaseAdapter() {
     override fun getCount(): Int {
         return arrayList.size
     }
@@ -30,6 +32,11 @@ class ItemAdapter(var context:Context, var arrayList: ArrayList<Item>) : BaseAda
 
         var icons:ImageView = view.findViewById(R.id.grid_img)
         var names:TextView =view.findViewById(R.id.grid_tv)
+
+        var item:ItemBag = arrayList.get(position)
+
+        icons.setImageResource(item.icons!!)
+        names.text = item.name
 
         return view
     }
