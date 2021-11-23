@@ -137,6 +137,26 @@ image::images\Switch.png[alt=Parcours,width=160,height=120]
 .Dialogue des POI
 image::images\PoiDialog.png[alt=Parcours,width=160,height=120]
 
+=== Mode jour/nuit
+
+* Un paramètre permet de choisir entre un mode jour (Thème clair) et un mode nuit (Thème sombre)
+
+[[]]
+.Thème clair
+image::images\LightTheme.png[alt=Parcours,width=160,height=120]
+
+[[]]
+.Thème sombre
+image::images\DarkTheme.png[alt=Parcours,width=160,height=120]
+
+=== Item
+
+* Création d'une table item permettant d'y stocker des items (objets), qui sont obtenables sur les POI en monde libre. Ces items sont stockés dans un sac accessible au joueur. Un item a un id, un nom et une description.
+
+=== Monde libre
+
+* C'est le début de la partie principale d'Akenasia. Dans ce mode, on "explore" en se déplaçant afin d'interagir avec les POI à proximité, ceux-ci donnant des items.
+
 
 
 
