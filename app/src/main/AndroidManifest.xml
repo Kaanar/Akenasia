@@ -57,6 +57,12 @@
             android:exported="true"
             android:label="game"
             tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".OpenWorld"
+            android:exported="true"
+            android:label="openworld"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

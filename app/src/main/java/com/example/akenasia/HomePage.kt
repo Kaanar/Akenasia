@@ -2,6 +2,7 @@ package com.example.akenasia
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,8 +56,8 @@ class HomePage : Fragment(){
         }
 
         binding.homepageOpenWorld.setOnClickListener{
-            val bundle = Bundle()
-            findNavController().navigate(R.id.openWorld,bundle)
+            val intent = Intent(context, OpenWorld::class.java)
+            activity?.startActivity(intent)
         }
 
     }

@@ -35,12 +35,7 @@ class Game : AppCompatActivity() {
     var isPlay = false
     private var essais=10
     private var lastDistance=0.0
-    //private var lat = ArrayList<Double>()
-    //private var long = ArrayList<Double>()
     private var i = 0
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -71,5 +66,4 @@ class Game : AppCompatActivity() {
         val distance : Double = pos.calcul_distance(48.902656120835665, 2.2134736447569447, 48.90432845480199, 2.216647218942868)
         Toast.makeText(this,"$distance", Toast.LENGTH_SHORT).show()
     }
-
 }

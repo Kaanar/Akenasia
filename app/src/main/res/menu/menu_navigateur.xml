@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/RencontreClick"
+        android:id="@+id/QuitClick"
         android:title="Quitter"
         android:icon="@drawable/ic_quit"/>
     <item
-        android:id="@+id/HomeClick"
+        android:id="@+id/BagClick"
         android:title="Sac"
         android:icon="@drawable/ic_bag"/>
     <item
