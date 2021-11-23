@@ -4,174 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
-    android:orientation="vertical"
-    tools:context=".Chronometre">
-
-    <LinearLayout
-        android:id="@+id/LayoutChronometre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:background="@drawable/shape_background"
-        android:backgroundTint="@color/white"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/ChresultTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:translationZ="90dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@color/purple_500"
-            android:elevation="15dp"
-            android:gravity="center"
-            android:padding="6dp"
-            android:text="Chronomètre"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Chronometer
-            android:id="@+id/chronoMterPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape_background"
-            android:backgroundTint="@color/white"
-            android:countDown="true"
-            android:elevation="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:textColor="@color/purple_500"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            tools:targetApi="24" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/ChPosGoalTv"
-        android:layout_width="128dp"
-        android:layout_height="20dp"
-        android:layout_gravity="center"
-        android:text="Position à atteindre:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LayoutChronometre" />
-
-    <Button
-        android:id="@+id/button_sac"
-        android:layout_width="119dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="56dp"
-        android:text="Sac"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/Chgoal_Y"
-        app:layout_constraintTop_toTopOf="@+id/ChPosGoalTv" />
-
-    <TextView
-        android:id="@+id/ChXGoalTv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="52dp"
-        android:text="Lat:"
-        app:layout_constraintEnd_toStartOf="@+id/ChPosGoalTv"
-        app:layout_constraintTop_toBottomOf="@+id/ChPosGoalTv" />
-
-    <TextView
-        android:id="@+id/Chgoal_X"
-        android:layout_width="190dp"
-        android:layout_height="30dp"
-        android:layout_gravity="start"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toEndOf="@+id/ChXGoalTv"
-        app:layout_constraintTop_toTopOf="@+id/ChXGoalTv" />
-
-    <TextView
-        android:id="@+id/ChYGoalTv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:text="Lon:"
-        app:layout_constraintStart_toStartOf="@+id/ChXGoalTv"
-        app:layout_constraintTop_toBottomOf="@+id/ChXGoalTv" />
-
-    <TextView
-        android:id="@+id/Chgoal_Y"
-        android:layout_width="194dp"
-        android:layout_height="37dp"
-        android:layout_gravity="start"
-        android:textAlignment="textStart"
-        app:layout_constraintStart_toEndOf="@+id/ChYGoalTv"
-        app:layout_constraintTop_toBottomOf="@+id/ChXGoalTv" />
-
-
-    <TextView
-        android:id="@+id/ChessaisTV"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/Chmap_view"
-        tools:layout_editor_absoluteX="51dp" />
+    tools:context=".OpenWorld">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/Chmap_view"
-        android:layout_width="0dp"
-        android:layout_height="184dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="418dp"
+        android:layout_height="732dp"
         android:labelFor="@+id/ChessaisTV"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Chgoal_Y"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/ChQuitGameBT"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="@string/previous"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
-
-    <Button
-        android:id="@+id/ChPositionBT"
-        android:layout_width="220dp"
-        android:layout_height="37dp"
-        android:layout_gravity="center"
-        android:text="Voir l'historique"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChessaisTV" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
