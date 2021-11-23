@@ -60,6 +60,12 @@ class HomePage : Fragment(){
             activity?.startActivity(intent)
         }
 
+        binding.settings.setOnClickListener{
+            val intent = Intent(context, Reglages::class.java).apply {
+            }
+            activity?.startActivity(intent)
+        }
+
     }
 
     override fun onDestroyView() {
