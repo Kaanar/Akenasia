@@ -11,12 +11,13 @@ import android.widget.AdapterView
 import android.widget.GridView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.akenasia.databinding.ActivityMainBinding
 import com.example.akenasia.databinding.BagBinding
 import com.example.akenasia.databinding.BagCardviewBinding
 import com.example.akenasia.databinding.ChronometreBinding
 
 class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
-    private lateinit var binding: BagCardviewBinding
+    private lateinit var binding: BagBinding
 
     private var gridView:GridView ? = null
     private var arrayList : ArrayList<ItemBag> ? = null
@@ -25,8 +26,8 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.bag)
+        binding = BagBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         gridView = findViewById(R.id.grid_v)
         arrayList = ArrayList()
