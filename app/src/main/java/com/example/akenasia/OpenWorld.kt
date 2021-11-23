@@ -81,6 +81,10 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                 }
             true
         }
+
+        CameraSwitch.setOnClickListener(){
+            cameraFocus = cameraFocus != true
+        }
     }
 
 
