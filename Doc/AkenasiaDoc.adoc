@@ -155,7 +155,11 @@ image::images\DarkTheme.png[alt=Parcours,width=160,height=120]
 
 === Monde libre
 
-* C'est le début de la partie principale d'Akenasia. Dans ce mode, on "explore" en se déplaçant afin d'interagir avec les POI à proximité, ceux-ci donnant des items.
+* C'est le début de la partie principale d'Akenasia. Dans ce mode, on "explore" en se déplaçant afin d'interagir avec les POI à proximité, ceux-ci donnant des items. Un bouton sac permet d'accéder à ses items déjà obtenus.
+
+[[]]
+.Monde libre
+image::images\OpenWorld.png[alt=Parcours,width=160,height=120]
 
 
 
