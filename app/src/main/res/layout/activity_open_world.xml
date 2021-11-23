@@ -8,10 +8,10 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/Chmap_view"
-        android:layout_width="418dp"
-        android:layout_height="732dp"
+        android:layout_width="358dp"
+        android:layout_height="561dp"
         android:labelFor="@+id/ChessaisTV"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,12 +19,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="358dp"
+        android:layout_height="77dp"
         android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="@+id/Chmap_view"
-        app:menu="@menu/menu_navigateur"
-        tools:layout_editor_absoluteX="-16dp"></com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigateur" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"
