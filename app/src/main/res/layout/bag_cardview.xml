@@ -1,57 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            app:cardCornerRadius="5sp">
+            android:layout_height="match_parent"
+            android:padding="12dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
                 <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:scaleType="fitXY"
-                    android:id="@+id/grid_img"
-                    android:src="@drawable/potion" />
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="60dp"
+                    android:src="@drawable/potion"
+                    android:id="@+id/grid_img"/>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/grid_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/grid_img"
+                    android:layout_marginLeft="38dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Potion"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="10sp"
-                            android:layout_toLeftOf="@id/more"
-                            android:textColor="#000"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
-                            android:text="Potion Magique"/>
-
-                        <ImageView
-                            android:layout_width="20sp"
-                            android:layout_height="25sp"
-                            android:src="@drawable/ic_more"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="25sp"
-                            android:id="@+id/more"/>
-
-
-                </RelativeLayout>
-        </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        
-
+        </RelativeLayout>
 </LinearLayout>
