@@ -24,6 +24,13 @@
     </fragment>
 
     <fragment
+        android:id="@+id/ItemFragment"
+        android:name="com.example.akenasia.home.Database"
+        android:label="Itemfragment"
+        tools:layout="@layout/items_list">
+    </fragment>
+
+    <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.akenasia.home.Database"
         android:label="@string/second_fragment_label"
@@ -49,7 +56,7 @@
         android:id="@+id/openWorld"
         android:name="com.example.akenasia.openworld.OpenWorld"
         android:label="activity_open_world"
-        tools:layout="@layout/activity_open_world" />
+        tools:layout="@layout/activity_openworld" />
 
 
 </navigation>
