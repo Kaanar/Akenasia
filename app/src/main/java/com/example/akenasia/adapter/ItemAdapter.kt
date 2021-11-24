@@ -47,12 +47,12 @@ class ItemAdapter : BaseAdapter() {
 
         DbContext = DatabaseHandler(context)
         var conView = convertView
-        conView= inflater.inflate(R.layout.items_list_2, null)
+        conView= inflater.inflate(R.layout.items_list, null)
 
         val nomItem = conView.findViewById<View>(R.id.name_item) as TextView
         nomItem.text =item.get(position).getItemName()
 
-        val descrItem = conView.findViewById<View>(R.id.descr_item) as TextView
+        val descrItem = conView.findViewById<View>(R.id.description_item) as TextView
         descrItem.text = item.get(position).getitemDesc()
 
         return conView

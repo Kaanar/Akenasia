@@ -1,4 +1,4 @@
-<com.google.android.material.card.MaterialCardView android:id="@+id/card"
+<com.google.android.material.card.MaterialCardView android:id="@+id/card3"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -17,23 +17,39 @@
             android:padding="16dp">
             <!-- Title, secondary and supporting text -->
             <TextView
-                android:id="@+id/name_item"
+                android:id="@+id/id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text=""
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
-
             <TextView
-                android:id="@+id/descr_item"
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text=""
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
-
+            <TextView
+                android:id="@+id/longitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="10sp"
+                android:text=""
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                />
+            <TextView
+                android:id="@+id/latitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="10sp"
+                android:text=""
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                />
         </LinearLayout>
         <Button
             android:id="@+id/choisir"

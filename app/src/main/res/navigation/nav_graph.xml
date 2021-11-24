@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_openWorld"
             app:destination="@id/openWorld" />
+        <action
+            android:id="@+id/action_FirstFragment_to_ItemFragment"
+            app:destination="@id/ItemFragment" />
     </fragment>
 
     <fragment
@@ -28,6 +31,9 @@
         android:name="com.example.akenasia.home.Database"
         android:label="Itemfragment"
         tools:layout="@layout/items_list">
+        <action
+            android:id="@+id/action_ItemFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
     <fragment
