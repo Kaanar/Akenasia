@@ -17,13 +17,16 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val DATABASE_NAME = "AkenasiaDatabase"
         private val TABLE_PLACE = "PlaceTable"
         private val TABLE_POSITION = "PositionTable"
-        private val TABLE_ITEM = "PositionTable"
+        private val TABLE_ITEM = "ItemTable"
+        private val TABLE_BAG = "BagTable"
         private val KEY_ID = "id"
         private val KEY_NAME = "name"
         private val KEY_LATITUDE = "latitude"
         private val KEY_LONGITUDE = "longitude"
         private val KEY_PARTIE = "partie"
         private val KEY_DESC = "description"
+        private val KEY_DEFENSE = "pointDefense"
+        private val KEY_ATTACK = "pointAttack"
 
     }
 
@@ -36,9 +39,15 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val CREATE_POSITION_TABLE =("CREATE TABLE " + TABLE_POSITION + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_PARTIE + " INTEGER" + ")" )
         db?.execSQL(CREATE_POSITION_TABLE)
+
         val CREATE_ITEM_TABLE =("CREATE TABLE " + TABLE_ITEM + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + ")" )
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + KEY_ATTACK + "INTEGER" + KEY_DEFENSE + "INTEGER" + ")" )
         db?.execSQL(CREATE_ITEM_TABLE)
+
+        val CREATE_BAG_TABLE =("CREATE TABLE " + TABLE_BAG + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + ")" )
+        db?.execSQL(CREATE_BAG_TABLE)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -46,6 +55,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEM)
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BAG)
+
         onCreate(db)
     }
 

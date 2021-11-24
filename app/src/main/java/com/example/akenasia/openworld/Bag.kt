@@ -37,10 +37,10 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
 
         var arrayList:ArrayList<ItemBag> = ArrayList()
 
-        arrayList.add(ItemBag(R.drawable.potion, "Potion"))
-        arrayList.add(ItemBag(R.drawable.epee, "Epee"))
-        arrayList.add(ItemBag(R.drawable.bouclier, "Bouclier"))
-        arrayList.add(ItemBag(R.drawable.armure, "Armure"))
+        //arrayList.add(ItemBag(R.drawable.potion, "Potion"))
+        //arrayList.add(ItemBag(R.drawable.epee, "Epee"))
+        //arrayList.add(ItemBag(R.drawable.bouclier, "Bouclier"))
+        //arrayList.add(ItemBag(R.drawable.armure, "Armure"))
 
         return arrayList
     }
@@ -49,6 +49,7 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
 
 
         var itemBag: ItemBag = arrayList!!.get(position)
-        Toast.makeText(applicationContext, itemBag.name, Toast.LENGTH_LONG).show()
+        //Toast.makeText(applicationContext, itemBag.name, Toast.LENGTH_LONG).show()
     }
+
 }

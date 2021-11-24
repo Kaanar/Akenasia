@@ -24,6 +24,8 @@ class PoiDialog : DialogFragment () {
         rootView.PoiOk.setOnClickListener() {
             //Mettre l'action à réaliser ici
             PoiName.text = "Oui c'est le OK"
+            //add item
+
         }
         rootView.PoiCancel.setOnClickListener() {
             //Pour fermer le dialogue
@@ -44,4 +46,8 @@ class PoiDialog : DialogFragment () {
     fun setLatLong (message : String) {
         latlong = message
     }
+
+
+
+
 }
