@@ -325,6 +325,88 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 
      */
 
+    //method to insert an Item in a Bag
+    fun addItem(emp: ItemBag):Long{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID, emp.Itemid)
+        contentValues.put(KEY_NAME, emp.ItemName) // EmpModelClass Name
+        contentValues.put(KEY_DESC, emp.ItemDesc)
+
+        // Inserting Row
+        val success = db.insert(TABLE_BAG, null,  contentValues)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    //methode to get an Item to a Bag
+    fun getItemBag(id: Int):ItemBag{
+        val db = this.readableDatabase
+        val selectQuery = "SELECT  * FROM $TABLE_BAG WHERE $KEY_ID = $id"
+        var cursor: Cursor? = null
+        try{
+            cursor = db.rawQuery(selectQuery, null)
+        }catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+        }
+        val itemId: Int
+        val itemName: String
+        val itemDesc: String
+
+
+        if (cursor != null) {
+            cursor.moveToFirst()
+            itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+            itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
+            itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
+            return ItemBag(itemId, itemName, itemDesc)
+        }
+        exitProcess(0)
+    }
+
+    //method to read an Item in a Bag
+    fun viewItemBag():List<ItemBag>{
+        val empList:ArrayList<ItemBag> = ArrayList()
+        val selectQuery = "SELECT  * FROM $TABLE_BAG"
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try{
+            cursor = db.rawQuery(selectQuery, null)
+        }catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        var itemId: Int
+        var itemName: String
+        var itemDesc: String
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+                itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
+                itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
+
+
+                val emp= ItemBag(itemId,itemName,itemDesc)
+                empList.add(emp)
+            } while (cursor.moveToNext())
+        }
+        return empList
+    }
+
+    fun deleteItemBag(emp: ItemBag):Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID, emp.Itemid) // EmpModelClass UserId
+        // Deleting Row
+        val success = db.delete(TABLE_BAG,"id="+emp.Itemid,null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
 
 
 }
