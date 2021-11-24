@@ -15,6 +15,7 @@ import com.example.akenasia.adapter.MyListAdapter
 import com.example.akenasia.adapter.PositionAdapter
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.Item
 import com.example.akenasia.database.Place
 import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.DatabaseBinding
@@ -90,6 +91,12 @@ class Database : Fragment() {
         binding.bDelete.setOnClickListener {
             deleteRecord()
         }
+
+        //Instancier les Items en dur
+        dbHandler.addItem(Item(1,"Potion","tu bois tu meurs, tu bois tu vie... à toi de voir",0,2))
+        dbHandler.addItem(Item(2,"Epee","blague humour noir epee",10,8))
+        dbHandler.addItem(Item(3,"Armure","blague humour noire armure",0,10))
+        dbHandler.addItem(Item(4,"Bouclier","blague hurmour noire bouclier",3,8))
     }
 
     override fun onDestroyView() {

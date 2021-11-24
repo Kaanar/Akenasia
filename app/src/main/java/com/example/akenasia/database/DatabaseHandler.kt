@@ -326,7 +326,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
      */
 
     //method to insert an Item in a Bag
-    fun addItem(emp: ItemBag):Long{
+    fun addItemBag(emp: ItemBag):Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.Itemid)
