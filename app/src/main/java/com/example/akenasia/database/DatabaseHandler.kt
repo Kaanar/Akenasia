@@ -27,7 +27,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val KEY_DESC = "description"
         private val KEY_DEFENSE = "pointDefense"
         private val KEY_ATTACK = "pointAttack"
-        private val KEY_PHOTO = "ItemPhoto"
+        private val KEY_PHOTO = "photo"
 
     }
 
@@ -327,6 +327,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 
      */
 
+    /*
+
     //method to insert an Item in a Bag
     fun addItemBag(emp: ItemBag):Long{
         val db = this.writableDatabase
@@ -408,6 +410,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db.close() // Closing database connection
         return success
     }
+
+     */
 
 
 

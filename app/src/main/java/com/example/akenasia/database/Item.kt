@@ -5,12 +5,12 @@ import android.graphics.Bitmap
 data class Item(var Itemid: Int, var ItemName: String, var ItemDesc: String, var ItemAttack : Int,var ItemDefense: Int) {
 
 
-    @JvmName("Itemid")
+    @JvmName("getItemId")
     fun getItemid(): Int {
         return Itemid
     }
 
-    @JvmName("getPlaceLat1")
+    @JvmName("getItemName1")
     fun getItemName(): String {
         return ItemName
     }
