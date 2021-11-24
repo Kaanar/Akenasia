@@ -1,6 +1,7 @@
 
 package com.example.akenasia.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
@@ -23,16 +24,25 @@ class ItemAdapter(var context:Context, var arrayList: ArrayList<ItemBag>) : Base
         return position.toLong()
     }
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var view:View = View.inflate(context, R.layout.bag_cardview,null)
+        val view:View = View.inflate(context, R.layout.bag_cardview,null)
 
-        var icons:ImageView = view.findViewById(R.id.grid_img)
-        var names:TextView =view.findViewById(R.id.grid_tv)
+        val icons:ImageView = view.findViewById(R.id.grid_img)
+        val names:TextView =view.findViewById(R.id.grid_tv)
 
-        var item: ItemBag = arrayList.get(position)
+        val item: ItemBag = arrayList.get(position)
 
-        icons.setImageResource(item.icons!!)
-        names.text = item.name
+        when (item.getItemName()) {
+            "épée" -> icons.setImageResource(R.drawable.epee)
+            "potion" -> icons.setImageResource(R.drawable.potion)
+            "bouclier" -> icons.setImageResource(R.drawable.bouclier)
+            "armure"-> icons.setImageResource(R.drawable.armure)
+            else -> { // Note the block
+                icons.setImageResource(R.drawable.ic_settings)
+            }
+        }
+        names.text = item.getItemName()
 
         return view
     }
