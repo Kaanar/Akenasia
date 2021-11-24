@@ -1,24 +1,24 @@
-package com.example.akenasia
+package com.example.akenasia.openworld
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.akenasia.R
+import com.example.akenasia.database.Position
 
 import com.example.akenasia.databinding.ActivityOpenworldBinding
+import com.example.akenasia.home.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PointOfInterest
-import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.content_map.*
 
 

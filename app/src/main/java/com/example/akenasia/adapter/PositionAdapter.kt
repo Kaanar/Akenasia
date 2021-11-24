@@ -1,28 +1,17 @@
-package com.example.akenasia
+package com.example.akenasia.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.*
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import java.util.ArrayList
-import kotlinx.android.synthetic.main.position_listview.id;
-import kotlinx.android.synthetic.main.position_listview.longitude;
-import kotlinx.android.synthetic.main.position_listview.latitude;
+import com.example.akenasia.R
+import com.example.akenasia.database.DatabaseHandler
 
 
-
-
-
-class PositionAdapter(private val context: Activity,private val id: Array<String>, private val lat: Array<String>, private val long: Array<String>, private val partie: Array<String>) : ArrayAdapter<String>(context, R.layout.custom_list, id) {
+class PositionAdapter(private val context: Activity,private val id: Array<String>, private val lat: Array<String>, private val long: Array<String>, private val partie: Array<String>) : ArrayAdapter<String>(context,
+    R.layout.custom_list, id) {
     lateinit var inflater: LayoutInflater
     lateinit var DbContext: DatabaseHandler
 

@@ -1,7 +1,8 @@
-package com.example.akenasia
+package com.example.akenasia.game
 
-import android.content.Context
-import com.example.akenasia.databinding.ChronometreBinding
+import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.Place
+import com.example.akenasia.database.Position
 import com.google.android.gms.maps.GoogleMap
 
 interface GameFactory {

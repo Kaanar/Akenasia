@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.home
 
 import android.content.Context
 import android.content.DialogInterface
@@ -11,6 +11,12 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.akenasia.adapter.MyListAdapter
+import com.example.akenasia.adapter.PositionAdapter
+import com.example.akenasia.R
+import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.Place
+import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.DatabaseBinding
 import kotlinx.android.synthetic.main.database.*
 import java.util.ArrayList
@@ -52,7 +58,8 @@ class Database : Fragment() {
         // Instanciation des positions en dur
         places = ArrayList<Place>()
         if(dbHandler.viewPlace().isEmpty()){
-            dbHandler.addPlace(Place(
+            dbHandler.addPlace(
+                Place(
                 0,
                 "BU",
                 48.905273887110944,
@@ -155,7 +162,7 @@ class Database : Fragment() {
 
     private fun viewRecord(){
         //creating the instance of DatabaseHandler class
-        val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
+        val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
         //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Place> = databaseHandler.viewPlace()
         val empArrayId = Array<String>(emp.size){"0"}
@@ -191,7 +198,7 @@ class Database : Fragment() {
 
             val deleteId = dltId.text.toString()
             //creating the instance of DatabaseHandler class
-            val databaseHandler: DatabaseHandler= DatabaseHandler(thiscontext!!)
+            val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
             if(deleteId.trim()!=""){
                 //calling the deleteEmployee method of DatabaseHandler class to delete record
                 val status = databaseHandler.deletePlace(Place(Integer.parseInt(deleteId), "", placeLat = 0.0, placeLong = 0.0))

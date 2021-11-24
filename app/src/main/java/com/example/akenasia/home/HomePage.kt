@@ -1,26 +1,19 @@
-package com.example.akenasia
+package com.example.akenasia.home
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import com.example.akenasia.databinding.DatabaseBinding
+import com.example.akenasia.openworld.OpenWorld
+import com.example.akenasia.R
+import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.HomepageBinding
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.chronometre.*
-import kotlinx.android.synthetic.main.database.*
 
 
 class HomePage : Fragment(){

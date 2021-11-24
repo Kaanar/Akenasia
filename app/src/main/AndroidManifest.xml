@@ -31,18 +31,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC2b2TDA9rI-A7u5ACrscijqN79dd_b5lI" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="MapsActivity"
-            tools:ignore="Instantiatable" />
-
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".home.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             tools:ignore="Instantiatable">
@@ -53,25 +47,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Game"
+            android:name=".game.Game"
             android:exported="true"
             android:label="game"
             tools:ignore="Instantiatable" />
 
         <activity
-            android:name=".OpenWorld"
+            android:name=".openworld.OpenWorld"
             android:exported="true"
             android:label="openworld"
             tools:ignore="Instantiatable" />
 
         <activity
-            android:name=".Bag"
+            android:name=".openworld.Bag"
             android:exported="true"
             android:label="bag"
             tools:ignore="Instantiatable" />
 
         <activity
-            android:name=".Reglages"
+            android:name=".home.Reglages"
             android:exported="true"
             android:label="reglages"
             tools:ignore="Instantiatable" />

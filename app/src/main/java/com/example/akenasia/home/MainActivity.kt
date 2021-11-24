@@ -1,31 +1,17 @@
-package com.example.akenasia
+package com.example.akenasia.home
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.core.app.ActivityCompat
 import com.example.akenasia.databinding.ActivityMainBinding
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.location.*
 
-import android.view.Menu
-import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.akenasia.R
 
 
 class MainActivity : AppCompatActivity() {

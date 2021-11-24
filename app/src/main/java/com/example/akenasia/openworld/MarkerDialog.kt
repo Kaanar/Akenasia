@@ -1,11 +1,11 @@
-package com.example.akenasia
+package com.example.akenasia.openworld
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.marker_dialog.*
+import com.example.akenasia.R
 import kotlinx.android.synthetic.main.marker_dialog.view.*
 
 

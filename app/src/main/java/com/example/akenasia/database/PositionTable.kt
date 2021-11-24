@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.database
 
 data class PositionTable (var posId: Int, var posLat: Double, var posLong: Double, var partie: Int) {
         @JvmName("getposId1")

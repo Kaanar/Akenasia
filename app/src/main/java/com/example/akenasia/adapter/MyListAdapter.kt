@@ -1,4 +1,4 @@
-package com.example.akenasia
+package com.example.akenasia.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import com.example.akenasia.R
 
 class MyListAdapter(private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val lat: Array<String>, private val long: Array<String>)
     : ArrayAdapter<String>(context, R.layout.custom_list, name) {

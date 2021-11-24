@@ -2,16 +2,11 @@ package com.example.akenasia
 
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragment
-import androidx.lifecycle.Lifecycle
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import kotlinx.android.synthetic.main.chronometre.*
-import kotlinx.android.synthetic.main.coups_limites.*
+import com.example.akenasia.game.Chronometre
+import com.example.akenasia.game.CoupsLimites
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
-import org.junit.Ignore
-import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 class ChronometreTest: FragmentScenario.FragmentAction<Chronometre>{
     @Test fun XIsVisible() {

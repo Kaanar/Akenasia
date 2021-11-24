@@ -1,16 +1,12 @@
-package com.example.akenasia
+package com.example.akenasia.openworld
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.chronometre.*
-import kotlinx.android.synthetic.main.marker_dialog.*
-import kotlinx.android.synthetic.main.marker_dialog.view.*
+import com.example.akenasia.R
 import kotlinx.android.synthetic.main.poi_dialog.*
 import kotlinx.android.synthetic.main.poi_dialog.view.*
 
