@@ -1,5 +1,7 @@
 package com.example.akenasia.database
 
+import android.graphics.Bitmap
+
 data class Item(var Itemid: Int, var ItemName: String, var ItemDesc: String, var ItemAttack : Int,var ItemDefense: Int) {
 
 
@@ -27,4 +29,5 @@ data class Item(var Itemid: Int, var ItemName: String, var ItemDesc: String, var
     fun getItemPointDefense(): Int{
         return ItemDefense
     }
+
 }

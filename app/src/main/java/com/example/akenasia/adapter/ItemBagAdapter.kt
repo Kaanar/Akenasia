@@ -12,6 +12,8 @@ import com.example.akenasia.R
 import java.util.*
 
 class ItemBagAdapter(var context:Context, var arrayList: ArrayList<ItemBag>) : BaseAdapter() {
+
+
     override fun getCount(): Int {
         return arrayList.size
     }

@@ -27,6 +27,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val KEY_DESC = "description"
         private val KEY_DEFENSE = "pointDefense"
         private val KEY_ATTACK = "pointAttack"
+        private val KEY_PHOTO = "ItemPhoto"
 
     }
 
@@ -41,11 +42,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db?.execSQL(CREATE_POSITION_TABLE)
 
         val CREATE_ITEM_TABLE =("CREATE TABLE " + TABLE_ITEM + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + KEY_ATTACK + "INTEGER" + KEY_DEFENSE + "INTEGER" + ")" )
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + KEY_ATTACK + "INTEGER" + KEY_DEFENSE + "INTEGER" + KEY_PHOTO + "BITMAP" + ")" )
         db?.execSQL(CREATE_ITEM_TABLE)
 
         val CREATE_BAG_TABLE =("CREATE TABLE " + TABLE_BAG + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + ")" )
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT" + KEY_PHOTO + "BITMAP" + ")" )
         db?.execSQL(CREATE_BAG_TABLE)
 
     }
@@ -227,6 +228,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         contentValues.put(KEY_DESC, emp.ItemDesc)
         contentValues.put(KEY_ATTACK, emp.ItemAttack)
         contentValues.put(KEY_DEFENSE, emp.ItemDefense)
+
 
         // Inserting Row
         val success = db.insert(TABLE_ITEM, null,  contentValues)
