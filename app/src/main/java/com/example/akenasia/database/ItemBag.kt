@@ -1,6 +1,8 @@
 package com.example.akenasia.database
 
-data class ItemBag(var Itemid: Int, var ItemName: String, var itemDesc: String) {
+data class ItemBag(var Itemid: Int, var ItemName: String, var ItemDesc: String) {
+
+
     @JvmName("Itemid")
     fun getItemid(): Int {
         return Itemid
@@ -13,6 +15,7 @@ data class ItemBag(var Itemid: Int, var ItemName: String, var itemDesc: String) 
 
     @JvmName("getitemDesc")
     fun getitemDesc(): String {
-        return itemDesc
+        return ItemDesc
     }
+
 }

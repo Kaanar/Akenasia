@@ -219,12 +219,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 
 
     //method to insert an Item
-    fun addItem(emp: ItemBag):Long{
+    fun addItem(emp: Item):Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.Itemid)
         contentValues.put(KEY_NAME, emp.ItemName) // EmpModelClass Name
-        contentValues.put(KEY_DESC, emp.itemDesc)
+        contentValues.put(KEY_DESC, emp.ItemDesc)
+        contentValues.put(KEY_ATTACK, emp.ItemAttack)
+        contentValues.put(KEY_DEFENSE, emp.ItemDefense)
 
         // Inserting Row
         val success = db.insert(TABLE_ITEM, null,  contentValues)
@@ -235,7 +237,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 
 
     //methode to get an Item
-    fun getItem(id: Int):ItemBag{
+    fun getItem(id: Int):Item{
         val db = this.readableDatabase
         val selectQuery = "SELECT  * FROM $TABLE_ITEM WHERE $KEY_ID = $id"
         var cursor: Cursor? = null
@@ -247,19 +249,23 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val itemId: Int
         val itemName: String
         val itemDesc: String
+        val itemAttack : Int
+        val itemDefense : Int
 
         if (cursor != null) {
             cursor.moveToFirst()
             itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
             itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
             itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
-            return ItemBag(itemId, itemName, itemDesc)
+            itemAttack = cursor.getInt(cursor.getColumnIndex("attack").toInt())
+            itemDefense = cursor.getInt(cursor.getColumnIndex("defense").toInt())
+            return Item(itemId, itemName, itemDesc, itemAttack, itemDefense)
         }
         exitProcess(0)
     }
     //method to read an Item
-    fun viewItem():List<ItemBag>{
-        val empList:ArrayList<ItemBag> = ArrayList()
+    fun viewItem():List<Item>{
+        val empList:ArrayList<Item> = ArrayList()
         val selectQuery = "SELECT  * FROM $TABLE_ITEM"
         val db = this.readableDatabase
         var cursor: Cursor? = null
@@ -272,27 +278,32 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         var itemId: Int
         var itemName: String
         var itemDesc: String
+        var itemAttack : Int
+        var itemDefense : Int
 
         if (cursor.moveToFirst()) {
             do {
                 itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
                 itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
                 itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
+                itemAttack = cursor.getInt(cursor.getColumnIndex("attack").toInt())
+                itemDefense = cursor.getInt(cursor.getColumnIndex("defense").toInt())
 
-                val emp= ItemBag(itemId,itemName,itemDesc)
+                val emp= Item(itemId,itemName,itemDesc,itemAttack,itemDefense)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
         return empList
     }
 
+    /*
     //Method to update an Item
     fun updateItem(emp: ItemBag):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.Itemid-1)
         contentValues.put(KEY_NAME, emp.ItemName)
-        contentValues.put(KEY_DESC, emp.itemDesc)
+        contentValues.put(KEY_DESC, emp.ItemDesc)
 
         // Updating Row
         val success = db.update(TABLE_ITEM, contentValues,"id="+emp.Itemid,null)
@@ -311,6 +322,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db.close() // Closing database connection
         return success
     }
+
+     */
 
 
 

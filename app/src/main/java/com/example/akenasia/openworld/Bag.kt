@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.GridView
-import android.widget.Toast
 import com.example.akenasia.database.ItemBag
 import com.example.akenasia.R
-import com.example.akenasia.adapter.ItemAdapter
+import com.example.akenasia.adapter.ItemBagAdapter
 import com.example.akenasia.databinding.BagBinding
 
 class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
@@ -16,7 +15,7 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
 
     private var gridView:GridView ? = null
     private var arrayList : ArrayList<ItemBag> ? = null
-    private var itemAdapter: ItemAdapter? = null
+    private var itemBagAdapter: ItemBagAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +26,8 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
         gridView = findViewById(R.id.grid_v)
         arrayList = ArrayList()
         arrayList = setdataList()
-        itemAdapter = ItemAdapter(applicationContext, arrayList!!)
-        gridView?.adapter = itemAdapter
+        itemBagAdapter = ItemBagAdapter(applicationContext, arrayList!!)
+        gridView?.adapter = itemBagAdapter
         gridView?.onItemClickListener = this
 
     }
