@@ -9,7 +9,7 @@
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
     android:orientation="vertical"
-    tools:context=".CoupsLimites">
+    tools:context=".game.CoupsLimites">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/Appbar"

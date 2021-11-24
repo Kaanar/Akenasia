@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,15 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/Theme.Akenasia.AppBarOverlay"
-            tools:ignore="MissingConstraints"
-            android:id="@+id/Appbar">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/Theme.Akenasia.PopupOverlay" />
+            android:id="@+id/Appbar"
+            tools:ignore="MissingConstraints">
 
             <TextView
                 android:id="@+id/GameModeTitleTV"
@@ -31,7 +24,7 @@
                 android:text="Mode de jeu"
                 android:textAlignment="center"
                 android:textSize="25sp"
-                app:layout_constraintBottom_toTopOf="@id/toolbar"
+                app:layout_constraintBottom_toTopOf="@id/Appbar"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
 
@@ -56,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="Coups limités"
                 android:textAppearance="?attr/textAppearanceHeadline6"/>
+
         </LinearLayout>
 
 

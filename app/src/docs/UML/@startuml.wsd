@@ -5,13 +5,12 @@ class Chronometre {
   chronometre : CHRONOMETER
   pos : POSITION
   place : PLACE
+  googleMap : GOOGLEMAP
+  dbHandler : DATASABASEHANDLER
+  i : INTEGER
+  onMapReady(map: GOOGLEMAP)
   Chronometre()
   nouvelEssai()
-}
-
-class MapsFragment {
-  googleMap : GOOGLEMAP
-  onMapReady()
 }
 
 class Place {
@@ -49,6 +48,8 @@ class CoupsLimites {
   essais : INTEGER
   pos : POSITION
   place : PLACE
+  dbHandler : DATASABASEHANDLER
+  i : INTEGER
   lastDistance : DOUBLE
   CoupsLimites()
   nouvelEssai()
@@ -68,7 +69,10 @@ interface PositionAdapter {
 class Historique {
   partieId : INTEGER
   googleMap : GOOGLEMAP
-  onMapReady()
+  onMapReady(map: GOOGLEMAP)
+  onInfoWindowClick(marker: Marker) 
+  updateTitle(marker: Marker) : STRING
+  updateInfo(marker: Marker) : STRING
 }
 
 class DatabaseHandler {
@@ -78,18 +82,69 @@ class DatabaseHandler {
   deletePlace()
 }
 
+class MarkerDialog {
+  title : STRING
+  info : STRING
+  setTitle()
+  setInfo()
+}
+
+class PoiDialog {
+  name : STRING
+  latlong : STRING
+  setName()
+  setLatLong()
+  use()
+}
+
+class Item {
+  itemId : INTEGER
+  itemName : STRING
+  itemDesc : STRING
+  Item()
+}
+
+interface ItemAdapter {
+  getView()
+}
+
+interface GamemodeFactory {
+  googleMap: GOOGLEMAP
+  pos: POSITION
+  dbHandler : DATASABASEHANDLER
+  place: PLACE
+  i: INTEGER
+}
+
+class OpenWorld {
+  pos : POSITION
+  cameraFocus : BOOLEAN
+  googleMap : GOOGLEMAP
+  chronometre : CHRONOMETER
+  cameraSwitch()
+  itemSelected()
+  onMapReady(map: GOOGLEMAP)
+  onPoiClick(poi: PointOfInterest)
+  updateName(poi: PointOfInterest) : STRING
+  updateLatLong(poi: PointOfInterest) : STRING
+}
+
 Database <|-- MyListAdapter
 DatabaseHandler <|-- Database
 Place <|-- Database
 Position <|-- Place
 Place <|-- Gamemode
-Gamemode <|-- Chronometre
-Gamemode <|-- CoupsLimites
+GamemodeFactory <|-- Chronometre
+GamemodeFactory <|-- CoupsLimites
 Chronometre <|-- PositionTable
 CoupsLimites <|-- PositionTable
 PositionTable <|-- PositionAdapter
 PositionTable <|-- Historique
-Chronometre <|-- MapsFragment
-CoupsLimites <|-- MapsFragment
+Historique <|-- MarkerDialog
+OpenWorld <|-- PoiDialog
+Gamemode <|-- OpenWorld
+OpenWorld <|-- Item
+Item <|-- ItemAdapter
+Gamemode <|-- GamemodeFactory 
 
 @enduml

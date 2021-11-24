@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/PoiText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Vous obtenez un Paul ! Félicitations ! "
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/PoiName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="22sp"
+        android:hint="Title"
+        android:layout_below="@+id/PoiText"/>
+
+    <TextView
+        android:id="@+id/PoiLatLong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="20sp"
+        android:layout_below="@+id/PoiName"
+        android:hint="Information" />
+
+    <Button
+        android:id="@+id/PoiOk"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PoiLatLong"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Ok" />
+
+    <Button
+        android:id="@+id/PoiCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PoiLatLong"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="32dp"
+        android:text="Annuler" />
+
+    <Button
+        android:id="@+id/goBag"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PoiLatLong"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="32dp"
+        android:text="Sac" />
+
+</RelativeLayout>

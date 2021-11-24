@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_map"
+    app:startDestination="@id/MapFragment">
+
+
+    <fragment
+        android:id="@+id/MapFragment"
+        android:name="com.example.akenasia.openworld.Bag"
+        android:label="bagFragment"
+        tools:layout="@layout/fragment_maps">
+        <action
+            android:id="@+id/map_fragment_to_bag_fragment"
+            app:destination="@id/BagFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/BagFragment"
+        android:name="com.example.akenasia.openworld.Bag"
+        android:label="bagFragment"
+        tools:layout="@layout/bag">
+        <action
+            android:id="@+id/bag_fragment_to_map_fragment"
+            app:destination="@id/MapFragment" />
+    </fragment>
+
+</navigation>

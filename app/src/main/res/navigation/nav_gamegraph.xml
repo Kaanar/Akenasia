@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/Chronometre"
-        android:name="com.example.akenasia.ReglesGenerales"
+        android:name="com.example.akenasia.game.ReglesGenerales"
         android:label="Chrono"
         tools:layout="@layout/regles_generales">
         <argument
@@ -20,11 +20,14 @@
         <action
             android:id="@+id/action_Regles_to_CL"
             app:destination="@id/CoupsLimitesHisto" />
+        <action
+            android:id="@+id/action_Chronometre_to_bag"
+            app:destination="@id/bag" />
     </fragment>
 
     <fragment
         android:id="@+id/ChronoHisto"
-        android:name="com.example.akenasia.Chronometre"
+        android:name="com.example.akenasia.game.Chronometre"
         android:label="Chrono"
         tools:layout="@layout/chronometre">
         <argument
@@ -42,7 +45,7 @@
 
     <fragment
         android:id="@+id/CoupsLimitesHisto"
-        android:name="com.example.akenasia.CoupsLimites"
+        android:name="com.example.akenasia.game.CoupsLimites"
         android:label="Coups_limites"
         tools:layout="@layout/coups_limites">
         <argument
@@ -63,7 +66,7 @@
 
     <fragment
         android:id="@+id/Histo"
-        android:name="com.example.akenasia.Historique"
+        android:name="com.example.akenasia.game.Historique"
         android:label="@string/fourth_fragment_label"
         tools:layout="@layout/historique">
         <argument
@@ -91,8 +94,19 @@
             android:id="@+id/action_map_fragment_to_CoupsLimitesHisto"
             app:destination="@id/CoupsLimitesHisto" />
     </fragment>
-
-
+    <fragment
+        android:id="@+id/bag"
+        android:name="com.example.akenasia.openworld.Bag"
+        android:label="activity_bag"
+        tools:layout="@layout/bag_cardview" />
+    <dialog
+        android:id="@+id/poiDialog"
+        android:name="com.example.akenasia.openworld.PoiDialog"
+        android:label="PoiDialog" >
+        <action
+            android:id="@+id/action_poiDialog_to_bag"
+            app:destination="@id/bag" />
+    </dialog>
 
 
 </navigation>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.akenasia.HomePage"
+        android:name="com.example.akenasia.home.HomePage"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/homepage">
 
@@ -18,11 +18,14 @@
         <action
             android:id="@+id/action_FirstFragment_to_map_fragment"
             app:destination="@id/map_fragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_openWorld"
+            app:destination="@id/openWorld" />
     </fragment>
 
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.akenasia.Database"
+        android:name="com.example.akenasia.home.Database"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/database">
         <action
@@ -31,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/ThirdFragment"
-        android:name="com.example.akenasia.GameMode"
+        android:name="com.example.akenasia.game.GameMode"
         android:label="@string/third_fragment_label"
         tools:layout="@layout/game_mode">
     <argument
@@ -42,8 +45,11 @@
         android:id="@+id/action_ThirdFragment_to_SecondFragment"
         app:destination="@id/SecondFragment" />
     </fragment>
-
-
+    <activity
+        android:id="@+id/openWorld"
+        android:name="com.example.akenasia.openworld.OpenWorld"
+        android:label="activity_open_world"
+        tools:layout="@layout/activity_open_world" />
 
 
 </navigation>
