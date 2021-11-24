@@ -151,7 +151,7 @@ image::images\DarkTheme.png[alt=Parcours,width=160,height=120]
 
 === Item
 
-* Création d'une table item permettant d'y stocker des items (objets), qui sont obtenables sur les POI en monde libre. Ces items sont stockés dans un sac accessible au joueur. Un item a un id, un nom et une description.
+* Création d'une table item permettant d'y stocker des items (objets). Ces items sont stockés dans un sac accessible au joueur. Un item a un id et un nom.
 
 === Monde libre
 
