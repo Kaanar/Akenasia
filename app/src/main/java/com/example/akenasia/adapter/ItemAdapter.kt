@@ -1,62 +1,33 @@
 package com.example.akenasia.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Button
+import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.navigation.findNavController
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
-import com.example.akenasia.database.Item
-import com.example.akenasia.database.Place
-import java.util.ArrayList
 
 
-class ItemAdapter : BaseAdapter() {
+class ItemAdapter (private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val desc: Array<String> ) : ArrayAdapter<String>(context, R.layout.custom_list, id) {
 
-    lateinit var context: Context
-    lateinit var item: ArrayList<Item>
     lateinit var inflater: LayoutInflater
-    lateinit var DbContext: DatabaseHandler
-
-    fun ItemAdapter(context: Context,items: ArrayList<Item>) {
-        this.context=context
-        this.item=items
-        inflater = LayoutInflater.from(context)
-    }
-
-    override fun getCount(): Int {
-       return item.size
-    }
-
-    override fun getItem(position: Int): Any {
-        return item.get(position)
-    }
-
-    override fun getItemId(position: Int): Long {
-        return 0
-    }
-
 
     @SuppressLint("ViewHolder")
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
-        DbContext = DatabaseHandler(context)
-        var conView = convertView
-        conView= inflater.inflate(R.layout.items_list, null)
+        val inflater = context.layoutInflater
+        val rowView = inflater.inflate(R.layout.items_listview, null, true)
 
-        val nomItem = conView.findViewById<View>(R.id.name_item) as TextView
-        nomItem.text =item.get(position).getItemName()
+        val idItem = rowView.findViewById<View>(R.id.ItemId) as TextView
+        val nomItem = rowView.findViewById<View>(R.id.ItemName) as TextView
+        val descrItem = rowView.findViewById<View>(R.id.ItemDescription) as TextView
 
-        val descrItem = conView.findViewById<View>(R.id.description_item) as TextView
-        descrItem.text = item.get(position).getitemDesc()
+        idItem.text = id[position]
+        nomItem.text = name[position]
+        descrItem.text = desc[position]
 
-        return conView
+        return rowView
     }
-
-
 }

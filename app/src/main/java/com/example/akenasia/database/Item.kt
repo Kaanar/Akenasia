@@ -1,9 +1,6 @@
 package com.example.akenasia.database
 
-import android.graphics.Bitmap
-
-data class Item(var Itemid: Int, var ItemName: String, var ItemDesc: String, var ItemAttack : Int,var ItemDefense: Int) {
-
+data class Item(var Itemid: Int, var ItemName: String, var ItemDesc: String) {
 
     @JvmName("getItemId")
     fun getItemid(): Int {
@@ -19,15 +16,4 @@ data class Item(var Itemid: Int, var ItemName: String, var ItemDesc: String, var
     fun getitemDesc(): String {
         return ItemDesc
     }
-
-    @JvmName("getItemPointAttack")
-    fun getItemPointAttack(): Int {
-        return ItemAttack
-    }
-
-    @JvmName("getItemPointDefense")
-    fun getItemPointDefense(): Int{
-        return ItemDefense
-    }
-
 }

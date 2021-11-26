@@ -13,21 +13,20 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     DATABASE_VERSION
 ) {
     companion object {
-        private val DATABASE_VERSION = 6
+        private val DATABASE_VERSION = 14
         private val DATABASE_NAME = "AkenasiaDatabase"
         private val TABLE_PLACE = "PlaceTable"
         private val TABLE_POSITION = "PositionTable"
         private val TABLE_ITEM = "ItemTable"
         private val TABLE_BAG = "BagTable"
+
         private val KEY_ID = "id"
         private val KEY_NAME = "name"
         private val KEY_LATITUDE = "latitude"
         private val KEY_LONGITUDE = "longitude"
         private val KEY_PARTIE = "partie"
         private val KEY_DESC = "description"
-        private val KEY_DEFENSE = "pointDefense"
-        private val KEY_ATTACK = "pointAttack"
-        private val KEY_PHOTO = "photo"
+
 
     }
 
@@ -38,15 +37,15 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db?.execSQL(CREATE_PLACE_TABLE)
 
         val CREATE_POSITION_TABLE =("CREATE TABLE " + TABLE_POSITION + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_PARTIE + " INTEGER" + ")" )
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_PARTIE + " INTEGER" + ")")
         db?.execSQL(CREATE_POSITION_TABLE)
 
         val CREATE_ITEM_TABLE =("CREATE TABLE " + TABLE_ITEM + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT," + KEY_ATTACK + "INTEGER," + KEY_DEFENSE + "INTEGER,"  + ")" )
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + " TEXT" + ")")
         db?.execSQL(CREATE_ITEM_TABLE)
 
         val CREATE_BAG_TABLE =("CREATE TABLE " + TABLE_BAG + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + "TEXT," + ")" )
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT)" )
         db?.execSQL(CREATE_BAG_TABLE)
 
     }
@@ -223,13 +222,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     fun addItem(emp: Item):Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_ID, emp.Itemid)
-        contentValues.put(KEY_NAME, emp.ItemName) // EmpModelClass Name
-        contentValues.put(KEY_DESC, emp.ItemDesc)
-        contentValues.put(KEY_ATTACK, emp.ItemAttack)
-        contentValues.put(KEY_DEFENSE, emp.ItemDefense)
-
-
+        contentValues.put(KEY_ID, emp.getItemid())
+        contentValues.put(KEY_NAME, emp.getItemName())
+        contentValues.put(KEY_DESC, emp.getitemDesc())
         // Inserting Row
         val success = db.insert(TABLE_ITEM, null,  contentValues)
         //2nd argument is String containing nullColumnHack
@@ -251,47 +246,44 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val itemId: Int
         val itemName: String
         val itemDesc: String
-        val itemAttack : Int
-        val itemDefense : Int
 
         if (cursor != null) {
             cursor.moveToFirst()
             itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
             itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
             itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
-            itemAttack = cursor.getInt(cursor.getColumnIndex("attack").toInt())
-            itemDefense = cursor.getInt(cursor.getColumnIndex("defense").toInt())
-            return Item(itemId, itemName, itemDesc, itemAttack, itemDefense)
+            return Item(itemId, itemName, itemDesc)
         }
         exitProcess(0)
     }
     //method to read an Item
-    fun viewItem():List<Item>{
-        val empList:ArrayList<Item> = ArrayList()
+    fun viewItem():List<Item> {
+        val empList: ArrayList<Item> = ArrayList()
         val selectQuery = "SELECT  * FROM $TABLE_ITEM"
         val db = this.readableDatabase
         var cursor: Cursor? = null
-        try{
+        try {
             cursor = db.rawQuery(selectQuery, null)
-        }catch (e: SQLiteException) {
+        } catch (e: SQLiteException) {
             db.execSQL(selectQuery)
             return ArrayList()
         }
         var itemId: Int
         var itemName: String
         var itemDesc: String
-        var itemAttack : Int
-        var itemDefense : Int
 
         if (cursor.moveToFirst()) {
             do {
                 itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
                 itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
                 itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
-                itemAttack = cursor.getInt(cursor.getColumnIndex("attack").toInt())
-                itemDefense = cursor.getInt(cursor.getColumnIndex("defense").toInt())
 
-                val emp= Item(itemId,itemName,itemDesc,itemAttack,itemDefense)
+                val emp = Item(
+                    Itemid = itemId,
+                    ItemName = itemName,
+                    ItemDesc = itemDesc,
+
+                )
                 empList.add(emp)
             } while (cursor.moveToNext())
         }

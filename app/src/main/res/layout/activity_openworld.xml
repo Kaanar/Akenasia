@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        tools:targetApi="24"
-        android:visibility="gone"/>
+        android:countDown="true"
+        tools:targetApi="24"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
