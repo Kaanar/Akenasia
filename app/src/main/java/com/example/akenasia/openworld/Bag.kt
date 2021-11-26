@@ -65,6 +65,44 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        Toast.makeText(this,"C'est le click", Toast.LENGTH_LONG).show()
+        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+        databaseHandler.deleteItem(
+            Item(p2, "", ""))
+        orderRecord(p2)
+        viewRecord()
+    }
+
+    private fun orderRecord(deleteId: Int) {
+        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+        //calling the viewEmployee method of DatabaseHandler class to read the records
+        val emp: List<Item> = databaseHandler.viewItem()
+        val empArrayId = Array<String>(emp.size) { "0" }
+        val empArrayName = Array<String>(emp.size) { "null" }
+        val empArrayDesc = Array<String>(emp.size) { "null" }
+
+        var index = 0
+        for (e in emp) {
+            empArrayId[index] = e.Itemid.toString()
+            empArrayName[index] = e.ItemName
+            empArrayDesc[index] = e.ItemDesc
+            if (e.Itemid < deleteId) {
+                //Toast.makeText(this, e.Itemid.toString(), Toast.LENGTH_LONG).show()
+            } else {
+                if (e.Itemid.toString().trim() != "") {
+                    val status = databaseHandler.updateItem(
+                        Item(e.Itemid,
+                            e.ItemName,
+                            e.ItemDesc,
+                        )
+                    )
+                    if (status > -1) {
+                        //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                   // Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()
+                }
+            }
+            index++
+        }
     }
 }

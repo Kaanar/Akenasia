@@ -290,9 +290,18 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         return empList
     }
 
-    /*
-    //Method to update an Item
-    fun updateItem(emp: ItemBag):Int{
+    fun deleteItem(emp: Item):Int {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID, emp.Itemid) // EmpModelClass UserId
+        // Deleting Row
+        val success = db.delete(TABLE_ITEM, "id=" + emp.Itemid, null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    fun updateItem(emp: Item):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.Itemid-1)
@@ -305,19 +314,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db.close() // Closing database connection
         return success
     }
-    //method to delete an Item
-    fun deleteItem(emp: ItemBag):Int{
-        val db = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(KEY_ID, emp.Itemid) // EmpModelClass UserId
-        // Deleting Row
-        val success = db.delete(TABLE_ITEM,"id="+emp.Itemid,null)
-        //2nd argument is String containing nullColumnHack
-        db.close() // Closing database connection
-        return success
-    }
-
-     */
 
     /*
 

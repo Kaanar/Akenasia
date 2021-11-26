@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
-import kotlinx.android.synthetic.main.poi_dialog.*
+import com.example.akenasia.database.Item
+import com.example.akenasia.database.Place
 import kotlinx.android.synthetic.main.poi_dialog.view.*
 
 
@@ -17,7 +18,6 @@ class PoiDialog : DialogFragment() {
     private lateinit var name : String
     private lateinit var latlong : String
     private lateinit var dbHandler: DatabaseHandler
-    private var thiscontext: Context? = null
 
     //On va récupérer le nom et la position du POI à partir de la classe Chronometre
 
@@ -29,8 +29,11 @@ class PoiDialog : DialogFragment() {
         rootView.PoiLatLong.text = latlong
         rootView.PoiOk.setOnClickListener() {
             //Mettre l'action à réaliser ici
-            PoiName.text = "Oui c'est le OK"
+            val emp: List<Item> = dbHandler.viewItem()
+            val id = emp.size
+            dbHandler.addItem(Item(id, "Dialogue", "test PoiDialog"))
             //add item
+            dismiss()
 
         }
         rootView.PoiCancel.setOnClickListener() {
