@@ -61,11 +61,19 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         OWmap_view.onResume()
         OWmap_view.getMapAsync(this)
 
+
+        binding.NavigationView.selectedItemId = R.id.MapClick
+
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                     R.id.QuitClick -> {
                         val intent = Intent(this, MainActivity::class.java)
+                        this.startActivity(intent)
+                        true
+                    }
+                    R.id.MapClick -> {
+                        val intent = Intent(this, OpenWorld::class.java)
                         this.startActivity(intent)
                         true
                     }
@@ -75,12 +83,14 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                         true
                     }
                     else -> {
-                        Toast.makeText(this, "Available soon",Toast.LENGTH_LONG).show()
-                       true
+                        val intent = Intent(this, Personnage::class.java)
+                        this.startActivity(intent)
+                        true
                     }
                 }
             true
         }
+
 
         CameraSwitch.setOnClickListener(){
             cameraFocus = cameraFocus != true

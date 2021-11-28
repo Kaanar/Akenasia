@@ -1,5 +1,6 @@
 package com.example.akenasia.openworld
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.akenasia.database.ItemBag
 import com.example.akenasia.R
 import com.example.akenasia.adapter.ItemAdapter
 import com.example.akenasia.databinding.BagBinding
+import com.example.akenasia.home.MainActivity
 
 class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
     private lateinit var binding: BagBinding
@@ -30,6 +32,37 @@ class Bag() : AppCompatActivity() , AdapterView.OnItemClickListener{
         itemAdapter = ItemAdapter(applicationContext, arrayList!!)
         gridView?.adapter = itemAdapter
         gridView?.onItemClickListener = this
+
+
+        binding.NavigationView.selectedItemId = R.id.BagClick
+
+
+        //Implémentation des différents choix du menu
+        binding.NavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.QuitClick -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    this.startActivity(intent)
+                    true
+                }
+                R.id.MapClick -> {
+                    val intent = Intent(this, OpenWorld::class.java)
+                    this.startActivity(intent)
+                    true
+                }
+                R.id.BagClick -> {
+                    val intent = Intent(this, Bag::class.java)
+                    this.startActivity(intent)
+                    true
+                }
+                else -> {
+                    val intent = Intent(this, Personnage::class.java)
+                    this.startActivity(intent)
+                    true
+                }
+            }
+            true
+        }
 
     }
 
