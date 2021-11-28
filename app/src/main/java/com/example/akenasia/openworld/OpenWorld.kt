@@ -16,15 +16,13 @@ import com.example.akenasia.home.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.android.synthetic.main.activity_openworld.*
 import kotlinx.android.synthetic.main.content_map.*
 import android.content.res.Resources
+import android.graphics.Color.GREEN
 import android.util.Log
 import com.example.akenasia.database.DatabaseHandler
-import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.*
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener {
 
@@ -37,6 +35,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var googleMap: GoogleMap
     private lateinit var chronometre: Chronometer
+    private lateinit var listMarker : ArrayList<LatLng>
     lateinit var dbHandler: DatabaseHandler
     private var cameraFocus: Boolean = true
 
@@ -45,6 +44,20 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         binding = ActivityOpenworldBinding.inflate(layoutInflater)
         setContentView(binding.root)
         pos = Position(this)
+
+        val a = LatLng(37.4213234578268, -122.08250150084496)
+        val b = LatLng(37.422509958470826, -122.08360254764557)
+        val c = LatLng(37.421, -122.082)
+        val d = LatLng(37.422, -122.083)
+        val e = LatLng(37.5, -122.083)
+        val f = LatLng(37.4213234578268, -122.083)
+        listMarker = ArrayList<LatLng>(6)
+        listMarker.add(a)
+        listMarker.add(b)
+        listMarker.add(c)
+        listMarker.add(d)
+        listMarker.add(e)
+        listMarker.add(f)
 
         //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment =
@@ -105,10 +118,15 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
 
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
-                pos.refreshLocation()
+                //pos.refreshLocation()
+                pos.setLongitude(pos.getLongitude() + 0.0001)
+
                 val location= LatLng(pos.getLatitude(), pos.getLongitude())
                 googleMap.clear()
-                googleMap.addMarker(MarkerOptions().position(location).title("Position"))
+                googleMap.addMarker(MarkerOptions()
+                    .position(location)
+                    .title("Current Position"))
+                viewMarker()
                 if (cameraFocus) {
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
                 }
@@ -121,11 +139,37 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     override fun onPoiClick(poi: PointOfInterest) {
         val distance = distancePoi(poi)
         val navHostFragment = supportFragmentManager       //calcul de la distance
-        if (distance < 500) {
+        if (distance < 150) {
             var dialog = PoiDialog()
             dialog.setName(updateTitle(poi))
             dialog.setLatLong(updateInfo(poi))
             dialog.show(navHostFragment, "PoiDialog") //ça pareil ça compile pas
+        }
+    }
+
+    fun viewMarker() {
+        var index = 0
+        val listLat = Array<Double>(listMarker.size) { 0.0 }
+        val listLong = Array<Double>(listMarker.size) { 0.0 }
+        for (e in listMarker) {
+
+
+            listLat[index] = e.latitude
+            listLong[index] = e.longitude
+
+            val marker = LatLng(listLat[index], listLong[index])
+
+            val distance = distanceMarker(marker)
+
+            if(distance < 150) {
+                googleMap.addMarker(MarkerOptions()
+                    .position(marker)
+                    .title(index.toString())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    .zIndex(1.0f)
+                )
+            }
+            index++
         }
     }
 
@@ -157,13 +201,20 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     }
 
     fun distancePoi(poi: PointOfInterest): Double {
-        pos.refreshLocation()
-        val navHostFragment = supportFragmentManager       //calcul de la distance
         return pos.calcul_distance(
             pos.getLatitude(),
             pos.getLongitude(),
             poi.latLng.latitude,
             poi.latLng.longitude,
+        )
+    }
+
+    fun distanceMarker(marker: LatLng): Double {
+        return pos.calcul_distance(
+            pos.getLatitude(),
+            pos.getLongitude(),
+            marker.latitude,
+            marker.longitude
         )
     }
 }
