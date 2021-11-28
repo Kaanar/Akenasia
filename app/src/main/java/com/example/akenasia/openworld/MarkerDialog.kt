@@ -8,7 +8,6 @@ import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
 import kotlinx.android.synthetic.main.marker_dialog.view.*
 
-
 class MarkerDialog : DialogFragment () {
     private lateinit var title : String
     private lateinit var info : String

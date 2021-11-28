@@ -283,7 +283,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                     ItemName = itemName,
                     ItemDesc = itemDesc,
 
-                    )
+                )
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
@@ -316,6 +316,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     }
 
     /*
+
     //method to insert an Item in a Bag
     fun addItemBag(emp: ItemBag):Long{
         val db = this.writableDatabase
@@ -323,12 +324,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         contentValues.put(KEY_ID, emp.Itemid)
         contentValues.put(KEY_NAME, emp.ItemName) // EmpModelClass Name
         contentValues.put(KEY_DESC, emp.ItemDesc)
+
         // Inserting Row
         val success = db.insert(TABLE_BAG, null,  contentValues)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
     }
+
     //methode to get an Item to a Bag
     fun getItemBag(id: Int):ItemBag{
         val db = this.readableDatabase
@@ -342,6 +345,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val itemId: Int
         val itemName: String
         val itemDesc: String
+
+
         if (cursor != null) {
             cursor.moveToFirst()
             itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
@@ -351,6 +356,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         }
         exitProcess(0)
     }
+
     //method to read an Item in a Bag
     fun viewItemBag():List<ItemBag>{
         val empList:ArrayList<ItemBag> = ArrayList()
@@ -366,17 +372,22 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         var itemId: Int
         var itemName: String
         var itemDesc: String
+
+
         if (cursor.moveToFirst()) {
             do {
                 itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
                 itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
                 itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
+
+
                 val emp= ItemBag(itemId,itemName,itemDesc)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
         return empList
     }
+
     fun deleteItemBag(emp: ItemBag):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
@@ -387,6 +398,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db.close() // Closing database connection
         return success
     }
+
      */
 
 
