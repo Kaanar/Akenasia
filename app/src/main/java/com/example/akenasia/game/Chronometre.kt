@@ -130,7 +130,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         val location = LatLng(pos.getLatitude(), pos.getLongitude(),)
         googleMap.clear()
         googleMap.addMarker(MarkerOptions().position(location).title("Position"))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 20f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
 
     }
 
