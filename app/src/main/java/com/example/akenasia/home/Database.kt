@@ -45,7 +45,6 @@ class Database : Fragment() {
         if (container != null) {
             thiscontext = container.getContext()
             dbHandler = DatabaseHandler(thiscontext!!)
-
         }
         _binding = DatabaseBinding.inflate(inflater, container, false)
         return binding.root

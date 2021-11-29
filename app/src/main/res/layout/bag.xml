@@ -2,34 +2,44 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".openworld.Bag">
 
+    <TextView
+        android:id="@+id/BagTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Bag"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/ListViewItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <GridView
-        android:id="@+id/grid_v"
-        android:layout_width="357dp"
-        android:layout_height="442dp"
-        android:columnWidth="150dp"
-        android:horizontalSpacing="15dp"
+    <ListView
+        android:id="@+id/ListViewItem"
+        android:layout_width="356dp"
+        android:layout_height="477dp"
+        android:layout_alignBaseline="@+id/BagTw"
+        android:columnWidth="100dp"
+        android:horizontalSpacing="5dp"
         android:numColumns="auto_fit"
-        android:verticalSpacing="15dp"
+        android:verticalSpacing="5dp"
         app:layout_constraintBottom_toTopOf="@+id/NavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavigationView"
-        android:layout_width="358dp"
-        android:layout_height="68dp"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
         android:layout_gravity="bottom"
-        android:translationZ="90dp"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:menu="@menu/menu_navigateur" />

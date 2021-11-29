@@ -19,6 +19,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val TABLE_POSITION = "PositionTable"
         private val TABLE_ITEM = "ItemTable"
         private val TABLE_BAG = "BagTable"
+        private val TABLE_PERSONNAGE = "PersonnnageTable"
 
         private val KEY_ID = "id"
         private val KEY_NAME = "name"
@@ -26,6 +27,15 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val KEY_LONGITUDE = "longitude"
         private val KEY_PARTIE = "partie"
         private val KEY_DESC = "description"
+        private val KEY_HP = "HP"
+        private val KEY_ATT = "ATT"
+        private val KEY_DEF = "DEF"
+        private val KEY_ARMURE = "armure"
+        private val KEY_BOUCLIER = "bouclier"
+        private val KEY_EPEE = "epee"
+        private val KEY_CHAUSSURES = "chaussures"
+        private val KEY_TYPE ="type"
+
 
 
     }
@@ -41,12 +51,20 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db?.execSQL(CREATE_POSITION_TABLE)
 
         val CREATE_ITEM_TABLE =("CREATE TABLE " + TABLE_ITEM + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + " TEXT" + ")")
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TYPE + " TEXT," + KEY_NAME + " TEXT," + KEY_DESC + " TEXT" + ")")
         db?.execSQL(CREATE_ITEM_TABLE)
 
         val CREATE_BAG_TABLE =("CREATE TABLE " + TABLE_BAG + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT)" )
         db?.execSQL(CREATE_BAG_TABLE)
+
+        val CREATE_PERSONNAGE_TABLE =("CREATE TABLE " + TABLE_PERSONNAGE + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_HP + " DOUBLE," + KEY_ATT + " DOUBLE," + KEY_DEF + " DOUBLE," + KEY_ARMURE + " INTEGER,"
+                + KEY_BOUCLIER + " INTEGER," + KEY_EPEE + " INTEGER," + KEY_CHAUSSURES + " INTEGER, FOREIGN KEY(" + KEY_ARMURE + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
+                ", FOREIGN KEY(" + KEY_BOUCLIER + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
+                ", FOREIGN KEY(" + KEY_EPEE + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
+                ", FOREIGN KEY(" + KEY_CHAUSSURES + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + "))")
+        db?.execSQL(CREATE_PERSONNAGE_TABLE)
 
     }
 
@@ -56,6 +74,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEM)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BAG)
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONNAGE)
 
         onCreate(db)
     }
@@ -223,8 +242,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.getItemid())
+        contentValues.put(KEY_TYPE, emp.getItemType())
         contentValues.put(KEY_NAME, emp.getItemName())
         contentValues.put(KEY_DESC, emp.getitemDesc())
+
         // Inserting Row
         val success = db.insert(TABLE_ITEM, null,  contentValues)
         //2nd argument is String containing nullColumnHack
@@ -244,15 +265,17 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
             db.execSQL(selectQuery)
         }
         val itemId: Int
+        val itemType: String
         val itemName: String
         val itemDesc: String
 
         if (cursor != null) {
             cursor.moveToFirst()
             itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+            itemType= cursor.getString(cursor.getColumnIndex("type").toInt())
             itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
             itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
-            return Item(itemId, itemName, itemDesc)
+            return Item(itemId,itemType, itemName, itemDesc)
         }
         exitProcess(0)
     }
@@ -269,17 +292,20 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
             return ArrayList()
         }
         var itemId: Int
+        var itemType: String
         var itemName: String
         var itemDesc: String
 
         if (cursor.moveToFirst()) {
             do {
                 itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+                itemType = cursor.getString(cursor.getColumnIndex("type").toInt())
                 itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
                 itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
 
                 val emp = Item(
                     Itemid = itemId,
+                    ItemType = itemType,
                     ItemName = itemName,
                     ItemDesc = itemDesc,
 
@@ -290,12 +316,12 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         return empList
     }
 
-    fun deleteItem(emp: Item):Int {
+    fun deleteItem(emp: Int):Int {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_ID, emp.Itemid) // EmpModelClass UserId
+        contentValues.put(KEY_ID, emp) // EmpModelClass UserId
         // Deleting Row
-        val success = db.delete(TABLE_ITEM, "id=" + emp.Itemid, null)
+        val success = db.delete(TABLE_ITEM, "id=" + emp, null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
@@ -305,6 +331,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, emp.Itemid-1)
+        contentValues.put(KEY_TYPE, emp.ItemType)
         contentValues.put(KEY_NAME, emp.ItemName)
         contentValues.put(KEY_DESC, emp.ItemDesc)
 

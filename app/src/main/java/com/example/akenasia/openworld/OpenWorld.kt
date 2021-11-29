@@ -115,7 +115,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                 }
             }
         }
-
     }
 
     //Implémentation de la méthode lorsqu'on click sur un POI

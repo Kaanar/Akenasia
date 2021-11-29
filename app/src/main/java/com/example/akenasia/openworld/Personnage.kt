@@ -2,11 +2,8 @@ package com.example.akenasia.openworld
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.R
-import com.example.akenasia.adapter.ItemAdapter
-import com.example.akenasia.database.ItemBag
 import com.example.akenasia.databinding.PersonnageBinding
 import com.example.akenasia.home.MainActivity
 
