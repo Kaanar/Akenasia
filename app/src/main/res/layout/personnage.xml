@@ -5,15 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
-        android:id="@+id/casque"
+        android:layout_width="280dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toTopOf="@+id/casque"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/personnage_pv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PV: " />
+
+        <TextView
+            android:id="@+id/personnage_att"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/personnage_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/potion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:orientation="vertical"
-        android:layout_width="74dp"
-        android:layout_height="91dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/epee">
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <ImageView
             android:layout_width="match_parent"
@@ -21,19 +48,26 @@
             android:src="@drawable/ic_add_item" />
 
         <TextView
+            android:id="@+id/potion_att"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="" />
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/potion_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/epee"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:orientation="vertical"
-        android:layout_width="74dp"
-        android:layout_height="91dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView">
+        app:layout_constraintStart_toEndOf="@+id/imageView">
 
         <ImageView
             android:layout_width="match_parent"
@@ -41,20 +75,26 @@
             android:src="@drawable/ic_add_item" />
 
         <TextView
+            android:id="@+id/epee_att"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="" />
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/epee_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bouclier"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:orientation="vertical"
-        android:layout_width="74dp"
-        android:layout_height="91dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/potion">
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <ImageView
             android:layout_width="match_parent"
@@ -62,30 +102,40 @@
             android:src="@drawable/ic_add_item" />
 
         <TextView
+            android:id="@+id/bouclier_att"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="" />
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/bouclier_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="133dp"
-        android:layout_height="202dp"
+        android:layout_width="160dp"
+        android:layout_height="270dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_personnage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
     <LinearLayout
-        android:id="@+id/potion"
+        android:id="@+id/casque"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:orientation="vertical"
-        android:layout_width="74dp"
-        android:layout_height="91dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -93,9 +143,16 @@
             android:src="@drawable/ic_add_item" />
 
         <TextView
+            android:id="@+id/casque_att"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="" />
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/casque_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

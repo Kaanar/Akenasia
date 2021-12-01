@@ -13,7 +13,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     DATABASE_VERSION
 ) {
     companion object {
-        private val DATABASE_VERSION = 14
+        private val DATABASE_VERSION = 15
         private val DATABASE_NAME = "AkenasiaDatabase"
         private val TABLE_PLACE = "PlaceTable"
         private val TABLE_POSITION = "PositionTable"
@@ -296,22 +296,24 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         var itemName: String
         var itemDesc: String
 
-        if (cursor.moveToFirst()) {
-            do {
-                itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
-                itemType = cursor.getString(cursor.getColumnIndex("type").toInt())
-                itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
-                itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
+        if (cursor != null) {
+            if(cursor.moveToFirst()){
+                do {
+                    itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+                    itemName = cursor.getString(cursor.getColumnIndex("type").toInt())
+                    itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
+                    itemDesc = cursor.getString(cursor.getColumnIndex("description").toInt())
 
-                val emp = Item(
-                    Itemid = itemId,
-                    ItemType = itemType,
-                    ItemName = itemName,
-                    ItemDesc = itemDesc,
+                    val emp = Item(
+                        Itemid = itemId,
+                        ItemType = "itemType",
+                        ItemName = itemName,
+                        ItemDesc = itemDesc,
 
-                    )
-                empList.add(emp)
-            } while (cursor.moveToNext())
+                        )
+                    empList.add(emp)
+                } while (cursor.moveToNext())
+            }
         }
         return empList
     }

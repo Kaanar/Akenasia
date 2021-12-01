@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
@@ -33,7 +32,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
         dbHandler = DatabaseHandler(applicationContext)
 
-        // Instanciation des positions en dur
+        // Instanciation des items en dur
         items = ArrayList<Item>()
         if(dbHandler.viewItem().isEmpty()) {
 
@@ -54,22 +53,18 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                 R.id.QuitClick -> {
                     val intent = Intent(this, MainActivity::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 R.id.MapClick -> {
                     val intent = Intent(this, OpenWorld::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 R.id.BagClick -> {
                     val intent = Intent(this, Bag::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 else -> {
                     val intent = Intent(this, Personnage::class.java)
                     this.startActivity(intent)
-                    true
                 }
             }
             true
@@ -79,7 +74,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private fun viewRecord(){
         //creating the instance of DatabaseHandler class
-        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+        val databaseHandler = DatabaseHandler(applicationContext)
         //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Item> = databaseHandler.viewItem()
         val empArrayId = Array<String>(emp.size){"0"}
@@ -100,14 +95,14 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+        val databaseHandler= DatabaseHandler(applicationContext)
         databaseHandler.deleteItem(p2)
         orderRecord(p2)
         viewRecord()
     }
 
     private fun orderRecord(deleteId: Int) {
-        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+        val databaseHandler = DatabaseHandler(applicationContext)
         //calling the viewEmployee method of DatabaseHandler class to read the records
         val emp: List<Item> = databaseHandler.viewItem()
         val empArrayId = Array<String>(emp.size) { "0" }
@@ -123,18 +118,13 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                 //Toast.makeText(this, e.Itemid.toString(), Toast.LENGTH_LONG).show()
             } else {
                 if (e.Itemid.toString().trim() != "") {
-                    val status = databaseHandler.updateItem(
+                    databaseHandler.updateItem(
                         Item(e.Itemid,
                             e.ItemType,
                             e.ItemName,
                             e.ItemDesc,
                         )
                     )
-                    if (status > -1) {
-                        //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    // Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()
                 }
             }
             index++
