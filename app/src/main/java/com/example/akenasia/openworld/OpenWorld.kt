@@ -51,7 +51,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         val d = LatLng(37.422, -122.083)
         val e = LatLng(37.5, -122.083)
         val f = LatLng(37.4213234578268, -122.083)
-        listMarker = ArrayList<LatLng>(6)
+        listMarker = ArrayList()
         listMarker.add(a)
         listMarker.add(b)
         listMarker.add(c)
@@ -175,12 +175,22 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                 googleMap.addMarker(MarkerOptions()
                     .position(marker)
                     .title(index.toString())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
                     .zIndex(1.0f)
                 )
             }
             index++
         }
+    }
+
+    fun randomColor(index : Int): Float {
+        if (index %3 == 0) {
+            return BitmapDescriptorFactory.HUE_CYAN
+        }
+        if (index %2 == 0) {
+            return BitmapDescriptorFactory.HUE_YELLOW
+        }
+        return BitmapDescriptorFactory.HUE_VIOLET
     }
 
     fun updateTitle(poi: PointOfInterest) : String {
