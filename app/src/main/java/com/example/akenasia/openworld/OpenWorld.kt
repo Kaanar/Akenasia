@@ -119,7 +119,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
                 }
             }
-
     }
 
     //Implémentation de la méthode lorsqu'on click sur un POI
@@ -136,7 +135,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             var dialog = PoiDialog()
             dialog.setName(updateTitle(poi))
             dialog.setLatLong(updateInfo(poi))
-            dialog.show(navHostFragment, "PoiDialog") //ça pareil ça compile pas
+            dialog.show(navHostFragment, "PoiDialog")
         }
         else {
             Toast.makeText(this, "Trop loin", Toast.LENGTH_SHORT).show()

@@ -31,8 +31,6 @@ class Database : Fragment() {
     private lateinit var pos: Position
     private lateinit var places: ArrayList<Place>
     private lateinit var dbHandler : DatabaseHandler
-    private lateinit var placeListView : ListView
-    private lateinit var positionAdapter: PositionAdapter
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!

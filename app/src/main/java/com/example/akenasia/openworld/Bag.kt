@@ -35,11 +35,10 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         // Instanciation des items en dur
         items = ArrayList<Item>()
         if(dbHandler.viewItem().isEmpty()) {
-
-            dbHandler.addItem(Item(0,ListItems.POTION.toString(), "Potion", "Yo"))
-            dbHandler.addItem(Item(1,ListItems.EPEE.toString(), "Epee", "blague humour noir epee"))
-            dbHandler.addItem(Item(2,ListItems.ARMURE.toString(), "Armure", "blague humour noire armure"))
-            dbHandler.addItem(Item(3,ListItems.BOUCLIER.toString(), "Bouclier", "blague hurmour noire bouclier"))
+            dbHandler.addItem(Item(0,ListItems.CHAUSSURES.toString(), "chaussures", "Yo",1.0,1.0))
+            dbHandler.addItem(Item(1,ListItems.EPEE.toString(), "Epee", "blague humour noir epee",3.0,0.0))
+            dbHandler.addItem(Item(2,ListItems.ARMURE.toString(), "Armure", "blague humour noire armure",0.0,3.0))
+            dbHandler.addItem(Item(3,ListItems.BOUCLIER.toString(), "Bouclier", "blague hurmour noire bouclier",1.0,2.0))
         }
         viewRecord()
         ListViewItem.onItemClickListener = this
@@ -123,7 +122,9 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                             e.ItemType,
                             e.ItemName,
                             e.ItemDesc,
-                        )
+                            e.ItemAtt,
+                            e.ItemDef,
+                            )
                     )
                 }
             }

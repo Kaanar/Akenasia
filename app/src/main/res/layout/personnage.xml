@@ -7,9 +7,9 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="280dp"
         android:layout_height="75dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/casque"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,26 +19,26 @@
             android:id="@+id/personnage_pv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="PV: " />
+            android:text="PV: "
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/personnage_att"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="ATT: " />
+            android:text="ATT: "
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/personnage_def"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="DEF: " />
+            android:text="DEF: "
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/potion"
+        android:id="@+id/chaussures"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:orientation="vertical"
@@ -52,13 +52,13 @@
             android:src="@drawable/ic_add_item" />
 
         <TextView
-            android:id="@+id/potion_att"
+            android:id="@+id/chaussures_att"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ATT: " />
 
         <TextView
-            android:id="@+id/potion_def"
+            android:id="@+id/chaussures_def"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DEF: " />
@@ -133,7 +133,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <LinearLayout
-        android:id="@+id/casque"
+        android:id="@+id/armure"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:orientation="vertical"
@@ -147,13 +147,13 @@
             android:src="@drawable/ic_add_item" />
 
         <TextView
-            android:id="@+id/casque_att"
+            android:id="@+id/armure_att"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ATT: " />
 
         <TextView
-            android:id="@+id/casque_def"
+            android:id="@+id/armure_def"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DEF: " />
@@ -161,7 +161,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavigationView"
-        android:layout_width="358dp"
+        android:layout_width="409dp"
         android:layout_height="68dp"
         android:layout_gravity="bottom"
         android:translationZ="90dp"
