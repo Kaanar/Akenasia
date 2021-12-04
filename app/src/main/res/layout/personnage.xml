@@ -7,6 +7,7 @@
 
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="280dp"
         android:layout_height="75dp"
         app:layout_constraintBottom_toTopOf="@+id/casque"
@@ -18,19 +19,22 @@
             android:id="@+id/personnage_pv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="PV: " />
 
         <TextView
             android:id="@+id/personnage_att"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="ATT: " />
 
         <TextView
             android:id="@+id/personnage_def"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ATT: " />
+            android:textAlignment="center"
+            android:text="DEF: " />
     </LinearLayout>
 
     <LinearLayout
