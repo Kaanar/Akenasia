@@ -39,7 +39,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
             dbHandler.addItem(Item(3, "Bouclier", "blague hurmour noire bouclier"))
         }
         viewRecord()
-        ListViewItem.onItemClickListener = this
+        //ListViewItem.onItemClickListener = this
     }
 
     private fun viewRecord(){
@@ -61,7 +61,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
         //creating custom ArrayAdapter
         val myListAdapter = ItemAdapter(this,empArrayId,empArrayName, empArrayDesc)
-        ListViewItem?.adapter = myListAdapter
+        //ListViewItem?.adapter = myListAdapter
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

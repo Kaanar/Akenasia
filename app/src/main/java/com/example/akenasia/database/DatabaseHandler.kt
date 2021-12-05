@@ -26,6 +26,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val KEY_LONGITUDE = "longitude"
         private val KEY_PARTIE = "partie"
         private val KEY_DESC = "description"
+        private val KEY_TYPE = "type"
 
 
     }
@@ -41,7 +42,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db?.execSQL(CREATE_POSITION_TABLE)
 
         val CREATE_ITEM_TABLE =("CREATE TABLE " + TABLE_ITEM + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + " TEXT" + ")")
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_DESC + " TEXT" +  ")")
         db?.execSQL(CREATE_ITEM_TABLE)
 
         val CREATE_BAG_TABLE =("CREATE TABLE " + TABLE_BAG + "("
@@ -198,7 +199,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         contentValues.put(KEY_NAME, emp.placeName)
         contentValues.put(KEY_LATITUDE, emp.placeLat)
         contentValues.put(KEY_LONGITUDE, emp.placeLong)
-
         // Updating Row
         val success = db.update(TABLE_PLACE, contentValues,"id="+emp.placeId,null)
         //2nd argument is String containing nullColumnHack

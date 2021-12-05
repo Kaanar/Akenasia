@@ -22,6 +22,7 @@ import android.content.res.Resources
 import android.graphics.Color.GREEN
 import android.util.Log
 import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.Item
 import com.google.android.gms.maps.model.*
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener {
@@ -36,6 +37,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     private lateinit var googleMap: GoogleMap
     private lateinit var chronometre: Chronometer
     private lateinit var listMarker : ArrayList<LatLng>
+    private lateinit var listOfItem : ArrayList<Item>
     lateinit var dbHandler: DatabaseHandler
     private var cameraFocus: Boolean = true
 
@@ -58,6 +60,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         listMarker.add(d)
         listMarker.add(e)
         listMarker.add(f)
+
 
         //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment =
@@ -137,12 +140,29 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                     .position(location)
                     .title("Current Position"))
                 viewMarker()
+
                 if (cameraFocus) {
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
                 }
             }
+
+            googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
+                if(Marker.isInfoWindowShown){
+                    Marker.hideInfoWindow()
+                } else {
+                    Marker.showInfoWindow()
+                }
+                true
+            })
         }
 
+    }
+
+    override fun onInfoWindowClick(marker : Marker) {
+        Toast.makeText(
+            this, "Info window cliked",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     //Implémentation de la méthode lorsqu'on click sur un POI
@@ -150,12 +170,14 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         val distance = distancePoi(poi)
         val navHostFragment = supportFragmentManager       //calcul de la distance
         if (distance < 150) {
+
             var dialog = PoiDialog()
             dialog.setName(updateTitle(poi))
             dialog.setLatLong(updateInfo(poi))
             dialog.show(navHostFragment, "PoiDialog") //ça pareil ça compile pas
         }
     }
+
 
     fun viewMarker() {
         var index = 0
@@ -183,6 +205,28 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         }
     }
 
+    fun ItemMarker() {
+        var id = 0
+        var index = 0
+        for (e in listMarker) {
+          if(index %3 == 0 ){
+              dbHandler.addItem(Item(id,"EPEE","Epee de combat"))
+              id ++
+            }
+          if(index %2 == 0){
+              dbHandler.addItem(Item(id,"ARMURE","Armure combat"))
+              id ++
+          }
+
+          dbHandler.addItem(Item(id,"BOUCLIER","bouclier"))
+          id ++
+
+            index++
+        }
+    }
+
+
+
     fun randomColor(index : Int): Float {
         if (index %3 == 0) {
             return BitmapDescriptorFactory.HUE_CYAN
@@ -192,6 +236,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         }
         return BitmapDescriptorFactory.HUE_VIOLET
     }
+
 
     fun updateTitle(poi: PointOfInterest) : String {
         return poi.name

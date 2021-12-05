@@ -24,7 +24,6 @@ class MarkerDialog : DialogFragment () {
         rootView.MarkerTitle.text = title
         rootView.MarkerInfo.text = info
         rootView.MarkerBtn.setOnClickListener() {
-            //On ferme le dialogue quand on clique sur le bouton
             dismiss()
         }
         return rootView
