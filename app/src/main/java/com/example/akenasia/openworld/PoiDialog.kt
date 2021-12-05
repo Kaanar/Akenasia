@@ -31,7 +31,7 @@ class PoiDialog : DialogFragment() {
             //Mettre l'action à réaliser ici
             val emp: List<Item> = dbHandler.viewItem()
             val id = emp.size
-            dbHandler.addItem(Item(id, "Dialogue", "test PoiDialog"))
+           // dbHandler.addItem(Item(id, "Dialogue", "test PoiDialog"))
             //add item
             dismiss()
 
