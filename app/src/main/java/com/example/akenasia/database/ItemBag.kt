@@ -1,12 +1,15 @@
 package com.example.akenasia.database
 
-class ItemBag{
+data class ItemBag(var ItemBagId: Int, var ItemId : Int ) {
 
-    var icons:Int ? = 0
-    var name:String ? = null
 
-    constructor(icons: Int?, name: String?) {
-        this.icons = icons
-        this.name = name
+    @JvmName("Itemid")
+    fun getItemid(): Int {
+        return ItemBagId
+    }
+
+    @JvmName("getPlaceLat1")
+    fun getItemId(): Int {
+        return ItemId
     }
 }
