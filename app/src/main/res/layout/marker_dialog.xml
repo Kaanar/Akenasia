@@ -48,35 +48,31 @@
         android:text="Le combat commence, vous restez sur vos gardes."
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BtnAttaque" />
+        app:layout_constraintTop_toBottomOf="@+id/MarkerInfo" />
 
     <TextView
         android:id="@+id/victoireText"
-        android:layout_width="match_parent"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/MarkerTitle"
         android:ems="10"
         android:text="Félicitation, vous avez gagné !"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/combatText1" />
+        app:layout_constraintTop_toBottomOf="@+id/combatText" />
 
     <TextView
         android:id="@+id/defaiteText"
-        android:layout_width="match_parent"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/MarkerTitle"
         android:ems="10"
         android:text="Dommage, vous avez perdu la bagarre ..."
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/combatText1" />
+        app:layout_constraintTop_toBottomOf="@+id/combatText" />
 
     <Button
         android:id="@+id/BtnFuite"
