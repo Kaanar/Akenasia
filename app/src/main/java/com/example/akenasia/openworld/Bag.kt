@@ -1,15 +1,21 @@
 package com.example.akenasia.openworld
 
+import ItemAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.akenasia.adapter.ItemAdapter
+import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Item
+import com.example.akenasia.database.ListItems
 import com.example.akenasia.databinding.BagBinding
+import com.example.akenasia.databinding.ItemDialogBinding
+import com.example.akenasia.databinding.ItemsListviewBinding
+import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
+import kotlinx.android.synthetic.main.items_listview.view.*
 import java.util.ArrayList
 
 class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -29,51 +35,78 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
         dbHandler = DatabaseHandler(applicationContext)
 
-        // Instanciation des positions en dur
+        // Instanciation des items en dur
         items = ArrayList<Item>()
         if(dbHandler.viewItem().isEmpty()) {
-
-            dbHandler.addItem(Item(0, "Potion", "Yo"))
-            dbHandler.addItem(Item(1, "Epee", "blague humour noir epee"))
-            dbHandler.addItem(Item(2, "Armure", "blague humour noire armure"))
-            dbHandler.addItem(Item(3, "Bouclier", "blague hurmour noire bouclier"))
+            dbHandler.addItem(Item(0,ListItems.CHAUSSURES.toString(), "chaussures", "Yo",1.0,1.0))
+            dbHandler.addItem(Item(1,ListItems.EPEE.toString(), "Epee", "blague humour noir epee",3.0,0.0))
+            dbHandler.addItem(Item(2,ListItems.ARMURE.toString(), "Armure", "blague humour noire armure",0.0,3.0))
+            dbHandler.addItem(Item(3,ListItems.BOUCLIER.toString(), "Bouclier", "blague hurmour noire bouclier",1.0,2.0))
         }
         viewRecord()
-        //ListViewItem.onItemClickListener = this
+        ListViewItem.onItemClickListener = this
+
+        binding.NavigationView.selectedItemId = R.id.BagClick
+
+        //Implémentation des différents choix du menu
+        binding.NavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.QuitClick -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    this.startActivity(intent)
+                }
+                R.id.MapClick -> {
+                    val intent = Intent(this, OpenWorld::class.java)
+                    this.startActivity(intent)
+                }
+                R.id.BagClick -> {
+                    val intent = Intent(this, Bag::class.java)
+                    this.startActivity(intent)
+                }
+                else -> {
+                    val intent = Intent(this, Personnage::class.java)
+                    this.startActivity(intent)
+                }
+            }
+            true
+        }
+
     }
 
     private fun viewRecord(){
         //creating the instance of DatabaseHandler class
-        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+        val databaseHandler = DatabaseHandler(applicationContext)
         //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Item> = databaseHandler.viewItem()
-        val empArrayId = Array<String>(emp.size){"0"}
-        val empArrayName = Array<String>(emp.size){"null"}
-        val empArrayDesc = Array<String>(emp.size){"null"}
+        val empArrayId = Array(emp.size){"0"}
+        val empArrayName = Array(emp.size){"null"}
+        val empArrayDesc = Array(emp.size){"null"}
+        val empArrayAtt = Array(emp.size){"null"}
+        val empArrayDef = Array(emp.size){"null"}
 
         var index = 0
         for(e in emp){
             empArrayId[index] = e.Itemid.toString()
             empArrayName[index] = e.ItemName
             empArrayDesc[index] = e.ItemDesc
-
+            empArrayAtt[index] = e.ItemAtt.toString()
+            empArrayDef[index] = e.ItemDef.toString()
             index++
         }
         //creating custom ArrayAdapter
-        val myListAdapter = ItemAdapter(this,empArrayId,empArrayName, empArrayDesc)
-        //ListViewItem?.adapter = myListAdapter
+        val myListAdapter = ItemAdapter(this,empArrayId,empArrayName, empArrayDesc, empArrayAtt, empArrayDef)
+        ListViewItem?.adapter = myListAdapter
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
-        databaseHandler.deleteItem(
-            Item(p2, "", ""))
+        val databaseHandler= DatabaseHandler(applicationContext)
+        databaseHandler.deleteItem(p2)
         orderRecord(p2)
         viewRecord()
     }
 
     private fun orderRecord(deleteId: Int) {
-        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+        val databaseHandler = DatabaseHandler(applicationContext)
         //calling the viewEmployee method of DatabaseHandler class to read the records
         val emp: List<Item> = databaseHandler.viewItem()
         val empArrayId = Array<String>(emp.size) { "0" }
@@ -89,17 +122,15 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                 //Toast.makeText(this, e.Itemid.toString(), Toast.LENGTH_LONG).show()
             } else {
                 if (e.Itemid.toString().trim() != "") {
-                    val status = databaseHandler.updateItem(
+                    databaseHandler.updateItem(
                         Item(e.Itemid,
+                            e.ItemType,
                             e.ItemName,
                             e.ItemDesc,
-                        )
+                            e.ItemAtt,
+                            e.ItemDef,
+                            )
                     )
-                    if (status > -1) {
-                        //Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    // Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show()
                 }
             }
             index++

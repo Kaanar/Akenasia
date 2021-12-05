@@ -11,6 +11,7 @@ import android.widget.Chronometer
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.home.MainActivity
+import com.example.akenasia.openworld.PoiDialog
 import com.example.akenasia.database.PositionTable
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
@@ -22,12 +23,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.chronometre.Chmap_view
+import kotlinx.android.synthetic.main.coups_limites.*
 
 
-
-class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
+class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnPoiClickListener {
 
 
     override lateinit var pos: Position
@@ -39,6 +41,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
     private var _binding: ChronometreBinding? = null
     private val binding get() = _binding!!
     private var thiscontext: Context? = null
+    private var lastDistance=0.0
     private lateinit var chronometre: Chronometer
 
 
@@ -48,10 +51,10 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
     ): View? {
         pos = Position(this.requireActivity())
         if (container != null) {
-            val id = this.arguments?.getInt("id")
+            val id= this.arguments?.getInt("id")
             thiscontext = container.getContext()
             dbHandler = DatabaseHandler(thiscontext!!)
-            place = dbHandler.getPlace(id!!)
+            place= dbHandler.getPlace(id!!)
         }
 
         _binding = ChronometreBinding.inflate(inflater, container, false)
@@ -70,8 +73,8 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chronometre = chronoMterPlay
-        Chgoal_X.text = place.getPlaceLat().toString()
-        Chgoal_Y.text = place.getPlaceLong().toString()
+        Chgoal_X.text=place.getPlaceLat().toString()
+        Chgoal_Y.text=place.getPlaceLong().toString()
 
         //Actualisation de la position du joueur
         pos.refreshLocation()
@@ -80,7 +83,6 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
             chronometre.start()
             isPlay = true
         }
-        //Rafraîchit la position de l'utilisateur
 
         //Quitte la partie
         ChQuitGameBT.setOnClickListener {
@@ -90,9 +92,9 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         //Envoie vers le fragment d'affichage des positions raffraîchies
         ChPositionBT.setOnClickListener {
             val bundle = Bundle()
-            bundle.putInt("id", 1)
-            bundle.putString("mode", "Chronometre")
-            findNavController().navigate(R.id.Histo, bundle)
+            bundle.putInt("id",1)
+            bundle.putString("mode","Chronometre")
+            findNavController().navigate(R.id.Histo,bundle)
         }
     }
 
@@ -117,7 +119,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
         )
 
         //Condition d'arrêt -> Victoire
-        if (distance < 1500) {
+        if (distance < 150) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
             isPlay = false
             chronometre.stop()
@@ -125,20 +127,33 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
             ChQuitGameBT.setVisibility(View.VISIBLE)
             ChPositionBT.setVisibility(View.VISIBLE)
         }
+        else {
+                if (distance < lastDistance) {
+                    ChresultTV.text = "Vous chauffez !"
+                }
+                if (distance == lastDistance) {
+                    ChresultTV.text = "AFK ?"
+                }
+                if (distance > lastDistance) {
+                    ChresultTV.text = "Vous refroidissez"
+                }
+            }
         i++
+        lastDistance = distance
         //Affichage de la position actuelle sur la map avec un marqueur
-        val location = LatLng(pos.getLatitude(), pos.getLongitude(),)
+        val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
         googleMap.clear()
         googleMap.addMarker(MarkerOptions().position(location).title("Position"))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
 
     }
 
     override fun onMapReady(p0: GoogleMap) {
         p0.let {
             googleMap = it
+            googleMap.setOnPoiClickListener(this)
         }
-        //Vérifie chaque tick du chrono
+        //Vérifie chaque tick du chrono et rafraîchit la position de l'utilisateur
         chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
             nouvelEssai()
             val currentTime: String = chronometre.getText().toString()
@@ -151,6 +166,21 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback {
                 ChPositionBT.setVisibility(View.VISIBLE)
             }
         }
+    }
+
+    override fun onPoiClick(poi: PointOfInterest) {
+        var dialog = PoiDialog()
+        dialog.setName(updateTitle(poi))
+        dialog.setLatLong(updateInfo(poi))
+        dialog.show(parentFragmentManager, "PoiDialog")
+    }
+
+    fun updateTitle(poi: PointOfInterest) : String {
+        return poi.name
+    }
+
+    fun updateInfo(poi: PointOfInterest) : String {
+        return poi.latLng.latitude.toString() +"\n" + poi.latLng.longitude.toString()
     }
 
 }

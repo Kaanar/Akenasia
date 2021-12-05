@@ -8,11 +8,12 @@
 
     <Chronometer
         android:id="@+id/OWChrono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="167dp"
+        android:layout_height="78dp"
         android:layout_margin="10dp"
         android:countDown="true"
-        tools:targetApi="24"/>
+        android:visibility="visible"
+        tools:targetApi="24" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

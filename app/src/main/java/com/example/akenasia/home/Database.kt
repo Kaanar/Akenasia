@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.akenasia.adapter.MyListAdapter
+import com.example.akenasia.adapter.PositionAdapter
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Place
@@ -29,7 +31,6 @@ class Database : Fragment() {
     private lateinit var pos: Position
     private lateinit var places: ArrayList<Place>
     private lateinit var dbHandler : DatabaseHandler
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -42,7 +43,6 @@ class Database : Fragment() {
         if (container != null) {
             thiscontext = container.getContext()
             dbHandler = DatabaseHandler(thiscontext!!)
-
         }
         _binding = DatabaseBinding.inflate(inflater, container, false)
         return binding.root
