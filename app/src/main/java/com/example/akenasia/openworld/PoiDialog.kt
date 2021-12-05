@@ -17,8 +17,8 @@ class PoiDialog : DialogFragment () {
     //On va récupérer le nom et la position du POI à partir de la classe Chronometre
 
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
-            View? {
-        var rootView: View = inflater.inflate(R.layout.poi_dialog, container, false)
+            View {
+        val rootView: View = inflater.inflate(R.layout.poi_dialog, container, false)
         rootView.PoiName.text = name
         rootView.PoiLatLong.text = latlong
         rootView.PoiOk.setOnClickListener() {

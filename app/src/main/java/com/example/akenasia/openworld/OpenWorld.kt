@@ -2,6 +2,7 @@ package com.example.akenasia.openworld
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PointOfInterest
+import kotlinx.android.synthetic.main.activity_openworld.*
+import kotlinx.android.synthetic.main.chronometre.*
+import kotlinx.android.synthetic.main.chronometre.chronoMterPlay
 import kotlinx.android.synthetic.main.content_map.*
 
 
@@ -49,17 +53,18 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             setupActionBarWithNavController(navController, appBarConfiguration)
         }
 
+
+
         //Initialisation de la position
         pos = Position(this)
-
-        //démarrage du chrono
-        chronometre = binding.OWChrono
-        chronometre.start()
 
         //Initialisation de la map
         OWmap_view.onCreate(savedInstanceState)
         OWmap_view.onResume()
         OWmap_view.getMapAsync(this)
+
+
+        binding.NavigationView.selectedItemId = R.id.MapClick
 
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
@@ -69,18 +74,25 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                         this.startActivity(intent)
                         true
                     }
+                    R.id.MapClick -> {
+                        val intent = Intent(this, OpenWorld::class.java)
+                        this.startActivity(intent)
+                        true
+                    }
                     R.id.BagClick -> {
                         val intent = Intent(this, Bag::class.java)
                         this.startActivity(intent)
                         true
                     }
                     else -> {
-                        Toast.makeText(this, "Available soon",Toast.LENGTH_LONG).show()
-                       true
+                        val intent = Intent(this, Personnage::class.java)
+                        this.startActivity(intent)
+                        true
                     }
                 }
             true
         }
+
 
         CameraSwitch.setOnClickListener(){
             cameraFocus = cameraFocus != true
@@ -89,14 +101,17 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
 
 
     override fun onMapReady(map: GoogleMap) {
-        map?.let {
+        map.let {
             googleMap = it
             googleMap.setOnPoiClickListener(this)
-
+        }
+            //Démarrage du chronomètre
+            chronometre = OWChrono
+            chronometre.base = SystemClock.elapsedRealtime()
+            chronometre.start()
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
                 pos.refreshLocation()
-                val currentTime: String = chronometre.getText().toString()
                 val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
                 googleMap.clear()
                 googleMap.addMarker(MarkerOptions().position(location).title("Position"))
@@ -104,8 +119,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
                 }
             }
-        }
-
     }
 
     //Implémentation de la méthode lorsqu'on click sur un POI
@@ -122,7 +135,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             var dialog = PoiDialog()
             dialog.setName(updateTitle(poi))
             dialog.setLatLong(updateInfo(poi))
-            dialog.show(navHostFragment, "PoiDialog") //ça pareil ça compile pas
+            dialog.show(navHostFragment, "PoiDialog")
         }
         else {
             Toast.makeText(this, "Trop loin", Toast.LENGTH_SHORT).show()

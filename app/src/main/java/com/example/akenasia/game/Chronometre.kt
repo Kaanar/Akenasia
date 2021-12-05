@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.chronometre.Chmap_view
-
+import kotlinx.android.synthetic.main.coups_limites.*
 
 
 class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnPoiClickListener {
@@ -41,6 +41,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
     private var _binding: ChronometreBinding? = null
     private val binding get() = _binding!!
     private var thiscontext: Context? = null
+    private var lastDistance=0.0
     private lateinit var chronometre: Chronometer
 
 
@@ -82,7 +83,6 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
             chronometre.start()
             isPlay = true
         }
-        //Rafraîchit la position de l'utilisateur
 
         //Quitte la partie
         ChQuitGameBT.setOnClickListener {
@@ -119,7 +119,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
         )
 
         //Condition d'arrêt -> Victoire
-        if (distance < 1500) {
+        if (distance < 150) {
             //Toast.makeText(this, "Vous avez gagné!",Toast.LENGTH_SHORT).show()
             isPlay = false
             chronometre.stop()
@@ -127,12 +127,24 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
             ChQuitGameBT.setVisibility(View.VISIBLE)
             ChPositionBT.setVisibility(View.VISIBLE)
         }
+        else {
+                if (distance < lastDistance) {
+                    ChresultTV.text = "Vous chauffez !"
+                }
+                if (distance == lastDistance) {
+                    ChresultTV.text = "AFK ?"
+                }
+                if (distance > lastDistance) {
+                    ChresultTV.text = "Vous refroidissez"
+                }
+            }
         i++
+        lastDistance = distance
         //Affichage de la position actuelle sur la map avec un marqueur
         val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
         googleMap.clear()
         googleMap.addMarker(MarkerOptions().position(location).title("Position"))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,20f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
 
     }
 
@@ -141,7 +153,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
             googleMap = it
             googleMap.setOnPoiClickListener(this)
         }
-        //Vérifie chaque tick du chrono
+        //Vérifie chaque tick du chrono et rafraîchit la position de l'utilisateur
         chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
             nouvelEssai()
             val currentTime: String = chronometre.getText().toString()
