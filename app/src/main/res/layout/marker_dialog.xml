@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,25 +10,93 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Title"
         android:textSize="30sp"
-        android:hint="Title" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/MarkerInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="20sp"
         android:layout_below="@+id/MarkerTitle"
-        android:hint="Information" />
+        android:ems="10"
+        android:hint="Information"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MarkerTitle" />
+
+    <TextView
+        android:id="@+id/TextMarker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MarkerTitle"
+        android:ems="10"
+        android:text="Un coffre se trouve à cet endroit, mais un ennemi le garde, voulez-vous l'attaquer ?"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MarkerInfo" />
+
+    <TextView
+        android:id="@+id/combatText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MarkerTitle"
+        android:ems="10"
+        android:text="Le combat commence, vous restez sur vos gardes."
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/MarkerInfo" />
+
+    <TextView
+        android:id="@+id/victoireText"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MarkerTitle"
+        android:ems="10"
+        android:text="Félicitation, vous avez gagné !"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/combatText" />
+
+    <TextView
+        android:id="@+id/defaiteText"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MarkerTitle"
+        android:ems="10"
+        android:text="Dommage, vous avez perdu la bagarre ..."
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/combatText" />
 
     <Button
-        android:id="@+id/MarkerBtn"
+        android:id="@+id/BtnFuite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/MarkerInfo"
-        android:text="Ok"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="Fuir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintStart_toEndOf="@+id/BtnAttaque"
+        app:layout_constraintTop_toBottomOf="@+id/TextMarker" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/BtnAttaque"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MarkerInfo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        android:text="Attaquer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextMarker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

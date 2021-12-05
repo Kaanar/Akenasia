@@ -24,7 +24,7 @@ class MarkerDialog : DialogFragment () {
         var rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
         rootView.MarkerTitle.text = title
         rootView.MarkerInfo.text = info
-        rootView.MarkerBtn.setOnClickListener() {
+        rootView.BtnAttaque.setOnClickListener() {
             //On ferme le dialogue quand on clique sur le bouton
             dismiss()
         }
