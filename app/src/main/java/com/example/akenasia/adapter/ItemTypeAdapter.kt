@@ -1,5 +1,6 @@
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.PersonnageTable
+import com.example.akenasia.game.Game
+import com.example.akenasia.openworld.Personnage
 import kotlinx.coroutines.processNextEventInCurrentThread
 
 
@@ -38,10 +42,11 @@ class ItemTypeAdapter (private val context: Activity, private val id: Array<Stri
         defItem.text="DEF: "+def[position]
 
         choisirBtn.setOnClickListener{
-            Toast.makeText(context,"Hello ça marche", Toast.LENGTH_LONG).show()
-
             val databaseHandler= DatabaseHandler(context)
             databaseHandler.updatePersonnage(databaseHandler.getItem(id[position].toInt()))
+
+            val intent = Intent(context, Personnage::class.java)
+            context.startActivity(intent)
         }
         return rowView
     }

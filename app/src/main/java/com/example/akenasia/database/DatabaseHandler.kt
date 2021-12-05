@@ -1,6 +1,5 @@
 package com.example.akenasia.database
 
-import android.app.Person
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -103,6 +102,29 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         return success
     }
 
+    //method to reset a Personnage's stats
+    fun resetPersonnage(emp: Int):Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        val personnage = getPersonnage(emp)
+        val id = personnage.persoId
+
+        contentValues.put(KEY_ID, personnage.persoId)
+        contentValues.put(KEY_HP, 20.0)
+        contentValues.put(KEY_ATT,12.0)
+        contentValues.put(KEY_DEF, 10.0)
+        contentValues.put(KEY_ARMURE, -1)
+        contentValues.put(KEY_BOUCLIER, -1)
+        contentValues.put(KEY_EPEE, -1)
+        contentValues.put(KEY_CHAUSSURES, -1)
+
+        // Updating Row
+        val success = db.update(TABLE_PERSONNAGE, contentValues,"id = $id  ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
     //method to update your Personnage's affected items
     fun updatePersonnage(emp: Item):Int{
         val db = this.writableDatabase
@@ -117,7 +139,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                     contentValues.put(KEY_ARMURE, personnage.armure)
                 }
                 else{
+                    contentValues.put(KEY_ATT,personnage.persoAtt +(emp.ItemAtt - getItem(personnage.armure).getItemAtt()))
+                    contentValues.put(KEY_DEF, personnage.persoDef +(emp.ItemDef - getItem(personnage.armure).getItemDef()))
                     contentValues.put(KEY_ARMURE, id)
+
                 }
                 contentValues.put(KEY_BOUCLIER, personnage.bouclier)
                 contentValues.put(KEY_EPEE, personnage.epee)
@@ -128,6 +153,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                     contentValues.put(KEY_EPEE, personnage.epee)
                 }
                 else{
+                    contentValues.put(KEY_ATT,personnage.persoAtt +(emp.ItemAtt - getItem(personnage.epee).getItemAtt()))
+                    contentValues.put(KEY_DEF, personnage.persoDef +(emp.ItemDef - getItem(personnage.epee).getItemDef()))
                     contentValues.put(KEY_EPEE, id)
                 }
                 contentValues.put(KEY_ARMURE, personnage.armure)
@@ -139,6 +166,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                     contentValues.put(KEY_BOUCLIER, personnage.bouclier)
                 }
                 else{
+                    contentValues.put(KEY_ATT,personnage.persoAtt +(emp.ItemAtt - getItem(personnage.bouclier).getItemAtt()))
+                    contentValues.put(KEY_DEF, personnage.persoDef +(emp.ItemDef - getItem(personnage.bouclier).getItemDef()))
                     contentValues.put(KEY_BOUCLIER,id)
                 }
                 contentValues.put(KEY_ARMURE, personnage.armure)
@@ -151,6 +180,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                     contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
                 }
                 else{
+                    contentValues.put(KEY_ATT,personnage.persoAtt +(emp.ItemAtt - getItem(personnage.chaussures).getItemAtt()))
+                    contentValues.put(KEY_DEF, personnage.persoDef +(emp.ItemDef - getItem(personnage.chaussures).getItemDef()))
                     contentValues.put(KEY_CHAUSSURES,id)
                 }
                 contentValues.put(KEY_ARMURE, personnage.armure)
@@ -167,8 +198,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         }
         contentValues.put(KEY_ID, personnage.persoId)
         contentValues.put(KEY_HP, personnage.persoHp)
-        contentValues.put(KEY_ATT, 12.0 + emp.ItemAtt)
-        contentValues.put(KEY_DEF, 10.0 + emp.ItemDef)
+
 
         // Updating Row
         val success = db.update(TABLE_PERSONNAGE, contentValues,"id = 1 ",null)

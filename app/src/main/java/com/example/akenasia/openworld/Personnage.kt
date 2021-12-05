@@ -3,16 +3,12 @@ package com.example.akenasia.openworld
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.databinding.PersonnageBinding
 import com.example.akenasia.home.MainActivity
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import com.example.akenasia.R
 import com.example.akenasia.databinding.ItemDialogBinding
@@ -104,20 +100,16 @@ class Personnage: AppCompatActivity() {
             infos.setText("Liste de vos chaussures")
         }
 
-
+        binding.retirer.setOnClickListener{
+            dbHandler.resetPersonnage(1)
+            this.recreate()
+        }
     }
-
-    /*override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        Toast.makeText(this,"Hello ça marche", Toast.LENGTH_LONG).show()
-
-        val databaseHandler= DatabaseHandler(this)
-        databaseHandler.updatePersonnage(databaseHandler.getItem(p2))
-
-    }*/
 
 
 
     @SuppressLint("SetTextI18n")
+    //Méthode qui affiche les stats du joueur et de ses items équipés
     private fun inflateStats() {
         if (dbHandler.viewPersonnage().isEmpty()) {
             dbHandler.createPersonnage()
