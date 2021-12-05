@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import java.io.Serializable
 import kotlin.system.exitProcess
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
@@ -102,6 +103,80 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         return success
     }
 
+    //method to update your Personnage's affected items
+    fun updatePersonnage(emp: Item):Int{
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        val id = emp.Itemid
+        val personnage = getPersonnage(1)
+        //vérifie l'item sélectionné est ne change rien si déjà équipé//
+
+        when (emp.getItemType()) {
+            "ARMURE" -> {
+                if(emp.getItemid().equals(personnage.armure)){
+                    contentValues.put(KEY_ARMURE, personnage.armure)
+                }
+                else{
+                    contentValues.put(KEY_ARMURE, id)
+                }
+                contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+                contentValues.put(KEY_EPEE, personnage.epee)
+                contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+            }
+            "EPEE" -> {
+                if(emp.getItemid().equals(personnage.epee)){
+                    contentValues.put(KEY_EPEE, personnage.epee)
+                }
+                else{
+                    contentValues.put(KEY_EPEE, id)
+                }
+                contentValues.put(KEY_ARMURE, personnage.armure)
+                contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+                contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+            }
+            "BOUCLIER" ->{
+                if(emp.getItemid().equals(personnage.bouclier)){
+                    contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+                }
+                else{
+                    contentValues.put(KEY_BOUCLIER,id)
+                }
+                contentValues.put(KEY_ARMURE, personnage.armure)
+                contentValues.put(KEY_BOUCLIER,id)
+                contentValues.put(KEY_EPEE, personnage.epee)
+                contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+            }
+            "CHAUSSURES" -> {
+                if(emp.getItemid().equals(personnage.chaussures)){
+                    contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+                }
+                else{
+                    contentValues.put(KEY_CHAUSSURES,id)
+                }
+                contentValues.put(KEY_ARMURE, personnage.armure)
+                contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+                contentValues.put(KEY_EPEE, personnage.epee)
+                contentValues.put(KEY_CHAUSSURES, id)
+            }
+            else -> {
+                contentValues.put(KEY_ARMURE, personnage.armure)
+                contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+                contentValues.put(KEY_EPEE, personnage.epee)
+                contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+            }
+        }
+        contentValues.put(KEY_ID, personnage.persoId)
+        contentValues.put(KEY_HP, personnage.persoHp)
+        contentValues.put(KEY_ATT, 12.0 + emp.ItemAtt)
+        contentValues.put(KEY_DEF, 10.0 + emp.ItemDef)
+
+        // Updating Row
+        val success = db.update(TABLE_PERSONNAGE, contentValues,"id = 1 ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
     //method to read a list of Personnage
     fun viewPersonnage():List<PersonnageTable>{
         val empList:ArrayList<PersonnageTable> = ArrayList()
@@ -152,14 +227,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         }catch (e: SQLiteException) {
             db.execSQL(selectQuery)
         }
-        var persoId: Int
-        var persoHp: Double
-        var persoAtt: Double
-        var persoDef: Double
-        var armure: Int
-        var bouclier: Int
-        var epee: Int
-        var chaussures: Int
+        val persoId: Int
+        val persoHp: Double
+        val persoAtt: Double
+        val persoDef: Double
+        val armure: Int
+        val bouclier: Int
+        val epee: Int
+        val chaussures: Int
 
         if (cursor != null) {
             cursor.moveToFirst()
@@ -178,11 +253,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         exitProcess(0)
     }
 
-
-    /*fun updatePersonnage(emp: Item)Long{
-        val db = this.writableDatabase
-        val contentValues = ContentValues()
-    }*/
 
 
 
@@ -398,6 +468,51 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         }
         else return Item(-1,"none", "vide", "", 0.0, 0.0)
     }
+
+    //method to read an Item
+    fun viewItemByType(type: Serializable):List<Item> {
+        val empList: ArrayList<Item> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_ITEM WHERE $KEY_TYPE = '$type'"
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        var itemId: Int
+        var itemType: String
+        var itemName: String
+        var itemDesc: String
+        var itemAtt: Double
+        var itemDef: Double
+
+        if (cursor != null) {
+            if(cursor.moveToFirst()){
+                do {
+                    itemId = cursor.getInt(cursor.getColumnIndex("id").toInt())
+                    itemType= cursor.getString(cursor.getColumnIndex("type").toInt())
+                    itemName = cursor.getString(cursor.getColumnIndex("name").toInt())
+                    itemDesc = cursor.getString(cursor.getColumnIndex("name").toInt())
+                    itemAtt = cursor.getDouble(cursor.getColumnIndex("ATT").toInt())
+                    itemDef = cursor.getDouble(cursor.getColumnIndex("DEF").toInt())
+
+                    val emp = Item(
+                        Itemid = itemId,
+                        ItemType = itemType,
+                        ItemName = itemName,
+                        ItemDesc = itemDesc,
+                        ItemAtt=itemAtt,
+                        ItemDef=itemDef,
+                    )
+                    empList.add(emp)
+                } while (cursor.moveToNext())
+            }
+        }
+        return empList
+    }
+
     //method to read an Item
     fun viewItem():List<Item> {
         val empList: ArrayList<Item> = ArrayList()

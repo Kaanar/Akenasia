@@ -22,6 +22,8 @@
         android:layout_width="356dp"
         android:layout_height="477dp"
         android:layout_alignBaseline="@+id/BagTw"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:columnWidth="100dp"
         android:horizontalSpacing="5dp"
         android:numColumns="auto_fit"

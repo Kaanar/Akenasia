@@ -11,8 +11,11 @@ import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Item
 import com.example.akenasia.database.ListItems
 import com.example.akenasia.databinding.BagBinding
+import com.example.akenasia.databinding.ItemDialogBinding
+import com.example.akenasia.databinding.ItemsListviewBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
+import kotlinx.android.synthetic.main.items_listview.view.*
 import java.util.ArrayList
 
 class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -42,7 +45,6 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
         viewRecord()
         ListViewItem.onItemClickListener = this
-
 
         binding.NavigationView.selectedItemId = R.id.BagClick
 
@@ -76,20 +78,23 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         val databaseHandler = DatabaseHandler(applicationContext)
         //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Item> = databaseHandler.viewItem()
-        val empArrayId = Array<String>(emp.size){"0"}
-        val empArrayName = Array<String>(emp.size){"null"}
-        val empArrayDesc = Array<String>(emp.size){"null"}
+        val empArrayId = Array(emp.size){"0"}
+        val empArrayName = Array(emp.size){"null"}
+        val empArrayDesc = Array(emp.size){"null"}
+        val empArrayAtt = Array(emp.size){"null"}
+        val empArrayDef = Array(emp.size){"null"}
 
         var index = 0
         for(e in emp){
             empArrayId[index] = e.Itemid.toString()
             empArrayName[index] = e.ItemName
             empArrayDesc[index] = e.ItemDesc
-
+            empArrayAtt[index] = e.ItemAtt.toString()
+            empArrayDef[index] = e.ItemDef.toString()
             index++
         }
         //creating custom ArrayAdapter
-        val myListAdapter = ItemAdapter(this,empArrayId,empArrayName, empArrayDesc)
+        val myListAdapter = ItemAdapter(this,empArrayId,empArrayName, empArrayDesc, empArrayAtt, empArrayDef)
         ListViewItem?.adapter = myListAdapter
     }
 

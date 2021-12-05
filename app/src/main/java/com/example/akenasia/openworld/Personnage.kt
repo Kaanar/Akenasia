@@ -3,14 +3,21 @@ package com.example.akenasia.openworld
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
-import com.example.akenasia.database.Item
 import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.databinding.PersonnageBinding
 import com.example.akenasia.home.MainActivity
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.Toast
+import com.example.akenasia.R
+import com.example.akenasia.databinding.ItemDialogBinding
+import kotlinx.android.synthetic.main.item_dialog.*
+
 
 class Personnage: AppCompatActivity() {
     private lateinit var binding: PersonnageBinding
@@ -56,14 +63,59 @@ class Personnage: AppCompatActivity() {
         }
         inflateStats()
 
+        //Affiche les armures du sac
         binding.armure.setOnClickListener{
             val infos= ItemDialog()
-            infos.setText("Liste de vos armures")
             val navHostFragment = supportFragmentManager
-            infos.show(navHostFragment,"infos")
+            val bundle = Bundle()
+            bundle.putSerializable("type",ListItems.ARMURE)
+            infos.arguments=bundle
+            infos.show(navHostFragment,"ItemDialog")
+            infos.setText("Liste de vos armures")
+        }
+        //Affiche les épées du sac
+        binding.epee.setOnClickListener{
+            val infos= ItemDialog()
+            val navHostFragment = supportFragmentManager
+            val bundle = Bundle()
+            bundle.putSerializable("type",ListItems.EPEE)
+            infos.arguments=bundle
+            infos.show(navHostFragment,"ItemDialog")
+            infos.setText("Liste de vos épées")
+        }
+        //Affiche les boucliers du sac
+        binding.bouclier.setOnClickListener{
+            val infos= ItemDialog()
+            val navHostFragment = supportFragmentManager
+            val bundle = Bundle()
+            bundle.putSerializable("type",ListItems.BOUCLIER)
+            infos.arguments=bundle
+            infos.show(navHostFragment,"ItemDialog")
+            infos.setText("Liste de vos boucliers")
+        }
+        //Affiche les chaussures du sac
+        binding.chaussures.setOnClickListener{
+            val infos= ItemDialog()
+            val navHostFragment = supportFragmentManager
+            val bundle = Bundle()
+            bundle.putSerializable("type",ListItems.CHAUSSURES)
+            infos.arguments=bundle
+            infos.show(navHostFragment,"ItemDialog")
+            infos.setText("Liste de vos chaussures")
         }
 
+
     }
+
+    /*override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        Toast.makeText(this,"Hello ça marche", Toast.LENGTH_LONG).show()
+
+        val databaseHandler= DatabaseHandler(this)
+        databaseHandler.updatePersonnage(databaseHandler.getItem(p2))
+
+    }*/
+
+
 
     @SuppressLint("SetTextI18n")
     private fun inflateStats() {

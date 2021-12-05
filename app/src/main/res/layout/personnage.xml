@@ -10,7 +10,7 @@
         android:layout_width="280dp"
         android:layout_height="75dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/casque"
+        app:layout_constraintBottom_toTopOf="@+id/armure"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
