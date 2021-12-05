@@ -69,6 +69,12 @@
             android:exported="true"
             android:label="reglages"
             tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".openworld.Personnage"
+            android:exported="true"
+            android:label="personnage"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

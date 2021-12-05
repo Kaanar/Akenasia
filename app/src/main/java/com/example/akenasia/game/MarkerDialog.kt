@@ -1,4 +1,4 @@
-package com.example.akenasia.openworld
+package com.example.akenasia.game
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
 import kotlinx.android.synthetic.main.marker_dialog.view.*
+
 
 class MarkerDialog : DialogFragment () {
     private lateinit var title : String
@@ -24,6 +25,7 @@ class MarkerDialog : DialogFragment () {
         rootView.MarkerTitle.text = title
         rootView.MarkerInfo.text = info
         rootView.MarkerBtn.setOnClickListener() {
+            //On ferme le dialogue quand on clique sur le bouton
             dismiss()
         }
         return rootView
