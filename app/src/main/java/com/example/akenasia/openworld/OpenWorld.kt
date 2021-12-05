@@ -20,12 +20,15 @@ import kotlinx.android.synthetic.main.activity_openworld.*
 import kotlinx.android.synthetic.main.content_map.*
 import android.content.res.Resources
 import android.graphics.Color.GREEN
+import android.provider.ContactsContract
 import android.util.Log
 import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Item
+import com.example.akenasia.database.ListItems
 import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE
 
-class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener {
+class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private val TAG: String = OpenWorld::class.java.getSimpleName()
 
@@ -37,6 +40,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     private lateinit var googleMap: GoogleMap
     private lateinit var chronometre: Chronometer
     private lateinit var listMarker : ArrayList<LatLng>
+    private lateinit var Markers: HashMap<LatLng,Int>
     private lateinit var listOfItem : ArrayList<Item>
     lateinit var dbHandler: DatabaseHandler
     private var cameraFocus: Boolean = true
@@ -46,7 +50,9 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         binding = ActivityOpenworldBinding.inflate(layoutInflater)
         setContentView(binding.root)
         pos = Position(this)
-
+        dbHandler= DatabaseHandler(this)
+        Markers= HashMap()
+        var i=0
         val a = LatLng(37.4213234578268, -122.08250150084496)
         val b = LatLng(37.422509958470826, -122.08360254764557)
         val c = LatLng(37.421, -122.082)
@@ -61,8 +67,12 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         listMarker.add(e)
         listMarker.add(f)
 
+        for (x in listMarker) {
+            Markers.put(e,i)
+            i++
+        }
 
-        //Mise en place d'un navcontroller pour d'eventuels fragments
+            //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.include3) as NavHostFragment?
         val navController = navHostFragment?.navController
@@ -147,16 +157,18 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             }
 
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
-                if(Marker.isInfoWindowShown){
-                    Marker.hideInfoWindow()
-                } else {
-                    Marker.showInfoWindow()
+                val index= Marker.title?.toInt()
+                if (index != null) {
+                    DropItem(index)
                 }
+                Marker.setIcon(BitmapDescriptorFactory.defaultMarker(HUE_AZURE))
+                 fun onMarkerClick(marker: Marker): Boolean{ return true }
                 true
-            })
+                })
+            }
         }
 
-    }
+
 
     override fun onInfoWindowClick(marker : Marker) {
         Toast.makeText(
@@ -185,12 +197,10 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         val listLong = Array<Double>(listMarker.size) { 0.0 }
         for (e in listMarker) {
 
-
             listLat[index] = e.latitude
             listLong[index] = e.longitude
 
-            val marker = LatLng(listLat[index], listLong[index])
-
+            val marker = LatLng( listLat[index], listLong[index])
             val distance = distanceMarker(marker)
 
             if(distance < 150) {
@@ -205,36 +215,35 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         }
     }
 
-    fun ItemMarker() {
-        var id = 0
-        var index = 0
-        for (e in listMarker) {
-          if(index %3 == 0 ){
-              dbHandler.addItem(Item(id,"EPEE","Epee de combat"))
-              id ++
+    fun DropItem(index: Int) {
+        when (index %4 ) {
+            0 -> { Toast.makeText(this,"c'est un marqueur cyan",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
             }
-          if(index %2 == 0){
-              dbHandler.addItem(Item(id,"ARMURE","Armure combat"))
-              id ++
-          }
-
-          dbHandler.addItem(Item(id,"BOUCLIER","bouclier"))
-          id ++
-
-            index++
+            1 -> {Toast.makeText(this,"c'est un marqueur jaune",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
+            }
+            2 -> { Toast.makeText(this,"c'est un marqueur vert",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
+            }
+            3 -> { Toast.makeText(this,"c'est un marqueur violet",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
+            }
         }
     }
 
 
 
     fun randomColor(index : Int): Float {
-        if (index %3 == 0) {
+        if (index %4 == 0) {
             return BitmapDescriptorFactory.HUE_CYAN
         }
-        if (index %2 == 0) {
+        if (index %4 == 1) {
             return BitmapDescriptorFactory.HUE_YELLOW
         }
-        return BitmapDescriptorFactory.HUE_VIOLET
+        return if (index %4 == 2) {
+            BitmapDescriptorFactory.HUE_GREEN
+        } else BitmapDescriptorFactory.HUE_VIOLET
     }
 
 
