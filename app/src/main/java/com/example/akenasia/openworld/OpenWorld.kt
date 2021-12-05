@@ -27,8 +27,9 @@ import com.example.akenasia.database.Item
 import com.example.akenasia.database.ListItems
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE
+import java.util.concurrent.ThreadLocalRandom
 
-class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener, GoogleMap.OnInfoWindowClickListener {
+class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener {
 
     private val TAG: String = OpenWorld::class.java.getSimpleName()
 
@@ -41,7 +42,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     private lateinit var chronometre: Chronometer
     private lateinit var listMarker : ArrayList<LatLng>
     private lateinit var Markers: HashMap<LatLng,Int>
-    private lateinit var listOfItem : ArrayList<Item>
     lateinit var dbHandler: DatabaseHandler
     private var cameraFocus: Boolean = true
 
@@ -50,8 +50,13 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         binding = ActivityOpenworldBinding.inflate(layoutInflater)
         setContentView(binding.root)
         pos = Position(this)
+        pos.refreshLocation()
         dbHandler= DatabaseHandler(this)
         Markers= HashMap()
+
+        //Peuplement de la zone du joueur
+        //Markers = FillMap(pos)
+
         var i=0
         val a = LatLng(37.4213234578268, -122.08250150084496)
         val b = LatLng(37.422509958470826, -122.08360254764557)
@@ -133,16 +138,29 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     }
 
 
+    //function qui ajoute des lieux près du joueur
+    private fun FillMap(pos: Position): HashMap<LatLng,Int>{
+        val nb=15
+        var randomLat: Double
+        var randomLong: Double
+        val markers: HashMap<LatLng,Int> = HashMap()
+        for(i in 0..nb){
+                randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
+                randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
+                markers.put(LatLng( pos.getLatitude() + randomLat, pos.getLongitude() + randomLong),i)
+        }
+        return markers
+    }
+
     override fun onMapReady(map: GoogleMap) {
-        map?.let {
+        map.let {
             googleMap = it
             googleMap.setOnPoiClickListener(this)
             visible()
 
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
-                //pos.refreshLocation()
-                pos.setLongitude(pos.getLongitude() + 0.0001)
+                pos.refreshLocation()
 
                 val location= LatLng(pos.getLatitude(), pos.getLongitude())
                 googleMap.clear()
@@ -151,31 +169,29 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                     .title("Current Position"))
                 viewMarker()
 
+
                 if (cameraFocus) {
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
                 }
             }
 
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
-                val index= Marker.title?.toInt()
-                if (index != null) {
-                    DropItem(index)
+                if(Marker.title.toString() == "Current Position"){
+                    Toast.makeText(this,"C'est vous",Toast.LENGTH_SHORT).show()
                 }
-                Marker.setIcon(BitmapDescriptorFactory.defaultMarker(HUE_AZURE))
-                 fun onMarkerClick(marker: Marker): Boolean{ return true }
+                else{
+                    val index= Marker.title?.toInt()
+                    if (index != null) {
+                        DropItem(index)
+                        Marker.isVisible=false
+                    }
+                }
                 true
-                })
-            }
+            })
+        }
         }
 
 
-
-    override fun onInfoWindowClick(marker : Marker) {
-        Toast.makeText(
-            this, "Info window cliked",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 
     //Implémentation de la méthode lorsqu'on click sur un POI
     override fun onPoiClick(poi: PointOfInterest) {
@@ -183,7 +199,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         val navHostFragment = supportFragmentManager       //calcul de la distance
         if (distance < 150) {
 
-            var dialog = PoiDialog()
+            val dialog = PoiDialog()
             dialog.setName(updateTitle(poi))
             dialog.setLatLong(updateInfo(poi))
             dialog.show(navHostFragment, "PoiDialog") //ça pareil ça compile pas
@@ -199,6 +215,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
 
             listLat[index] = e.latitude
             listLong[index] = e.longitude
+
 
             val marker = LatLng( listLat[index], listLong[index])
             val distance = distanceMarker(marker)
@@ -216,18 +233,26 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     }
 
     fun DropItem(index: Int) {
+        var id:Int
+        try{
+            id= dbHandler.viewItem().last().getItemid()+1
+        }
+        catch (e:java.util.NoSuchElementException){
+            id=1
+        }
+
         when (index %4 ) {
-            0 -> { Toast.makeText(this,"c'est un marqueur cyan",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
+            0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
             }
-            1 -> {Toast.makeText(this,"c'est un marqueur jaune",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
+            1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
             }
-            2 -> { Toast.makeText(this,"c'est un marqueur vert",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
+            2 -> { Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
             }
-            3 -> { Toast.makeText(this,"c'est un marqueur violet",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(dbHandler.viewItem().last().Itemid+1, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
+            3 -> { Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
+                this.dbHandler.addItem(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
             }
         }
     }
