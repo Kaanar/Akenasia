@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="280dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/armure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/personnage_pv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PV: "
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/personnage_att"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATT: "
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/personnage_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: "
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chaussures"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_add_item" />
+
+        <TextView
+            android:id="@+id/chaussures_att"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/chaussures_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/epee"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_add_item" />
+
+        <TextView
+            android:id="@+id/epee_att"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/epee_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bouclier"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_add_item" />
+
+        <TextView
+            android:id="@+id/bouclier_att"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/bouclier_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="135dp"
+        android:layout_height="199dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_personnage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/armure"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_add_item" />
+
+        <TextView
+            android:id="@+id/armure_att"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATT: " />
+
+        <TextView
+            android:id="@+id/armure_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEF: " />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/retirer"
+        android:layout_width="199dp"
+        android:layout_height="37dp"
+        android:text="Retirer l'équipement"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/bouclier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavigationView"
+        android:layout_width="409dp"
+        android:layout_height="68dp"
+        android:layout_gravity="bottom"
+        android:translationZ="90dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:menu="@menu/menu_navigateur" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

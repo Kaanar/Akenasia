@@ -91,7 +91,7 @@ class CoupsLimites() : Fragment(), GameFactory, OnMapReadyCallback {
     fun nouvelEssai() {
         pos.refreshLocation()
         //tests on simule des positions voir si on obtient les résulats attendus
-       if (essais == 9) {
+       /*if (essais == 9) {
             pos.setLatitude(10.0)
             pos.setLongitude(10.0)
         }
@@ -126,7 +126,7 @@ class CoupsLimites() : Fragment(), GameFactory, OnMapReadyCallback {
         if (essais == 1) {
             pos.setLatitude(48.90527388944)
             pos.setLongitude(2.21568703652)
-        }
+        }*/
 
         //Ajoute la position récupérée dans la base de données
         dbHandler.addPosition(
@@ -190,7 +190,7 @@ class CoupsLimites() : Fragment(), GameFactory, OnMapReadyCallback {
         val location= LatLng(pos.getLatitude(), pos.getLongitude(),)
         googleMap.clear()
         googleMap.addMarker(MarkerOptions().position(location).title("Position"+(10-essais).toString()))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,10f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
     }
 
     override fun onMapReady(map: GoogleMap) {

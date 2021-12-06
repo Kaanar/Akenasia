@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ItemBag">
+    tools:context=".openworld.Bag">
 
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/grid_v"
-        android:verticalSpacing="15dp"
-        android:horizontalSpacing="15dp"
-        android:columnWidth="150dp"
-        android:numColumns="auto_fit" />
-</RelativeLayout>
+    <TextView
+        android:id="@+id/BagTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Bag"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/ListViewItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/ListViewItem"
+        android:layout_width="356dp"
+        android:layout_height="477dp"
+        android:layout_alignBaseline="@+id/BagTw"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:columnWidth="100dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavigationView"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:menu="@menu/menu_navigateur" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

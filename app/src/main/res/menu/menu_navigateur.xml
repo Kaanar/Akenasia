@@ -6,12 +6,16 @@
         android:title="Quitter"
         android:icon="@drawable/ic_quit"/>
     <item
+        android:id="@+id/MapClick"
+        android:title="Map"
+        android:icon="@drawable/ic_map"/>
+    <item
         android:id="@+id/BagClick"
         android:title="Sac"
         android:icon="@drawable/ic_bag"/>
     <item
-        android:id="@+id/ProfilClick"
-        android:title="Mon profil"
+        android:id="@+id/PersonnageClick"
+        android:title="Profil"
         android:icon="@drawable/ic_profil"/>
 
 </menu>
