@@ -1,6 +1,28 @@
 @startuml Akenasia
 left to right direction
 
+package Game {
+  Historique <|-- HistoriqueDialog
+  PositionTable <|-- Historique
+  Chronometre <|-- PositionTable
+  CoupsLimites <|-- PositionTable
+  GamemodeFactory <|-- CoupsLimites
+  GamemodeFactory <|-- Chronometre
+  Gamemode <|-- GamemodeFactory
+}
+
+package OpenWorld {
+  OpenWorld <|-- Bag
+  OpenWorld <|-- MarkerDialog
+  OpenWorld <|-- Item
+  Item <|-- ListItems
+  ListItems <|-- ItemAdapter
+  OpenWorld <|-- Personnage
+  PersonnageTable <|-- Personnage
+  Personnage <|-- ItemDialog
+  ItemDialog <|-- ItemTypeAdapter
+}
+
 class Chronometre {
   chronometre : CHRONOMETER
   pos : POSITION
@@ -62,46 +84,66 @@ class PositionTable {
   partieId : INTEGER
 }
 
-interface PositionAdapter {
-  getView()
-}
-
 class Historique {
   partieId : INTEGER
   googleMap : GOOGLEMAP
   onMapReady(map: GOOGLEMAP)
-  onInfoWindowClick(marker: Marker) 
-  updateTitle(marker: Marker) : STRING
-  updateInfo(marker: Marker) : STRING
+  onInfoWindowClick(marker: MARKER) 
+  updateTitle(marker: MARKER) : STRING
+  updateInfo(marker: MARKER) : STRING
 }
 
 class DatabaseHandler {
-  addPlace()
-  viewPlace()
-  updatePlace()
-  deletePlace()
+  addRecord()
+  viewRecord()
+  updateRecord()
+  deleteRecord()
 }
 
-class MarkerDialog {
+class HistoriqueDialog {
   title : STRING
   info : STRING
   setTitle()
   setInfo()
 }
 
-class PoiDialog {
-  name : STRING
-  latlong : STRING
-  setName()
-  setLatLong()
-  use()
+class MarkerDialog {
+  title : STRING
+  info : STRING
+  dbHandler : DATASABASEHANDLER
+  attaque()
+  fuite()
 }
 
 class Item {
   itemId : INTEGER
   itemName : STRING
   itemDesc : STRING
+  itemAtt : DOUBLE
+  itemDef : DOUBLE
   Item()
+}
+
+class PersonnageTable {
+  persoId : INTEGER
+  persoHp : DOUBLE
+  persoAtt : DOUBLE
+  persoDef : DOUBLE
+  armure : INTEGER
+  bouclier : INTEGER
+  epee : INTEGER
+  chaussures : INTEGER
+  Personnage()
+}
+
+class Personnage {
+  dbHandler : DATASABASEHANDLER
+  currentPersonnage : PERSONNAGETABLE
+  armure()
+  bouclier()
+  epee()
+  chaussures()
+  retirer()
 }
 
 interface ItemAdapter {
@@ -109,24 +151,58 @@ interface ItemAdapter {
 }
 
 interface GamemodeFactory {
-  googleMap: GOOGLEMAP
-  pos: POSITION
+  googleMap : GOOGLEMAP
+  pos : POSITION
   dbHandler : DATASABASEHANDLER
-  place: PLACE
-  i: INTEGER
+  place : PLACE
+  i : INTEGER
+}
+
+enum ListItems {
+  EPEE
+  CHAUSSURES
+  ARMURE
+  BOUCLIER
+}
+
+class ItemDialog {
+  viewItem() 
+}
+
+class Bag {
+  item : ARRAYLIST<ITEM>
+  dbHandler : DATASABASEHANDLER
+  viewRecord()
+  orderRecord()
+  onItemClick()
+}
+
+interface ItemTypeAdapter {
+  getView()
 }
 
 class OpenWorld {
   pos : POSITION
   cameraFocus : BOOLEAN
+  isPlay : BOOLEAN
   googleMap : GOOGLEMAP
   chronometre : CHRONOMETER
+  listMarker : ARRAYLIST<LATLNG>
+  dbHandler : DATASABASEHANDLER
+  spawnTime : DOUBLE
+  randomLat : DOUBLE
+  randomLong : DOUBLE
   cameraSwitch()
-  itemSelected()
   onMapReady(map: GOOGLEMAP)
-  onPoiClick(poi: PointOfInterest)
-  updateName(poi: PointOfInterest) : STRING
-  updateLatLong(poi: PointOfInterest) : STRING
+  onMarkerClickListener(marker: MARKER)
+  dropItem(index: INTEGER)
+  randomColor(index: INTEGER)
+  distanceMarker(marker: LATLNG) : DOUBLE
+  viewMarker()
+}
+
+Interface PlaceAdapter {
+  getView()
 }
 
 Database <|-- MyListAdapter
@@ -138,13 +214,23 @@ GamemodeFactory <|-- Chronometre
 GamemodeFactory <|-- CoupsLimites
 Chronometre <|-- PositionTable
 CoupsLimites <|-- PositionTable
-PositionTable <|-- PositionAdapter
 PositionTable <|-- Historique
-Historique <|-- MarkerDialog
-OpenWorld <|-- PoiDialog
+OpenWorld <|-- MarkerDialog
 Gamemode <|-- OpenWorld
 OpenWorld <|-- Item
 Item <|-- ItemAdapter
 Gamemode <|-- GamemodeFactory 
+OpenWorld <|-- Personnage
+Historique <|-- HistoriqueDialog
+ListItems <|-- Item
+PersonnageTable <|-- Personnage
+DatabaseHandler <|-- CoupsLimites
+DatabaseHandler <|-- Chronometre
+DatabaseHandler <|-- OpenWorld
+Personnage <|-- ItemDialog
+OpenWorld <|-- Bag
+ItemDialog <|-- ItemTypeAdapter
+Place <|-- PlaceAdapter
+
 
 @enduml

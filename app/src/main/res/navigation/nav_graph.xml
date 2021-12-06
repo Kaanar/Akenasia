@@ -21,6 +21,19 @@
         <action
             android:id="@+id/action_FirstFragment_to_openWorld"
             app:destination="@id/openWorld" />
+        <action
+            android:id="@+id/action_FirstFragment_to_ItemFragment"
+            app:destination="@id/ItemFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ItemFragment"
+        android:name="com.example.akenasia.home.Database"
+        android:label="Itemfragment"
+        tools:layout="@layout/items_listview">
+        <action
+            android:id="@+id/action_ItemFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
     <fragment
@@ -49,7 +62,7 @@
         android:id="@+id/openWorld"
         android:name="com.example.akenasia.openworld.OpenWorld"
         android:label="activity_open_world"
-        tools:layout="@layout/activity_open_world" />
+        tools:layout="@layout/activity_openworld" />
 
 
 </navigation>

@@ -26,17 +26,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/ChresultTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:translationZ="90dp" />
 
         <TextView
+            android:id="@+id/ChresultTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -44,7 +36,7 @@
             android:elevation="15dp"
             android:gravity="center"
             android:padding="6dp"
-            android:text="Chronomètre"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />

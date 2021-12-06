@@ -94,10 +94,10 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
 
     }
     override fun onInfoWindowClick(marker: Marker) {
-        var dialog = MarkerDialog()
+        var dialog = HistoriqueDialog()
         dialog.setTitle(updateTitle(marker))
         dialog.setInfo(updateInfo(marker))
-        dialog.show(parentFragmentManager, "MarkerDialog")
+        dialog.show(parentFragmentManager, "HistoriqueDialog")
     }
     fun updateTitle(marker : Marker) : String {
         return marker.snippet.toString()

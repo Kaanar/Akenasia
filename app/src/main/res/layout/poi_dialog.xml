@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Vous obtenez un Paul ! Félicitations ! "
+        android:hint="Voici les informations du POI"
         android:textSize="26sp" />
 
     <TextView
