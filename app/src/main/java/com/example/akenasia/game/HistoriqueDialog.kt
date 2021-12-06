@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
-import kotlinx.android.synthetic.main.marker_dialog.view.*
+import kotlinx.android.synthetic.main.historique_dialog.view.*
 
 
-class MarkerDialog : DialogFragment () {
+class HistoriqueDialog : DialogFragment () {
     private lateinit var title : String
     private lateinit var info : String
 
@@ -21,10 +21,10 @@ class MarkerDialog : DialogFragment () {
 
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
             View? {
-        var rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
-        rootView.MarkerTitle.text = title
-        rootView.MarkerInfo.text = info
-        rootView.BtnAttaque.setOnClickListener() {
+        var rootView: View = inflater.inflate(R.layout.historique_dialog, container, false)
+        rootView.HistoriqueTitle.text = title
+        rootView.HistoriqueInfo.text = info
+        rootView.BtnOk.setOnClickListener() {
             //On ferme le dialogue quand on clique sur le bouton
             dismiss()
         }
