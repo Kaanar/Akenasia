@@ -46,6 +46,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     lateinit var dbHandler: DatabaseHandler
     private var cameraFocus: Boolean = true
     private var spawnTime= 0
+    private var randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
+    private var randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         //Peuplement de la zone du joueur
         //Markers = FillMap(pos)
 
+        //Ajout de markers en dur
         var i=0
         val a = LatLng(37.4213234578268, -122.08250150084496)
         val b = LatLng(37.422509958470826, -122.08360254764557)
@@ -163,8 +166,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
 
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
-                pos.refreshLocation()
                 //MAJ de l'affichage de la position du joueur
+                pos.refreshLocation()
                 val location= LatLng(pos.getLatitude(), pos.getLongitude())
                 googleMap.clear()
                 googleMap.addMarker(MarkerOptions()
@@ -181,7 +184,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
                 //Si le joueur click sur son marker
                 if(Marker.title.toString() == "Current Position"){
-                    Toast.makeText(this,"C'est vous",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show()
                 }
                 //si il click sur un ennemi
                 else if (Marker.title.toString() == "Un ennemi !"){
@@ -232,10 +235,14 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             val marker = LatLng( listLat[index], listLong[index])
             val distance = distanceMarker(marker)
 
+            if(this.spawnTime==360){
+                randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
+                randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
+            }
             //Toutes les 60 secondes, on fait pop un marker "ennemi"
-            if(this.spawnTime > 30){
+            if(this.spawnTime > 360){
                 googleMap.addMarker(MarkerOptions()
-                    .position(LatLng(37.4213234578264, -122.08250150084496))
+                    .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
                     .title("Un ennemi !")
                     .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
                     .zIndex(1.0f)
@@ -264,7 +271,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             id=1
         }
 
-        when (index %4 ) {
+        when (index %4) {
             0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
                 this.dbHandler.addItem(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
             }

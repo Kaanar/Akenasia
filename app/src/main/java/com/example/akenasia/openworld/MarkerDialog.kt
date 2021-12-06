@@ -44,13 +44,13 @@ class MarkerDialog : DialogFragment () {
             combatText.visibility = View.VISIBLE
             TextMarker.visibility = View.INVISIBLE
 
-            cbtval = (0..1).random()
+            cbtval = (0..2).random()
 
 
             if(cbtval == 0){
                 defaiteText.visibility = View.VISIBLE
             }
-            if(cbtval == 1)
+            if(cbtval == 1 || cbtval == 2)
             {
                 victoireText.visibility = View.VISIBLE
                 var id:Int
