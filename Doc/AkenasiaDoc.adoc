@@ -161,9 +161,25 @@ image::images\DarkTheme.png[alt=Parcours,width=160,height=120]
 .Monde libre
 image::images\OpenWorld.png[alt=Parcours,width=160,height=120]
 
+* Le joueur voit des marqueurs apparaître sur la map au fur et à mesure qu'il se déplace. Les marqueurs les plus éloignés disparaissent
 
+[[]]
+image::
 
+* Les lieux, représentés par des marqueurs, sont désormais différenciés par leur couleur. Les items récupérables différent en fonction de la couleur du marqueur.
 
+[[]]
+image::
+
+* Gérer/équiper son personnage. Le joueur joue un personnage avec des stats (PV/ATT/DEF) qu'il peut équiper avec les items qu'il a récupérés. Le joueur ne peut pas équiper 2 items d'un même type et peut équiper jusqu'à 4 items à la fois. Les items améliorent les stats du joueur.
+
+[[]]
+image::
+
+* Création d'ennemis et possibilité de combat. Le joueur peut rencontrer des ennemis en se déplaçant sur la map. Il peut voir les stats de l'ennemi et décider de l'affronter ou non.
+
+[[]]
+image::
 
 
 
