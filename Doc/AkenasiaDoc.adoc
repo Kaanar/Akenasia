@@ -186,7 +186,9 @@ image::Images/Stat3.PNG[alt=Parcours,width=160,height=120]
 * Création d'ennemis et possibilité de combat. Le joueur peut rencontrer des ennemis en se déplaçant sur la map. Il peut voir les stats de l'ennemi et décider de l'affronter ou non.
 
 [[]]
-image::
+image::Images/Combat1.png[alt=Parcours,width=160,height=120]
+
+image::Images/Combat2.png[alt=Parcours,width=160,height=120]
 
 
 
