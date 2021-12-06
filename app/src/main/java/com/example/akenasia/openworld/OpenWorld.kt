@@ -27,6 +27,7 @@ import com.example.akenasia.database.Item
 import com.example.akenasia.database.ListItems
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
 import java.util.concurrent.ThreadLocalRandom
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener {
@@ -44,6 +45,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     private lateinit var Markers: HashMap<LatLng,Int>
     lateinit var dbHandler: DatabaseHandler
     private var cameraFocus: Boolean = true
+    private var spawnTime= 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +79,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             i++
         }
 
+        //Indicateur qui permet de faire spawn un ennemi
             //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.include3) as NavHostFragment?
@@ -161,7 +164,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
                 pos.refreshLocation()
-
+                //MAJ de l'affichage de la position du joueur
                 val location= LatLng(pos.getLatitude(), pos.getLongitude())
                 googleMap.clear()
                 googleMap.addMarker(MarkerOptions()
@@ -169,16 +172,25 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                     .title("Current Position"))
                 viewMarker()
 
-
+                //Zoom de la caméra sur la position du joueur
                 if (cameraFocus) {
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
                 }
             }
 
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
+                //Si le joueur click sur son marker
                 if(Marker.title.toString() == "Current Position"){
                     Toast.makeText(this,"C'est vous",Toast.LENGTH_SHORT).show()
                 }
+                //si il click sur un ennemi
+                else if (Marker.title.toString() == "Un ennemi !"){
+                    val dialog = MarkerDialog()
+                    val navHostFragment = supportFragmentManager
+                    dialog.show(navHostFragment, "MarkerDialog")
+                    spawnTime=0
+                }
+                //si il il click sur un lieu
                 else{
                     val index= Marker.title?.toInt()
                     if (index != null) {
@@ -219,6 +231,17 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
 
             val marker = LatLng( listLat[index], listLong[index])
             val distance = distanceMarker(marker)
+
+            //Toutes les 60 secondes, on fait pop un marker "ennemi"
+            if(this.spawnTime > 30){
+                googleMap.addMarker(MarkerOptions()
+                    .position(LatLng(37.4213234578264, -122.08250150084496))
+                    .title("Un ennemi !")
+                    .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                    .zIndex(1.0f)
+                )
+            }
+            spawnTime+=1
 
             if(distance < 150) {
                 googleMap.addMarker(MarkerOptions()
