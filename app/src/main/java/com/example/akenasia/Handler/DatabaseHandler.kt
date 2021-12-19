@@ -1,13 +1,8 @@
-package com.example.akenasia.database
+package com.example.akenasia.Handler
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.content.ContentValues
-import android.database.Cursor
-import android.database.sqlite.SQLiteException
-import java.io.Serializable
-import kotlin.system.exitProcess
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME,null,

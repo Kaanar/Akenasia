@@ -8,15 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.akenasia.home.MainActivity
-import com.example.akenasia.openworld.MarkerDialog
 import com.example.akenasia.database.PositionTable
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Position
-import com.example.akenasia.database.PositionHandler
+import com.example.akenasia.Handler.PositionHandler
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.historique.*
 import com.google.android.gms.maps.model.LatLng

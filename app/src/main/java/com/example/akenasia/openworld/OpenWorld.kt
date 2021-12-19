@@ -18,12 +18,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.activity_openworld.*
 import kotlinx.android.synthetic.main.content_map.*
 import android.content.res.Resources
-import android.graphics.Color.GREEN
-import android.provider.ContactsContract
 import android.util.Log
+import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*
-import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
 import java.util.concurrent.ThreadLocalRandom
 

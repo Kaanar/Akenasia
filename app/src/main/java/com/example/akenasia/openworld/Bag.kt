@@ -7,16 +7,12 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.database.Item
-import com.example.akenasia.database.ItemHandler
-import com.example.akenasia.database.ListItems
+import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.databinding.BagBinding
-import com.example.akenasia.databinding.ItemDialogBinding
-import com.example.akenasia.databinding.ItemsListviewBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
-import kotlinx.android.synthetic.main.items_listview.view.*
 import java.util.ArrayList
 
 class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {

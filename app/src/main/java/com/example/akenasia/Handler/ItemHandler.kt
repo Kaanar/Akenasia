@@ -1,9 +1,10 @@
-package com.example.akenasia.database
+package com.example.akenasia.Handler
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import com.example.akenasia.database.Item
 import java.io.Serializable
 
 class ItemHandler(var context: Context): Handler {
@@ -31,7 +32,7 @@ class ItemHandler(var context: Context): Handler {
 
 
     //methode to get an Item
-    fun get(id: Int):Item{
+    fun get(id: Int): Item {
         val db = dbHandler.readableDatabase
         val selectQuery = "SELECT  * FROM ${dbHandler.TABLE_ITEM} WHERE $KEY_ID = $id"
         var cursor: Cursor? = null

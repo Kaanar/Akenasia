@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.akenasia.home.MainActivity
 import com.example.akenasia.openworld.PoiDialog
 import com.example.akenasia.R
+import com.example.akenasia.Handler.PlaceHandler
+import com.example.akenasia.Handler.PositionHandler
 import com.example.akenasia.database.*
 import com.example.akenasia.databinding.ChronometreBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,7 +25,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.chronometre.Chmap_view
-import kotlinx.android.synthetic.main.coups_limites.*
 
 
 class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnPoiClickListener {

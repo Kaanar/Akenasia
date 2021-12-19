@@ -1,6 +1,5 @@
 package com.example.akenasia.openworld
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Item
-import com.example.akenasia.database.ItemHandler
-import com.example.akenasia.database.Place
+import com.example.akenasia.Handler.ItemHandler
 import kotlinx.android.synthetic.main.poi_dialog.view.*
 
 

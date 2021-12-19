@@ -9,9 +9,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Place
-import com.example.akenasia.database.PlaceHandler
+import com.example.akenasia.Handler.PlaceHandler
 import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.*
 

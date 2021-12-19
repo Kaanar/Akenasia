@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.database.Place
 import java.util.ArrayList
 

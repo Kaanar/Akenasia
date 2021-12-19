@@ -1,9 +1,10 @@
-package com.example.akenasia.database
+package com.example.akenasia.Handler
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import com.example.akenasia.database.Place
 import kotlin.system.exitProcess
 
 class PlaceHandler(var context: Context): Handler {

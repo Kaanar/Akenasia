@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Item
-import com.example.akenasia.database.ItemHandler
+import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.database.ListItems
-import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.marker_dialog.*
 import kotlinx.android.synthetic.main.marker_dialog.view.*
-import java.io.Serializable
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.properties.Delegates

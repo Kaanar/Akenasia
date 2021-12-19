@@ -6,11 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.databinding.PersonnageBinding
 import com.example.akenasia.home.MainActivity
-import android.widget.Toast
 import com.example.akenasia.R
+import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.database.*
-import com.example.akenasia.databinding.ItemDialogBinding
-import kotlinx.android.synthetic.main.item_dialog.*
 
 
 class Personnage: AppCompatActivity() {

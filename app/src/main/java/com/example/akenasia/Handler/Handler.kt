@@ -1,6 +1,4 @@
-package com.example.akenasia.database
-
-import android.content.ContentValues
+package com.example.akenasia.Handler
 
 interface Handler {
 
