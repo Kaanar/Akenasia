@@ -13,6 +13,7 @@ import com.example.akenasia.database.PositionTable
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Position
+import com.example.akenasia.database.PositionHandler
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -24,7 +25,7 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
 
     private lateinit var googleMap: GoogleMap
     private lateinit var pos: Position
-    private lateinit var dbHandler: DatabaseHandler
+    private lateinit var dbHandler: PositionHandler
     private var PartieId=0
     private var thiscontext: Context? = null
 
@@ -43,7 +44,7 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
         pos = Position(this.requireActivity())
         if (container != null) {
             thiscontext = container.getContext()
-            dbHandler = DatabaseHandler(thiscontext!!)
+            dbHandler = PositionHandler(thiscontext!!)
             PartieId= requireArguments().getInt("id")
         }
         return inflater.inflate(R.layout.historique, container, false)
@@ -55,16 +56,15 @@ class Historique : Fragment(R.layout.fragment_maps), GoogleMap.OnInfoWindowClick
             val intent = Intent(context, MainActivity::class.java)
             this.startActivity(intent)
         }
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
     }
 
     override fun onMapReady(map: GoogleMap) {
         map?.let {
             googleMap = it
 
-            val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
+
             //calling the viewPlace method of DatabaseHandler class to read the records
-            val emp: List<PositionTable> = databaseHandler.viewPosition(PartieId)
+            val emp: List<PositionTable> = dbHandler.view(PartieId)
             val empArrayId = Array<String>(emp.size) { "0" }
             val empArrayLat = Array<String>(emp.size) { "null" }
             val empArrayLong = Array<String>(emp.size) { "null" }

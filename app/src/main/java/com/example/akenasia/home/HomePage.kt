@@ -34,6 +34,7 @@ class HomePage : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         pos = Position(this.requireActivity())
+        pos.refreshLocation()
         if (container != null) {
             thiscontext = container.getContext()
         }

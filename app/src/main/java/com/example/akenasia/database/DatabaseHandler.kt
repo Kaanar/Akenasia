@@ -12,34 +12,18 @@ import kotlin.system.exitProcess
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME,null,
     DATABASE_VERSION
-) {
+), Handler {
+
     companion object {
         private val DATABASE_VERSION = 16
         private val DATABASE_NAME = "AkenasiaDatabase"
-        private val TABLE_PLACE = "PlaceTable"
-        private val TABLE_POSITION = "PositionTable"
-        private val TABLE_ITEM = "ItemTable"
-        private val TABLE_BAG = "BagTable"
-        private val TABLE_PERSONNAGE = "PersonnnageTable"
-
-        private val KEY_ID = "id"
-        private val KEY_NAME = "name"
-        private val KEY_LATITUDE = "latitude"
-        private val KEY_LONGITUDE = "longitude"
-        private val KEY_PARTIE = "partie"
-        private val KEY_DESC = "description"
-        private val KEY_HP = "HP"
-        private val KEY_ATT = "ATT"
-        private val KEY_DEF = "DEF"
-        private val KEY_ARMURE = "armure"
-        private val KEY_BOUCLIER = "bouclier"
-        private val KEY_EPEE = "epee"
-        private val KEY_CHAUSSURES = "chaussures"
-        private val KEY_TYPE ="type"
-
-
-
     }
+
+        val TABLE_PLACE = "PlaceTable"
+        val TABLE_POSITION = "PositionTable"
+        val TABLE_ITEM = "ItemTable"
+        val TABLE_BAG = "BagTable"
+        val TABLE_PERSONNAGE = "PersonnnageTable"
 
     override fun onCreate(db: SQLiteDatabase?) {
         //creating table with fields
