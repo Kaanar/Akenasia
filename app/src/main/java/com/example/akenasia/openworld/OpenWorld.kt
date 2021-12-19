@@ -10,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.R
-import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.ActivityOpenworldBinding
 import com.example.akenasia.home.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,9 +21,7 @@ import android.content.res.Resources
 import android.graphics.Color.GREEN
 import android.provider.ContactsContract
 import android.util.Log
-import com.example.akenasia.database.DatabaseHandler
-import com.example.akenasia.database.Item
-import com.example.akenasia.database.ListItems
+import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
@@ -43,7 +40,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     private lateinit var chronometre: Chronometer
     private lateinit var listMarker : ArrayList<LatLng>
     private lateinit var Markers: HashMap<LatLng,Int>
-    lateinit var dbHandler: DatabaseHandler
+    lateinit var itemHandler: ItemHandler
     private var cameraFocus: Boolean = true
     private var spawnTime= 0
     private var randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
@@ -55,7 +52,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         setContentView(binding.root)
         pos = Position(this)
         pos.refreshLocation()
-        dbHandler= DatabaseHandler(this)
+        itemHandler= ItemHandler(this)
         Markers= HashMap()
 
         //Peuplement de la zone du joueur
@@ -265,7 +262,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     fun DropItem(index: Int) {
         var id:Int
         try{
-            id= dbHandler.viewItem().last().getItemid()+1
+            id= itemHandler.view().last().getItemid()+1
         }
         catch (e:java.util.NoSuchElementException){
             id=1
@@ -273,16 +270,16 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
 
         when (index %4) {
             0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
+                this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
             }
             1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
+                this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
             }
             2 -> { Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
+                this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
             }
             3 -> { Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
-                this.dbHandler.addItem(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
+                this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
             }
         }
     }

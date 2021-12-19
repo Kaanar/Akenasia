@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.database.ItemHandler
+import com.example.akenasia.database.PersonnageHandler
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.game.Game
 import com.example.akenasia.openworld.Personnage
@@ -42,8 +44,9 @@ class ItemTypeAdapter (private val context: Activity, private val id: Array<Stri
         defItem.text="DEF: "+def[position]
 
         choisirBtn.setOnClickListener{
-            val databaseHandler= DatabaseHandler(context)
-            databaseHandler.updatePersonnage(databaseHandler.getItem(id[position].toInt()))
+            val personnageHandler= PersonnageHandler(context)
+            val itemHandler= ItemHandler(context)
+            personnageHandler.update(itemHandler.get(id[position].toInt()))
 
             val intent = Intent(context, Personnage::class.java)
             context.startActivity(intent)

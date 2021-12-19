@@ -9,7 +9,6 @@ interface GameFactory {
 
     var googleMap: GoogleMap
     var pos: Position
-    var dbHandler : DatabaseHandler
     var place: Place
     var isPlay: Boolean
     var i: Int

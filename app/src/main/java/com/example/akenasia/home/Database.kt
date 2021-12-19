@@ -16,6 +16,7 @@ import com.example.akenasia.adapter.PositionAdapter
 import com.example.akenasia.R
 import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Place
+import com.example.akenasia.database.PlaceHandler
 import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.DatabaseBinding
 import kotlinx.android.synthetic.main.database.*
@@ -30,7 +31,7 @@ class Database : Fragment() {
     private var _binding: DatabaseBinding? = null
     private lateinit var pos: Position
     private lateinit var places: ArrayList<Place>
-    private lateinit var dbHandler : DatabaseHandler
+    private lateinit var placeHandler : PlaceHandler
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -42,7 +43,7 @@ class Database : Fragment() {
         pos = Position(this.requireActivity())
         if (container != null) {
             thiscontext = container.getContext()
-            dbHandler = DatabaseHandler(thiscontext!!)
+            placeHandler = PlaceHandler(thiscontext!!)
         }
         _binding = DatabaseBinding.inflate(inflater, container, false)
         return binding.root
@@ -54,8 +55,8 @@ class Database : Fragment() {
         viewRecord()
         // Instanciation des positions en dur
         places = ArrayList<Place>()
-        if(dbHandler.viewPlace().isEmpty()){
-            dbHandler.addPlace(
+        if(placeHandler.view().isEmpty()){
+            placeHandler.add(
                 Place(
                 0,
                 "BU",
@@ -63,7 +64,7 @@ class Database : Fragment() {
                 2.2156870365142827
             )
             )
-            dbHandler.addPlace(
+            placeHandler.add(
                 Place(
                     1,
                     "Crous",
@@ -71,7 +72,7 @@ class Database : Fragment() {
                     2.216480970382691
                 )
             )
-            dbHandler.addPlace(
+            placeHandler.add(
                 Place(
                     2,
                     "Bat G",
@@ -100,12 +101,12 @@ class Database : Fragment() {
         val latitude = pos.getLatitude().toString()
         val longitude = pos.getLongitude().toString()
 
-        val emp: List<Place> = dbHandler.viewPlace()
+        val emp: List<Place> = placeHandler.view()
 
         val id = emp.size.toString()
 
         if (id.trim() != "" && name.trim() != "" && latitude.trim() !="" && longitude.trim() != "") {
-            val status = dbHandler.addPlace(Place(Integer.parseInt(id), name, latitude.toDouble(), longitude.toDouble()))
+            val status = placeHandler.add(Place(Integer.parseInt(id), name, latitude.toDouble(), longitude.toDouble()))
             if (status > -1) {
                 Toast.makeText(activity, "Place added", Toast.LENGTH_LONG).show()
                 u_name.text.clear()
@@ -123,7 +124,7 @@ class Database : Fragment() {
     private fun orderRecord(deleteId: Int) {
         val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<Place> = databaseHandler.viewPlace()
+        val emp: List<Place> = placeHandler.view()
         val empArrayId = Array<String>(emp.size) { "0" }
         val empArrayName = Array<String>(emp.size) { "null" }
         val empArrayLat = Array<String>(emp.size) { "null" }
@@ -139,7 +140,7 @@ class Database : Fragment() {
                 Toast.makeText(activity, e.placeId.toString(), Toast.LENGTH_LONG).show()
             } else {
                 if (e.placeId.toString().trim() != "") {
-                    val status = databaseHandler.updatePlace(
+                    val status = placeHandler.update(
                         Place(e.placeId,
                             e.placeName,
                             e.placeLat,
@@ -161,7 +162,7 @@ class Database : Fragment() {
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
         //calling the viewPlace method of DatabaseHandler class to read the records
-        val emp: List<Place> = databaseHandler.viewPlace()
+        val emp: List<Place> = placeHandler.view()
         val empArrayId = Array<String>(emp.size){"0"}
         val empArrayName = Array<String>(emp.size){"null"}
         val empArrayLat = Array<String>(emp.size){"null"}
@@ -198,7 +199,7 @@ class Database : Fragment() {
             val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
             if(deleteId.trim()!=""){
                 //calling the deleteEmployee method of DatabaseHandler class to delete record
-                val status = databaseHandler.deletePlace(Place(Integer.parseInt(deleteId), "", placeLat = 0.0, placeLong = 0.0))
+                val status = placeHandler.delete(Integer.parseInt(deleteId))
                 if(status > -1){
                     Toast.makeText(activity,"Place deleted", Toast.LENGTH_LONG).show()
                     orderRecord(Integer.parseInt(deleteId))
