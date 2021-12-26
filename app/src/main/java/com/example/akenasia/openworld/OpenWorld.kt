@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
 import java.util.concurrent.ThreadLocalRandom
 
-class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickListener {
+class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
     private val TAG: String = OpenWorld::class.java.getSimpleName()
 
@@ -142,7 +142,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     override fun onMapReady(map: GoogleMap) {
         map.let {
             googleMap = it
-            googleMap.setOnPoiClickListener(this)
             visible()
 
             Toast.makeText(this,marqueurHandler.view().size.toString(),Toast.LENGTH_LONG).show()
@@ -155,7 +154,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                     marqueurHandler.add(x.key,x.value)
                 }
             }
-           else{
+          else{
                 for(i in 0..marqueurHandler.view().size){
                     marqueurHandler.delete(i)
                 }
@@ -195,10 +194,11 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
                 //si il il click sur un lieu
                 else{
                     val index= Marker.title?.toInt()
-                    Toast.makeText(this,index.toString(),Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,index.toString(),Toast.LENGTH_SHORT).show()
                     if (index != null) {
                         DropItem(index)
-                        marqueurHandler.update(index,Marker.position,0)
+                        Toast.makeText(this,index.toString(),Toast.LENGTH_SHORT).show()
+                        marqueurHandler.update(index,Marker.position,2)
                     }
                 }
                 true
@@ -210,15 +210,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
     fun viewMarker() {
         var index = 0
         val listLatLng=marqueurHandler.view()
-        val listLat = Array<Double>(marqueurHandler.view().size) { 0.0 }
-        val listLong = Array<Double>(marqueurHandler.view().size) { 0.0 }
         for (e in listLatLng) {
-
-            listLat[index] = e.key.latitude
-            listLong[index] = e.key.longitude
-
-
-            val marker = LatLng( listLat[index], listLong[index])
+            val marker = LatLng( e.key.latitude, e.key.longitude)
             val distance = distanceMarker(marker)
 
             if(this.spawnTime==60){
@@ -259,16 +252,16 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, GoogleMap.OnPoiClickLi
         }
 
         when (index %4) {
-            0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
+            0 -> { //Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
             }
-            1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+            1 -> {//Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
             }
-            2 -> { Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
+            2 -> { //Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
             }
-            3 -> { Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
+            3 -> { //Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
             }
         }

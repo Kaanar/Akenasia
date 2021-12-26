@@ -59,7 +59,7 @@ class MarqueurHandler(var context : Context): Handler {
     //method to read a list of Position
     fun view(): HashMap<LatLng,Int> {
         val empList:HashMap<LatLng,Int> = HashMap()
-        val selectQuery = "SELECT * FROM ${dbHandler.TABLE_MARQUEUR}"
+        val selectQuery = "SELECT * FROM ${dbHandler.TABLE_MARQUEUR} order by $KEY_VISIBLE desc"
         val db = dbHandler.readableDatabase
         var cursor: Cursor? = null
         try{
@@ -73,14 +73,16 @@ class MarqueurHandler(var context : Context): Handler {
 
 
         if (cursor != null) {
-            cursor.moveToFirst()
-            do {
-                posLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
-                posLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
-                visible = cursor.getInt(cursor.getColumnIndex("visible").toInt())
-                val emp= LatLng(posLat,posLong)
-                empList.put(emp,visible)
-            } while (cursor.moveToNext())
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast) {
+                    posLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
+                    posLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
+                    visible = cursor.getInt(cursor.getColumnIndex("visible").toInt())
+                    val emp= LatLng(posLat,posLong)
+                    empList[emp] = visible
+                    cursor.moveToNext()
+                }
+            }
         }
         return empList
     }
