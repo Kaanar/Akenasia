@@ -49,16 +49,15 @@ class Position(context: Context) {
 
         }
         fusedLocationProviderClient = FusedLocationProviderClient(context)
-        val task =
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { position: Location? ->
-                if (position != null) {
-                    this.latitude = position.latitude
-                    this.longitude = position.longitude
-                } else {
-                    this.latitude = 0.0
-                    this.longitude = 0.0
-                }
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener { position: Location? ->
+            if (position != null) {
+                this.latitude = position.latitude
+                this.longitude = position.longitude
+            } else {
+                this.latitude = 0.0
+                this.longitude = 0.0
             }
+        }
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -143,7 +142,7 @@ class Position(context: Context) {
             .checkLocationSettings(builder.build())
         result.addOnCompleteListener(OnCompleteListener<LocationSettingsResponse?> { task ->
             try {
-                val response = task.getResult(ApiException::class.java)
+                task.getResult(ApiException::class.java)
             } catch (e: ApiException) {
                 when (e.statusCode) {
                     LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
@@ -158,26 +157,6 @@ class Position(context: Context) {
             }
         })
     }
-    //demande la permission de récupérer les coordonnées GPS
-    //Si c'est accepté, récupère les coordonnées GPS de l'appareil et les stocke dans l'instance
-    /*fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED) {
-            return
-        }
-        val task =
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { position: Location? ->
-                if (position != null) {
-                    this.latitude = position.latitude
-                    this.longitude = position.longitude
-                } else {
-                    this.latitude = 0.0
-                    this.longitude = 0.0
-                }*/
-
 
     fun calcul_distance(lat1: Double, long1: Double, lat2: Double, long2: Double): Double {
         val d2r = 0.0174532925199433

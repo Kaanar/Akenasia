@@ -10,7 +10,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 ), Handler {
 
     companion object {
-        private val DATABASE_VERSION = 16
+        private val DATABASE_VERSION = 17
         private val DATABASE_NAME = "AkenasiaDatabase"
     }
 
@@ -19,6 +19,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val TABLE_ITEM = "ItemTable"
         val TABLE_BAG = "BagTable"
         val TABLE_PERSONNAGE = "PersonnnageTable"
+        val TABLE_MARQUEUR = "MarqueurTable"
+
 
     override fun onCreate(db: SQLiteDatabase?) {
         //creating table with fields
@@ -46,6 +48,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                 ", FOREIGN KEY(" + KEY_CHAUSSURES + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + "))")
         db?.execSQL(CREATE_PERSONNAGE_TABLE)
 
+        val CREATE_MARQUEUR_TABLE =("CREATE TABLE " + TABLE_MARQUEUR + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_VISIBLE + " INTEGER" + ")")
+        db?.execSQL(CREATE_MARQUEUR_TABLE)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -55,6 +61,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEM)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BAG)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONNAGE)
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MARQUEUR)
 
         onCreate(db)
     }
