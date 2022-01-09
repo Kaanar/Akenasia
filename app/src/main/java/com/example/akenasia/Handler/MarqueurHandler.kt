@@ -57,9 +57,9 @@ class MarqueurHandler(var context : Context): Handler {
     }
 
     //method to read a list of Position
-    fun view(): HashMap<LatLng,Int> {
-        val empList:HashMap<LatLng,Int> = HashMap()
-        val selectQuery = "SELECT * FROM ${dbHandler.TABLE_MARQUEUR} order by $KEY_VISIBLE desc"
+    fun view(): HashMap<Int,Pair<LatLng,Int>> {
+        val empList:HashMap<Int,Pair<LatLng,Int>> = HashMap()
+        val selectQuery = "SELECT * FROM ${dbHandler.TABLE_MARQUEUR}"
         val db = dbHandler.readableDatabase
         var cursor: Cursor? = null
         try{
@@ -67,21 +67,22 @@ class MarqueurHandler(var context : Context): Handler {
         }catch (e: SQLiteException) {
             db.execSQL(selectQuery)
         }
+        var posId: Int
         var posLat: Double
         var posLong: Double
         var visible: Int
 
-
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                while (!cursor.isAfterLast) {
+                do{
+                    posId = cursor.getInt(cursor.getColumnIndex("id").toInt())
                     posLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
                     posLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
                     visible = cursor.getInt(cursor.getColumnIndex("visible").toInt())
                     val emp= LatLng(posLat,posLong)
-                    empList[emp] = visible
-                    cursor.moveToNext()
-                }
+                    val marker: Pair<LatLng,Int> = Pair(emp,visible)
+                    empList[posId] = marker
+                } while (cursor.moveToNext())
             }
         }
         return empList
@@ -98,6 +99,15 @@ class MarqueurHandler(var context : Context): Handler {
         return success
     }
 
+    fun deleteAll(): Int{
+        val db = dbHandler.writableDatabase
+        // Deleting Row
+        val success = db.delete(dbHandler.TABLE_MARQUEUR,null,null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
     fun update(id: Int, emp: LatLng, visible: Int): Int {
         val db = dbHandler.writableDatabase
         val contentValues = ContentValues()
@@ -105,7 +115,6 @@ class MarqueurHandler(var context : Context): Handler {
         contentValues.put(KEY_LATITUDE, emp.latitude)
         contentValues.put(KEY_LONGITUDE, emp.longitude)
         contentValues.put(KEY_VISIBLE, visible)
-
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_MARQUEUR, contentValues,"id="+id,null)

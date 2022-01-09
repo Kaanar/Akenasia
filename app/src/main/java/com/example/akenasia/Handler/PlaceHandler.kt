@@ -54,7 +54,7 @@ class PlaceHandler(var context: Context): Handler {
         // Inserting Row
         val success = db.insert(dbHandler.TABLE_PLACE, null,  contentValues)
         //2nd argument is String containing nullColumnHack
-        db.close() // Closing database connection
+        //db.close() // Closing database connection
         return success
     }
 

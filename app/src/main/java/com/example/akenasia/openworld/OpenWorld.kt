@@ -125,7 +125,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         var randomLong: Double
         val markers: HashMap<Int,LatLng> = HashMap()
         pos.refreshLocation()
-        for(i in 0..nb){
+        for(i in 1..nb){
             randomLat = ThreadLocalRandom.current().nextDouble(0.000,0.10)
             randomLong = ThreadLocalRandom.current().nextDouble(0.000,0.10)
             randomradius = ThreadLocalRandom.current().nextInt(40)
@@ -149,16 +149,13 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             //Peuplement de latlng dans la bdd
             if(marqueurHandler.view().isEmpty()){
                 Markers=FillMap()
-                Toast.makeText(this,Markers.size.toString(),Toast.LENGTH_LONG).show()
                 for(x in Markers){
                     marqueurHandler.add(x.key,x.value)
                 }
             }
-          else{
-                for(i in 0..marqueurHandler.view().size){
-                    marqueurHandler.delete(i)
-                }
-            }
+         /* else{
+                    marqueurHandler.deleteAll()
+            }*/
 
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
@@ -197,7 +194,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     Toast.makeText(this,index.toString(),Toast.LENGTH_SHORT).show()
                     if (index != null) {
                         DropItem(index)
-                        Toast.makeText(this,index.toString(),Toast.LENGTH_SHORT).show()
                         marqueurHandler.update(index,Marker.position,2)
                     }
                 }
@@ -208,11 +204,11 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
 
     fun viewMarker() {
-        var index = 0
         val listLatLng=marqueurHandler.view()
         for (e in listLatLng) {
-            val marker = LatLng( e.key.latitude, e.key.longitude)
+            val marker = LatLng(e.value.first.latitude, e.value.first.longitude)
             val distance = distanceMarker(marker)
+            val index = e.key
 
             if(this.spawnTime==60){
                 randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
@@ -230,7 +226,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             spawnTime+=1
 
             //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
-            if(distance < 1500 && e.value==1 ) {
+            if(distance < 1500 && e.value.second==1 ) {
                 googleMap.addMarker(MarkerOptions()
                     .position(marker)
                     .title(index.toString())
@@ -238,7 +234,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     .zIndex(1.0f)
                 )
            }
-            index++
         }
     }
 
@@ -267,8 +262,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         }
     }
 
-
-
     fun randomColor(index : Int): Float {
         if (index %4 == 0) {
             return BitmapDescriptorFactory.HUE_CYAN
@@ -279,15 +272,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         return if (index %4 == 2) {
             BitmapDescriptorFactory.HUE_GREEN
         } else BitmapDescriptorFactory.HUE_VIOLET
-    }
-
-
-    fun updateTitle(poi: PointOfInterest) : String {
-        return poi.name
-    }
-
-    fun updateInfo(poi: PointOfInterest) : String {
-        return poi.latLng.latitude.toString() +"\n" + poi.latLng.longitude.toString()
     }
 
     fun visible() {
@@ -307,15 +291,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         } catch (e: Resources.NotFoundException) {
             Log.e(TAG, "Can't find style. Error: ", e)
         }
-    }
-
-    fun distancePoi(poi: PointOfInterest): Double {
-        return pos.calcul_distance(
-            pos.getLatitude(),
-            pos.getLongitude(),
-            poi.latLng.latitude,
-            poi.latLng.longitude,
-        )
     }
 
     fun distanceMarker(marker: LatLng): Double {
