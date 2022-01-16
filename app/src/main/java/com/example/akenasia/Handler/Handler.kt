@@ -33,5 +33,7 @@ interface Handler {
         get() = "type"
     val KEY_VISIBLE: String
         get() = "visible"
+    val KEY_LASTUPDATED: String
+        get() = "last_updated"
 
 }

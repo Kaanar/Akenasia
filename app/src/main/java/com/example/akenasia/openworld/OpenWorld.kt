@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.R
 import com.example.akenasia.databinding.ActivityOpenworldBinding
 import com.example.akenasia.home.MainActivity
@@ -19,11 +18,13 @@ import kotlinx.android.synthetic.main.activity_openworld.*
 import kotlinx.android.synthetic.main.content_map.*
 import android.content.res.Resources
 import android.util.Log
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.MarqueurHandler
 import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
+import java.time.LocalTime
 import java.util.concurrent.ThreadLocalRandom
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
@@ -43,8 +44,17 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     lateinit var marqueurHandler: MarqueurHandler
     private var cameraFocus: Boolean = true
     private var spawnTime= 0
+
+
+    //Valeurs LatLong
     private var randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
     private var randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
+    //Valeur random pour la position du marker ennemi
+    private var randomPosition = ThreadLocalRandom.current().nextInt(0,4)
+    //Valeur random pour la fréquence d'appartition du marker ennemi
+    private var randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,30000)
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +66,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         marqueurHandler= MarqueurHandler(this)
         Markers= HashMap()
 
+        val x = LocalTime.now()
+        Toast.makeText(this,x.toString(),Toast.LENGTH_LONG).show()
 
         //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment =
@@ -144,7 +156,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             googleMap = it
             visible()
 
-            Toast.makeText(this,marqueurHandler.view().size.toString(),Toast.LENGTH_LONG).show()
 
             //Peuplement de latlng dans la bdd
             if(marqueurHandler.view().isEmpty()){
@@ -153,9 +164,9 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     marqueurHandler.add(x.key,x.value)
                 }
             }
-         /* else{
-                    marqueurHandler.deleteAll()
-            }*/
+            else{
+                marqueurHandler.deleteAll()
+            }
 
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
@@ -187,14 +198,15 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     val navHostFragment = supportFragmentManager
                     dialog.show(navHostFragment, "MarkerDialog")
                     spawnTime=0
+                    randomPosition = ThreadLocalRandom.current().nextInt(0,4)
+                    randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,30000)
                 }
                 //si il il click sur un lieu
                 else{
                     val index= Marker.title?.toInt()
-                    Toast.makeText(this,index.toString(),Toast.LENGTH_SHORT).show()
                     if (index != null) {
                         DropItem(index)
-                        marqueurHandler.update(index,Marker.position,2)
+                        marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
                     }
                 }
                 true
@@ -206,27 +218,51 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     fun viewMarker() {
         val listLatLng=marqueurHandler.view()
         for (e in listLatLng) {
-            val marker = LatLng(e.value.first.latitude, e.value.first.longitude)
+            val marker = LatLng(e.getMarqueurLocation().latitude,e.getMarqueurLocation().longitude)
             val distance = distanceMarker(marker)
-            val index = e.key
+            val index = e.getMarqueurId()
 
-            if(this.spawnTime==60){
+            //Affichage de l'ennemi à refactorer dans une autre classe
+
+            if(this.spawnTime== randomSpawnTime ){
                 randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
                 randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
             }
-            //Toutes les 60 secondes, on fait pop un marker "ennemi"
-            if(this.spawnTime > 60){
-                googleMap.addMarker(MarkerOptions()
-                    .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
-                    .title("Un ennemi !")
-                    .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
-                    .zIndex(1.0f)
-                )
+            //Toutes les randomSpawnTime secondes, on fait pop un marker "ennemi"
+            if(this.spawnTime > randomSpawnTime){
+
+                when (randomPosition%4){
+                    0->googleMap.addMarker(MarkerOptions()
+                        .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
+                        .title("Un ennemi !")
+                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                        .zIndex(1.0f)
+                    )
+                    1->googleMap.addMarker(MarkerOptions()
+                        .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() - randomLong))
+                        .title("Un ennemi !")
+                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                        .zIndex(1.0f)
+                    )
+                    2->googleMap.addMarker(MarkerOptions()
+                        .position(LatLng(pos.getLatitude() - randomLat, pos.getLongitude() + randomLong))
+                        .title("Un ennemi !")
+                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                        .zIndex(1.0f)
+                    )
+                    3->googleMap.addMarker(MarkerOptions()
+                        .position(LatLng(pos.getLatitude() - randomLat, pos.getLongitude() - randomLong))
+                        .title("Un ennemi !")
+                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                        .zIndex(1.0f)
+                    )
+                }
+
             }
             spawnTime+=1
 
             //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
-            if(distance < 1500 && e.value.second==1 ) {
+            if(distance < 1500 && e.getMarqueurVisible() == 1) {
                 googleMap.addMarker(MarkerOptions()
                     .position(marker)
                     .title(index.toString())
@@ -247,16 +283,16 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         }
 
         when (index %4) {
-            0 -> { //Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
+            0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
             }
-            1 -> {//Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+            1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
             }
-            2 -> { //Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
+            2 -> { Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
             }
-            3 -> { //Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
+            3 -> { Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
             }
         }
