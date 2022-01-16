@@ -207,6 +207,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     if (index != null) {
                         DropItem(index)
                         marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
+                        Toast.makeText(this,(System.currentTimeMillis().minus(marqueurHandler.get(index).getMarqueurLastUpdated())).toString(),Toast.LENGTH_LONG).show()
                     }
                 }
                 true
@@ -260,16 +261,33 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
             }
             spawnTime+=1
-
+            val currenTime= System.currentTimeMillis()
             //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
-            if(distance < 1500 && e.getMarqueurVisible() == 1) {
-                googleMap.addMarker(MarkerOptions()
-                    .position(marker)
-                    .title(index.toString())
-                    .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
-                    .zIndex(1.0f)
-                )
-           }
+            //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
+            if(distance < 1500){
+                if(e.getMarqueurVisible() == 1 ) {
+                    googleMap.addMarker(MarkerOptions()
+                        .position(marker)
+                        .title(index.toString())
+                        .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
+                        .zIndex(1.0f)
+                    )
+                }
+                else if((currenTime.minus( e.getMarqueurLastUpdated())) > 6000){
+                    googleMap.addMarker(MarkerOptions()
+                        .position(marker)
+                        .title(index.toString())
+                        .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
+                        .zIndex(1.0f)
+                    )
+                    marqueurHandler.update(Marqueur(e.getMarqueurId(),
+                        marker,
+                        1,
+                        currenTime)
+                    )
+                }
+            }
+
         }
     }
 
