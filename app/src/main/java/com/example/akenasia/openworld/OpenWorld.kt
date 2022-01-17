@@ -269,7 +269,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     )
                 }
                 //Si (temps actuel - last_updated du marker) converti en seconde > 5 minutes, alors on affiche le marqueur
-                else if((System.currentTimeMillis().minus(marqueurHandler.get(index).getMarqueurLastUpdated())/1000) > 300){
+                else if((System.currentTimeMillis().minus(marqueurHandler.get(index).getMarqueurLastUpdated())/1000) > 10){
                     googleMap.addMarker(MarkerOptions()
                         .position(marker)
                         .title(index.toString())
@@ -309,8 +309,14 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type3","Parfait pour les débutants",1.0,2.0))}
                 }
             }
-            1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
-                this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
+            1 -> { when (type%3){
+                0 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type1","Une épée basique",3.0,1.0))}
+                1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type2","Une épée basique",3.0,1.0))}
+                2 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type3","Une épée basique",3.0,1.0))}
+                }
             }
             2 -> { Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
