@@ -60,6 +60,10 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                     val intent = Intent(this, Bag::class.java)
                     this.startActivity(intent)
                 }
+                R.id.ForgeClick -> {
+                    val intent = Intent(this, Forge::class.java)
+                    this.startActivity(intent)
+                }
                 else -> {
                     val intent = Intent(this, Personnage::class.java)
                     this.startActivity(intent)

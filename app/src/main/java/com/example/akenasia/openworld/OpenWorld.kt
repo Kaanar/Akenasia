@@ -112,6 +112,10 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         this.startActivity(intent)
                         true
                     }
+                    R.id.ForgeClick -> {
+                        val intent = Intent(this, Forge::class.java)
+                        this.startActivity(intent)
+                    }
                     else -> {
                         val intent = Intent(this, Personnage::class.java)
                         this.startActivity(intent)
