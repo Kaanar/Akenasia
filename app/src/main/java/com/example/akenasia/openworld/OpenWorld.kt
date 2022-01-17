@@ -66,8 +66,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         marqueurHandler= MarqueurHandler(this)
         Markers= HashMap()
 
-        val x = LocalTime.now()
-        Toast.makeText(this,x.toString(),Toast.LENGTH_LONG).show()
 
         //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment =
@@ -207,7 +205,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     if (index != null) {
                         DropItem(index)
                         marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
-                        Toast.makeText(this,(System.currentTimeMillis().minus(marqueurHandler.get(index).getMarqueurLastUpdated())).toString(),Toast.LENGTH_LONG).show()
                     }
                 }
                 true
@@ -215,7 +212,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         }
         }
 
-
+    //Méthode qui permet d'afficher ou non les marqueurs du jeu. Il y a le marqueur du joueur, le marqueur des ennemis et les lieux proches
     fun viewMarker() {
         val listLatLng=marqueurHandler.view()
         for (e in listLatLng) {
@@ -231,7 +228,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             }
             //Toutes les randomSpawnTime secondes, on fait pop un marker "ennemi"
             if(this.spawnTime > randomSpawnTime){
-
+                // En fonction du nombre randomPosition généré, l'affichage de l'ennemi se fera dans une zone particulière (45°) parmi 360°
                 when (randomPosition%4){
                     0->googleMap.addMarker(MarkerOptions()
                         .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
@@ -261,6 +258,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
             }
             spawnTime+=1
+            //On récupère le temps actuel
             val currenTime= System.currentTimeMillis()
             //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
             //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
@@ -273,15 +271,17 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         .zIndex(1.0f)
                     )
                 }
-                else if((currenTime.minus( e.getMarqueurLastUpdated())) > 6000){
+                //Si (temps actuel - last_updated du marker) converti en seconde > 5 minutes, alors on affiche le marqueur
+                else if((System.currentTimeMillis().minus(marqueurHandler.get(index).getMarqueurLastUpdated())/1000) > 300){
                     googleMap.addMarker(MarkerOptions()
                         .position(marker)
                         .title(index.toString())
                         .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
                         .zIndex(1.0f)
                     )
+                    //et on le met à jour en indiquant qu'il est visible à nouveau (MarqueurVisible = 1
                     marqueurHandler.update(Marqueur(e.getMarqueurId(),
-                        marker,
+                        e.getMarqueurLocation(),
                         1,
                         currenTime)
                     )
@@ -291,6 +291,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         }
     }
 
+    //Méthode qui identifie le type de lieu et qui drop l'item correspondant
     fun DropItem(index: Int) {
         var id:Int
         try{
@@ -316,6 +317,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         }
     }
 
+    //Méthode qui attribue pour chaque marqueur une couleur, correspondant à un type de lieu
     fun randomColor(index : Int): Float {
         if (index %4 == 0) {
             return BitmapDescriptorFactory.HUE_CYAN

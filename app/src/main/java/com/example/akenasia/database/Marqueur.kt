@@ -23,7 +23,5 @@ data class Marqueur(var Marqueurid: Int, var MarqueurLocation: LatLng, var Marqu
     fun getMarqueurLastUpdated(): Long {
         return MarqueurLastUpdated
     }
-
-
 }
 

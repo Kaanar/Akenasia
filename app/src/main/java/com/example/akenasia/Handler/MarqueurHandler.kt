@@ -36,7 +36,7 @@ class MarqueurHandler(var context : Context): Handler {
             Lat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
             Long = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
             visible = cursor.getInt(cursor.getColumnIndex("visible").toInt())
-            lastUpdated = cursor.getLong(cursor.getColumnIndex("visible").toInt())
+            lastUpdated = cursor.getLong(cursor.getColumnIndex("last_updated").toInt())
             return Marqueur(id, LatLng(Lat, Long), visible, lastUpdated)
         }
         exitProcess(0)
@@ -82,7 +82,7 @@ class MarqueurHandler(var context : Context): Handler {
                     posLat = cursor.getDouble(cursor.getColumnIndex("latitude").toInt())
                     posLong = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
                     visible = cursor.getInt(cursor.getColumnIndex("visible").toInt())
-                    lastUpdated = cursor.getLong(cursor.getColumnIndex("visible").toInt())
+                    lastUpdated = cursor.getLong(cursor.getColumnIndex("last_updated").toInt())
 
                     val emp = Marqueur(posId,LatLng(posLat,posLong),visible,lastUpdated)
                     empList.add(emp)
