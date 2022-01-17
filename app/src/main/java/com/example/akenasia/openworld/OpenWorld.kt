@@ -162,9 +162,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     marqueurHandler.add(x.key,x.value)
                 }
             }
-            else{
-                marqueurHandler.deleteAll()
-            }
 
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
