@@ -10,6 +10,7 @@ import com.example.akenasia.R
 import com.example.akenasia.database.Item
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.database.ListItems
+import kotlinx.android.synthetic.main.historique_dialog.view.*
 import kotlinx.android.synthetic.main.marker_dialog.*
 import kotlinx.android.synthetic.main.marker_dialog.view.*
 import java.util.*
@@ -32,8 +33,8 @@ class MarkerDialog : DialogFragment () {
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
             View? {
         val rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
-        rootView.MarkerTitle.text = "Un slime !"
-        rootView.MarkerInfo.text = "HP: 5   ATT:1   DEF:2"
+        rootView.MarkerTitle.text = title
+        rootView.MarkerInfo.text = info
         itemHandler = ItemHandler(context!!)
         rootView.BtnAttaque.setOnClickListener() {
             //On lance le combat
