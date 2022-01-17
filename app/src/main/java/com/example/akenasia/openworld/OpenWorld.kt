@@ -291,6 +291,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     //Méthode qui identifie le type de lieu et qui drop l'item correspondant
     fun DropItem(index: Int) {
         var id:Int
+        val type = (0..3).random() // generated random from 1 to 3 included
         try{
             id= itemHandler.view().last().getItemid()+1
         }
@@ -299,8 +300,14 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         }
 
         when (index %4) {
-            0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
-                this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
+            0 -> { when (type%3){
+                0 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type1","Parfait pour les débutants",1.0,2.0))}
+                1 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type2","Parfait pour les débutants",1.0,2.0))}
+                2 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type3","Parfait pour les débutants",1.0,2.0))}
+                }
             }
             1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
