@@ -9,8 +9,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Place
+import com.example.akenasia.Handler.PlaceHandler
 import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.*
 
@@ -23,7 +23,7 @@ class Game : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     private lateinit var Chronobinding: ChronometreBinding
     private lateinit var CLbinding: CoupsLimitesBinding
-    private lateinit var dbHandler : DatabaseHandler
+    private lateinit var placeHandler: PlaceHandler
     private lateinit var place: Place
     private lateinit var chronometre: Chronometer
     var isPlay = false
@@ -36,9 +36,9 @@ class Game : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dbHandler = DatabaseHandler(this)
+        placeHandler = PlaceHandler(this)
         pos = Position(this)
-        place= dbHandler.getPlace(intent.getIntExtra("id",0))
+        place= placeHandler.get(intent.getIntExtra("id",0))
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.include2) as NavHostFragment?

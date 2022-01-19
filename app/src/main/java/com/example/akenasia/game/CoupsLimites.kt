@@ -10,13 +10,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.home.MainActivity
-import com.example.akenasia.database.PositionTable
 import com.example.akenasia.R
+import com.example.akenasia.Handler.PlaceHandler
+import com.example.akenasia.Handler.PositionHandler
+import com.example.akenasia.database.*
 import com.example.akenasia.databinding.CoupsLimitesBinding
 import kotlinx.android.synthetic.main.coups_limites.*
-import com.example.akenasia.database.DatabaseHandler
-import com.example.akenasia.database.Place
-import com.example.akenasia.database.Position
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -26,7 +25,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 class CoupsLimites() : Fragment(), GameFactory, OnMapReadyCallback {
 
     override lateinit var pos: Position
-    override lateinit var dbHandler: DatabaseHandler
+    lateinit var placeHandler: PlaceHandler
+    lateinit var positionHandler: PositionHandler
     override lateinit var place: Place
     override var isPlay: Boolean = false
     override var i: Int = 0
@@ -45,8 +45,9 @@ class CoupsLimites() : Fragment(), GameFactory, OnMapReadyCallback {
         if (container != null) {
             val id= this.arguments?.getInt("id")
             thiscontext = container.getContext()
-            dbHandler = DatabaseHandler(thiscontext!!)
-            place= dbHandler.getPlace(id!!)
+            placeHandler = PlaceHandler(thiscontext!!)
+            positionHandler = PositionHandler(thiscontext!!)
+            place= placeHandler.get(id!!)
         }
         _binding = CoupsLimitesBinding.inflate(inflater, container, false)
         return binding.root
@@ -129,7 +130,7 @@ class CoupsLimites() : Fragment(), GameFactory, OnMapReadyCallback {
         }*/
 
         //Ajoute la position récupérée dans la base de données
-        dbHandler.addPosition(
+        positionHandler.add(
             PositionTable(
                 10 - essais,
                 pos.getLatitude(),

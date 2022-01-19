@@ -10,7 +10,7 @@ import org.junit.Test
 
 class ChronometreTest: FragmentScenario.FragmentAction<Chronometre>{
     @Test fun XIsVisible() {
-        val scenario = launchFragment<CoupsLimites>()
+        val scenario = launchFragment<Chronometre>()
         scenario.onFragment { fragment ->
             fragment.nouvelEssai()
             //Test que les X est bien affichée au premier click
@@ -18,21 +18,14 @@ class ChronometreTest: FragmentScenario.FragmentAction<Chronometre>{
         }
     }
     @Test fun YIsVisible() {
-        val scenario = launchFragment<CoupsLimites>()
+        val scenario = launchFragment<Chronometre>()
         scenario.onFragment { fragment ->
             fragment.nouvelEssai()
             //Test que les Y est bien affichée au premier click
             //assertThat(fragment.ChYCurTv.text.toString(),not(equalTo("")))
         }
     }
-    @Test fun MinusEssai() {
-        val scenario = launchFragment<CoupsLimites>()
-        scenario.onFragment { fragment ->
-            fragment.nouvelEssai()
-            //Test que le premier essai a bien été pris en compte
-           assertThat(fragment.getEssais(), not(equalTo(10)))
-        }
-    }
+
 
     override fun perform(fragment: Chronometre) {
         TODO("Not yet implemented")

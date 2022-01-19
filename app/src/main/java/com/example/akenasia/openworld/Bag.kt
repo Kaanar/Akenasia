@@ -7,15 +7,12 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
+import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.database.Item
-import com.example.akenasia.database.ListItems
+import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.databinding.BagBinding
-import com.example.akenasia.databinding.ItemDialogBinding
-import com.example.akenasia.databinding.ItemsListviewBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
-import kotlinx.android.synthetic.main.items_listview.view.*
 import java.util.ArrayList
 
 class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -24,7 +21,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
 
     private var items: ArrayList<Item>? = null
-    private lateinit var dbHandler : DatabaseHandler
+    private lateinit var itemHandler : ItemHandler
     // This property is only valid between onCreateView and
     // onDestroyView.
 
@@ -33,7 +30,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         super.onCreate(savedInstanceState)
         binding = BagBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        dbHandler = DatabaseHandler(applicationContext)
+        itemHandler = ItemHandler(applicationContext)
 
         // Instanciation des items en dur
         items = ArrayList<Item>()
@@ -77,7 +74,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         //creating the instance of DatabaseHandler class
         val databaseHandler = DatabaseHandler(applicationContext)
         //calling the viewPlace method of DatabaseHandler class to read the records
-        val emp: List<Item> = databaseHandler.viewItem()
+        val emp: List<Item> = itemHandler.view()
         val empArrayId = Array(emp.size){"0"}
         val empArrayName = Array(emp.size){"null"}
         val empArrayDesc = Array(emp.size){"null"}
@@ -99,8 +96,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val databaseHandler= DatabaseHandler(applicationContext)
-        databaseHandler.deleteItem(p2)
+        itemHandler.delete(p2)
         orderRecord(p2)
         viewRecord()
     }
@@ -108,7 +104,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     private fun orderRecord(deleteId: Int) {
         val databaseHandler = DatabaseHandler(applicationContext)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<Item> = databaseHandler.viewItem()
+        val emp: List<Item> = itemHandler.view()
         val empArrayId = Array<String>(emp.size) { "0" }
         val empArrayName = Array<String>(emp.size) { "null" }
         val empArrayDesc = Array<String>(emp.size) { "null" }
@@ -122,7 +118,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                 //Toast.makeText(this, e.Itemid.toString(), Toast.LENGTH_LONG).show()
             } else {
                 if (e.Itemid.toString().trim() != "") {
-                    databaseHandler.updateItem(
+                    itemHandler.update(
                         Item(e.Itemid,
                             e.ItemType,
                             e.ItemName,
