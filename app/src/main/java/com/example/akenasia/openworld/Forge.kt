@@ -3,8 +3,9 @@ package com.example.akenasia.openworld
 import ItemAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.widget.CompoundButton
-import android.widget.Spinner
+import android.view.View
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.Handler.ItemHandler
@@ -13,12 +14,11 @@ import com.example.akenasia.database.Item
 import com.example.akenasia.database.ListItems
 import com.example.akenasia.databinding.ForgeBinding
 import com.example.akenasia.home.MainActivity
+import kotlinx.android.synthetic.main.bag.*
 import kotlinx.android.synthetic.main.forge.*
-import kotlinx.android.synthetic.main.regles_generales.*
-import java.util.ArrayList
 
 
-class Forge :  AppCompatActivity() {
+class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
     private lateinit var binding: ForgeBinding
     private lateinit var itemHandler: ItemHandler
     private lateinit var type : ListItems
@@ -28,8 +28,10 @@ class Forge :  AppCompatActivity() {
         binding = ForgeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         itemHandler = ItemHandler(applicationContext)
+        //On affiche tous les items sans filtre
         classicRecord()
         //Implémentation des différents choix du menu
+        ListViewItemForge.onItemClickListener = this
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.QuitClick -> {
@@ -52,6 +54,7 @@ class Forge :  AppCompatActivity() {
             true
         }
 
+        //Chaque bouton permet d'appliquer un filtre en fonction du type de l'objet
         binding.CBEpee.setOnClickListener {
             if(CBEpee.isChecked) {
                 type = ListItems.EPEE
@@ -93,6 +96,7 @@ class Forge :  AppCompatActivity() {
         }
     }
 
+    //Afficher tous les items sans filtre
     private fun classicRecord() {
         //creating the instance of DatabaseHandler class
         val databaseHandler = DatabaseHandler(applicationContext)
@@ -101,6 +105,7 @@ class Forge :  AppCompatActivity() {
         viewRecord(emp)
     }
 
+    //Affiche les objets par type
     private fun searchRecord() {
         val databaseHandler = DatabaseHandler(applicationContext)
         val emp: List<Item> = itemHandler.viewByType(type)
@@ -128,6 +133,14 @@ class Forge :  AppCompatActivity() {
             ItemAdapter(this, empArrayId, empArrayName, empArrayDesc, empArrayAtt, empArrayDef)
         ListViewItemForge?.adapter = myListAdapter
 
+    }
+
+    //On récupère les infos en bdd de l'item sur lequel on clique
+    override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        val i = itemHandler.get(p2)
+        //Toast.makeText(this, p2.toString(),Toast.LENGTH_LONG).show()
+        itemHandler.upItem(i)
+        searchRecord()
     }
 
 }

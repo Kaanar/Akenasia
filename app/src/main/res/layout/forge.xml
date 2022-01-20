@@ -9,8 +9,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forge"
-        android:textSize="60dp"
+        android:text="Cliquez sur l'élément à améliorer"
+        android:textSize="32dp"
+        android:textColor="@color/black"
         android:id="@+id/ForgeTxt"
         tools:ignore="MissingConstraints" />
 
@@ -43,7 +44,20 @@
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:menu="@menu/menu_navigateur" />
 
-    <CheckBox
+    <RadioGroup
+        android:id="@+id/radioGroupForge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
+        tools:ignore="MissingConstraints">
+
+        <RadioButton
         android:id="@+id/CBEpee"
         app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
         android:layout_width="wrap_content"
@@ -55,7 +69,7 @@
         tools:layout_editor_absoluteY="120dp"
         tools:ignore="MissingConstraints" />
 
-    <CheckBox
+        <RadioButton
         android:id="@+id/CBBouclier"
         app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
         android:layout_width="wrap_content"
@@ -67,7 +81,7 @@
         tools:layout_editor_absoluteY="120dp"
         tools:ignore="MissingConstraints" />
 
-    <CheckBox
+        <RadioButton
         android:id="@+id/CBChaussures"
         app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
         android:layout_width="wrap_content"
@@ -79,7 +93,7 @@
         tools:layout_editor_absoluteY="120dp"
         tools:ignore="MissingConstraints" />
 
-    <CheckBox
+        <RadioButton
         android:id="@+id/CBArmure"
         app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
         android:layout_width="wrap_content"
@@ -90,5 +104,6 @@
         android:layout_marginBottom="30dp"
         tools:layout_editor_absoluteY="120dp"
         tools:ignore="MissingConstraints" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
