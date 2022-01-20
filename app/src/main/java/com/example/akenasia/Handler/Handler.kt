@@ -35,5 +35,14 @@ interface Handler {
         get() = "visible"
     val KEY_LASTUPDATED: String
         get() = "last_updated"
-
+    val KEY_REFJOUEUR: String
+        get() = "refjoueur"
+    val KEY_TOTALMARQUEUR: String
+        get() = "marqueur_t"
+    val KEY_TOTALMONSTRE: String
+        get() = "monstre_t"
+    val KEY_TOTALITEM: String
+        get() = "item_t"
+    val KEY_UNLOCKED: String
+        get() = "unlocked"
 }
