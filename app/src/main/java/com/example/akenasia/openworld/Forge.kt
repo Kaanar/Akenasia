@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.R
@@ -16,12 +17,14 @@ import com.example.akenasia.databinding.ForgeBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
 import kotlinx.android.synthetic.main.forge.*
+import kotlinx.android.synthetic.main.itemtype_listview.*
 
 
 class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
     private lateinit var binding: ForgeBinding
     private lateinit var itemHandler: ItemHandler
     private lateinit var type : ListItems
+    private lateinit var item : Item
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,8 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
         itemHandler = ItemHandler(applicationContext)
         //On affiche tous les items sans filtre
-        classicRecord()
+        type = ListItems.EPEE
+        searchRecord()
         //Implémentation des différents choix du menu
         ListViewItemForge.onItemClickListener = this
         binding.NavigationView.setOnItemSelectedListener { item ->
@@ -137,10 +141,11 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
 
     //On récupère les infos en bdd de l'item sur lequel on clique
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val i = itemHandler.get(p2+1)
-        //Toast.makeText(this, p2.toString(),Toast.LENGTH_LONG).show()
+        val a = Integer.parseInt(ListViewItemForge.getItemAtPosition(p2).toString())
+        val i = itemHandler.get(a)
+        //Toast.makeText(this, a.toString(),Toast.LENGTH_LONG).show()
         itemHandler.upItem(i)
-        classicRecord()
+        searchRecord()
     }
 
 }
