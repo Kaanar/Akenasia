@@ -97,31 +97,27 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                    R.id.QuitClick -> {
-                        val intent = Intent(this, MainActivity::class.java)
-                        this.startActivity(intent)
-                        true
-                    }
-                    R.id.MapClick -> {
-                        val intent = Intent(this, OpenWorld::class.java)
-                        this.startActivity(intent)
-                        true
-                    }
-                    R.id.BagClick -> {
-                        val intent = Intent(this, Bag::class.java)
-                        this.startActivity(intent)
-                        true
-                    }
-                    R.id.ForgeClick -> {
-                        val intent = Intent(this, Forge::class.java)
-                        this.startActivity(intent)
-                    }
-                    else -> {
-                        val intent = Intent(this, Personnage::class.java)
-                        this.startActivity(intent)
-                        true
-                    }
+                R.id.QuitClick -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    this.startActivity(intent)
+                    true
                 }
+                R.id.MapClick -> {
+                    val intent = Intent(this, OpenWorld::class.java)
+                    this.startActivity(intent)
+                    true
+                }
+                R.id.BagClick -> {
+                    val intent = Intent(this, Bag::class.java)
+                    this.startActivity(intent)
+                    true
+                }
+                else -> {
+                    val intent = Intent(this, Personnage::class.java)
+                    this.startActivity(intent)
+                    true
+                }
+            }
             true
         }
 
@@ -211,7 +207,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                 true
             })
         }
-        }
+    }
 
     //Méthode qui permet d'afficher ou non les marqueurs du jeu. Il y a le marqueur du joueur, le marqueur des ennemis et les lieux proches
     fun viewMarker() {

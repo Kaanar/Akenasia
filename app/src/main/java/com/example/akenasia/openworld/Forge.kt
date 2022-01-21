@@ -137,10 +137,10 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
 
     //On récupère les infos en bdd de l'item sur lequel on clique
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val i = itemHandler.get(p2)
+        val i = itemHandler.get(p2+1)
         //Toast.makeText(this, p2.toString(),Toast.LENGTH_LONG).show()
         itemHandler.upItem(i)
-        searchRecord()
+        classicRecord()
     }
 
 }

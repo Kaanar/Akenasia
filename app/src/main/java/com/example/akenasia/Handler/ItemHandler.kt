@@ -176,7 +176,7 @@ class ItemHandler(var context: Context): Handler {
         contentValues.put(KEY_DEF, emp.ItemDef+1)
 
         // Updating Row
-        val success = db.update(dbHandler.TABLE_ITEM, contentValues,"id="+emp.Itemid,null)
+        val success = db.update(dbHandler.TABLE_ITEM, contentValues,"id= "+ emp.Itemid,null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success

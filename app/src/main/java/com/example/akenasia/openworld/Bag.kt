@@ -100,8 +100,8 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        itemHandler.delete(p2)
-        orderRecord(p2)
+        itemHandler.delete(p2+1)
+        orderRecord(p2+1)
         viewRecord()
     }
 
