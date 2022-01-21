@@ -50,5 +50,13 @@ class AchievementHandler(var context: Context): Handler  {
         return empList
     }
 
+    fun unlock(id: Int): Int {
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_UNLOCKED, 1)
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_ACHIEVEMENT, contentValues, "id = $id ", null)
 
+        return success
+    }
 }
