@@ -222,6 +222,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             val currenTime= System.currentTimeMillis()
             //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
             //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
+            if(distance < 1500){
                 if(e.getMarqueurVisible() == 1 ) {
                     googleMap.addMarker(MarkerOptions()
                         .position(marker)
@@ -245,6 +246,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         currenTime)
                     )
                 }
+            }
+
         }
     }
 
