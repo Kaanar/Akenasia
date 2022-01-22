@@ -22,9 +22,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.MarqueurHandler
 import com.example.akenasia.database.*
+import com.example.akenasia.openworld.mobs.Dragon
+import com.example.akenasia.openworld.mobs.Monstre
+import com.example.akenasia.openworld.mobs.Orc
+import com.example.akenasia.openworld.mobs.Slime
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
-import java.time.LocalTime
 import java.util.concurrent.ThreadLocalRandom
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
@@ -189,7 +192,14 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                 }
                 //si il click sur un ennemi
                 else if (Marker.title.toString() == "Un ennemi !"){
+                    val slime = Slime() //initialisation d'un mob
+                    val orc = Orc()
+                    val dragon = Dragon()
                     val dialog = MarkerDialog()
+                    var monstre = Monstre()
+                    monstre = dragon
+                    dialog.setTitle(updateTitle("Ce monstre vous attaque : " + monstre.name))
+                    dialog.setInfo(updateInfo("Hp : " + monstre.hp.toString() + ", Atk : " +monstre.atk.toString()))
                     val navHostFragment = supportFragmentManager
                     dialog.show(navHostFragment, "MarkerDialog")
                     spawnTime=0
@@ -259,7 +269,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             val currenTime= System.currentTimeMillis()
             //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
             //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
-            if(distance < 1500){
+            if(distance < 15000){
                 if(e.getMarqueurVisible() == 1 ) {
                     googleMap.addMarker(MarkerOptions()
                         .position(marker)
@@ -353,5 +363,13 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             marker.latitude,
             marker.longitude
         )
+    }
+
+    fun updateTitle(nom: String) : String {
+        return nom
+    }
+
+    fun updateInfo(info: String) : String {
+        return info
     }
 }
