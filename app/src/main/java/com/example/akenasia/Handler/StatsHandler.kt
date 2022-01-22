@@ -4,7 +4,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
-import com.example.akenasia.database.PositionTable
+import android.database.DatabaseUtils
+
+
+
 
 class StatsHandler(var context: Context): Handler {
 
@@ -13,7 +16,7 @@ class StatsHandler(var context: Context): Handler {
 
 
     //Method to Initialize stats of a player
-    fun add(id: Int): Long {
+    fun create(id: Int): Long {
         val contentValues = ContentValues()
         val db= dbHandler.writableDatabase
         contentValues.put(KEY_REFJOUEUR, id)
@@ -28,10 +31,16 @@ class StatsHandler(var context: Context): Handler {
         return success
     }
 
+    //method to read a list of Stats of a player
+    fun getStatsCount(): Long {
+        val db = dbHandler.readableDatabase
+        return DatabaseUtils.queryNumEntries(db, dbHandler.TABLE_STATS)
+    }
+
     //Method to get all visited markers by a player
     fun getTotalMarqueur(id: Int): Int {
         val db = dbHandler.readableDatabase
-        val selectQuery = "SELECT  * FROM ${dbHandler.TABLE_STATS} WHERE $KEY_REFJOUEUR = $id"
+        val selectQuery = "SELECT * FROM ${dbHandler.TABLE_STATS} WHERE $KEY_REFJOUEUR = $id"
         var cursor: Cursor? = null
         try {
             cursor = db.rawQuery(selectQuery, null)
@@ -39,8 +48,7 @@ class StatsHandler(var context: Context): Handler {
             db.execSQL(selectQuery)
         }
         var totalMarqueur=0
-        if (cursor != null) {
-            cursor.moveToFirst()
+        if (cursor != null && cursor.moveToFirst()) {
             totalMarqueur = cursor.getInt(cursor.getColumnIndex("marqueur_t").toInt())
         }
         return totalMarqueur
@@ -92,7 +100,7 @@ class StatsHandler(var context: Context): Handler {
         contentValues.put(KEY_TOTALMARQUEUR, total)
 
         // Updating Row
-        val success = db.update(dbHandler.TABLE_STATS, contentValues,"id="+id,null)
+        val success = db.update(dbHandler.TABLE_STATS, contentValues, "$KEY_REFJOUEUR=$id",null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
@@ -106,7 +114,7 @@ class StatsHandler(var context: Context): Handler {
         contentValues.put(KEY_TOTALMONSTRE, total)
 
         // Updating Row
-        val success = db.update(dbHandler.TABLE_STATS, contentValues,"id="+id,null)
+        val success = db.update(dbHandler.TABLE_STATS, contentValues,"$KEY_REFJOUEUR=$id",null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
@@ -117,10 +125,10 @@ class StatsHandler(var context: Context): Handler {
         val total = this.getTotalMarqueur(id) + 1
         val contentValues = ContentValues()
         contentValues.put(KEY_REFJOUEUR, id)
-        contentValues.put(KEY_TOTALMARQUEUR, total)
+        contentValues.put(KEY_TOTALITEM, total)
 
         // Updating Row
-        val success = db.update(dbHandler.TABLE_STATS, contentValues,"id="+id,null)
+        val success = db.update(dbHandler.TABLE_STATS, contentValues,"$KEY_REFJOUEUR=$id",null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success

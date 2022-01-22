@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
-import com.example.akenasia.database.PositionTable
 
 class AchievementHandler(var context: Context): Handler  {
 
@@ -25,7 +24,7 @@ class AchievementHandler(var context: Context): Handler  {
         return success
     }
 
-    //method to read a list of Position
+    //method to read a list of Achievements
     fun view(): HashMap<String,Int> {
         val empList:HashMap<String,Int> = HashMap()
         val selectQuery = "SELECT * FROM ${dbHandler.TABLE_ACHIEVEMENT} "
@@ -39,10 +38,9 @@ class AchievementHandler(var context: Context): Handler  {
         var desc: String
         var unlocked: Int
 
-
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                desc = cursor.getString(cursor.getColumnIndex("desc").toInt())
+                desc = cursor.getString(cursor.getColumnIndex("description").toInt())
                 unlocked = cursor.getInt(cursor.getColumnIndex("unlocked").toInt())
                 empList[desc] = unlocked
             } while (cursor.moveToNext())
@@ -55,8 +53,6 @@ class AchievementHandler(var context: Context): Handler  {
         val contentValues = ContentValues()
         contentValues.put(KEY_UNLOCKED, 1)
         // Updating Row
-        val success = db.update(dbHandler.TABLE_ACHIEVEMENT, contentValues, "id = $id ", null)
-
-        return success
+        return db.update(dbHandler.TABLE_ACHIEVEMENT, contentValues, "id = $id ", null)
     }
 }

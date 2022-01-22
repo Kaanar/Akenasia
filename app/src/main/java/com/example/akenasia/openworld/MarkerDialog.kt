@@ -1,5 +1,6 @@
 package com.example.akenasia.openworld
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
 import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.achievement.Stats
 import com.example.akenasia.database.ListItems
 import kotlinx.android.synthetic.main.marker_dialog.*
 import kotlinx.android.synthetic.main.marker_dialog.view.*
@@ -23,18 +25,13 @@ class MarkerDialog : DialogFragment () {
     private lateinit var itemHandler : ItemHandler
 
 
-    /*
-    On passe le titre et les infos présents de la classe Historique dans le dialog
-    Le dialoque affiche le titre (n° de la position) et les infos (latitude, longitude)
-    en fonction du marqueur sur lequel on clique sur la map de l'historique.
-     */
-
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
             View? {
         val rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
         rootView.MarkerTitle.text = "Un slime !"
         rootView.MarkerInfo.text = "HP: 5   ATT:1   DEF:2"
         itemHandler = ItemHandler(context!!)
+
         rootView.BtnAttaque.setOnClickListener() {
             //On lance le combat
             BtnAttaque.visibility = View.INVISIBLE
@@ -63,6 +60,9 @@ class MarkerDialog : DialogFragment () {
                 val def = ThreadLocalRandom.current().nextInt(0,5)
                 this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble()))
                 Toast.makeText(context,"Vous avez gagné un item surprise", Toast.LENGTH_LONG).show()
+                //MAJ des stats, +1 monstre vaincu et +1 item récupéré
+                Stats(context!!, 1).upMonstres()
+                Stats(context!!,1).upItems()
             }
         }
         rootView.BtnFuite.setOnClickListener() {

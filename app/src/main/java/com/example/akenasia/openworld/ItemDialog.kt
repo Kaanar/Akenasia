@@ -67,16 +67,6 @@ class ItemDialog : DialogFragment() {
         title=text
     }
 
-
-    fun viewRecord(type: ListItems) {
-        //creating the instance of DatabaseHandler class
-        //val databaseHandler = dbHandler
-        //calling the viewPlace method of DatabaseHandler class to read the records
-
-    }
-
-
-
 }
 
 

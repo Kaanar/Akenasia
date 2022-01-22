@@ -21,6 +21,7 @@ import android.util.Log
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.MarqueurHandler
+import com.example.akenasia.achievement.Stats
 import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
@@ -38,8 +39,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var googleMap: GoogleMap
     private lateinit var chronometre: Chronometer
-    private lateinit var listMarker : ArrayList<LatLng>
-    private lateinit var Markers: HashMap<Int,LatLng>
+    private lateinit var markers: HashMap<Int,LatLng>
     lateinit var itemHandler: ItemHandler
     lateinit var marqueurHandler: MarqueurHandler
     private var cameraFocus: Boolean = true
@@ -64,7 +64,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         pos.refreshLocation()
         itemHandler= ItemHandler(this)
         marqueurHandler= MarqueurHandler(this)
-        Markers= HashMap()
+        markers= HashMap()
 
 
         //Mise en place d'un navcontroller pour d'eventuels fragments
@@ -127,41 +127,11 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     }
 
 
-    //function qui ajoute des lieux près du joueur
-    private fun FillMap(): HashMap<Int,LatLng>{
-        val nb=150
-        var randomradius : Int
-        var randomLat: Double
-        var randomLong: Double
-        val markers: HashMap<Int,LatLng> = HashMap()
-        pos.refreshLocation()
-        for(i in 1..nb){
-            randomLat = ThreadLocalRandom.current().nextDouble(0.000,0.10)
-            randomLong = ThreadLocalRandom.current().nextDouble(0.000,0.10)
-            randomradius = ThreadLocalRandom.current().nextInt(40)
-            when (randomradius%4){
-                0->markers.put(i,LatLng(pos.getLatitude() + randomLat, pos.getLongitude() +randomLong))
-                1->markers.put(i,LatLng(pos.getLatitude() + randomLat, pos.getLongitude() -randomLong))
-                2->markers.put(i,LatLng(pos.getLatitude() - randomLat, pos.getLongitude() +randomLong))
-                3->markers.put(i,LatLng(pos.getLatitude() - randomLat, pos.getLongitude() -randomLong))
-            }
-        }
-        return markers
-    }
-
     override fun onMapReady(map: GoogleMap) {
         map.let {
             googleMap = it
             visible()
 
-
-            //Peuplement de latlng dans la bdd
-            if(marqueurHandler.view().isEmpty()){
-                Markers=FillMap()
-                for(x in Markers){
-                    marqueurHandler.add(x.key,x.value)
-                }
-            }
 
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
@@ -203,6 +173,9 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         DropItem(index)
                         marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
                     }
+                    //MAJ des stats, +1 lieu fouillé et +1 item récupéré
+                    Stats(this,1).upMarqueurs()
+                    Stats(this,1).upItems()
                 }
                 true
             })
@@ -222,44 +195,33 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             if(this.spawnTime== randomSpawnTime ){
                 randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
                 randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
+                randomLat*=1
             }
             //Toutes les randomSpawnTime secondes, on fait pop un marker "ennemi"
             if(this.spawnTime > randomSpawnTime){
                 // En fonction du nombre randomPosition généré, l'affichage de l'ennemi se fera dans une zone particulière (45°) parmi 360°
                 when (randomPosition%4){
-                    0->googleMap.addMarker(MarkerOptions()
-                        .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
-                        .title("Un ennemi !")
-                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
-                        .zIndex(1.0f)
-                    )
-                    1->googleMap.addMarker(MarkerOptions()
-                        .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() - randomLong))
-                        .title("Un ennemi !")
-                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
-                        .zIndex(1.0f)
-                    )
-                    2->googleMap.addMarker(MarkerOptions()
-                        .position(LatLng(pos.getLatitude() - randomLat, pos.getLongitude() + randomLong))
-                        .title("Un ennemi !")
-                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
-                        .zIndex(1.0f)
-                    )
-                    3->googleMap.addMarker(MarkerOptions()
-                        .position(LatLng(pos.getLatitude() - randomLat, pos.getLongitude() - randomLong))
-                        .title("Un ennemi !")
-                        .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
-                        .zIndex(1.0f)
-                    )
+                    0-> {randomLat*=1
+                        randomLong*=1}
+                    1->{randomLat*=1
+                        randomLong*=-1}
+                    2->{randomLat*=-1
+                        randomLong*=1}
+                    3->{randomLat*=-1
+                        randomLong*=-1}
                 }
-
+                googleMap.addMarker(MarkerOptions()
+                    .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
+                    .title("Un ennemi !")
+                    .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                    .zIndex(1.0f)
+                )
             }
             spawnTime+=1
             //On récupère le temps actuel
             val currenTime= System.currentTimeMillis()
             //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
             //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
-            if(distance < 1500){
                 if(e.getMarqueurVisible() == 1 ) {
                     googleMap.addMarker(MarkerOptions()
                         .position(marker)
@@ -283,8 +245,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         currenTime)
                     )
                 }
-            }
-
         }
     }
 

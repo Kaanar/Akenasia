@@ -10,7 +10,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 ), Handler {
 
     companion object {
-        private val DATABASE_VERSION = 19
+        private val DATABASE_VERSION = 20
         private val DATABASE_NAME = "AkenasiaDatabase"
     }
 
@@ -20,7 +20,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val TABLE_BAG = "BagTable"
         val TABLE_PERSONNAGE = "PersonnnageTable"
         val TABLE_MARQUEUR = "MarqueurTable"
-        val TABLE_STATS = "MarqueurTable"
+        val TABLE_STATS = "StatsTable"
         val TABLE_ACHIEVEMENT = "AchievementTable"
 
 
@@ -68,14 +68,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
-        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEM)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BAG)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONNAGE)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MARQUEUR)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATS)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACHIEVEMENT)
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_PLACE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_POSITION")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ITEM")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_BAG")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_PERSONNAGE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_MARQUEUR")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_STATS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ACHIEVEMENT")
 
         onCreate(db)
     }

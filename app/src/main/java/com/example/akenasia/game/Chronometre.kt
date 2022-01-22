@@ -51,7 +51,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
         pos = Position(this.requireActivity())
         if (container != null) {
             val id= this.arguments?.getInt("id")
-            thiscontext = container.getContext()
+            thiscontext = container.context
             placeHandler = PlaceHandler(thiscontext!!)
             positionHandler = PositionHandler(thiscontext!!)
             place= placeHandler.get(id!!)

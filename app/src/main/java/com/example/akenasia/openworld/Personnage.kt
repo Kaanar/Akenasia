@@ -111,9 +111,6 @@ class Personnage: AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     //Méthode qui affiche les stats du joueur et de ses items équipés
     private fun inflateStats() {
-        if (personnageHandler.view().isEmpty()) {
-            personnageHandler.create()
-        }
         currentPersonnage=personnageHandler.get(1)
 
         //Affichage des stats du personnage

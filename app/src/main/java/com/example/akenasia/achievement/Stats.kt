@@ -10,12 +10,11 @@ class Stats(context:Context, idJoueur: Int) {
         var id= idJoueur
         var achievementhandler= AchievementHandler(context)
 
-    fun upMarqueur(){
+    fun upMarqueurs(){
         stathandler.upTotalMarqueur(id)
 
-        val marqueurs= stathandler.getTotalMarqueur(id)
-       when(marqueurs){
-            10-> achievementhandler.unlock(1) //vous avez découvert 10 lieux
+        when(stathandler.getTotalMarqueur(id)){
+            10-> achievementhandler.unlock(1)
             20-> achievementhandler.unlock(2)
             30-> achievementhandler.unlock(3)
             40-> achievementhandler.unlock(4)
@@ -31,8 +30,7 @@ class Stats(context:Context, idJoueur: Int) {
     fun upMonstres(){
         stathandler.upTotalMonstre(id)
 
-        val monstres= stathandler.getTotalMonstre(id)
-        when(monstres){
+        when(stathandler.getTotalMonstre(id)){
             1-> achievementhandler.unlock(10)
             5-> achievementhandler.unlock(11)
             10-> achievementhandler.unlock(12)
@@ -48,9 +46,7 @@ class Stats(context:Context, idJoueur: Int) {
     fun upItems(){
         stathandler.upTotalItem(id)
 
-        val items= stathandler.getTotalItem(id)
-
-        when(items){
+        when(stathandler.getTotalItem(id)){
             1-> achievementhandler.unlock(19)
             5-> achievementhandler.unlock(20)
             10-> achievementhandler.unlock(21)
