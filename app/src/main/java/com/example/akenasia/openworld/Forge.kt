@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
 import com.example.akenasia.database.ListItems
+import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.databinding.ForgeBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
@@ -24,18 +26,26 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
     private lateinit var binding: ForgeBinding
     private lateinit var itemHandler: ItemHandler
     private lateinit var type : ListItems
-    private lateinit var item : Item
+    private lateinit var personnage: PersonnageHandler
+    private lateinit var currentPersonnage: PersonnageTable
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ForgeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         itemHandler = ItemHandler(applicationContext)
+        personnage = PersonnageHandler(this)
         //On affiche tous les items sans filtre
         type = ListItems.EPEE
         searchRecord()
         //Implémentation des différents choix du menu
         ListViewItemForge.onItemClickListener = this
+        if (personnage.view().isEmpty()) {
+            personnage.create()
+        }
+        currentPersonnage=personnage.get(1)
+
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.QuitClick -> {
@@ -58,6 +68,7 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
             true
         }
 
+        binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
         //Chaque bouton permet d'appliquer un filtre en fonction du type de l'objet
         binding.CBEpee.setOnClickListener {
             if(CBEpee.isChecked) {
@@ -141,11 +152,21 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
 
     //On récupère les infos en bdd de l'item sur lequel on clique
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val a = Integer.parseInt(ListViewItemForge.getItemAtPosition(p2).toString())
-        val i = itemHandler.get(a)
-        //Toast.makeText(this, a.toString(),Toast.LENGTH_LONG).show()
-        itemHandler.upItem(i)
-        searchRecord()
+        val coutUpgrade = 1500
+        if(currentPersonnage.getArgent()<coutUpgrade) {
+            Toast.makeText(this, "Trop pauvre",Toast.LENGTH_LONG).show()
+        }
+        else {
+            val a = Integer.parseInt(ListViewItemForge.getItemAtPosition(p2).toString())
+            val i = itemHandler.get(a)
+            //Toast.makeText(this, a.toString(),Toast.LENGTH_LONG).show()
+            itemHandler.upItem(i)
+            searchRecord()
+            personnage.upArgent(currentPersonnage.getArgent()-coutUpgrade)
+            currentPersonnage = personnage.get(1)
+            binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
+        }
+
     }
 
 }

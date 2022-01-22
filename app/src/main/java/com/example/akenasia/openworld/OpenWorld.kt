@@ -21,6 +21,7 @@ import android.util.Log
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.MarqueurHandler
+import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
@@ -44,7 +45,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     lateinit var marqueurHandler: MarqueurHandler
     private var cameraFocus: Boolean = true
     private var spawnTime= 0
-
+    private lateinit var personnage: PersonnageHandler
+    private lateinit var currentPersonnage: PersonnageTable
 
     //Valeurs LatLong
     private var randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
@@ -64,6 +66,11 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         pos.refreshLocation()
         itemHandler= ItemHandler(this)
         marqueurHandler= MarqueurHandler(this)
+        personnage = PersonnageHandler(this)
+        if (personnage.view().isEmpty()) {
+            personnage.create()
+        }
+        currentPersonnage=personnage.get(1)
         Markers= HashMap()
 
 
@@ -297,6 +304,9 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         catch (e:java.util.NoSuchElementException){
             id=1
         }
+        currentPersonnage.setArgent(2000)
+        personnage.upArgent(currentPersonnage.getArgent())
+        //Toast.makeText(this, currentPersonnage.getArgent().toString(), Toast.LENGTH_LONG).show()
 
         when (index %4) {
             0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()

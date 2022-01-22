@@ -10,9 +10,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cliquez sur l'élément à améliorer"
-        android:textSize="32dp"
-        android:textColor="@color/black"
+        android:textSize="24dp"
         android:id="@+id/ForgeTxt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Votre argent : "
+        android:textSize="16dp"
+        android:id="@+id/ArgentInfoTxt"
+        app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 0 "
+        android:textSize="16dp"
+        android:id="@+id/ArgentTxt"
+        app:layout_constraintLeft_toRightOf="@id/ArgentInfoTxt"
+        app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
         tools:ignore="MissingConstraints" />
 
     <ListView
@@ -54,7 +72,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
+        app:layout_constraintTop_toBottomOf="@id/ArgentInfoTxt"
         tools:ignore="MissingConstraints">
 
         <RadioButton

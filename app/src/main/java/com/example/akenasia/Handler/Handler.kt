@@ -31,6 +31,8 @@ interface Handler {
         get() = "chaussures"
     val KEY_TYPE: String
         get() = "type"
+    val KEY_ARGENT: String
+        get() = "argent"
     val KEY_VISIBLE: String
         get() = "visible"
     val KEY_LASTUPDATED: String
