@@ -12,11 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.home.MainActivity
 import com.example.akenasia.openworld.PoiDialog
-import com.example.akenasia.database.PositionTable
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
-import com.example.akenasia.database.Place
-import com.example.akenasia.database.Position
+import com.example.akenasia.Handler.PlaceHandler
+import com.example.akenasia.Handler.PositionHandler
+import com.example.akenasia.database.*
 import com.example.akenasia.databinding.ChronometreBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -26,14 +25,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.android.synthetic.main.chronometre.*
 import kotlinx.android.synthetic.main.chronometre.Chmap_view
-import kotlinx.android.synthetic.main.coups_limites.*
 
 
 class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnPoiClickListener {
 
 
     override lateinit var pos: Position
-    override lateinit var dbHandler: DatabaseHandler
+    lateinit var placeHandler: PlaceHandler
+    lateinit var positionHandler: PositionHandler
     override lateinit var place: Place
     override var isPlay: Boolean = false
     override var i: Int = 0
@@ -52,9 +51,10 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
         pos = Position(this.requireActivity())
         if (container != null) {
             val id= this.arguments?.getInt("id")
-            thiscontext = container.getContext()
-            dbHandler = DatabaseHandler(thiscontext!!)
-            place= dbHandler.getPlace(id!!)
+            thiscontext = container.context
+            placeHandler = PlaceHandler(thiscontext!!)
+            positionHandler = PositionHandler(thiscontext!!)
+            place= placeHandler.get(id!!)
         }
 
         _binding = ChronometreBinding.inflate(inflater, container, false)
@@ -101,7 +101,7 @@ class Chronometre() : Fragment(), GameFactory, OnMapReadyCallback, GoogleMap.OnP
     fun nouvelEssai() {
         pos.refreshLocation()
 
-        dbHandler.addPosition(
+        positionHandler.add(
             PositionTable(
                 i,
                 pos.getLatitude(),

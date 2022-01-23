@@ -1,27 +1,21 @@
 package com.example.akenasia.openworld
 
-import ItemAdapter
 import ItemTypeAdapter
-import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
 import com.example.akenasia.database.Item
-import com.example.akenasia.database.ListItems
+import com.example.akenasia.Handler.ItemHandler
 import kotlinx.android.synthetic.main.bag.*
 import kotlinx.android.synthetic.main.item_dialog.view.*
 import java.io.Serializable
 
 class ItemDialog : DialogFragment() {
-    private lateinit var dbHandler : DatabaseHandler
+    private lateinit var itemHandler : ItemHandler
     private lateinit var title : String
     private lateinit var type : Serializable
 
@@ -30,7 +24,7 @@ class ItemDialog : DialogFragment() {
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
             View {
         val rootView= inflater.inflate(R.layout.item_dialog, container, false)
-        dbHandler = DatabaseHandler(context!!)
+        itemHandler = ItemHandler(context!!)
         rootView.ItemInfos.text=title
 
         return rootView
@@ -38,7 +32,7 @@ class ItemDialog : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val emp: List<Item> = dbHandler.viewItemByType(type)
+        val emp: List<Item> = itemHandler.viewByType(type)
         val empArrayId = Array<String>(emp.size){"0"}
         val empArrayName = Array<String>(emp.size){"null"}
         val empArrayDesc = Array<String>(emp.size){"null"}
@@ -71,16 +65,6 @@ class ItemDialog : DialogFragment() {
     fun setText(text: String){
         title=text
     }
-
-
-    fun viewRecord(type: ListItems) {
-        //creating the instance of DatabaseHandler class
-        //val databaseHandler = dbHandler
-        //calling the viewPlace method of DatabaseHandler class to read the records
-
-    }
-
-
 
 }
 

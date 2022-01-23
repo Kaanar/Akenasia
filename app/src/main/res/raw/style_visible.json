@@ -10,7 +10,7 @@
     "featureType": "poi",
     "elementType": "labels.icon",
     "stylers": [
-      { "visibility": "on" }
+      { "visibility": "off" }
     ]
   }
 ]

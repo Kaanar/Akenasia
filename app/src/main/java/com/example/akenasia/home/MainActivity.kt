@@ -11,7 +11,16 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.location.*
 
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.akenasia.Handler.AchievementHandler
+import com.example.akenasia.Handler.MarqueurHandler
+import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.Handler.StatsHandler
 import com.example.akenasia.R
+import com.example.akenasia.achievement.Achievement
+import com.example.akenasia.database.PersonnageTable
+import com.example.akenasia.database.Position
+import com.google.android.gms.maps.model.LatLng
+import java.util.concurrent.ThreadLocalRandom
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +31,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var appSettingPrefs: SharedPreferences
     lateinit var locationRequest: LocationRequest
+    lateinit var marqueurHandler: MarqueurHandler
+    lateinit var achievementHandler: AchievementHandler
+    lateinit var personnageHandler: PersonnageHandler
+    lateinit var statsHandler: StatsHandler
+    private lateinit var pos: Position
+    private lateinit var markers: HashMap<Int, LatLng>
     val PERMISSION_ID = 1
 
     @SuppressLint("CommitPrefEdits")
@@ -29,6 +44,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        marqueurHandler= MarqueurHandler(this)
+        achievementHandler= AchievementHandler(this)
+        personnageHandler= PersonnageHandler(this)
+        statsHandler= StatsHandler(this)
+        markers= HashMap()
+        pos = Position(this)
+        pos.refreshLocation()
+
 
         appSettingPrefs= getSharedPreferences("AppSettingPrefs", 0)
         val isNightModeOn: Boolean = appSettingPrefs.getBoolean("NightMode", false)
@@ -50,8 +73,28 @@ class MainActivity : AppCompatActivity() {
         if (navController != null) {
             setupActionBarWithNavController(navController, appBarConfiguration)
         }
-
     }
+
+    override fun onStart() {
+        super.onStart()
+        //Initialisation des données du jeu
+        initialisation()
+    }
+
+    private fun initialisation(){
+
+        if(achievementHandler.view().isEmpty()){
+            val achievements = Achievement(this)
+            achievements.init()
+        }
+        if (personnageHandler.view().isEmpty()) {
+            personnageHandler.create()
+        }
+        if (statsHandler.getStatsCount().toInt() == 0) {
+            statsHandler.create(1)
+        }
+    }
+
 }
 
 

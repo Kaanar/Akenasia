@@ -3,21 +3,23 @@ package com.example.akenasia.openworld
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.akenasia.database.DatabaseHandler
-import com.example.akenasia.database.ListItems
-import com.example.akenasia.database.PersonnageTable
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import com.example.akenasia.databinding.PersonnageBinding
 import com.example.akenasia.home.MainActivity
-import android.widget.Toast
 import com.example.akenasia.R
-import com.example.akenasia.databinding.ItemDialogBinding
-import kotlinx.android.synthetic.main.item_dialog.*
+import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.achievement.AchievementFragment
+import com.example.akenasia.database.*
 
 
 class Personnage: AppCompatActivity() {
     private lateinit var binding: PersonnageBinding
-    private lateinit var dbHandler: DatabaseHandler
+    private lateinit var personnageHandler: PersonnageHandler
+    private lateinit var itemHandler: ItemHandler
     private lateinit var currentPersonnage: PersonnageTable
 
 
@@ -26,10 +28,17 @@ class Personnage: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = PersonnageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        dbHandler = DatabaseHandler(this)
+        personnageHandler = PersonnageHandler(this)
+        itemHandler = ItemHandler(this)
+
 
 
         binding.NavigationView.selectedItemId = R.id.PersonnageClick
+
+        binding.achievements.setOnClickListener{
+            val intent= Intent(this,AchievementFragment::class.java)
+            this.startActivity(intent)
+        }
 
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
@@ -37,22 +46,22 @@ class Personnage: AppCompatActivity() {
                 R.id.QuitClick -> {
                     val intent = Intent(this, MainActivity::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 R.id.MapClick -> {
                     val intent = Intent(this, OpenWorld::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 R.id.BagClick -> {
                     val intent = Intent(this, Bag::class.java)
                     this.startActivity(intent)
-                    true
+                }
+                R.id.ForgeClick -> {
+                    val intent = Intent(this, Forge::class.java)
+                    this.startActivity(intent)
                 }
                 else -> {
                     val intent = Intent(this, Personnage::class.java)
                     this.startActivity(intent)
-                    true
                 }
             }
             true
@@ -101,7 +110,7 @@ class Personnage: AppCompatActivity() {
         }
 
         binding.retirer.setOnClickListener{
-            dbHandler.resetPersonnage(1)
+            personnageHandler.reset(1)
             this.recreate()
         }
     }
@@ -111,10 +120,7 @@ class Personnage: AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     //Méthode qui affiche les stats du joueur et de ses items équipés
     private fun inflateStats() {
-        if (dbHandler.viewPersonnage().isEmpty()) {
-            dbHandler.createPersonnage()
-        }
-        currentPersonnage=dbHandler.getPersonnage(1)
+        currentPersonnage=personnageHandler.get(1)
 
         //Affichage des stats du personnage
         binding.personnagePv.text="PV: "+currentPersonnage.getpersoHp().toString()
@@ -122,22 +128,22 @@ class Personnage: AppCompatActivity() {
         binding.personnageDef.text="DEF: "+currentPersonnage.getpersoDef().toString()
 
         //Affichage des stats de l'armure
-        binding.armureAtt.text="ATT: "+dbHandler.getItem(currentPersonnage.armure).ItemAtt.toString()
-        binding.armureDef.text="DEF: "+dbHandler.getItem(currentPersonnage.armure).ItemDef.toString()
+        binding.armureAtt.text="ATT: "+itemHandler.get(currentPersonnage.armure).ItemAtt.toString()
+        binding.armureDef.text="DEF: "+itemHandler.get(currentPersonnage.armure).ItemDef.toString()
 
         //Affichage des stats du bouclier
-        binding.bouclierAtt.text="ATT: "+dbHandler.getItem(currentPersonnage.bouclier).ItemAtt.toString()
-        binding.bouclierDef.text="DEF: "+dbHandler.getItem(currentPersonnage.bouclier).ItemDef.toString()
+        binding.bouclierAtt.text="ATT: "+itemHandler.get(currentPersonnage.bouclier).ItemAtt.toString()
+        binding.bouclierDef.text="DEF: "+itemHandler.get(currentPersonnage.bouclier).ItemDef.toString()
 
 
         //Affichage des stats de l'épée
-        binding.epeeAtt.text="ATT: "+dbHandler.getItem(currentPersonnage.epee).ItemAtt.toString()
-        binding.epeeDef.text="DEF: "+dbHandler.getItem(currentPersonnage.epee).ItemDef.toString()
+        binding.epeeAtt.text="ATT: "+itemHandler.get(currentPersonnage.epee).ItemAtt.toString()
+        binding.epeeDef.text="DEF: "+itemHandler.get(currentPersonnage.epee).ItemDef.toString()
 
 
         //Affichage des stats des chaussures
-        binding.chaussuresAtt.text="ATT: "+dbHandler.getItem(currentPersonnage.chaussures).ItemAtt.toString()
-        binding.chaussuresDef.text="DEF: "+dbHandler.getItem(currentPersonnage.chaussures).ItemDef.toString()
+        binding.chaussuresAtt.text="ATT: "+itemHandler.get(currentPersonnage.chaussures).ItemAtt.toString()
+        binding.chaussuresDef.text="DEF: "+itemHandler.get(currentPersonnage.chaussures).ItemDef.toString()
 
     }
 

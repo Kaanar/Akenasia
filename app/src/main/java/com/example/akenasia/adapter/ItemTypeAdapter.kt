@@ -7,13 +7,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import com.example.akenasia.R
-import com.example.akenasia.database.DatabaseHandler
-import com.example.akenasia.database.PersonnageTable
-import com.example.akenasia.game.Game
+import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.openworld.Personnage
-import kotlinx.coroutines.processNextEventInCurrentThread
 
 
 class ItemTypeAdapter (private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val desc: Array<String>, private val att: Array<String>
@@ -42,8 +39,9 @@ class ItemTypeAdapter (private val context: Activity, private val id: Array<Stri
         defItem.text="DEF: "+def[position]
 
         choisirBtn.setOnClickListener{
-            val databaseHandler= DatabaseHandler(context)
-            databaseHandler.updatePersonnage(databaseHandler.getItem(id[position].toInt()))
+            val personnageHandler= PersonnageHandler(context)
+            val itemHandler= ItemHandler(context)
+            personnageHandler.update(itemHandler.get(id[position].toInt()))
 
             val intent = Intent(context, Personnage::class.java)
             context.startActivity(intent)

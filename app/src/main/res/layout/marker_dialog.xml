@@ -6,79 +6,61 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/MarkerTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Title"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/MarkerInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MarkerTitle"
-        android:ems="10"
-        android:hint="Information"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MarkerTitle" />
-
-    <TextView
         android:id="@+id/TextMarker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MarkerTitle"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:text="Un coffre se trouve à cet endroit, mais un ennemi le garde, voulez-vous l'attaquer ?"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MarkerInfo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/combatText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MarkerTitle"
+        android:layout_marginTop="51dp"
         android:ems="10"
         android:text="Le combat commence, vous restez sur vos gardes."
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/MarkerInfo" />
+        app:layout_constraintTop_toTopOf="@+id/TextMarker" />
 
     <TextView
         android:id="@+id/victoireText"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MarkerTitle"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:text="Félicitation, vous avez gagné !"
         android:textSize="20sp"
         android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/combatText" />
+        app:layout_constraintTop_toBottomOf="@+id/AttaqueJoueur" />
 
     <TextView
         android:id="@+id/defaiteText"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MarkerTitle"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:text="Dommage, vous avez perdu la bagarre ..."
         android:textSize="20sp"
         android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/combatText" />
+        app:layout_constraintTop_toBottomOf="@+id/AttaqueJoueur" />
 
     <Button
         android:id="@+id/BtnFuite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MarkerInfo"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:text="Fuir"
@@ -91,12 +73,133 @@
         android:id="@+id/BtnAttaque"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MarkerInfo"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="60dp"
         android:text="Attaquer"
+        app:layout_constraintBottom_toBottomOf="@+id/combatText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextMarker" />
+        app:layout_constraintTop_toBottomOf="@+id/TextMarker"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/BtnAttaqueMonstre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="464dp"
+        android:text="Attaquer"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAttaque" />
+
+    <TextView
+        android:id="@+id/PvJoueur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="pvJoueur"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.257"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAttaqueMonstre" />
+
+    <TextView
+        android:id="@+id/PvMonstre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="pvMonstre"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toEndOf="@+id/PvJoueur"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAttaqueMonstre" />
+
+    <TextView
+        android:id="@+id/NomMonstre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:text="nomMonstre"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/PvMonstre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAttaqueMonstre"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <TextView
+        android:id="@+id/NomJoueur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="276dp"
+        android:text="Joueur"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/PvMonstre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAttaqueMonstre"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <TextView
+        android:id="@+id/AttaqueMonstre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="0"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PvMonstre" />
+
+    <TextView
+        android:id="@+id/AttaqueJoueur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="0"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.389"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PvMonstre" />
+
+    <TextView
+        android:id="@+id/TexteMonstreAtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:text="Attaque :"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/AttaqueMonstre"
+        app:layout_constraintTop_toBottomOf="@+id/PvMonstre" />
+
+    <TextView
+        android:id="@+id/TexteJoueurAtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Attaque :"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/AttaqueJoueur"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PvMonstre" />
+
+    <Button
+        android:id="@+id/BtnRetour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Retour"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/victoireText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
