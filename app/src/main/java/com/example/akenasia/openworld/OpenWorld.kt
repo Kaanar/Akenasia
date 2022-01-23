@@ -204,7 +204,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     dialog.show(navHostFragment, "MarkerDialog")
                     spawnTime=0
                     randomPosition = ThreadLocalRandom.current().nextInt(0,4)
-                    randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,30000)
+                    randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,10000)
+                    //bound : 30 000 à l'origine
                 }
                 //si il il click sur un lieu
                 else{
