@@ -24,9 +24,12 @@ import com.example.akenasia.Handler.MarqueurHandler
 import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.achievement.Stats
 import com.example.akenasia.database.*
+import com.example.akenasia.openworld.mobs.Dragon
+import com.example.akenasia.openworld.mobs.Monstre
+import com.example.akenasia.openworld.mobs.Orc
+import com.example.akenasia.openworld.mobs.Slime
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
-import java.time.LocalTime
 import java.util.concurrent.ThreadLocalRandom
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
@@ -158,18 +161,28 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             //Différentiation des use case en fonction du type de marker
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
                 //Si le joueur click sur son marker
-                when {
-                    Marker.title.toString() == "Current Position" -> { Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show() }
-                    //si il click sur un ennemi
-                    Marker.title.toString() == "Un ennemi !" -> {
-                        val dialog = MarkerDialog()
-                        val navHostFragment = supportFragmentManager
-                        dialog.show(navHostFragment, "MarkerDialog")
-                        spawnTime=0
-                        randomPosition = ThreadLocalRandom.current().nextInt(0,4)
-                        randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,30000)
-                    }
-                    //si il il click sur un lieu
+
+                if(Marker.title.toString() == "Current Position"){
+                    Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show()
+                }
+                //si il click sur un ennemi
+                else if (Marker.title.toString() == "Un ennemi !"){
+                    val slime = Slime() //initialisation d'un mob
+                    val orc = Orc()
+                    val dragon = Dragon()
+                    val dialog = MarkerDialog()
+                    var monstre = Monstre()
+                    monstre = dragon
+                    dialog.setTitle(updateTitle("Ce monstre vous attaque : " + monstre.name))
+                    dialog.setInfo(updateInfo("Hp : " + monstre.hp.toString() + ", Atk : " +monstre.atk.toString()))
+                    val navHostFragment = supportFragmentManager
+                    dialog.show(navHostFragment, "MarkerDialog")
+                    spawnTime=0
+                    randomPosition = ThreadLocalRandom.current().nextInt(0,4)
+                    randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,10000)
+                    //bound : 30 000 à l'origine
+                }
+                //si il il click sur un lieu                 
                     else -> {
                         val index= Marker.title?.toInt()
                         if (index != null) {
@@ -179,6 +192,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         //MAJ des stats, +1 lieu fouillé et +1 item récupéré
                         Stats(this,1).upMarqueurs()
                         Stats(this,1).upItems()
+
                     }
                 }
                 true
@@ -247,6 +261,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             val currenTime= System.currentTimeMillis()
             //Si la distance entre le joueur et le lieu est inférieure à 1500m, on affiche le lieu
             //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
+
             if(distance <1500) {
                 if (e.getMarqueurVisible() == 1) {
                     googleMap.addMarker(
@@ -339,4 +354,9 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             marker.latitude,
             marker.longitude)
     }
+
+
 }
+
+}
+
