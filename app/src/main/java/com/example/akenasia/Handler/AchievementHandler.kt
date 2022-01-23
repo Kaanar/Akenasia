@@ -27,7 +27,7 @@ class AchievementHandler(var context: Context): Handler  {
     //method to read a list of Achievements
     fun view(): HashMap<String,Int> {
         val empList:HashMap<String,Int> = HashMap()
-        val selectQuery = "SELECT * FROM ${dbHandler.TABLE_ACHIEVEMENT} "
+        val selectQuery = "SELECT * FROM ${dbHandler.TABLE_ACHIEVEMENT} ORDER BY id"
         val db = dbHandler.readableDatabase
         var cursor: Cursor? = null
         try{

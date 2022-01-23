@@ -37,7 +37,7 @@ class Personnage: AppCompatActivity() {
 
         binding.achievements.setOnClickListener{
             val intent= Intent(this,AchievementFragment::class.java)
-            startActivity(intent)
+            this.startActivity(intent)
         }
 
         //Implémentation des différents choix du menu

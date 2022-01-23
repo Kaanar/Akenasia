@@ -40,13 +40,14 @@
     </LinearLayout>
 
 
-    <ImageButton
+    <Button
         android:id="@+id/achievements"
-        android:layout_width="63dp"
-        android:layout_height="51dp"
+        android:layout_width="98dp"
+        android:layout_height="50dp"
         android:layout_marginStart="39dp"
-        android:src="@drawable/ic_achievement_list"
+        android:text="Succès"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/player_stats_linear_layout"
         app:layout_constraintTop_toTopOf="parent" />
 

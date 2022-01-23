@@ -10,8 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.akenasia.R
 
-class AchievementAdapter (private val context: Activity, private val description: Array<String>, private val unlocked: Array<Int>)
-    : ArrayAdapter<String>(context, R.layout.achievements_listview) {
+class AchievementAdapter (private val context: Activity,private val id: Array<String>, private val description: Array<String>, private val unlocked: Array<String>)
+    : ArrayAdapter<String>(context, R.layout.achievements_listview,id) {
 
 
     @SuppressLint("ViewHolder", "SetTextI18n")
@@ -20,19 +20,19 @@ class AchievementAdapter (private val context: Activity, private val description
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.achievements_listview, null, true)
 
-        val description_tv = rowView.findViewById<View>(R.id.achievement_description) as TextView
-        val unlocked_tv = rowView.findViewById<View>(R.id.achievement_unlocked) as TextView
-        val unlocked_image = rowView.findViewById<View>(R.id.achievement_unlocked_image) as ImageView
+        val descriptionTv = rowView.findViewById<View>(R.id.achievement_description) as TextView
+        val unlockedTv = rowView.findViewById<View>(R.id.achievement_unlocked) as TextView
+        val unlockedImage = rowView.findViewById<View>(R.id.achievement_unlocked_image) as ImageView
 
-        description_tv.text=description[position]
-        when(unlocked[position]){
+        descriptionTv.text=description[position]
+        when(unlocked[position].toInt()){
             0->{
-                unlocked_tv.text="Succès vérouillé"
-                unlocked_image.setImageResource(R.drawable.ic_unchecked)
+                unlockedTv.text="Succès vérouillé"
+                unlockedImage.setImageResource(R.drawable.ic_unchecked)
             }
             1->{
-                unlocked_tv.text="Succès dévérouillé!"
-                unlocked_image.setImageResource(R.drawable.ic_checked)
+                unlockedTv.text="Succès dévérouillé!"
+                unlockedImage.setImageResource(R.drawable.ic_checked)
             }
         }
 

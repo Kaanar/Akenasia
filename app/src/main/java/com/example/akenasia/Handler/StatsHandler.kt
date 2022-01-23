@@ -122,7 +122,7 @@ class StatsHandler(var context: Context): Handler {
 
     fun upTotalItem(id: Int): Int{
         val db = dbHandler.writableDatabase
-        val total = this.getTotalMarqueur(id) + 1
+        val total = this.getTotalItem(id) + 1
         val contentValues = ContentValues()
         contentValues.put(KEY_REFJOUEUR, id)
         contentValues.put(KEY_TOTALITEM, total)

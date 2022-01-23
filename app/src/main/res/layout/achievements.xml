@@ -9,20 +9,25 @@
     <ListView
         android:id="@+id/ListViewAchievements"
         android:layout_width="409dp"
-        android:layout_height="673dp"
+        android:layout_height="642dp"
         app:layout_constraintBottom_toTopOf="@+id/NavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavigationView"
         android:layout_width="409dp"
-        android:layout_height="0dp"
+        android:layout_height="62dp"
+        android:layout_below="@+id/ListViewAchievements"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:menu="@menu/menu_navigateur" />

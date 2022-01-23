@@ -1,30 +1,22 @@
 package com.example.akenasia.openworld
 
-import ItemAdapter
+import com.example.akenasia.adapter.ItemAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.R
-import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.database.Item
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.databinding.BagBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
-import java.util.ArrayList
 
 class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private lateinit var binding: BagBinding
-
-
-    private var items: ArrayList<Item>? = null
     private lateinit var itemHandler : ItemHandler
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +24,8 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
         itemHandler = ItemHandler(applicationContext)
 
-        // Instanciation des items en dur
-        items = ArrayList<Item>()
         viewRecord()
+
         ListViewItem.onItemClickListener = this
 
         binding.NavigationView.selectedItemId = R.id.BagClick
@@ -65,8 +56,6 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     private fun viewRecord(){
-        //creating the instance of DatabaseHandler class
-        DatabaseHandler(applicationContext)
         //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Item> = itemHandler.view()
         val empArrayId = Array(emp.size){"0"}
@@ -96,8 +85,6 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     private fun orderRecord(deleteId: Int) {
-        val databaseHandler = DatabaseHandler(applicationContext)
-        //calling the viewEmployee method of DatabaseHandler class to read the records
         val emp: List<Item> = itemHandler.view()
         val empArrayId = Array<String>(emp.size) { "0" }
         val empArrayName = Array<String>(emp.size) { "null" }

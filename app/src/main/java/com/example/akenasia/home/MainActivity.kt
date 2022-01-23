@@ -73,40 +73,16 @@ class MainActivity : AppCompatActivity() {
         if (navController != null) {
             setupActionBarWithNavController(navController, appBarConfiguration)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
         //Initialisation des données du jeu
         initialisation()
     }
 
-    //function qui ajoute des lieux près du joueur
-    private fun FillMap(): HashMap<Int,LatLng>{
-        val nb=150
-        var randomradius : Int
-        var randomLat: Double
-        var randomLong: Double
-        val markers: HashMap<Int,LatLng> = HashMap()
-        pos.refreshLocation()
-        for(i in 1..nb){
-            randomLat = ThreadLocalRandom.current().nextDouble(0.000,0.10)
-            randomLong = ThreadLocalRandom.current().nextDouble(0.000,0.10)
-            randomradius = ThreadLocalRandom.current().nextInt(40)
-            when (randomradius%4){
-                0->markers.put(i,LatLng(pos.getLatitude() + randomLat, pos.getLongitude() +randomLong))
-                1->markers.put(i,LatLng(pos.getLatitude() + randomLat, pos.getLongitude() -randomLong))
-                2->markers.put(i,LatLng(pos.getLatitude() - randomLat, pos.getLongitude() +randomLong))
-                3->markers.put(i,LatLng(pos.getLatitude() - randomLat, pos.getLongitude() -randomLong))
-            }
-        }
-        return markers
-    }
-
     private fun initialisation(){
-        //Peuplement de latlng dans la bdd pour le mode OpenWorld
-        if(marqueurHandler.view().isEmpty()){
-            markers=FillMap()
-            for(x in markers){
-                marqueurHandler.add(x.key,x.value)
-            }
-        }
+
         if(achievementHandler.view().isEmpty()){
             val achievements = Achievement(this)
             achievements.init()

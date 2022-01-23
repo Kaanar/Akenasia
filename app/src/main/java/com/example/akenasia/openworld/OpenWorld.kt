@@ -31,8 +31,6 @@ import java.util.concurrent.ThreadLocalRandom
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
     private val TAG: String = OpenWorld::class.java.getSimpleName()
-
-
     private lateinit var pos: Position
     private var isPlay: Boolean = false
     private lateinit var binding: ActivityOpenworldBinding
@@ -44,8 +42,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     lateinit var marqueurHandler: MarqueurHandler
     private var cameraFocus: Boolean = true
     private var spawnTime= 0
-
-
     //Valeurs LatLong
     private var randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
     private var randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
@@ -53,7 +49,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     private var randomPosition = ThreadLocalRandom.current().nextInt(0,4)
     //Valeur random pour la fréquence d'appartition du marker ennemi
     private var randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,30000)
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,20 +61,12 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         marqueurHandler= MarqueurHandler(this)
         markers= HashMap()
 
-
         //Mise en place d'un navcontroller pour d'eventuels fragments
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.include3) as NavHostFragment?
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.include3) as NavHostFragment?
         val navController = navHostFragment?.navController
-        if (navController != null) {
-            appBarConfiguration = AppBarConfiguration(navController.graph)
-        }
-        if (navController != null) {
-            setupActionBarWithNavController(navController, appBarConfiguration)
-        }
-
+        if (navController != null) { appBarConfiguration = AppBarConfiguration(navController.graph) }
+        if (navController != null) { setupActionBarWithNavController(navController, appBarConfiguration) }
         chronometre = OWChrono
-
         if (!isPlay) {
             chronometre.base = SystemClock.elapsedRealtime() + 300000
             chronometre.start()
@@ -91,7 +78,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         OWmap_view.onResume()
         OWmap_view.getMapAsync(this)
 
-
         binding.NavigationView.selectedItemId = R.id.MapClick
 
         //Implémentation des différents choix du menu
@@ -100,39 +86,37 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     R.id.QuitClick -> {
                         val intent = Intent(this, MainActivity::class.java)
                         this.startActivity(intent)
-                        true
                     }
                     R.id.MapClick -> {
                         val intent = Intent(this, OpenWorld::class.java)
                         this.startActivity(intent)
-                        true
                     }
                     R.id.BagClick -> {
                         val intent = Intent(this, Bag::class.java)
                         this.startActivity(intent)
-                        true
                     }
                     else -> {
                         val intent = Intent(this, Personnage::class.java)
                         this.startActivity(intent)
-                        true
                     }
                 }
             true
         }
-
-        CameraSwitch.setOnClickListener(){
-            cameraFocus = cameraFocus != true
-        }
+        CameraSwitch.setOnClickListener{ cameraFocus = cameraFocus != true }
     }
-
 
     override fun onMapReady(map: GoogleMap) {
         map.let {
             googleMap = it
             visible()
 
-
+            //Peuplement de latlng dans la bdd pour le mode OpenWorld
+            if(marqueurHandler.view().isEmpty()) {
+                markers = FillMap()
+                for (x in markers) {
+                    marqueurHandler.add(x.key, x.value)
+                }
+            }
             //rafraîchit la position du joueur à chaque tik
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
                 //MAJ de l'affichage de la position du joueur
@@ -143,44 +127,62 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     .position(location)
                     .title("Current Position"))
                 viewMarker()
-
                 //Zoom de la caméra sur la position du joueur
-                if (cameraFocus) {
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f))
-                }
+                if (cameraFocus) { googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,15f)) }
             }
 
             //Différentiation des use case en fonction du type de marker
-
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
                 //Si le joueur click sur son marker
-                if(Marker.title.toString() == "Current Position"){
-                    Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show()
-                }
-                //si il click sur un ennemi
-                else if (Marker.title.toString() == "Un ennemi !"){
-                    val dialog = MarkerDialog()
-                    val navHostFragment = supportFragmentManager
-                    dialog.show(navHostFragment, "MarkerDialog")
-                    spawnTime=0
-                    randomPosition = ThreadLocalRandom.current().nextInt(0,4)
-                    randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,30000)
-                }
-                //si il il click sur un lieu
-                else{
-                    val index= Marker.title?.toInt()
-                    if (index != null) {
-                        DropItem(index)
-                        marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
+                when {
+                    Marker.title.toString() == "Current Position" -> { Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show() }
+                    //si il click sur un ennemi
+                    Marker.title.toString() == "Un ennemi !" -> {
+                        val dialog = MarkerDialog()
+                        val navHostFragment = supportFragmentManager
+                        dialog.show(navHostFragment, "MarkerDialog")
+                        spawnTime=0
+                        randomPosition = ThreadLocalRandom.current().nextInt(0,4)
+                        randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,30000)
                     }
-                    //MAJ des stats, +1 lieu fouillé et +1 item récupéré
-                    Stats(this,1).upMarqueurs()
-                    Stats(this,1).upItems()
+                    //si il il click sur un lieu
+                    else -> {
+                        val index= Marker.title?.toInt()
+                        if (index != null) {
+                            DropItem(index)
+                            marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
+                        }
+                        //MAJ des stats, +1 lieu fouillé et +1 item récupéré
+                        Stats(this,1).upMarqueurs()
+                        Stats(this,1).upItems()
+                    }
                 }
                 true
             })
         }
         }
+
+    //function qui ajoute des lieux près du joueur
+    private fun FillMap(): HashMap<Int,LatLng>{
+        val nb=150
+        var randomradius : Int
+        var randomLat: Double
+        var randomLong: Double
+        val markers: HashMap<Int,LatLng> = HashMap()
+        pos.refreshLocation()
+        for(i in 1..nb){
+            randomLat = ThreadLocalRandom.current().nextDouble(0.000,0.10)
+            randomLong = ThreadLocalRandom.current().nextDouble(0.000,0.10)
+            randomradius = ThreadLocalRandom.current().nextInt(40)
+            when (randomradius%4){
+                0->markers.put(i,LatLng(pos.getLatitude() + randomLat, pos.getLongitude() +randomLong))
+                1->markers.put(i,LatLng(pos.getLatitude() + randomLat, pos.getLongitude() -randomLong))
+                2->markers.put(i,LatLng(pos.getLatitude() - randomLat, pos.getLongitude() +randomLong))
+                3->markers.put(i,LatLng(pos.getLatitude() - randomLat, pos.getLongitude() -randomLong))
+            }
+        }
+        return markers
+    }
 
     //Méthode qui permet d'afficher ou non les marqueurs du jeu. Il y a le marqueur du joueur, le marqueur des ennemis et les lieux proches
     fun viewMarker() {
@@ -214,40 +216,41 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
                     .title("Un ennemi !")
                     .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
-                    .zIndex(1.0f)
-                )
+                    .zIndex(1.0f))
             }
             spawnTime+=1
             //On récupère le temps actuel
             val currenTime= System.currentTimeMillis()
-            //Si la distance entre le joueur et le lieu est inférieure à 150m, on affiche le lieu
+            //Si la distance entre le joueur et le lieu est inférieure à 1500m, on affiche le lieu
             //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
-            if(distance < 1500){
-                if(e.getMarqueurVisible() == 1 ) {
-                    googleMap.addMarker(MarkerOptions()
-                        .position(marker)
-                        .title(index.toString())
-                        .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
-                        .zIndex(1.0f)
-                    )
+            if(distance <1500) {
+                if (e.getMarqueurVisible() == 1) {
+                    googleMap.addMarker(
+                        MarkerOptions()
+                            .position(marker)
+                            .title(index.toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
+                            .zIndex(1.0f))
                 }
                 //Si (temps actuel - last_updated du marker) converti en seconde > 5 minutes, alors on affiche le marqueur
-                else if((System.currentTimeMillis().minus(marqueurHandler.get(index).getMarqueurLastUpdated())/1000) > 300){
-                    googleMap.addMarker(MarkerOptions()
-                        .position(marker)
-                        .title(index.toString())
-                        .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
-                        .zIndex(1.0f)
-                    )
+                else if ((System.currentTimeMillis()
+                        .minus(marqueurHandler.get(index).getMarqueurLastUpdated()) / 1000) > 300)
+                        {
+                    googleMap.addMarker(
+                        MarkerOptions()
+                            .position(marker)
+                            .title(index.toString())
+                            .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index)))
+                            .zIndex(1.0f))
                     //et on le met à jour en indiquant qu'il est visible à nouveau (MarqueurVisible = 1
-                    marqueurHandler.update(Marqueur(e.getMarqueurId(),
-                        e.getMarqueurLocation(),
-                        1,
-                        currenTime)
-                    )
+                    marqueurHandler.update(
+                        Marqueur(
+                            e.getMarqueurId(),
+                            e.getMarqueurLocation(),
+                            1,
+                            currenTime))
                 }
             }
-
         }
     }
 
@@ -260,7 +263,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         catch (e:java.util.NoSuchElementException){
             id=1
         }
-
         when (index %4) {
             0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
                 this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
@@ -294,16 +296,10 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
-            val success = googleMap.setMapStyle(
-                MapStyleOptions.loadRawResourceStyle(
-                    this, R.raw.style_visible
-                    //Le nom du fichier json qui permet de définir l'affichage de la map
-                )
-            )
-            if (!success) {
-                Log.e(TAG, "Style parsing failed.")
-                //message d'erreur si le json n'est pas appliqué
-            }
+            //Le nom du fichier json qui permet de définir l'affichage de la map
+            val success = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_visible))
+            //message d'erreur si le json n'est pas appliqué
+            if (!success) { Log.e(TAG, "Style parsing failed.")}
         } catch (e: Resources.NotFoundException) {
             Log.e(TAG, "Can't find style. Error: ", e)
         }
@@ -314,7 +310,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             pos.getLatitude(),
             pos.getLongitude(),
             marker.latitude,
-            marker.longitude
-        )
+            marker.longitude)
     }
 }

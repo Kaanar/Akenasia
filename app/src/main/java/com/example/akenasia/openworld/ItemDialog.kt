@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
 import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.database.ListItems
 import kotlinx.android.synthetic.main.bag.*
 import kotlinx.android.synthetic.main.item_dialog.view.*
 import java.io.Serializable
