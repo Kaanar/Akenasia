@@ -45,6 +45,10 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                     val intent = Intent(this, Bag::class.java)
                     this.startActivity(intent)
                 }
+                R.id.ForgeClick -> {
+                    val intent = Intent(this, Forge::class.java)
+                    this.startActivity(intent)
+                }
                 else -> {
                     val intent = Intent(this, Personnage::class.java)
                     this.startActivity(intent)
@@ -79,38 +83,8 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        itemHandler.delete(p2)
-        orderRecord(p2)
+        itemHandler.delete(p2+1)
         viewRecord()
     }
 
-    private fun orderRecord(deleteId: Int) {
-        val emp: List<Item> = itemHandler.view()
-        val empArrayId = Array<String>(emp.size) { "0" }
-        val empArrayName = Array<String>(emp.size) { "null" }
-        val empArrayDesc = Array<String>(emp.size) { "null" }
-
-        var index = 0
-        for (e in emp) {
-            empArrayId[index] = e.Itemid.toString()
-            empArrayName[index] = e.ItemName
-            empArrayDesc[index] = e.ItemDesc
-            if (e.Itemid < deleteId) {
-                //Toast.makeText(this, e.Itemid.toString(), Toast.LENGTH_LONG).show()
-            } else {
-                if (e.Itemid.toString().trim() != "") {
-                    itemHandler.update(
-                        Item(e.Itemid,
-                            e.ItemType,
-                            e.ItemName,
-                            e.ItemDesc,
-                            e.ItemAtt,
-                            e.ItemDef,
-                            )
-                    )
-                }
-            }
-            index++
-        }
-    }
 }

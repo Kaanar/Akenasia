@@ -10,7 +10,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 ), Handler {
 
     companion object {
-        private val DATABASE_VERSION = 20
+        private val DATABASE_VERSION = 21
         private val DATABASE_NAME = "AkenasiaDatabase"
     }
 
@@ -45,7 +45,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db?.execSQL(CREATE_BAG_TABLE)
 
         val CREATE_PERSONNAGE_TABLE =("CREATE TABLE " + TABLE_PERSONNAGE + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_HP + " DOUBLE," + KEY_ATT + " DOUBLE," + KEY_DEF + " DOUBLE," + KEY_ARMURE + " INTEGER,"
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_ARGENT + " INTEGER," + KEY_HP + " DOUBLE," + KEY_ATT + " DOUBLE," + KEY_DEF + " DOUBLE," + KEY_ARMURE + " INTEGER,"
                 + KEY_BOUCLIER + " INTEGER," + KEY_EPEE + " INTEGER," + KEY_CHAUSSURES + " INTEGER, FOREIGN KEY(" + KEY_ARMURE + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
                 ", FOREIGN KEY(" + KEY_BOUCLIER + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
                 ", FOREIGN KEY(" + KEY_EPEE + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
