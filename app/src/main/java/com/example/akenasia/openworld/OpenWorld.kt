@@ -69,7 +69,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         personnage = PersonnageHandler(this)
       
         currentPersonnage=personnage.get(1)
-        Markers= HashMap()
         markers= HashMap()
 
         //Mise en place d'un navcontroller pour d'eventuels fragments
@@ -106,30 +105,19 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         val intent = Intent(this, Bag::class.java)
                         this.startActivity(intent)
                     }
+                    R.id.ForgeClick -> {
+                        val intent = Intent(this, Forge::class.java)
+                        this.startActivity(intent)
+                    }
                     else -> {
                         val intent = Intent(this, Personnage::class.java)
                         this.startActivity(intent)
                     }
                 }
-                R.id.MapClick -> {
-                    val intent = Intent(this, OpenWorld::class.java)
-                    this.startActivity(intent)
-                    true
-                }
-                R.id.BagClick -> {
-                    val intent = Intent(this, Bag::class.java)
-                    this.startActivity(intent)
-                    true
-                }
-                else -> {
-                    val intent = Intent(this, Personnage::class.java)
-                    this.startActivity(intent)
-                    true
-                }
-            }
             true
         }
         CameraSwitch.setOnClickListener{ cameraFocus = cameraFocus != true }
+
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -159,22 +147,15 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             }
 
             //Différentiation des use case en fonction du type de marker
+
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
                 //Si le joueur click sur son marker
-
                 if(Marker.title.toString() == "Current Position"){
                     Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show()
                 }
                 //si il click sur un ennemi
                 else if (Marker.title.toString() == "Un ennemi !"){
-                    val slime = Slime() //initialisation d'un mob
-                    val orc = Orc()
-                    val dragon = Dragon()
                     val dialog = MarkerDialog()
-                    var monstre = Monstre()
-                    monstre = dragon
-                    dialog.setTitle(updateTitle("Ce monstre vous attaque : " + monstre.name))
-                    dialog.setInfo(updateInfo("Hp : " + monstre.hp.toString() + ", Atk : " +monstre.atk.toString()))
                     val navHostFragment = supportFragmentManager
                     dialog.show(navHostFragment, "MarkerDialog")
                     spawnTime=0
@@ -182,18 +163,16 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     randomSpawnTime = ThreadLocalRandom.current().nextInt(4000,10000)
                     //bound : 30 000 à l'origine
                 }
-                //si il il click sur un lieu                 
-                    else -> {
-                        val index= Marker.title?.toInt()
-                        if (index != null) {
-                            DropItem(index)
-                            marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
-                        }
-                        //MAJ des stats, +1 lieu fouillé et +1 item récupéré
-                        Stats(this,1).upMarqueurs()
-                        Stats(this,1).upItems()
-
+                //si il il click sur un lieu
+                else{
+                    val index= Marker.title?.toInt()
+                    if (index != null) {
+                        DropItem(index)
+                        marqueurHandler.update(Marqueur(index,Marker.position,2,System.currentTimeMillis()))
                     }
+                    //MAJ des stats, +1 lieu fouillé et +1 item récupéré
+                    Stats(this,1).upMarqueurs()
+                    Stats(this,1).upItems()
                 }
                 true
             })
@@ -355,8 +334,13 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             marker.longitude)
     }
 
+    fun updateTitle(nom: String) : String {
+        return nom
+    }
 
+    fun updateInfo(info: String) : String {
+        return info
+    }
 }
 
-}
 

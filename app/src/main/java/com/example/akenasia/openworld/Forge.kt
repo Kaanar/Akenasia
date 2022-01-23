@@ -1,25 +1,23 @@
 package com.example.akenasia.openworld
 
-import ItemAdapter
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.R
+import com.example.akenasia.adapter.ItemAdapter
 import com.example.akenasia.database.Item
 import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.databinding.ForgeBinding
 import com.example.akenasia.home.MainActivity
-import kotlinx.android.synthetic.main.bag.*
 import kotlinx.android.synthetic.main.forge.*
-import kotlinx.android.synthetic.main.itemtype_listview.*
 
 
 class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -58,6 +56,10 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
                 }
                 R.id.BagClick -> {
                     val intent = Intent(this, Bag::class.java)
+                    this.startActivity(intent)
+                }
+                R.id.ForgeClick -> {
+                    val intent = Intent(this, Forge::class.java)
                     this.startActivity(intent)
                 }
                 else -> {
