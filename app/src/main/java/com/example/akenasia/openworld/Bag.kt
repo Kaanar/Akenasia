@@ -34,12 +34,6 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
         // Instanciation des items en dur
         items = ArrayList<Item>()
-        /*if(dbHandler.viewItem().isEmpty()) {
-            dbHandler.addItem(Item(0,ListItems.CHAUSSURES.toString(), "chaussures", "Yo",1.0,1.0))
-            dbHandler.addItem(Item(1,ListItems.EPEE.toString(), "Epee", "blague humour noir epee",3.0,0.0))
-            dbHandler.addItem(Item(2,ListItems.ARMURE.toString(), "Armure", "blague humour noire armure",0.0,3.0))
-            dbHandler.addItem(Item(3,ListItems.BOUCLIER.toString(), "Bouclier", "blague hurmour noire bouclier",1.0,2.0))
-        }*/
         viewRecord()
         ListViewItem.onItemClickListener = this
 
@@ -72,7 +66,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private fun viewRecord(){
         //creating the instance of DatabaseHandler class
-        val databaseHandler = DatabaseHandler(applicationContext)
+        DatabaseHandler(applicationContext)
         //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Item> = itemHandler.view()
         val empArrayId = Array(emp.size){"0"}

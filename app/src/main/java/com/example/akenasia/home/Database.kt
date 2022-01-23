@@ -30,8 +30,6 @@ class Database : Fragment() {
     private lateinit var pos: Position
     private lateinit var places: ArrayList<Place>
     private lateinit var placeHandler : PlaceHandler
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private var thiscontext: Context? = null
     override fun onCreateView(
@@ -120,7 +118,6 @@ class Database : Fragment() {
     }
 
     private fun orderRecord(deleteId: Int) {
-        val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
         //calling the viewEmployee method of DatabaseHandler class to read the records
         val emp: List<Place> = placeHandler.view()
         val empArrayId = Array<String>(emp.size) { "0" }
@@ -157,8 +154,6 @@ class Database : Fragment() {
     }
 
     private fun viewRecord(){
-        //creating the instance of DatabaseHandler class
-        val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
         //calling the viewPlace method of DatabaseHandler class to read the records
         val emp: List<Place> = placeHandler.view()
         val empArrayId = Array<String>(emp.size){"0"}
@@ -193,8 +188,6 @@ class Database : Fragment() {
         dialogBuilder.setPositiveButton("Delete", DialogInterface.OnClickListener { _, _ ->
 
             val deleteId = dltId.text.toString()
-            //creating the instance of DatabaseHandler class
-            val databaseHandler: DatabaseHandler = DatabaseHandler(thiscontext!!)
             if(deleteId.trim()!=""){
                 //calling the deleteEmployee method of DatabaseHandler class to delete record
                 val status = placeHandler.delete(Integer.parseInt(deleteId))

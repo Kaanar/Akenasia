@@ -10,7 +10,7 @@ import kotlinx.coroutines.processNextEventInCurrentThread
 
 
 class ItemAdapter (private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val desc: Array<String>, private val att: Array<String>
-,private val def: Array<String> ) : ArrayAdapter<String>(context, R.layout.custom_list, id) {
+,private val def: Array<String> ) : ArrayAdapter<String>(context,R.layout.items_listview) {
 
     lateinit var inflater: LayoutInflater
 
