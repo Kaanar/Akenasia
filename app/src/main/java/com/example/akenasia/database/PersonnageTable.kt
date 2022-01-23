@@ -1,7 +1,7 @@
 package com.example.akenasia.database
 
 data class PersonnageTable (var persoId: Int, var persoHp: Double, var persoAtt: Double, var persoDef: Double,var armure: Int,
-                            var bouclier: Int, var epee: Int, var chaussures: Int) {
+                            var bouclier: Int, var epee: Int, var chaussures: Int, var argent: Int) {
     @JvmName("getpersoId1")
     fun getpersoId(): Int {
         return persoId
@@ -41,5 +41,15 @@ data class PersonnageTable (var persoId: Int, var persoHp: Double, var persoAtt:
     @JvmName("getChaussures1")
     fun getChaussures():Int {
         return chaussures
+    }
+
+    @JvmName("getArgent1")
+    fun getArgent():Int {
+        return argent
+    }
+
+    @JvmName("setArgent1")
+    fun setArgent(somme : Int) {
+        argent += somme
     }
 }

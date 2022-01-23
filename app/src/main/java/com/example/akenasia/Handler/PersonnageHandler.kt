@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import com.example.akenasia.database.Item
 import com.example.akenasia.database.PersonnageTable
+import com.example.akenasia.openworld.Personnage
 import kotlin.system.exitProcess
 
 class PersonnageHandler(var context: Context): Handler {
@@ -25,6 +26,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
+        contentValues.put(KEY_ARGENT, 0)
 
 
         // Inserting Row
@@ -49,9 +51,33 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
+        contentValues.put(KEY_ARGENT, 0)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id = $id  ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    fun upArgent(emp: Int): Int {
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        val personnage = get(1)
+        val id = 1
+
+        contentValues.put(KEY_ID, personnage.persoId)
+        contentValues.put(KEY_HP, personnage.persoHp)
+        contentValues.put(KEY_ATT, personnage.persoAtt)
+        contentValues.put(KEY_DEF, personnage.persoDef)
+        contentValues.put(KEY_ARMURE, personnage.armure)
+        contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+        contentValues.put(KEY_EPEE, personnage.epee)
+        contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+        contentValues.put(KEY_ARGENT, emp)
+
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $id ",null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
@@ -159,6 +185,7 @@ class PersonnageHandler(var context: Context): Handler {
         var bouclier: Int
         var epee: Int
         var chaussures: Int
+        var argent : Int
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -170,9 +197,10 @@ class PersonnageHandler(var context: Context): Handler {
                 bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
                 epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
                 chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
+                argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
 
                 val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                    bouclier=bouclier,epee=epee,chaussures=chaussures)
+                    bouclier=bouclier,epee=epee,chaussures=chaussures, argent = argent)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
@@ -197,6 +225,7 @@ class PersonnageHandler(var context: Context): Handler {
         val bouclier: Int
         val epee: Int
         val chaussures: Int
+        val argent: Int
 
         if (cursor != null) {
             cursor.moveToFirst()
@@ -208,8 +237,9 @@ class PersonnageHandler(var context: Context): Handler {
             bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
             epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
             chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
+            argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
             val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                bouclier=bouclier,epee=epee,chaussures=chaussures)
+                bouclier=bouclier,epee=epee,chaussures=chaussures, argent = argent)
             return emp
         }
         exitProcess(0)

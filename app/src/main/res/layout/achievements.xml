@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".openworld.Bag">
+    tools:context=".achievement.AchievementFragment">
 
     <ListView
-        android:id="@+id/ListViewItem"
+        android:id="@+id/ListViewAchievements"
         android:layout_width="409dp"
-        android:layout_height="673dp"
+        android:layout_height="642dp"
         app:layout_constraintBottom_toTopOf="@+id/NavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,7 +20,9 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavigationView"
         android:layout_width="409dp"
-        android:layout_height="0dp"
+        android:layout_height="62dp"
+        android:layout_below="@+id/ListViewAchievements"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

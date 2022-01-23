@@ -11,6 +11,8 @@ import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
+import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.achievement.Stats
 import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.openworld.mobs.Dragon
@@ -70,6 +72,7 @@ class MarkerDialog : DialogFragment () {
         att_joueur = personnageTable.getpersoAtt()
         def_joueur = personnageTable.getpersoDef()
         var rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
+
         rootView.BtnAttaque.setOnClickListener() {
             //On lance le combat
             BtnAttaque.visibility = View.INVISIBLE
@@ -110,6 +113,11 @@ class MarkerDialog : DialogFragment () {
                 val def = ThreadLocalRandom.current().nextInt(0,5)
                 this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble()))
                 Toast.makeText(context,"Vous avez gagné un item surprise", Toast.LENGTH_LONG).show()
+                
+                 //MAJ des stats, +1 monstre vaincu et +1 item récupéré
+                Stats(context!!, 1).upMonstres()
+                Stats(context!!,1).upItems()
+
                 BtnRetour.visibility = View.VISIBLE
                 BtnAttaqueMonstre.visibility = View.INVISIBLE
             }
@@ -122,7 +130,6 @@ class MarkerDialog : DialogFragment () {
                 defaiteText.visibility = View.VISIBLE
                 BtnRetour.visibility = View.VISIBLE
                 BtnAttaqueMonstre.visibility = View.INVISIBLE
-
             }
         }
 
