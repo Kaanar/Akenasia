@@ -21,38 +21,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/ItemId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:text="Numéro"
         android:textAppearance="?attr/textAppearanceHeadline6"
-        app:layout_constraintBottom_toTopOf="@+id/ItemName"
         app:layout_constraintStart_toEndOf="@+id/idTv"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/ItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="70dp"
-        android:text="Nom :"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Nom"
         android:textAppearance="?attr/textAppearanceHeadline6"
-        app:layout_constraintEnd_toStartOf="@+id/ItemId"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ItemId" />
+        app:layout_constraintTop_toBottomOf="@+id/idTv" />
 
 
     <TextView
         android:id="@+id/ItemAtt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:text="ATT:"
         android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintStart_toStartOf="@+id/ItemDesc"
@@ -62,7 +59,7 @@
         android:id="@+id/ItemDef"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:text="DEF:"
         android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintStart_toStartOf="@+id/ItemAtt"
@@ -72,9 +69,8 @@
         android:id="@+id/ItemDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:layout_marginEnd="44dp"
-        android:text="Description :"
         android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintEnd_toStartOf="@+id/ItemId"
         app:layout_constraintHorizontal_bias="0.0"

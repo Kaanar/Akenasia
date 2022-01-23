@@ -3,12 +3,16 @@ package com.example.akenasia.openworld
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import com.example.akenasia.databinding.PersonnageBinding
 import com.example.akenasia.home.MainActivity
 import com.example.akenasia.R
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.achievement.AchievementFragment
 import com.example.akenasia.database.*
 
 
@@ -31,23 +35,25 @@ class Personnage: AppCompatActivity() {
 
         binding.NavigationView.selectedItemId = R.id.PersonnageClick
 
+        binding.achievements.setOnClickListener{
+            val intent= Intent(this,AchievementFragment::class.java)
+            this.startActivity(intent)
+        }
+
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.QuitClick -> {
                     val intent = Intent(this, MainActivity::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 R.id.MapClick -> {
                     val intent = Intent(this, OpenWorld::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 R.id.BagClick -> {
                     val intent = Intent(this, Bag::class.java)
                     this.startActivity(intent)
-                    true
                 }
                 R.id.ForgeClick -> {
                     val intent = Intent(this, Forge::class.java)
@@ -56,7 +62,6 @@ class Personnage: AppCompatActivity() {
                 else -> {
                     val intent = Intent(this, Personnage::class.java)
                     this.startActivity(intent)
-                    true
                 }
             }
             true
@@ -115,9 +120,6 @@ class Personnage: AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     //Méthode qui affiche les stats du joueur et de ses items équipés
     private fun inflateStats() {
-        if (personnageHandler.view().isEmpty()) {
-            personnageHandler.create()
-        }
         currentPersonnage=personnageHandler.get(1)
 
         //Affichage des stats du personnage

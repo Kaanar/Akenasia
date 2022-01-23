@@ -20,6 +20,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val TABLE_BAG = "BagTable"
         val TABLE_PERSONNAGE = "PersonnnageTable"
         val TABLE_MARQUEUR = "MarqueurTable"
+        val TABLE_STATS = "StatsTable"
+        val TABLE_ACHIEVEMENT = "AchievementTable"
+
+
 
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -52,16 +56,26 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LATITUDE + " DOUBLE," + KEY_LONGITUDE + " DOUBLE," + KEY_VISIBLE + " INTEGER," + KEY_LASTUPDATED + " INTEGER" + ")")
         db?.execSQL(CREATE_MARQUEUR_TABLE)
 
+        val CREATE_STATS_TABLE =("CREATE TABLE " + TABLE_STATS + "("
+                + KEY_REFJOUEUR + " INTEGER PRIMARY KEY," + KEY_TOTALMARQUEUR + " INTEGER," + KEY_TOTALMONSTRE + " INTEGER," + KEY_TOTALITEM + " INTEGER" + ")")
+        db?.execSQL(CREATE_STATS_TABLE)
+
+        val CREATE_ACHIEVEMENT_TABLE =("CREATE TABLE " + TABLE_ACHIEVEMENT + "("
+                + KEY_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_DESC + " TEXT," + KEY_UNLOCKED + " INTEGER" + ")")
+        db?.execSQL(CREATE_ACHIEVEMENT_TABLE)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
-        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSITION)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEM)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BAG)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONNAGE)
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MARQUEUR)
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_PLACE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_POSITION")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ITEM")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_BAG")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_PERSONNAGE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_MARQUEUR")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_STATS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ACHIEVEMENT")
 
         onCreate(db)
     }
