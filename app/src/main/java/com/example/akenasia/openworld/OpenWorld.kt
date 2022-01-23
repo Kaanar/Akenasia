@@ -301,34 +301,40 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
         when (index %4) {
             0 -> { when (type%3){
-                0 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
+                0 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type 1dans un buisson",Toast.LENGTH_LONG).show()
                     this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type1","Parfait pour les débutants",1.0,2.0))}
-                1 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
-                    this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type2","Parfait pour les débutants",1.0,2.0))}
-                2 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
-                    this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type3","Parfait pour les débutants",1.0,2.0))}
+                1 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type 2 dans un buisson",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type2","Parfait pour les débutants",5.0,10.0))}
+                2 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type 3 dans un buisson",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type3","Parfait pour les débutants",10.0,20.0))}
                 }
             }
             1 -> { when (type%3){
-                0 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+                0 -> {Toast.makeText(this,"Une épée rouillée type1 jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
                     this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type1","Une épée basique",3.0,1.0))}
-                1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
-                    this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type2","Une épée basique",3.0,1.0))}
-                2 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
-                    this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type3","Une épée basique",3.0,1.0))}
+                1 -> {Toast.makeText(this,"Une épée rouillée type2 jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type2","Une épée basique",6.0,2.0))}
+                2 -> {Toast.makeText(this,"Une épée rouillée type3 jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat type3","Une épée basique",9.0,4.0))}
                 }
             }
             2 -> { when (type%3){
-                0 -> {Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
+                0 -> {Toast.makeText(this,"Vous avez trouvé des chaussures en cuir type1 abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
                     this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes type1","Pas très confortable",1.0,1.0))}
-                1 -> {Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
-                    this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes type2","Pas très confortable",1.0,1.0))}
-                2 -> {Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
-                    this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes type3","Pas très confortable",1.0,1.0))}
+                1 -> {Toast.makeText(this,"Vous avez trouvé des chaussures en cuir type2 abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes type2","Pas très confortable",3.0,2.0))}
+                2 -> {Toast.makeText(this,"Vous avez trouvé des chaussures en cuir type3 abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes type3","Pas très confortable",6.0,4.0))}
                 }
             }
-            3 -> { Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
-                this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
+            3 -> { when (type%3){
+                0 -> {Toast.makeText(this,"Une armure en cuir type1! Quelle chance !",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure type1","une armure en cuivre",0.0,3.0))}
+                1 -> {Toast.makeText(this,"Une armure en cuir type2! Quelle chance !",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure type2","une armure en cuivre",0.0,6.0))}
+                2 -> {Toast.makeText(this,"Une armure en cuir type3! Quelle chance !",Toast.LENGTH_LONG).show()
+                    this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure type3","une armure en cuivre",0.0,9.0))}
+                }
             }
         }
     }

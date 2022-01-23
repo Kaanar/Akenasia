@@ -35,5 +35,8 @@ interface Handler {
         get() = "visible"
     val KEY_LASTUPDATED: String
         get() = "last_updated"
-
+    val KEY_POINT: String
+        get() = "points"
+    val KEY_NIVEAU : String
+        get() = "niveau"
 }

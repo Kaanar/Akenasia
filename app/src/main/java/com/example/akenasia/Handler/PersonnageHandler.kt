@@ -25,6 +25,8 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
+        contentValues.put(KEY_POINT, 0)
+        contentValues.put(KEY_NIVEAU, 0)
 
 
         // Inserting Row
@@ -49,6 +51,8 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
+        contentValues.put(KEY_POINT, 0)
+        contentValues.put(KEY_NIVEAU, 0)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id = $id  ",null)
@@ -159,6 +163,8 @@ class PersonnageHandler(var context: Context): Handler {
         var bouclier: Int
         var epee: Int
         var chaussures: Int
+        var persoPoint: Int
+        var persoNiveau : Int
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -170,6 +176,8 @@ class PersonnageHandler(var context: Context): Handler {
                 bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
                 epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
                 chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
+                persoPoint = cursor.getInt(cursor.getColumnIndex("Points").toInt())
+                persoNiveau = cursor.getInt(cursor.getColumnIndex("Niveau").toInt())
 
                 val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
                     bouclier=bouclier,epee=epee,chaussures=chaussures)
