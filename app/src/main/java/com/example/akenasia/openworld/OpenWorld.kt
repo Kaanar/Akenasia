@@ -316,11 +316,11 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
         when (index %4) {
             0 -> { when (type%3){
-                0 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type 1dans un buisson",Toast.LENGTH_LONG).show()
+                0 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type1 dans un buisson",Toast.LENGTH_LONG).show()
                     this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type1","Parfait pour les débutants",1.0,2.0))}
-                1 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type 2 dans un buisson",Toast.LENGTH_LONG).show()
+                1 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type2 dans un buisson",Toast.LENGTH_LONG).show()
                     this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type2","Parfait pour les débutants",5.0,10.0))}
-                2 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type 3 dans un buisson",Toast.LENGTH_LONG).show()
+                2 -> {Toast.makeText(this,"Vous trouvez un vieux bouclier type  dans un buisson",Toast.LENGTH_LONG).show()
                     this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier type3","Parfait pour les débutants",10.0,20.0))}
                 }
             }
