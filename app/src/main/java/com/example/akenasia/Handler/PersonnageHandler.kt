@@ -25,6 +25,8 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
+        contentValues.put(KEY_POINT, 0)
+        contentValues.put(KEY_LEVEL, 0)
 
 
 
@@ -50,6 +52,8 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
+        contentValues.put(KEY_POINT, 0)
+        contentValues.put(KEY_LEVEL, 0)
 
 
         // Updating Row
@@ -168,6 +172,8 @@ class PersonnageHandler(var context: Context): Handler {
         var bouclier: Int
         var epee: Int
         var chaussures: Int
+        var point : Int
+        var level : Int
 
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -180,9 +186,11 @@ class PersonnageHandler(var context: Context): Handler {
                 bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
                 epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
                 chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
+                point = cursor.getInt(cursor.getColumnIndex("point").toInt())
+                level = cursor.getInt(cursor.getColumnIndex("level").toInt())
 
                 val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                    bouclier=bouclier,epee=epee,chaussures=chaussures)
+                    bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
@@ -207,6 +215,8 @@ class PersonnageHandler(var context: Context): Handler {
         val bouclier: Int
         val epee: Int
         val chaussures: Int
+        val point : Int
+        val level : Int
 
 
 
@@ -220,9 +230,11 @@ class PersonnageHandler(var context: Context): Handler {
             bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
             epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
             chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
+            point = cursor.getInt(cursor.getColumnIndex("point").toInt())
+            level = cursor.getInt(cursor.getColumnIndex("level").toInt())
 
             val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                bouclier=bouclier,epee=epee,chaussures=chaussures)
+                bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level)
             return emp
         }
         exitProcess(0)

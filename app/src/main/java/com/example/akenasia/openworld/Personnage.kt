@@ -120,8 +120,8 @@ class Personnage: AppCompatActivity() {
         binding.personnagePv.text="PV: "+currentPersonnage.getpersoHp().toString()
         binding.personnageAtt.text="ATT: "+currentPersonnage.getpersoAtt().toString()
         binding.personnageDef.text="DEF: "+currentPersonnage.getpersoDef().toString()
-        //binding.personnagePoints.text="POINTS: "+currentPersonnage.getPoint().toString()
-        //binding.personnageLevel.text="LEVEL: "+currentPersonnage.getNiveau().toString()
+        binding.personnagePoints.text="POINTS: "+currentPersonnage.getPoint().toString()
+        binding.personnageLevel.text="LEVEL: "+currentPersonnage.getNiveau().toString()
 
         //Affichage des stats de l'armure
         binding.armureAtt.text="ATT: "+itemHandler.get(currentPersonnage.armure).ItemAtt.toString()
