@@ -93,14 +93,6 @@ class PersonnageHandler(var context: Context): Handler {
         val personnage = get(1)
         val id = 1
 
-        contentValues.put(KEY_ID, personnage.persoId)
-        contentValues.put(KEY_HP, personnage.persoHp)
-        contentValues.put(KEY_ATT, personnage.persoAtt)
-        contentValues.put(KEY_DEF, personnage.persoDef)
-        contentValues.put(KEY_ARMURE, personnage.armure)
-        contentValues.put(KEY_BOUCLIER, personnage.bouclier)
-        contentValues.put(KEY_EPEE, personnage.epee)
-        contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
         contentValues.put(KEY_POINT, personnage.point)
         contentValues.put(KEY_LEVEL, emp)
 

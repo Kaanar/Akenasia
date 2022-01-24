@@ -68,6 +68,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         itemHandler= ItemHandler(this)
         marqueurHandler= MarqueurHandler(this)
         personnageHandler= PersonnageHandler(this)
+        currentPersonnage= personnageHandler.get(1)
         Markers= HashMap()
 
 
@@ -298,8 +299,10 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
     fun UpdatePointLevel(){
         currentPersonnage.setPoints()
+        //update des points d'xp en BD sur cette ligne -> personnageHandler.setXP(currentpersonnage)
         if (currentPersonnage.getPoints()%150 == 0){
             currentPersonnage.setLevel()
+            //UPDatde des points d'xp en bd sur cette ligne
         }
     }
 
