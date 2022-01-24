@@ -25,8 +25,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
-        contentValues.put(KEY_POINT, 0)
-        contentValues.put(KEY_NIVEAU, 0)
+
 
 
         // Inserting Row
@@ -51,8 +50,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
-        contentValues.put(KEY_POINT, 0)
-        contentValues.put(KEY_NIVEAU, 0)
+
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id = $id  ",null)
@@ -60,6 +58,9 @@ class PersonnageHandler(var context: Context): Handler {
         db.close() // Closing database connection
         return success
     }
+
+
+
 
     //method to update your Personnage's affected items
     fun update(emp: Item):Int{
@@ -83,6 +84,7 @@ class PersonnageHandler(var context: Context): Handler {
                 contentValues.put(KEY_BOUCLIER, personnage.bouclier)
                 contentValues.put(KEY_EPEE, personnage.epee)
                 contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+
             }
             "EPEE" -> {
                 if(emp.getItemid().equals(personnage.epee)){
@@ -96,6 +98,7 @@ class PersonnageHandler(var context: Context): Handler {
                 contentValues.put(KEY_ARMURE, personnage.armure)
                 contentValues.put(KEY_BOUCLIER, personnage.bouclier)
                 contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+
             }
             "BOUCLIER" ->{
                 if(emp.getItemid().equals(personnage.bouclier)){
@@ -110,6 +113,7 @@ class PersonnageHandler(var context: Context): Handler {
                 contentValues.put(KEY_BOUCLIER,id)
                 contentValues.put(KEY_EPEE, personnage.epee)
                 contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+
             }
             "CHAUSSURES" -> {
                 if(emp.getItemid().equals(personnage.chaussures)){
@@ -124,6 +128,7 @@ class PersonnageHandler(var context: Context): Handler {
                 contentValues.put(KEY_BOUCLIER, personnage.bouclier)
                 contentValues.put(KEY_EPEE, personnage.epee)
                 contentValues.put(KEY_CHAUSSURES, id)
+
             }
             else -> {
                 contentValues.put(KEY_ARMURE, personnage.armure)
@@ -163,8 +168,7 @@ class PersonnageHandler(var context: Context): Handler {
         var bouclier: Int
         var epee: Int
         var chaussures: Int
-        var persoPoint: Int
-        var persoNiveau : Int
+
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -176,11 +180,9 @@ class PersonnageHandler(var context: Context): Handler {
                 bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
                 epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
                 chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
-                persoPoint = cursor.getInt(cursor.getColumnIndex("Points").toInt())
-                persoNiveau = cursor.getInt(cursor.getColumnIndex("Niveau").toInt())
 
                 val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                    bouclier=bouclier,epee=epee,chaussures=chaussures, persoPoint=persoPoint, persoNiveau=persoNiveau)
+                    bouclier=bouclier,epee=epee,chaussures=chaussures)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
@@ -205,8 +207,7 @@ class PersonnageHandler(var context: Context): Handler {
         val bouclier: Int
         val epee: Int
         val chaussures: Int
-        var persoPoint: Int
-        var persoNiveau : Int
+
 
 
         if (cursor != null) {
@@ -219,10 +220,9 @@ class PersonnageHandler(var context: Context): Handler {
             bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
             epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
             chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
-            persoPoint = cursor.getInt(cursor.getColumnIndex("Points").toInt())
-            persoNiveau = cursor.getInt(cursor.getColumnIndex("Niveau").toInt())
+
             val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                bouclier=bouclier,epee=epee,chaussures=chaussures,persoPoint=persoPoint, persoNiveau=persoNiveau)
+                bouclier=bouclier,epee=epee,chaussures=chaussures)
             return emp
         }
         exitProcess(0)

@@ -31,12 +31,12 @@ interface Handler {
         get() = "chaussures"
     val KEY_TYPE: String
         get() = "type"
+    val KEY_POINT : String
+        get() = "point"
+    val KEY_LEVEL : String
+        get() = "level"
     val KEY_VISIBLE: String
         get() = "visible"
     val KEY_LASTUPDATED: String
         get() = "last_updated"
-    val KEY_POINT: String
-        get() = "points"
-    val KEY_NIVEAU : String
-        get() = "niveau"
 }

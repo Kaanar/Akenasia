@@ -183,6 +183,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             //Différentiation des use case en fonction du type de marker
 
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
+
                 //Si le joueur click sur son marker
                 if(Marker.title.toString() == "Current Position"){
                     Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show()
@@ -205,6 +206,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     }
                 }
                 true
+
+
             })
         }
         }
@@ -379,4 +382,5 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             marker.longitude
         )
     }
+
 }

@@ -8,9 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="280dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="289dp"
+        android:layout_height="119dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/armure"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +36,22 @@
             android:layout_height="wrap_content"
             android:text="DEF: "
             android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/personnage_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="POINTS: "
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/personnage_level"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LEVEL: "
+            android:textAlignment="center" />
+
+
     </LinearLayout>
 
     <LinearLayout
