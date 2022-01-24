@@ -21,6 +21,7 @@ import android.util.Log
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.MarqueurHandler
+import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
@@ -40,7 +41,9 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     private lateinit var chronometre: Chronometer
     private lateinit var listMarker : ArrayList<LatLng>
     private lateinit var Markers: HashMap<Int,LatLng>
+    private lateinit var currentPersonnage: PersonnageTable
     lateinit var itemHandler: ItemHandler
+    lateinit var personnageHandler: PersonnageHandler
     lateinit var marqueurHandler: MarqueurHandler
     private var cameraFocus: Boolean = true
     private var spawnTime= 0
@@ -64,6 +67,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         pos.refreshLocation()
         itemHandler= ItemHandler(this)
         marqueurHandler= MarqueurHandler(this)
+        personnageHandler= PersonnageHandler(this)
         Markers= HashMap()
 
 
@@ -183,7 +187,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             //Différentiation des use case en fonction du type de marker
 
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
-
+                // Quand le joueur clique sur un marker, ses points et son niveau sont recalculés
+                UpdatePointLevel()
                 //Si le joueur click sur son marker
                 if(Marker.title.toString() == "Current Position"){
                     Toast.makeText(this,"Votre position: Lat " + pos.getLatitude()+" Long: "+ pos.getLongitude(),Toast.LENGTH_SHORT).show()
@@ -288,6 +293,13 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                 }
             }
 
+        }
+    }
+
+    fun UpdatePointLevel(){
+        currentPersonnage.setPoints()
+        if (currentPersonnage.getPoints()%150 == 0){
+            currentPersonnage.setLevel()
         }
     }
 

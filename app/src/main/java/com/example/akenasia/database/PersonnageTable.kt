@@ -49,8 +49,8 @@ data class PersonnageTable (var persoId: Int, var persoHp: Double, var persoAtt:
     }
 
     @JvmName("setPoints")
-    fun setPoints(nvxpoint : Int){
-        point += nvxpoint
+    fun setPoints(){
+        point += 5
     }
 
     @JvmName("getLevel1")
@@ -59,8 +59,8 @@ data class PersonnageTable (var persoId: Int, var persoHp: Double, var persoAtt:
     }
 
     @JvmName("setLevel1")
-    fun setLevel(nvxlevel : Int) {
-        level += nvxlevel
+    fun setLevel() {
+        level += 1
     }
 
 }
