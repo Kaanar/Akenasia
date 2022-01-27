@@ -14,12 +14,13 @@
         android:id="@+id/ForgeTxt"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Votre argent : "
-        android:textSize="16dp"
-        android:id="@+id/ArgentInfoTxt"
+    <ImageView
+        android:src="@drawable/ic_coin"
+        android:id="@+id/ImageCoin"
+        android:scaleType="fitXY"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:adjustViewBounds="true"
         app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
         tools:ignore="MissingConstraints" />
 
@@ -29,7 +30,27 @@
         android:text=" 0 "
         android:textSize="16dp"
         android:id="@+id/ArgentTxt"
-        app:layout_constraintLeft_toRightOf="@id/ArgentInfoTxt"
+        app:layout_constraintLeft_toRightOf="@id/QuantiteArgent"
+        app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Le coût d'une amélioration est de 1500 pièces"
+        android:textSize="16dp"
+        android:id="@+id/ConditionTxt"
+        app:layout_constraintLeft_toRightOf="@id/QuantiteArgent"
+        app:layout_constraintTop_toBottomOf="@id/ImageCoin"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" x "
+        android:textSize="16dp"
+        android:id="@+id/QuantiteArgent"
+        app:layout_constraintLeft_toRightOf="@id/ImageCoin"
         app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
         tools:ignore="MissingConstraints" />
 
@@ -72,7 +93,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/ArgentInfoTxt"
+        app:layout_constraintTop_toBottomOf="@id/ImageCoin"
         tools:ignore="MissingConstraints">
 
         <RadioButton
@@ -81,8 +102,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Epee"
-        android:textSize="16dp"
-        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+            android:checked="true"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="30dp"
         tools:layout_editor_absoluteY="120dp"
         tools:ignore="MissingConstraints" />

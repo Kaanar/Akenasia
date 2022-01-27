@@ -34,7 +34,7 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
         itemHandler = ItemHandler(applicationContext)
         personnage = PersonnageHandler(this)
-        //On affiche tous les items sans filtre
+        //On affiche toutes les epees (filtre par défaut)
         type = ListItems.EPEE
         searchRecord()
         //Implémentation des différents choix du menu
@@ -73,22 +73,17 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
         binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
         //Chaque bouton permet d'appliquer un filtre en fonction du type de l'objet
         binding.CBEpee.setOnClickListener {
-            if(CBEpee.isChecked) {
+            if (CBEpee.isChecked) {
                 type = ListItems.EPEE
                 searchRecord()
             }
-            else {
-                classicRecord()
-            }
         }
+
 
         binding.CBBouclier.setOnClickListener {
             if(CBBouclier.isChecked) {
                 type = ListItems.BOUCLIER
                 searchRecord()
-            }
-            else {
-                classicRecord()
             }
         }
 
@@ -97,9 +92,6 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
                 type = ListItems.CHAUSSURES
                 searchRecord()
             }
-            else {
-                classicRecord()
-            }
         }
 
         binding.CBArmure.setOnClickListener {
@@ -107,19 +99,7 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
                 type = ListItems.ARMURE
                 searchRecord()
             }
-            else {
-                classicRecord()
-            }
         }
-    }
-
-    //Afficher tous les items sans filtre
-    private fun classicRecord() {
-        //creating the instance of DatabaseHandler class
-        val databaseHandler = DatabaseHandler(applicationContext)
-        //calling the viewPlace method of DatabaseHandler class to read the records
-        val emp: List<Item> = itemHandler.view()
-        viewRecord(emp)
     }
 
     //Affiche les objets par type
