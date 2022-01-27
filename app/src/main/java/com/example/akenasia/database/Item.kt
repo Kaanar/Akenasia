@@ -1,6 +1,6 @@
 package com.example.akenasia.database
 
-data class Item(var Itemid: Int,var ItemType: String, var ItemName: String, var ItemDesc: String, var ItemAtt: Double, var ItemDef: Double) {
+data class Item(var Itemid: Int,var ItemType: String, var ItemName: String, var ItemDesc: String, var ItemAtt: Double, var ItemDef: Double, var nb_Upgrade : Int) {
 
     @JvmName("getItemId")
     fun getItemid(): Int {
@@ -29,6 +29,10 @@ data class Item(var Itemid: Int,var ItemType: String, var ItemName: String, var 
     @JvmName("getItemDef1")
     fun getItemDef(): Double {
         return ItemDef
+    }
+
+    fun getItemNbUpgrade() : Int {
+        return nb_Upgrade
     }
 
 }

@@ -17,6 +17,7 @@ import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.databinding.ForgeBinding
 import com.example.akenasia.home.MainActivity
+import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.forge.*
 
 
@@ -135,20 +136,21 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
     //On récupère les infos en bdd de l'item sur lequel on clique
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         val coutUpgrade = 1500
-        if(currentPersonnage.getArgent()<coutUpgrade) {
-            Toast.makeText(this, "Trop pauvre",Toast.LENGTH_LONG).show()
-        }
-        else {
-            val a = Integer.parseInt(ListViewItemForge.getItemAtPosition(p2).toString())
-            val i = itemHandler.get(a)
-            //Toast.makeText(this, a.toString(),Toast.LENGTH_LONG).show()
-            itemHandler.upItem(i)
-            searchRecord()
-            personnage.upArgent(currentPersonnage.getArgent()-coutUpgrade)
-            currentPersonnage = personnage.get(1)
-            binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
-        }
+        val a = Integer.parseInt(ListViewItemForge.getItemAtPosition(p2).toString())
+        val i = itemHandler.get(a)
 
+        //On envoie les infos de l'item au dialog
+        val dialog = ForgeDialog()
+        dialog.setItem(updateItem(i))
+        val navHostFragment = supportFragmentManager
+        dialog.show(navHostFragment, "ForgeDialog")
+
+        searchRecord()
+        currentPersonnage = personnage.get(1)
+        binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
     }
 
+    fun updateItem(item : Item) : Item {
+        return item
+    }
 }

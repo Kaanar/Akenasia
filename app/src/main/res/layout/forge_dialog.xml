@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/ForgeDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Text"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/ForgeDialogDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="22sp"
+        android:hint="Title"
+        android:layout_below="@+id/ForgeDialogTitle"/>
+
+    <TextView
+        android:id="@+id/ForgeDialogAtk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/ForgeDialogDesc"
+        android:hint="Atk" />
+
+    <TextView
+        android:id="@+id/ForgeDialogDef"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/ForgeDialogAtk"
+        android:hint="Def" />
+
+    <TextView
+        android:id="@+id/ForgeDialogCout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/ForgeDialogDef"
+        android:hint="Cout" />
+
+    <Button
+        android:id="@+id/ForgeDialogOk"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/ForgeDialogCout"
+        android:text="Ok" />
+
+    <Button
+        android:id="@+id/ForgeDialogCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ForgeDialogCout"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/ForgeDialogOk"
+        android:text="Annuler" />
+
+</RelativeLayout>
