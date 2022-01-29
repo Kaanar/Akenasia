@@ -28,7 +28,6 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
     private lateinit var personnage: PersonnageHandler
     private lateinit var currentPersonnage: PersonnageTable
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ForgeBinding.inflate(layoutInflater)
@@ -142,15 +141,23 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
         //On envoie les infos de l'item au dialog
         val dialog = ForgeDialog()
         dialog.setItem(updateItem(i))
+        dialog.setTitle(updateTitle(i.getItemid()))
         val navHostFragment = supportFragmentManager
         dialog.show(navHostFragment, "ForgeDialog")
 
         searchRecord()
         currentPersonnage = personnage.get(1)
-        binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
+        binding.ArgentTxt.refreshDrawableState()
+
     }
+
+
 
     fun updateItem(item : Item) : Item {
         return item
+    }
+
+    fun updateTitle(title : Int) : String {
+        return title.toString()
     }
 }
