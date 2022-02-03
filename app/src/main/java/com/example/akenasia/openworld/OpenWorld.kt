@@ -24,10 +24,6 @@ import com.example.akenasia.Handler.MarqueurHandler
 import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.achievement.Stats
 import com.example.akenasia.database.*
-import com.example.akenasia.openworld.mobs.Dragon
-import com.example.akenasia.openworld.mobs.Monstre
-import com.example.akenasia.openworld.mobs.Orc
-import com.example.akenasia.openworld.mobs.Slime
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
 import java.util.concurrent.ThreadLocalRandom
@@ -241,7 +237,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             //Si la distance entre le joueur et le lieu est inférieure à 1500m, on affiche le lieu
             //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
 
-            if(distance <1500) {
+            if(distance <15000000) {
                 if (e.getMarqueurVisible() == 1) {
                     googleMap.addMarker(
                         MarkerOptions()

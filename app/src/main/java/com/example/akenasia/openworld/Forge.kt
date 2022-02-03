@@ -1,10 +1,13 @@
 package com.example.akenasia.openworld
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.Handler.DatabaseHandler
@@ -19,6 +22,7 @@ import com.example.akenasia.databinding.ForgeBinding
 import com.example.akenasia.home.MainActivity
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.forge.*
+import kotlinx.android.synthetic.main.forge_dialog.*
 
 
 class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -79,7 +83,6 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
             }
         }
 
-
         binding.CBBouclier.setOnClickListener {
             if(CBBouclier.isChecked) {
                 type = ListItems.BOUCLIER
@@ -101,6 +104,8 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
             }
         }
     }
+
+
 
     //Affiche les objets par type
     private fun searchRecord() {
@@ -134,7 +139,6 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
 
     //On récupère les infos en bdd de l'item sur lequel on clique
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val coutUpgrade = 1500
         val a = Integer.parseInt(ListViewItemForge.getItemAtPosition(p2).toString())
         val i = itemHandler.get(a)
 
@@ -142,22 +146,27 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
         val dialog = ForgeDialog()
         dialog.setItem(updateItem(i))
         dialog.setTitle(updateTitle(i.getItemid()))
+        dialog.setForge(updateForge())
         val navHostFragment = supportFragmentManager
         dialog.show(navHostFragment, "ForgeDialog")
-
-        searchRecord()
-        currentPersonnage = personnage.get(1)
-        binding.ArgentTxt.refreshDrawableState()
-
     }
-
-
 
     fun updateItem(item : Item) : Item {
         return item
     }
 
+    fun refresh() {
+        searchRecord()
+        currentPersonnage = personnage.get(1)
+        ArgentTxt.text = currentPersonnage.getArgent().toString()
+    }
+
+    fun updateForge() : Forge {
+        return this
+    }
+
     fun updateTitle(title : Int) : String {
         return title.toString()
     }
+
 }

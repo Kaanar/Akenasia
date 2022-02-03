@@ -12,6 +12,7 @@ import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.databinding.BagBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
+import kotlinx.android.synthetic.main.forge.*
 
 class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
@@ -83,8 +84,31 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        itemHandler.delete(p2+1)
+        val a = Integer.parseInt(ListViewItem.getItemAtPosition(p2).toString())
+        val i = itemHandler.get(a)
+
+        //On envoie les infos de l'item au dialog
+        val dialog = BagDialog()
+        dialog.setItem(updateItem(i))
+        dialog.setTitle(updateTitle(i.getItemid()))
+        dialog.setBag(updateBag())
+        val navHostFragment = supportFragmentManager
+        dialog.show(navHostFragment, "BagDialog")
+    }
+
+    fun refresh() {
         viewRecord()
     }
 
+    fun updateBag() : Bag {
+        return this
+    }
+
+    fun updateItem(item : Item) : Item {
+        return item
+    }
+
+    fun updateTitle(title : Int) : String {
+        return title.toString()
+    }
 }

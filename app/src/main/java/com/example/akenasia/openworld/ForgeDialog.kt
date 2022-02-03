@@ -1,17 +1,19 @@
 package com.example.akenasia.openworld
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.test.core.app.ApplicationProvider
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.database.PersonnageTable
+import kotlinx.android.synthetic.main.forge.*
 import kotlinx.android.synthetic.main.forge_dialog.view.*
 
 class ForgeDialog : DialogFragment() {
@@ -20,7 +22,7 @@ class ForgeDialog : DialogFragment() {
     private lateinit var item : Item
     private lateinit var personnage: PersonnageHandler
     private lateinit var currentPersonnage: PersonnageTable
-
+    private lateinit var forge : Forge
 
 
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
@@ -30,8 +32,8 @@ class ForgeDialog : DialogFragment() {
         personnage = PersonnageHandler(context!!)
         currentPersonnage = personnage.get(1)
 
+
         var rootView: View = inflater.inflate(R.layout.forge_dialog, container, false)
-        val coutUpgrade = 1500
         //On affiche les infos de l'item à améliorer
         rootView.ForgeDialogTitle.text = "Id de l'item : " +title
         rootView.ForgeDialogDesc.text = "Type d'item : " + item.getItemName()
@@ -50,12 +52,13 @@ class ForgeDialog : DialogFragment() {
             else {
                 personnage.upArgent(currentPersonnage.getArgent()-upgradeCost(item.nb_Upgrade))
                 currentPersonnage = personnage.get(1)
-                //Toast.makeText(this, a.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "L'upgrade est un succès",Toast.LENGTH_LONG).show()
                 itemHandler.upItem(item)
+                forge.refresh()
                 dismiss()
             }
-
         }
+
         rootView.ForgeDialogCancel.setOnClickListener() {
             //Pour fermer le dialogue
             dismiss()
@@ -67,12 +70,16 @@ class ForgeDialog : DialogFragment() {
         item = i
     }
 
+    fun setForge(forge : Forge) {
+        this.forge = forge
+    }
+
     fun setTitle (i : String) {
         title = i
     }
 
     fun upgradeCost(nb_Updgrade: Int): Int {
-        return 1500 * (nb_Updgrade + 1) * 2 * (nb_Updgrade+1)
+        return 1500 * (nb_Updgrade + 1) + 1500 * nb_Updgrade * 2
     }
 }
 
