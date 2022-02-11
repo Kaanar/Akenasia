@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
 import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.database.ListItems
 import com.example.akenasia.databinding.BagBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
@@ -18,6 +20,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private lateinit var binding: BagBinding
     private lateinit var itemHandler : ItemHandler
+    private lateinit var type : ListItems
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +28,9 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
         itemHandler = ItemHandler(applicationContext)
 
-        viewRecord()
+        //On affiche toutes les epees (filtre par défaut)
+        type = ListItems.EPEE
+        searchRecord()
 
         ListViewItem.onItemClickListener = this
 
@@ -58,19 +63,51 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
             true
         }
 
+        binding.BagEpee.setOnClickListener {
+            if (BagEpee.isChecked) {
+                type = ListItems.EPEE
+                searchRecord()
+            }
+        }
+
+        binding.BagBouclier.setOnClickListener {
+            if(BagBouclier.isChecked) {
+                type = ListItems.BOUCLIER
+                searchRecord()
+            }
+        }
+
+        binding.BagChaussures.setOnClickListener {
+            if(BagChaussures.isChecked) {
+                type = ListItems.CHAUSSURES
+                searchRecord()
+            }
+        }
+
+        binding.BagArmure.setOnClickListener {
+            if(BagArmure.isChecked) {
+                type = ListItems.ARMURE
+                searchRecord()
+            }
+        }
     }
 
-    private fun viewRecord(){
-        //calling the viewPlace method of DatabaseHandler class to read the records
-        val emp: List<Item> = itemHandler.view()
-        val empArrayId = Array(emp.size){"0"}
-        val empArrayName = Array(emp.size){"null"}
-        val empArrayDesc = Array(emp.size){"null"}
-        val empArrayAtt = Array(emp.size){"null"}
-        val empArrayDef = Array(emp.size){"null"}
+    //Affiche les objets par type
+    private fun searchRecord() {
+        val databaseHandler = DatabaseHandler(applicationContext)
+        val emp: List<Item> = itemHandler.viewByType(type)
+        viewRecord(emp)
+    }
+
+    private fun viewRecord(emp : List<Item>) {
+        val empArrayId = Array(emp.size) { "0" }
+        val empArrayName = Array(emp.size) { "null" }
+        val empArrayDesc = Array(emp.size) { "null" }
+        val empArrayAtt = Array(emp.size) { "null" }
+        val empArrayDef = Array(emp.size) { "null" }
 
         var index = 0
-        for(e in emp){
+        for (e in emp) {
             empArrayId[index] = e.Itemid.toString()
             empArrayName[index] = e.ItemName
             empArrayDesc[index] = e.ItemDesc
@@ -79,8 +116,10 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
             index++
         }
         //creating custom ArrayAdapter
-        val myListAdapter = ItemAdapter(this,empArrayId,empArrayName, empArrayDesc, empArrayAtt, empArrayDef)
+        val myListAdapter =
+            ItemAdapter(this, empArrayId, empArrayName, empArrayDesc, empArrayAtt, empArrayDef)
         ListViewItem?.adapter = myListAdapter
+
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -97,7 +136,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     fun refresh() {
-        viewRecord()
+        searchRecord()
     }
 
     fun updateBag() : Bag {
