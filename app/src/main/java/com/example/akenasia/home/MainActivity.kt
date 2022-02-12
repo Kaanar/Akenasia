@@ -28,16 +28,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var appSettingPrefs: SharedPreferences
-    lateinit var locationRequest: LocationRequest
     lateinit var marqueurHandler: MarqueurHandler
     lateinit var achievementHandler: AchievementHandler
     lateinit var personnageHandler: PersonnageHandler
     lateinit var statsHandler: StatsHandler
     private lateinit var pos: Position
     private lateinit var markers: HashMap<Int, LatLng>
-    val PERMISSION_ID = 1
 
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {

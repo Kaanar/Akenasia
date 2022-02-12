@@ -39,6 +39,13 @@ android {
         viewBinding true
     }
     aaptOptions { cruncherEnabled = false }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src\\main\\res'
+            }
+        }
+    }
 }
 
 sonarqube {

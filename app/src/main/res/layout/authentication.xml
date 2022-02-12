@@ -30,7 +30,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-
         <Button
             android:id="@+id/SignInButton"
             android:layout_width="wrap_content"

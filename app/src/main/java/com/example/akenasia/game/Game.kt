@@ -19,17 +19,9 @@ class Game : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var pos: Position
-    private lateinit var Reglesbinding: ReglesGeneralesBinding
     private lateinit var binding: ActivityGameBinding
-    private lateinit var Chronobinding: ChronometreBinding
-    private lateinit var CLbinding: CoupsLimitesBinding
     private lateinit var placeHandler: PlaceHandler
     private lateinit var place: Place
-    private lateinit var chronometre: Chronometer
-    var isPlay = false
-    private var essais=10
-    private var lastDistance=0.0
-    private var i = 0
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)

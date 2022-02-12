@@ -10,7 +10,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 ), Handler {
 
     companion object {
-        private val DATABASE_VERSION = 21
+        private val DATABASE_VERSION = 23
         private val DATABASE_NAME = "AkenasiaDatabase"
     }
 
