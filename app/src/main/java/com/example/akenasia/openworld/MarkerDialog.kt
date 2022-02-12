@@ -59,6 +59,35 @@ class MarkerDialog : DialogFragment () {
             return mob
     }
 
+    fun crit(): Boolean {
+        var nb = (0..5).random()
+        if(nb == 1){
+            return true
+        }
+        return false
+    }
+
+    fun calcul_degat_joueur(): Double {
+        var crit = crit()
+        if(crit){
+            return att_joueur*2
+        }
+        return att_joueur
+    }
+
+    fun calcul_degat_monstre(m : Monstre): Double {
+        var crit = crit()
+        var spe = m.attaque_spe()
+        if(spe){
+            Toast.makeText(context,m.texte_spe, Toast.LENGTH_LONG).show()
+            return m.atk - def_joueur
+        }
+        if(crit){
+            return m.atk*2
+        }
+        return m.atk - def_joueur
+    }
+
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
             View? {
         thiscontext = this.activity
@@ -94,7 +123,7 @@ class MarkerDialog : DialogFragment () {
 
         rootView.BtnAttaqueMonstre.setOnClickListener() {
 
-            pv_monstre -= att_joueur
+            pv_monstre -= calcul_degat_joueur()
             PvMonstre.text = String.format("%f", pv_monstre)
             if (pv_monstre <= 0) {
                 victoireText.visibility = View.VISIBLE
@@ -119,7 +148,7 @@ class MarkerDialog : DialogFragment () {
                 BtnAttaqueMonstre.visibility = View.INVISIBLE
             }
 
-            pv_joueur -= att_monstre
+            pv_joueur -= calcul_degat_monstre(mob)
             PvJoueur.text = String.format("%f", pv_joueur)
 
 
