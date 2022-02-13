@@ -55,6 +55,7 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                     val intent = Intent(this, Forge::class.java)
                     this.startActivity(intent)
                 }
+
                 else -> {
                     val intent = Intent(this, Personnage::class.java)
                     this.startActivity(intent)
@@ -80,6 +81,13 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         binding.BagChaussures.setOnClickListener {
             if(BagChaussures.isChecked) {
                 type = ListItems.CHAUSSURES
+                searchRecord()
+            }
+        }
+
+        binding.BagPotion.setOnClickListener {
+            if(BagPotion.isChecked) {
+                type = ListItems.POTION
                 searchRecord()
             }
         }

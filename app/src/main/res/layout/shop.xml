@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".openworld.Bag">
+    tools:context=".openworld.Shop">
 
     <RadioGroup
-        android:id="@+id/radioGroupBag"
+        android:id="@+id/radioGroupShop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -19,7 +19,7 @@
         tools:ignore="MissingConstraints">
 
         <RadioButton
-            android:id="@+id/BagEpee"
+            android:id="@+id/ShopEpee"
             app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             tools:ignore="MissingConstraints" />
 
         <RadioButton
-            android:id="@+id/BagBouclier"
+            android:id="@+id/ShopBouclier"
             app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             tools:ignore="MissingConstraints" />
 
         <RadioButton
-            android:id="@+id/BagChaussures"
+            android:id="@+id/ShopChaussures"
             app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             tools:ignore="MissingConstraints" />
 
         <RadioButton
-            android:id="@+id/BagArmure"
+            android:id="@+id/ShopArmure"
             app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,39 +66,29 @@
             android:layout_marginBottom="30dp"
             tools:layout_editor_absoluteY="120dp"
             tools:ignore="MissingConstraints" />
-
-        <RadioButton
-            android:id="@+id/BagPotion"
-            app:layout_constraintTop_toTopOf="@+id/ListViewItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Potion"
-            android:textSize="16dp"
-            app:layout_constraintLeft_toRightOf="@+id/BagEpee"
-            android:layout_marginBottom="30dp"
-            tools:layout_editor_absoluteY="120dp"
-            tools:ignore="MissingConstraints,NotSibling" />
     </RadioGroup>
 
-    <ListView
-        android:id="@+id/ListViewItem"
-        android:layout_width="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupBag"
-        tools:ignore="MissingConstraints"
-        android:layout_height="600dp"/>
+    <Button
+        android:id="@+id/ShopButtonPotionPV"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/radioGroupShop"
+        android:text="Acheter"
+        app:srcCompat="@drawable/ic_shopping_cart"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupShop"
+        app:layout_constraintLeft_toLeftOf="@id/ShopEpee"
+        tools:ignore="NotSibling" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/NavigationView"
-        android:layout_width="409dp"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_scrollFlags="scroll|enterAlways|snap"
-        app:menu="@menu/menu_navigateur" />
+    <Button
+        android:id="@+id/ShopButtonPotionDef"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/radioGroupShop"
+        android:text="Acheter"
+        app:srcCompat="@drawable/ic_shopping_cart"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupShop"
+        app:layout_constraintLeft_toRightOf="@id/ShopButtonPotionPV"
+        tools:ignore="NotSibling" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

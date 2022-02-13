@@ -22,5 +22,4 @@
         android:id="@+id/ForgeClick"
         android:title="Forge"
         android:icon="@drawable/ic_build"/>
-
 </menu>

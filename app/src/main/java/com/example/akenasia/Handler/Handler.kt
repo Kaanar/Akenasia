@@ -49,4 +49,6 @@ interface Handler {
         get() = "unlocked"
     val KEY_UPGRADE: String
         get() = "upgrade"
+    val KEY_PRIX: String
+        get() = "prix"
 }
