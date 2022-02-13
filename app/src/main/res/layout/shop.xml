@@ -68,27 +68,57 @@
             tools:ignore="MissingConstraints" />
     </RadioGroup>
 
-    <Button
-        android:id="@+id/ShopButtonPotionPV"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/radioGroupShop"
-        android:text="Acheter"
-        app:srcCompat="@drawable/ic_shopping_cart"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupShop"
-        app:layout_constraintLeft_toLeftOf="@id/ShopEpee"
-        tools:ignore="NotSibling" />
+    <ImageView
+        android:src="@drawable/ic_coin"
+        android:id="@+id/ShopImageCoin"
+        android:scaleType="fitXY"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupShop"
+        tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/ShopButtonPotionDef"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/radioGroupShop"
-        android:text="Acheter"
-        app:srcCompat="@drawable/ic_shopping_cart"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupShop"
-        app:layout_constraintLeft_toRightOf="@id/ShopButtonPotionPV"
-        tools:ignore="NotSibling" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 0 "
+        android:textSize="16dp"
+        android:id="@+id/ShopArgentTxt"
+        app:layout_constraintLeft_toRightOf="@id/ShopQuantiteArgent"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupShop"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" x "
+        android:textSize="16dp"
+        android:id="@+id/ShopQuantiteArgent"
+        app:layout_constraintLeft_toRightOf="@id/ShopImageCoin"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupShop"
+        tools:ignore="MissingConstraints" />
+
+    <ListView
+        android:id="@+id/ShopListViewItem"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/ShopImageCoin"
+        app:layout_constraintBottom_toTopOf="@id/NavigationView"
+        tools:ignore="MissingConstraints"
+        android:layout_height="600dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavigationView"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:menu="@menu/menu_navigateur" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
