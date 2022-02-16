@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".openworld.Forge">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cliquez sur l'élément à améliorer"
+        android:textSize="24dp"
+        android:id="@+id/ForgeTxt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Votre argent : "
+        android:textSize="16dp"
+        android:id="@+id/ArgentInfoTxt"
+        app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 0 "
+        android:textSize="16dp"
+        android:id="@+id/ArgentTxt"
+        app:layout_constraintLeft_toRightOf="@id/ArgentInfoTxt"
+        app:layout_constraintTop_toBottomOf="@id/ForgeTxt"
+        tools:ignore="MissingConstraints" />
+
+    <ListView
+        android:id="@+id/ListViewItemForge"
+        android:layout_width="356dp"
+        android:layout_height="477dp"
+        android:layout_alignBaseline="@+id/ForgeTxt"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:columnWidth="100dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavigationView"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:menu="@menu/menu_navigateur" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupForge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/ArgentInfoTxt"
+        tools:ignore="MissingConstraints">
+
+        <RadioButton
+        android:id="@+id/CBEpee"
+        app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Epee"
+        android:textSize="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="30dp"
+        tools:layout_editor_absoluteY="120dp"
+        tools:ignore="MissingConstraints" />
+
+        <RadioButton
+        android:id="@+id/CBBouclier"
+        app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bouclier"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/CBEpee"
+        android:layout_marginBottom="30dp"
+        tools:layout_editor_absoluteY="120dp"
+        tools:ignore="MissingConstraints" />
+
+        <RadioButton
+        android:id="@+id/CBChaussures"
+        app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chaussures"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/CBBouclier"
+        android:layout_marginBottom="30dp"
+        tools:layout_editor_absoluteY="120dp"
+        tools:ignore="MissingConstraints" />
+
+        <RadioButton
+        android:id="@+id/CBArmure"
+        app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Armure"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/CBChaussures"
+        android:layout_marginBottom="30dp"
+        tools:layout_editor_absoluteY="120dp"
+        tools:ignore="MissingConstraints" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

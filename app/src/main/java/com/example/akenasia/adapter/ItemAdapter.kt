@@ -1,3 +1,5 @@
+package com.example.akenasia.adapter
+
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
@@ -6,11 +8,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.akenasia.R
-import kotlinx.coroutines.processNextEventInCurrentThread
-
 
 class ItemAdapter (private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val desc: Array<String>, private val att: Array<String>
-,private val def: Array<String> ) : ArrayAdapter<String>(context, R.layout.custom_list, id) {
+,private val def: Array<String> ) : ArrayAdapter<String>(context,R.layout.items_listview,id) {
 
     lateinit var inflater: LayoutInflater
 

@@ -65,6 +65,12 @@
             tools:ignore="Instantiatable" />
 
         <activity
+            android:name=".openworld.Forge"
+            android:exported="true"
+            android:label="forge"
+            tools:ignore="Instantiatable" />
+
+        <activity
             android:name=".home.Reglages"
             android:exported="true"
             android:label="reglages"
@@ -75,6 +81,13 @@
             android:exported="true"
             android:label="personnage"
             tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".achievement.AchievementFragment"
+            android:exported="true"
+            android:label="achievement"
+            tools:ignore="Instantiatable" />
+
     </application>
 
 </manifest>

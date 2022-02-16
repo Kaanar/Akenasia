@@ -19,9 +19,6 @@
             android:id="@+id/action_FirstFragment_to_map_fragment"
             app:destination="@id/map_fragment" />
         <action
-            android:id="@+id/action_FirstFragment_to_openWorld"
-            app:destination="@id/openWorld" />
-        <action
             android:id="@+id/action_FirstFragment_to_ItemFragment"
             app:destination="@id/ItemFragment" />
     </fragment>
@@ -58,11 +55,5 @@
         android:id="@+id/action_ThirdFragment_to_SecondFragment"
         app:destination="@id/SecondFragment" />
     </fragment>
-    <activity
-        android:id="@+id/openWorld"
-        android:name="com.example.akenasia.openworld.OpenWorld"
-        android:label="activity_open_world"
-        tools:layout="@layout/activity_openworld" />
-
 
 </navigation>

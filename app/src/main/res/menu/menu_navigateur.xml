@@ -18,4 +18,9 @@
         android:title="Profil"
         android:icon="@drawable/ic_profil"/>
 
+    <item
+        android:id="@+id/ForgeClick"
+        android:title="Forge"
+        android:icon="@drawable/ic_quit"/>
+
 </menu>

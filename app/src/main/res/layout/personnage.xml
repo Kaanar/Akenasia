@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/personnage"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="289dp"
-        android:layout_height="119dp"
+        android:id="@+id/player_stats_linear_layout"
+        android:layout_width="209dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/armure"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +55,18 @@
 
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/achievements"
+        android:layout_width="98dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="39dp"
+        android:text="Succès"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/player_stats_linear_layout"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/chaussures"
         android:layout_width="100dp"
@@ -90,7 +103,7 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/player_stats_linear_layout">
 
         <ImageView
             android:layout_width="match_parent"
@@ -158,7 +171,7 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/player_stats_linear_layout">
 
         <ImageView
             android:layout_width="match_parent"
@@ -181,7 +194,7 @@
     <Button
         android:id="@+id/retirer"
         android:layout_width="199dp"
-        android:layout_height="37dp"
+        android:layout_height="48dp"
         android:text="Retirer l'équipement"
         android:textAppearance="?attr/textAppearanceHeadline6"
         android:textSize="15sp"
