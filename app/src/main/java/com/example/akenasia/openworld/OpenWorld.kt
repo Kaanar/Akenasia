@@ -275,12 +275,12 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     }
 
     fun UpdatePointLevel(){
-        currentPersonnage.setPoints()
-        //update des points d'xp en BD sur cette ligne -> personnageHandler.setXP(currentpersonnage)
-        if (currentPersonnage.getPoints()%150 == 0){
-            currentPersonnage.setLevel()
-            //UPDatde des points d'xp en bd sur cette ligne
+
+        personnage.upPoint(1)
+        if(personnage.get(1).getPoints()%150==0){
+            personnage.upLevel(1)
         }
+
     }
 
     //Méthode qui identifie le type de lieu et qui drop l'item correspondant
