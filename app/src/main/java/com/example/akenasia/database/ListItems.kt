@@ -5,5 +5,7 @@ enum class ListItems {
     CHAUSSURES,
     ARMURE,
     BOUCLIER,
-    POTION
+    POTION,
+    TICKET,
+    GADGET
 }

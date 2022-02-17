@@ -6,67 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".openworld.Shop">
 
-    <RadioGroup
-        android:id="@+id/radioGroupShop"
-        android:layout_width="0dp"
+
+    <Spinner
+        android:id="@+id/ShopSpinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints">
-
-        <RadioButton
-            android:id="@+id/ShopEpee"
-            app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Epee"
-            android:textSize="16sp"
-            android:checked="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="30dp"
-            tools:layout_editor_absoluteY="120dp"
-            tools:ignore="MissingConstraints" />
-
-        <RadioButton
-            android:id="@+id/ShopBouclier"
-            app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bouclier"
-            android:textSize="16dp"
-            app:layout_constraintLeft_toRightOf="@+id/CBEpee"
-            android:layout_marginBottom="30dp"
-            tools:layout_editor_absoluteY="120dp"
-            tools:ignore="MissingConstraints" />
-
-        <RadioButton
-            android:id="@+id/ShopChaussures"
-            app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chaussures"
-            android:textSize="16dp"
-            app:layout_constraintLeft_toRightOf="@+id/CBBouclier"
-            android:layout_marginBottom="30dp"
-            tools:layout_editor_absoluteY="120dp"
-            tools:ignore="MissingConstraints" />
-
-        <RadioButton
-            android:id="@+id/ShopArmure"
-            app:layout_constraintBottom_toTopOf="@+id/ListViewItemForge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Armure"
-            android:textSize="16dp"
-            app:layout_constraintLeft_toRightOf="@+id/CBChaussures"
-            android:layout_marginBottom="30dp"
-            tools:layout_editor_absoluteY="120dp"
-            tools:ignore="MissingConstraints" />
-    </RadioGroup>
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:src="@drawable/ic_coin"
@@ -75,7 +26,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:adjustViewBounds="true"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupShop"
+        app:layout_constraintTop_toBottomOf="@id/ShopSpinner"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -85,7 +36,7 @@
         android:textSize="16dp"
         android:id="@+id/ShopArgentTxt"
         app:layout_constraintLeft_toRightOf="@id/ShopQuantiteArgent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupShop"
+        app:layout_constraintTop_toBottomOf="@id/ShopSpinner"
         tools:ignore="MissingConstraints" />
 
 
@@ -96,7 +47,7 @@
         android:textSize="16dp"
         android:id="@+id/ShopQuantiteArgent"
         app:layout_constraintLeft_toRightOf="@id/ShopImageCoin"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupShop"
+        app:layout_constraintTop_toBottomOf="@id/ShopSpinner"
         tools:ignore="MissingConstraints" />
 
     <ListView
@@ -105,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ShopImageCoin"
         app:layout_constraintBottom_toTopOf="@id/NavigationView"
         tools:ignore="MissingConstraints"
-        android:layout_height="600dp"/>
+        android:layout_height="0dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavigationView"

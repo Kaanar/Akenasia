@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.R
@@ -15,8 +17,11 @@ import com.example.akenasia.databinding.BagBinding
 import com.example.akenasia.home.MainActivity
 import kotlinx.android.synthetic.main.bag.*
 import kotlinx.android.synthetic.main.forge.*
+import kotlinx.android.synthetic.main.shop.*
+import java.util.ArrayList
 
-class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
+class Bag : AppCompatActivity(), AdapterView.OnItemClickListener,
+    AdapterView.OnItemSelectedListener {
 
     private lateinit var binding: BagBinding
     private lateinit var itemHandler : ItemHandler
@@ -28,9 +33,24 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(binding.root)
         itemHandler = ItemHandler(applicationContext)
 
-        //On affiche toutes les epees (filtre par défaut)
-        type = ListItems.EPEE
-        searchRecord()
+        val spinnerList = ArrayList<ListItems>()
+        spinnerList.add(ListItems.POTION)
+        spinnerList.add(ListItems.GADGET)
+        spinnerList.add(ListItems.TICKET)
+        spinnerList.add(ListItems.BOUCLIER)
+        spinnerList.add(ListItems.EPEE)
+        spinnerList.add(ListItems.ARMURE)
+        spinnerList.add(ListItems.CHAUSSURES)
+
+        val spinner: Spinner = findViewById(R.id.BagSpinner)
+        spinner.onItemSelectedListener = this
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            spinnerList
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
 
         ListViewItem.onItemClickListener = this
 
@@ -62,41 +82,6 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
                 }
             }
             true
-        }
-
-        binding.BagEpee.setOnClickListener {
-            if (BagEpee.isChecked) {
-                type = ListItems.EPEE
-                searchRecord()
-            }
-        }
-
-        binding.BagBouclier.setOnClickListener {
-            if(BagBouclier.isChecked) {
-                type = ListItems.BOUCLIER
-                searchRecord()
-            }
-        }
-
-        binding.BagChaussures.setOnClickListener {
-            if(BagChaussures.isChecked) {
-                type = ListItems.CHAUSSURES
-                searchRecord()
-            }
-        }
-
-        binding.BagPotion.setOnClickListener {
-            if(BagPotion.isChecked) {
-                type = ListItems.POTION
-                searchRecord()
-            }
-        }
-
-        binding.BagArmure.setOnClickListener {
-            if(BagArmure.isChecked) {
-                type = ListItems.ARMURE
-                searchRecord()
-            }
         }
     }
 
@@ -157,5 +142,14 @@ class Bag : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     fun updateTitle(title : Int) : String {
         return title.toString()
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        val a = BagSpinner.getItemAtPosition(p2)
+        type = a as ListItems
+        searchRecord()
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 }
