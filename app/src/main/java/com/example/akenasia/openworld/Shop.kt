@@ -125,8 +125,8 @@ class Shop : AppCompatActivity(), AdapterView.OnItemClickListener,
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        val a = Integer.parseInt(ShopListViewItem.getItemIdAtPosition(p2).toString())
-        Toast.makeText(this, p2.toString(), Toast.LENGTH_LONG).show()
+        val a = Integer.parseInt(ShopListViewItem.getItemAtPosition(p2).toString())
+        Toast.makeText(this, a.toString(), Toast.LENGTH_LONG).show()
         val i = listShop[a]
 
         //On envoie les infos de l'item au dialog

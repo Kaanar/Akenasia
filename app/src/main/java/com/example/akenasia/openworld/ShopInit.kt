@@ -19,7 +19,7 @@ class ShopInit {
             2000
         )
         val potionDef = Item(
-            0,
+            1,
             ListItems.POTION.toString(),
             "Potion de défense basique",
             "Augmente la DEF de 10",
@@ -29,7 +29,7 @@ class ShopInit {
             2000
         )
         val ticketEvent = Item(
-            0,
+            2,
             ListItems.TICKET.toString(),
             "Ticket d'event",
             "Un ticket pour participer à un événement",
@@ -39,7 +39,7 @@ class ShopInit {
             50000
         )
         val mobSpawner = Item(
-            0,
+            3,
             ListItems.GADGET.toString(),
             "Mob Spawner",
             "Invoque un monstre à côté de votre position",

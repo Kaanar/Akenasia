@@ -28,8 +28,6 @@ class ShopDialog : DialogFragment() {
         itemHandler = ItemHandler(context!!)
         personnage = PersonnageHandler(context!!)
         currentPersonnage = personnage.get(1)
-        item.Itemid = this.itemHandler.view().last().getItemid() + 1
-
 
         var rootView: View = inflater.inflate(R.layout.shop_dialog, container, false)
         //On affiche les infos de l'item à améliorer
@@ -42,6 +40,7 @@ class ShopDialog : DialogFragment() {
                 Toast.makeText(context, "Pas assez d'argent", Toast.LENGTH_LONG).show()
             }
             else {
+                item.Itemid = this.itemHandler.view().last().getItemid() + 1
                 personnage.upArgent(currentPersonnage.getArgent()-item.getItemPrix())
                 currentPersonnage = personnage.get(1)
                 this.itemHandler.add(item)
