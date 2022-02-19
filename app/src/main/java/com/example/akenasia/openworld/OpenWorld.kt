@@ -30,6 +30,8 @@ import com.example.akenasia.openworld.mobs.Orc
 import com.example.akenasia.openworld.mobs.Slime
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_ORANGE
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.util.concurrent.ThreadLocalRandom
 
 class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
@@ -70,6 +72,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
       
         currentPersonnage=personnage.get(1)
         markers= HashMap()
+
+
 
         //Mise en place d'un navcontroller pour d'eventuels fragments
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.include3) as NavHostFragment?
