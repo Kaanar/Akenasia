@@ -1,27 +1,5 @@
 package com.example.akenasia.database
 
-import com.google.android.gms.maps.model.LatLng
+class Marqueur(val id: Int?=0, val latitude: String?="", val longitude: String?="", val last_updated: Long?=0, val visible: Int?=0) {
 
-data class Marqueur(var Marqueurid: Int, var MarqueurLocation: LatLng, var MarqueurVisible: Int, var MarqueurLastUpdated: Long){
-
-    @JvmName("getmarqueurid")
-    fun getMarqueurId(): Int {
-        return Marqueurid
-    }
-
-    @JvmName("getmarqueurlocation")
-    fun getMarqueurLocation(): LatLng {
-        return MarqueurLocation
-    }
-
-    @JvmName("getmarqueurvisible")
-    fun getMarqueurVisible(): Int {
-        return MarqueurVisible
-    }
-
-    @JvmName("getmarqueurlastupdated")
-    fun getMarqueurLastUpdated(): Long {
-        return MarqueurLastUpdated
-    }
 }
-

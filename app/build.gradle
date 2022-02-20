@@ -5,10 +5,14 @@ plugins {
     id 'kotlin-android-extensions'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'com.google.gms.google-services'
+    id "org.jetbrains.kotlin.plugin.noarg" version "1.6.10"
 
 }
 apply plugin: 'kotlin-android'
 
+noArg {
+    annotation("com.example.akenasia.database.Marqueur")
+}
 android {
     compileSdkVersion 31
 
