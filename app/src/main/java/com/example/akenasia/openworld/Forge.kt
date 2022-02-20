@@ -70,7 +70,7 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
             true
         }
 
-        binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
+        binding.ArgentTxt.text = currentPersonnage.argent.toString()
         //Chaque bouton permet d'appliquer un filtre en fonction du type de l'objet
         binding.CBEpee.setOnClickListener {
             if(CBEpee.isChecked) {
@@ -155,7 +155,7 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
     //On récupère les infos en bdd de l'item sur lequel on clique
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         val coutUpgrade = 1500
-        if(currentPersonnage.getArgent()<coutUpgrade) {
+        if(currentPersonnage.argent<coutUpgrade) {
             Toast.makeText(this, "Trop pauvre",Toast.LENGTH_LONG).show()
         }
         else {
@@ -164,9 +164,9 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
             //Toast.makeText(this, a.toString(),Toast.LENGTH_LONG).show()
             itemHandler.upItem(i)
             searchRecord()
-            personnage.upArgent(currentPersonnage.getArgent()-coutUpgrade)
+            personnage.upArgent(currentPersonnage.argent-coutUpgrade)
             currentPersonnage = personnage.get(1)
-            binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
+            binding.ArgentTxt.text = currentPersonnage.argent.toString()
         }
 
     }

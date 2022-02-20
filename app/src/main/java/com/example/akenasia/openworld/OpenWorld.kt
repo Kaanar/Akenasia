@@ -58,6 +58,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     //Marqueur du joueur sur la carte
     private lateinit var CurrentMarkerPosition: Marker
     private var lesMarqueurs: ArrayList<Marker> = ArrayList()
+    private var playerMarqueurs: ArrayList<Marker> = ArrayList()
     //START Firebase database connection + Firebase Auth
     private lateinit var database: FirebaseDatabase
     private lateinit var user: FirebaseAuth
@@ -193,6 +194,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
                 //rafraîchit l'affichage des marqueurs
                 viewMarker()
+                //rafraichit la position des autres joueurs
+                viewPlayers()
                 //Zoom de la caméra sur la position du joueur
                 if (cameraFocus) {
                     googleMap.animateCamera(
@@ -251,6 +254,26 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
 
         }
+    }
+
+    private fun viewPlayers() {
+        //Référencement de la BD au niveau des marqueurs + on trie les marqueurs par ID
+        val users= database.getReference("User")
+        val query: Query = users.orderByKey()
+
+        //Query qui permet de récupérer tous les joueurs de la table
+        /*query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                //START Pour chaque marqueur on check si on l'affiche ou pas
+                for(children in snapshot.children){
+                    val user = children.value
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.i(TAG, "onCancelled: Error: " + error.message);
+            }
+        }*/
     }
 
     //Méthode qui permet d'afficher ou non les marqueurs du jeu. Il y a le marqueur du joueur, le marqueur des ennemis et les lieux proches
@@ -349,7 +372,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             id=1
         }
         currentPersonnage.setArgent(2000)
-        personnage.upArgent(currentPersonnage.getArgent())
+        personnage.upArgent(currentPersonnage.argent)
         //Toast.makeText(this, currentPersonnage.getArgent().toString(), Toast.LENGTH_LONG).show()
         when (index %4) {
             0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
