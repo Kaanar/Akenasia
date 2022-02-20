@@ -41,7 +41,7 @@ import com.google.android.gms.maps.model.LatLng
 
 
 
-class OpenWorld : AppCompatActivity(),OnMapReadyCallback, LocationListener {
+class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
     private val TAG: String = OpenWorld::class.java.simpleName
     private lateinit var pos: Position
@@ -183,12 +183,14 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, LocationListener {
             //à chaque tik:
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
                 //START Si la position du joueur a changé alors on la met à jour
-                val oldlocation = LatLng(pos.getLatitude(), pos.getLongitude())
                 pos.refreshLocation()
-                if (distanceMarker(oldlocation) != 0.0) {
-                    onLocationChanged(Location("MyLocation"))
-                }
+                val loc = LatLng(pos.getLatitude(), pos.getLongitude())
+                CurrentMarkerPosition.remove()
+                CurrentMarkerPosition=googleMap.addMarker(MarkerOptions()
+                    .position(loc)
+                    .title("Current Position"))!!
                 //END
+
                 //rafraîchit l'affichage des marqueurs
                 viewMarker()
                 //Zoom de la caméra sur la position du joueur
@@ -399,13 +401,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback, LocationListener {
             marker.longitude)
     }
 
-    override fun onLocationChanged(p0: Location) {
-        val loc = LatLng(pos.getLatitude(), pos.getLongitude())
-        CurrentMarkerPosition.remove()
-        CurrentMarkerPosition=googleMap.addMarker(MarkerOptions()
-            .position(loc)
-            .title("Current Position"))!!
-    }
 
 }
 
