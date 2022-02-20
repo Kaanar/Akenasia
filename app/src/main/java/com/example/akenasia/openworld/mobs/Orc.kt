@@ -3,7 +3,7 @@ package com.example.akenasia.openworld.mobs
 class Orc : Monstre() {
     override val name = "Orc"
     override var atk = 3.0
-    override var hp = 20.0
+    override var hp = 40.0 //augmentation car augmentation des pv du slime
     override val texte_spe ="L'orc s'inflige des dégats pour augmenter son attaque !"
 
 

@@ -70,8 +70,17 @@ class MarkerDialog : DialogFragment () {
     fun calcul_degat_joueur(): Double {
         var crit = crit()
         if(crit){
-            return att_joueur*2
+            attaqueInfoJoueur.text = "Vous infligez un coup critique !"
+            //Thread.sleep(2_000)
+            //attaqueInfoJoueur.text = String.format("Vous infligez %d dégats", att_joueur)
+            //Thread.sleep(2_000)
+            attaqueInfoJoueur.text = ""
+            return att_joueur*2 // ajouter un message si coup crit
         }
+        //attaqueInfoJoueur.text = String.format("Vous infligez %d dégats", att_joueur)
+        attaqueInfoJoueur.text = "Vous attaquez !"
+        //Thread.sleep(2_000)
+        attaqueInfoJoueur.text = ""
         return att_joueur
     }
 
@@ -79,12 +88,26 @@ class MarkerDialog : DialogFragment () {
         var crit = crit()
         var spe = m.attaque_spe()
         if(spe){
-            Toast.makeText(context,m.texte_spe, Toast.LENGTH_LONG).show()
+            //Toast.makeText(context,m.texte_spe, Toast.LENGTH_LONG).show() //à remplacer dans un textview
+            attaqueInfoMonstre.text = "Le monstre utilise son attaque spéciale !"
+            //Thread.sleep(2_000)
+            attaqueInfoMonstre.text = String.format("%s", m.texte_spe)
+            //Thread.sleep(2_000)
+            attaqueInfoMonstre.text = ""
             return m.atk - def_joueur
         }
         if(crit){
+            attaqueInfoMonstre.text = "Le monstre vous inflige un coup critique !"
+            //Thread.sleep(2_000)
+            //attaqueInfoMonstre.text = String.format("Vosu perdez %f points de vie.", m.atk*2)
+            attaqueInfoMonstre.text = "Vous prenez des dégats."
+            //Thread.sleep(2_000)
+            attaqueInfoMonstre.text = ""
             return m.atk*2
         }
+        attaqueInfoMonstre.text = "test"
+        Thread.sleep(2_000)
+        attaqueInfoMonstre.text = ""
         return m.atk - def_joueur
     }
 
@@ -114,6 +137,8 @@ class MarkerDialog : DialogFragment () {
             AttaqueMonstre.visibility = View.VISIBLE
             TexteJoueurAtt.visibility = View.VISIBLE
             TexteMonstreAtt.visibility = View.VISIBLE
+            attaqueInfoJoueur.visibility = View.VISIBLE
+            attaqueInfoMonstre.visibility = View.VISIBLE
             AttaqueMonstre.text = String.format("%f", mob.atk)
             AttaqueJoueur.text = String.format("%f", att_joueur)
             NomMonstre.text = String.format("%s", mob.name)

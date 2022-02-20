@@ -5,7 +5,7 @@ import android.widget.Toast
 class Slime : Monstre() {
     override val name = "Slime"
     override var atk = 1.0
-    override val hp = 8.0
+    override val hp = 20.0 //pv à 20 pour tester + qu'un tour de combat
     override val texte_spe ="Le slime est en colère, il va vous manger !"
 
 
