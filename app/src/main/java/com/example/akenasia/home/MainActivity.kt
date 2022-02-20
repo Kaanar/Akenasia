@@ -80,10 +80,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initialisation(){
 
-        if(achievementHandler.view().isEmpty()){
-            val achievements = Achievement(this)
-            achievements.init()
-        }
         if (personnageHandler.view().isEmpty()) {
             personnageHandler.create()
         }

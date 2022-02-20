@@ -3,6 +3,7 @@ package com.example.akenasia.authentication
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.provider.ContactsContract
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -65,12 +66,13 @@ class SignUp: AppCompatActivity() {
                     Log.d(Authentication.TAG, "createUserWithEmail:success")
                     //Création du user parmi les utilisateurs
                     auth.currentUser
-                    //Création de l'objet user pour le jeu
-                    val user= User(email, password, pseudo)
-                    database.getReference("User").child(auth.uid.toString()).setValue(user)
-                    //lancement de l'activité
+                    //START initialisation des données du joueur dans la base
+                    DataInitialisation(auth.uid.toString(),email,password,pseudo).initialise()
+                    //END
+                    //START lancement de l'activité
                     val intent = Intent(this, MainActivity::class.java)
                     this.startActivity(intent)
+                    //END
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(Authentication.TAG, "createUserWithEmail:failure", task.exception)
