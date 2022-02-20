@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".openworld.Bag">
+    tools:context=".openworld.Shop">
+
 
     <Spinner
-        android:id="@+id/BagSpinner"
+        android:id="@+id/ShopSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -18,13 +19,44 @@
         android:layout_marginRight="16dp"
         tools:ignore="MissingConstraints" />
 
+    <ImageView
+        android:src="@drawable/ic_coin"
+        android:id="@+id/ShopImageCoin"
+        android:scaleType="fitXY"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintTop_toBottomOf="@id/ShopSpinner"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 0 "
+        android:textSize="16dp"
+        android:id="@+id/ShopArgentTxt"
+        app:layout_constraintLeft_toRightOf="@id/ShopQuantiteArgent"
+        app:layout_constraintTop_toBottomOf="@id/ShopSpinner"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" x "
+        android:textSize="16dp"
+        android:id="@+id/ShopQuantiteArgent"
+        app:layout_constraintLeft_toRightOf="@id/ShopImageCoin"
+        app:layout_constraintTop_toBottomOf="@id/ShopSpinner"
+        tools:ignore="MissingConstraints" />
+
     <ListView
-        android:id="@+id/ListViewItem"
+        android:id="@+id/ShopListViewItem"
         android:layout_width="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
-        app:layout_constraintTop_toBottomOf="@+id/BagSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/ShopImageCoin"
+        app:layout_constraintBottom_toTopOf="@id/NavigationView"
         tools:ignore="MissingConstraints"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/NavigationView"
@@ -38,5 +70,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:menu="@menu/menu_navigateur" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

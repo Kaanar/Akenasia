@@ -108,7 +108,7 @@ class MarkerDialog : DialogFragment () {
                 val pick: Int = Random().nextInt(ListItems.values().size)
                 val att = ThreadLocalRandom.current().nextInt(0,5)
                 val def = ThreadLocalRandom.current().nextInt(0,5)
-                this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble()))
+                this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble(), 0, 0))
                 Toast.makeText(context,"Vous avez gagné un item surprise", Toast.LENGTH_LONG).show()
                 
                  //MAJ des stats, +1 monstre vaincu et +1 item récupéré

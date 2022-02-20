@@ -59,6 +59,12 @@
             tools:ignore="Instantiatable" />
 
         <activity
+            android:name=".openworld.Shop"
+            android:exported="true"
+            android:label="shop"
+            tools:ignore="Instantiatable" />
+
+        <activity
             android:name=".openworld.Bag"
             android:exported="true"
             android:label="bag"
