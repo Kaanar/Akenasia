@@ -70,7 +70,7 @@ class PersonnageHandler(var context: Context): Handler {
         val contentValues = ContentValues()
         val personnage= this.get(emp)
 
-        contentValues.put(KEY_POINT,personnage.getPoints()+5)
+        contentValues.put(KEY_POINT,personnage.points+5)
 
         contentValues.put(KEY_ARGENT, 0)
 
@@ -110,7 +110,7 @@ class PersonnageHandler(var context: Context): Handler {
         val personnage= this.get(emp)
 
         contentValues.put(KEY_POINT,0)
-        contentValues.put(KEY_LEVEL,personnage.getLevel()+1)
+        contentValues.put(KEY_LEVEL,personnage.level+1)
 
 
         // Updating Row
@@ -244,7 +244,7 @@ class PersonnageHandler(var context: Context): Handler {
                 argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
 
                 val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                    bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level,  argent = argent)
+                    bouclier=bouclier,epee=epee,chaussures=chaussures, points=point, level=level,  argent = argent)
 
                 empList.add(emp)
             } while (cursor.moveToNext())
@@ -291,7 +291,7 @@ class PersonnageHandler(var context: Context): Handler {
             argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
             
             val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level, argent = argent)
+                bouclier=bouclier,epee=epee,chaussures=chaussures, points=point, level=level, argent = argent)
 
             return emp
         }

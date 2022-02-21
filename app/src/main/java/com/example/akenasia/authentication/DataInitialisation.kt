@@ -38,7 +38,7 @@ class DataInitialisation(val id: String, val email: String, val password: String
         database.getReference("User").child(auth.uid.toString()).child("Position").child("longitude").setValue(0.0)
         //END
         //START initialisation du personnage
-        val personnage= PersonnageTable(auth.uid.toString(),20.0,12.0,10.0,-1,-1,-1,-1,0)
+        val personnage= PersonnageTable(auth.uid.toString(),20.0,12.0,10.0,-1,-1,-1,-1,0,0,0)
         database.getReference("User").child(auth.uid.toString()).child("Personnage").setValue(personnage)
 
 

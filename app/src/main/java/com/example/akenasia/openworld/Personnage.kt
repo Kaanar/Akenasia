@@ -161,11 +161,11 @@ class Personnage: AppCompatActivity() {
         currentPersonnage=personnageHandler.get(1)
 
         //Affichage des stats du personnage
-        binding.personnagePv.text="PV: "+currentPersonnage.getpersoHp().toString()
-        binding.personnageAtt.text="ATT: "+currentPersonnage.getpersoAtt().toString()
-        binding.personnageDef.text="DEF: "+currentPersonnage.getpersoDef().toString()
-        binding.personnagePoints.text="POINTS: "+currentPersonnage.getPoints().toString()
-        binding.personnageLevel.text="LEVEL: "+currentPersonnage.getLevel().toString()
+        binding.personnagePv.text="PV: "+currentPersonnage.persoHp.toString()
+        binding.personnageAtt.text="ATT: "+currentPersonnage.persoAtt.toString()
+        binding.personnageDef.text="DEF: "+currentPersonnage.persoDef.toString()
+        binding.personnagePoints.text="POINTS: "+currentPersonnage.points.toString()
+        binding.personnageLevel.text="LEVEL: "+currentPersonnage.level.toString()
 
 
         //Affichage des stats de l'armure
