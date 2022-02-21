@@ -26,6 +26,9 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
+        contentValues.put(KEY_POINT, 0)
+        contentValues.put(KEY_LEVEL, 0)
+
         contentValues.put(KEY_ARGENT, 0)
 
 
@@ -51,10 +54,28 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, -1)
         contentValues.put(KEY_EPEE, -1)
         contentValues.put(KEY_CHAUSSURES, -1)
-        contentValues.put(KEY_ARGENT, 0)
+        contentValues.put(KEY_POINT, 0)
+        contentValues.put(KEY_LEVEL, 0)
+
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id = $id  ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    fun upPoint(emp: Int): Int {
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        val personnage= this.get(emp)
+
+        contentValues.put(KEY_POINT,personnage.getPoints()+5)
+
+        contentValues.put(KEY_ARGENT, 0)
+
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id = $emp ",null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
@@ -77,11 +98,29 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_ARGENT, emp)
 
         // Updating Row
-        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $id ",null)
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
     }
+
+    fun upLevel(emp: Int): Int {
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        val personnage= this.get(emp)
+
+        contentValues.put(KEY_POINT,0)
+        contentValues.put(KEY_LEVEL,personnage.getLevel()+1)
+
+
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+
 
     //method to update your Personnage's affected items
     fun update(emp: Item):Int{
@@ -185,6 +224,9 @@ class PersonnageHandler(var context: Context): Handler {
         var bouclier: Int
         var epee: Int
         var chaussures: Int
+        var point : Int
+        var level : Int
+
         var argent : Int
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -197,10 +239,13 @@ class PersonnageHandler(var context: Context): Handler {
                 bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
                 epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
                 chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
+                point = cursor.getInt(cursor.getColumnIndex("point").toInt())
+                level = cursor.getInt(cursor.getColumnIndex("level").toInt())
                 argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
 
-                val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                    bouclier=bouclier,epee=epee,chaussures=chaussures, argent = argent)
+                val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
+                    bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level,  argent = argent)
+
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
@@ -225,6 +270,10 @@ class PersonnageHandler(var context: Context): Handler {
         val bouclier: Int
         val epee: Int
         val chaussures: Int
+        val point : Int
+        val level : Int
+
+
         val argent: Int
 
         if (cursor != null) {
@@ -237,9 +286,13 @@ class PersonnageHandler(var context: Context): Handler {
             bouclier = cursor.getInt(cursor.getColumnIndex("bouclier").toInt())
             epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
             chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
+            point = cursor.getInt(cursor.getColumnIndex("point").toInt())
+            level = cursor.getInt(cursor.getColumnIndex("level").toInt())
             argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
-            val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
-                bouclier=bouclier,epee=epee,chaussures=chaussures, argent = argent)
+            
+            val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
+                bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level, argent = argent)
+
             return emp
         }
         exitProcess(0)

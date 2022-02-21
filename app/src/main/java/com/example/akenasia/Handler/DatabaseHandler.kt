@@ -10,7 +10,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 ), Handler {
 
     companion object {
-        private val DATABASE_VERSION = 21
+        private val DATABASE_VERSION = 25
         private val DATABASE_NAME = "AkenasiaDatabase"
     }
 
@@ -37,7 +37,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db?.execSQL(CREATE_POSITION_TABLE)
 
         val CREATE_ITEM_TABLE =("CREATE TABLE " + TABLE_ITEM + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TYPE + " TEXT," + KEY_NAME + " TEXT," + KEY_DESC + " TEXT," + KEY_ATT + " DOUBLE," + KEY_DEF + " DOUBLE" + ")")
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TYPE + " TEXT," + KEY_NAME + " TEXT," + KEY_DESC + " TEXT," + KEY_ATT + " DOUBLE," + KEY_UPGRADE + " INTEGER," + KEY_PRIX + " INTEGER," + KEY_DEF + " DOUBLE" + ")")
         db?.execSQL(CREATE_ITEM_TABLE)
 
         val CREATE_BAG_TABLE =("CREATE TABLE " + TABLE_BAG + "("
@@ -46,7 +46,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 
         val CREATE_PERSONNAGE_TABLE =("CREATE TABLE " + TABLE_PERSONNAGE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_ARGENT + " INTEGER," + KEY_HP + " DOUBLE," + KEY_ATT + " DOUBLE," + KEY_DEF + " DOUBLE," + KEY_ARMURE + " INTEGER,"
-                + KEY_BOUCLIER + " INTEGER," + KEY_EPEE + " INTEGER," + KEY_CHAUSSURES + " INTEGER, FOREIGN KEY(" + KEY_ARMURE + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
+                + KEY_BOUCLIER + " INTEGER," + KEY_EPEE + " INTEGER," + KEY_CHAUSSURES + " INTEGER," + KEY_LEVEL + " INTEGER," + KEY_POINT + " INTEGER, FOREIGN KEY(" + KEY_ARMURE + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
                 ", FOREIGN KEY(" + KEY_BOUCLIER + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
                 ", FOREIGN KEY(" + KEY_EPEE + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + ")" +
                 ", FOREIGN KEY(" + KEY_CHAUSSURES + ") REFERENCES " + TABLE_ITEM + "(" + KEY_ID + "))")

@@ -33,6 +33,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+    <ImageButton
+        android:id="@+id/MapShopButton"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/CameraSwitch"
+        android:text="Shop"
+        app:srcCompat="@drawable/ic_shopping_cart"
+        app:layout_constraintTop_toBottomOf="@+id/CameraSwitch"
+        app:layout_constraintLeft_toLeftOf="@id/CameraSwitch" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

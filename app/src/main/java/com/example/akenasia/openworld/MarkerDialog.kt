@@ -59,16 +59,69 @@ class MarkerDialog : DialogFragment () {
             return mob
     }
 
+    fun crit(): Boolean {
+        var nb = (0..5).random()
+        if(nb == 1){
+            return true
+        }
+        return false
+    }
+
+    fun calcul_degat_joueur(): Double {
+        var crit = crit()
+        if(crit){
+            attaqueInfoJoueur.text = "Vous infligez un coup critique !"
+            Toast.makeText(context,"Vous infligez un coup critique !", Toast.LENGTH_LONG).show()
+            //Thread.sleep(2_000)
+            //attaqueInfoJoueur.text = String.format("Vous infligez %d dégats", att_joueur)
+            //Thread.sleep(2_000)
+            attaqueInfoJoueur.text = ""
+            return att_joueur*2 // ajouter un message si coup crit
+        }
+        //attaqueInfoJoueur.text = String.format("Vous infligez %d dégats", att_joueur)
+        attaqueInfoJoueur.text = "Vous attaquez !"
+        //Thread.sleep(2_000)
+        attaqueInfoJoueur.text = ""
+        return att_joueur
+    }
+
+    fun calcul_degat_monstre(m : Monstre): Double {
+        var crit = crit()
+        var spe = m.attaque_spe()
+        if(spe){
+            //Toast.makeText(context,m.texte_spe, Toast.LENGTH_LONG).show() //à remplacer dans un textview
+            attaqueInfoMonstre.text = "Le monstre utilise son attaque spéciale !"
+            //Thread.sleep(2_000)
+            attaqueInfoMonstre.text = String.format("%s", m.texte_spe)
+            //Thread.sleep(2_000)
+            attaqueInfoMonstre.text = ""
+            return m.atk - def_joueur
+        }
+        if(crit){
+            attaqueInfoMonstre.text = "Le monstre vous inflige un coup critique !"
+            //Thread.sleep(2_000)
+            //attaqueInfoMonstre.text = String.format("Vous perdez %f points de vie.", m.atk*2)
+            attaqueInfoMonstre.text = "Vous prenez des dégats."
+            //Thread.sleep(2_000)
+            attaqueInfoMonstre.text = ""
+            return m.atk*2
+        }
+        attaqueInfoMonstre.text = "test"
+        //Thread.sleep(2_000)
+        attaqueInfoMonstre.text = ""
+        return m.atk - def_joueur
+    }
+
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
             View? {
         thiscontext = this.activity
         personnageHandler = PersonnageHandler(thiscontext!!)
         itemHandler = ItemHandler(thiscontext!!)
         personnageTable = personnageHandler.get(1)
-        pv_joueur = personnageTable.getpersoHp()
-        att_joueur = personnageTable.getpersoAtt()
-        def_joueur = personnageTable.getpersoDef()
-        var rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
+        pv_joueur = personnageTable.persoHp
+        att_joueur = personnageTable.persoAtt
+        def_joueur = personnageTable.persoDef
+        val rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
 
         rootView.BtnAttaque.setOnClickListener() {
             //On lance le combat
@@ -85,17 +138,19 @@ class MarkerDialog : DialogFragment () {
             AttaqueMonstre.visibility = View.VISIBLE
             TexteJoueurAtt.visibility = View.VISIBLE
             TexteMonstreAtt.visibility = View.VISIBLE
-            AttaqueMonstre.text = String.format("%f", mob.atk)
-            AttaqueJoueur.text = String.format("%f", att_joueur)
+            attaqueInfoJoueur.visibility = View.VISIBLE
+            attaqueInfoMonstre.visibility = View.VISIBLE
+            AttaqueMonstre.text = String.format("%.2f", mob.atk)
+            AttaqueJoueur.text = String.format("%.2f", att_joueur)
             NomMonstre.text = String.format("%s", mob.name)
-            PvMonstre.text = String.format("%f", pv_monstre)
-            PvJoueur.text = String.format("%f", pv_joueur)
+            PvMonstre.text = String.format("%.2f", pv_monstre)
+            PvJoueur.text = String.format("%.2f", pv_joueur)
         }
 
         rootView.BtnAttaqueMonstre.setOnClickListener() {
 
-            pv_monstre -= att_joueur
-            PvMonstre.text = String.format("%f", pv_monstre)
+            pv_monstre -= calcul_degat_joueur()
+            PvMonstre.text = String.format("%.2f", pv_monstre)
             if (pv_monstre <= 0) {
                 victoireText.visibility = View.VISIBLE
                 var id:Int
@@ -108,7 +163,7 @@ class MarkerDialog : DialogFragment () {
                 val pick: Int = Random().nextInt(ListItems.values().size)
                 val att = ThreadLocalRandom.current().nextInt(0,5)
                 val def = ThreadLocalRandom.current().nextInt(0,5)
-                this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble()))
+                this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble(), 0, 0))
                 Toast.makeText(context,"Vous avez gagné un item surprise", Toast.LENGTH_LONG).show()
                 
                  //MAJ des stats, +1 monstre vaincu et +1 item récupéré
@@ -119,8 +174,8 @@ class MarkerDialog : DialogFragment () {
                 BtnAttaqueMonstre.visibility = View.INVISIBLE
             }
 
-            pv_joueur -= att_monstre
-            PvJoueur.text = String.format("%f", pv_joueur)
+            pv_joueur -= calcul_degat_monstre(mob)
+            PvJoueur.text = String.format("%.2f", pv_joueur)
 
 
             if (pv_joueur <= 0) {

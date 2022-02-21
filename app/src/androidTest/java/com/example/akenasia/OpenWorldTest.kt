@@ -59,7 +59,7 @@ class OpenWorldTest: TestCase(){
             val op = OpenWorld()
             val context = ApplicationProvider.getApplicationContext<Context>()
             itemHandler = ItemHandler(context)
-            val item = Item(0, "BOUCLIER","Bouclier simple","Parfait pour les débutants",1.0,2.0)
+            val item = Item(0, "BOUCLIER","Bouclier simple","Parfait pour les débutants",1.0,2.0, 0,0)
             op.DropItem(0)
             assertEquals("BOUCLIER", item.ItemType)
         }
