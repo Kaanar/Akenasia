@@ -1,9 +1,11 @@
 package com.example.akenasia.achievement
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.Handler.AchievementHandler
 import com.example.akenasia.R
@@ -76,12 +78,17 @@ class AchievementFragment : AppCompatActivity() {
     private fun viewRecord(){
         //calling the viewPlace method of DatabaseHandler class to read the records
 
-       val achievements= database.getReference("User").child(user.uid.toString()).child("Achievement")
+        //Référencement de la BD au niveau des suucès du user + on trie les succès par ID
+        val achievements= database.getReference("User").child(user.uid.toString()).child("Achievement")
         val query: Query = achievements.orderByKey()
+        var nb =27 //ATTENTION IL FAUT FAIRE EN SORTE QUE CE SOIT = NB DE ACHIEVEMENTS
 
-        val empArrayid : ArrayList<String> = ArrayList()
-        val empArrayDesc : ArrayList<String> = ArrayList()
-        val empArrayUnlocked : ArrayList<String> = ArrayList()
+        Toast.makeText(this@AchievementFragment,nb.toString(),Toast.LENGTH_LONG).show()
+        val empArrayid : Array<String> = Array(nb){"0"}
+        val empArrayDesc : Array<String> = Array(nb){"0"}
+        val empArrayUnlocked : Array<String> = Array(nb){"0"}
+
+        nb =0
         //Query qui permet de récupérer tous les marqueurs de la table
         query.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -92,12 +99,14 @@ class AchievementFragment : AppCompatActivity() {
                     val id = children.key.toString()
                     val description = children.child("description").value.toString()
                     val unlocked = children.child("unlocked").value.toString()
-                    empArrayid.add(id)
-                    empArrayDesc.add(description)
-                    empArrayUnlocked.add(unlocked)
+                    empArrayid[nb]=id
+                    empArrayDesc[nb]=description
+                    empArrayUnlocked[nb]=unlocked
+                    nb++
                 }
                 //END
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.i(TAG, "onCancelled: Error: " + error.message);
             }
