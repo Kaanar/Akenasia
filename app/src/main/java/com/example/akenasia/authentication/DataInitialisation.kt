@@ -30,6 +30,8 @@ class DataInitialisation(val id: String, val email: String, val password: String
         database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalMarqueur").setValue(0)
         database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalMonstre").setValue(0)
         database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalItem").setValue(0)
+        database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalJoueurs").child(auth.uid.toString()).setValue(pseudo)
+
         //END
         //START initialisation de la position
         database.getReference("User").child(auth.uid.toString()).child("Position").child("latitude").setValue(0.0)

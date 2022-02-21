@@ -57,8 +57,10 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     private var spawnTime= 0
     //Marqueur du joueur sur la carte
     private lateinit var CurrentMarkerPosition: Marker
+    //Marqueurs des lieux et des joueurs
     private var lesMarqueurs: ArrayList<Marker> = ArrayList()
     private var playerMarqueurs: ArrayList<Marker> = ArrayList()
+    private var lesUsers: ArrayList<String> = ArrayList()
     //START Firebase database connection + Firebase Auth
     private lateinit var database: FirebaseDatabase
     private lateinit var user: FirebaseAuth
@@ -151,7 +153,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
             //Référencement de la BD au nivea des marqueurs + on trie les marqueurs par ID
             val markers = database.getReference("Marqueur")
-            val query: Query = markers.orderByKey()
+            var query: Query = markers.orderByKey()
 
             //Query qui permet de récupérer tous les marqueurs de la table
             query.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -160,18 +162,18 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     //START on récupère tous les marqueurs une première fois en les cachant pour pouvoir les afficher ou
                     //non derrière
                     for (children in snapshot.children) {
-                        val marker = children.getValue(Marqueur::class.java)
-                        val latitude = marker!!.latitude!!.toDouble()
-                        val longitude = marker.longitude!!.toDouble()
-                        val position = LatLng(latitude, longitude)
-                        val index = marker.id
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(position)
-                                .title(index.toString())
-                                .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index!!)))
-                                .zIndex(1.0f).visible(false)
-                        )?.let { lesMarqueurs.add(it) }
+                            val marker = children.getValue(Marqueur::class.java)
+                            val latitude = marker!!.latitude!!.toDouble()
+                            val longitude = marker.longitude!!.toDouble()
+                            val position = LatLng(latitude, longitude)
+                            val index = marker.id
+                            googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(position)
+                                    .title(index.toString())
+                                    .icon(BitmapDescriptorFactory.defaultMarker(randomColor(index!!)))
+                                    .zIndex(1.0f).visible(false)
+                            )?.let { lesMarqueurs.add(it) }
                     }
                     //END
                 }
@@ -180,6 +182,36 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     Log.i(TAG, "onCancelled: Error: " + error.message);
                 }
             })
+
+            //Référencement de la BD au niveau des users + on trie les users par ID
+            val users= database.getReference("User")
+            query = users.orderByKey()
+
+            //START Query qui permet de récupérer la position tous les joueurs de la table
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    for(children in snapshot.children){
+                        if(children.key!=user.uid){
+                            val latitude = children.child("Position").child("latitude").value
+                            val longitude = children.child("Position").child("longitude").value
+                            lesUsers.add(children.key.toString())
+
+                            googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(LatLng(latitude as Double,longitude as Double ))
+                                    .title(children.key.toString())
+                                    .zIndex(1.0f).visible(true)
+                            )?.let { playerMarqueurs.add(it) }
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.i(TAG, "onCancelled: Error: " + error.message);
+                }
+            })
+
 
             //à chaque tik:
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
@@ -230,7 +262,13 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         randomPosition = ThreadLocalRandom.current().nextInt(0, 4)
                         randomSpawnTime = ThreadLocalRandom.current().nextInt(40, 300)
                     }
-                    //si il il click sur un lieu
+                    //si il il click sur un autre joueur
+                    Marker.title.toString() in lesUsers -> {
+                        val pseudo =database.getReference("User").child(Marker.title.toString()).child("pseudo").toString()
+                        Toast.makeText(this, "Oh, voici un autre joueur ! Bonjour :)",Toast.LENGTH_LONG).show()
+                        database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(Marker.title.toString()).setValue(pseudo)
+                    }
+                    //Et si il click sur un lieu
                     else -> {
                         val index = Marker.title?.toInt()
                         if (index != null) {
@@ -257,23 +295,48 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     }
 
     private fun viewPlayers() {
-        //Référencement de la BD au niveau des marqueurs + on trie les marqueurs par ID
+        //Référencement de la BD au niveau des users + on trie les users par ID
         val users= database.getReference("User")
         val query: Query = users.orderByKey()
 
-        //Query qui permet de récupérer tous les joueurs de la table
-        /*query.addListenerForSingleValueEvent(object : ValueEventListener {
+        //START Query qui permet de récupérer la position tous les joueurs de la table
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                //START Pour chaque marqueur on check si on l'affiche ou pas
+                var nbPlayers=0
+                var deltaPosition: Double
+                //Pour chaque user...
                 for(children in snapshot.children){
-                    val user = children.value
+                    if(children.key!=user.uid){
+                        //START on récupère la dernière localisation (latitude et longitude)
+                        val latitude = children.child("Position").child("latitude").value
+                        val longitude = children.child("Position").child("longitude").value
+                        //END
+                        //START on la compare avec l'ancienne position enregistrée du joueur
+                        val oldlatitude =playerMarqueurs[nbPlayers].position.latitude
+                        val oldlongitude =playerMarqueurs[nbPlayers].position.longitude
+                        //calcul de la distance entre les deux positions
+                        deltaPosition= pos.calcul_distance(latitude as Double,longitude as Double,oldlatitude,oldlongitude)
+                        //Si la distance est >=150 ALORS on remplace le marqueur de l'ancienne position par un nouveau
+                        if(deltaPosition>=150){
+                            playerMarqueurs[nbPlayers].remove()
+                            googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(LatLng(latitude,longitude))
+                                    .title(children.key.toString())
+                                    .zIndex(1.0f).visible(true)
+                            )?.let { playerMarqueurs.add(nbPlayers, it) }
+                        }
+                        //END
+                        nbPlayers++
+                    }
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.i(TAG, "onCancelled: Error: " + error.message);
             }
-        }*/
+        })
     }
 
     //Méthode qui permet d'afficher ou non les marqueurs du jeu. Il y a le marqueur du joueur, le marqueur des ennemis et les lieux proches
