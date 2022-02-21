@@ -71,6 +71,7 @@ class MarkerDialog : DialogFragment () {
         var crit = crit()
         if(crit){
             attaqueInfoJoueur.text = "Vous infligez un coup critique !"
+            Toast.makeText(context,"Vous infligez un coup critique !", Toast.LENGTH_LONG).show()
             //Thread.sleep(2_000)
             //attaqueInfoJoueur.text = String.format("Vous infligez %d dégats", att_joueur)
             //Thread.sleep(2_000)
@@ -99,14 +100,14 @@ class MarkerDialog : DialogFragment () {
         if(crit){
             attaqueInfoMonstre.text = "Le monstre vous inflige un coup critique !"
             //Thread.sleep(2_000)
-            //attaqueInfoMonstre.text = String.format("Vosu perdez %f points de vie.", m.atk*2)
+            //attaqueInfoMonstre.text = String.format("Vous perdez %f points de vie.", m.atk*2)
             attaqueInfoMonstre.text = "Vous prenez des dégats."
             //Thread.sleep(2_000)
             attaqueInfoMonstre.text = ""
             return m.atk*2
         }
         attaqueInfoMonstre.text = "test"
-        Thread.sleep(2_000)
+        //Thread.sleep(2_000)
         attaqueInfoMonstre.text = ""
         return m.atk - def_joueur
     }
@@ -139,17 +140,17 @@ class MarkerDialog : DialogFragment () {
             TexteMonstreAtt.visibility = View.VISIBLE
             attaqueInfoJoueur.visibility = View.VISIBLE
             attaqueInfoMonstre.visibility = View.VISIBLE
-            AttaqueMonstre.text = String.format("%f", mob.atk)
-            AttaqueJoueur.text = String.format("%f", att_joueur)
+            AttaqueMonstre.text = String.format("%.2f", mob.atk)
+            AttaqueJoueur.text = String.format("%.2f", att_joueur)
             NomMonstre.text = String.format("%s", mob.name)
-            PvMonstre.text = String.format("%f", pv_monstre)
-            PvJoueur.text = String.format("%f", pv_joueur)
+            PvMonstre.text = String.format("%.2f", pv_monstre)
+            PvJoueur.text = String.format("%.2f", pv_joueur)
         }
 
         rootView.BtnAttaqueMonstre.setOnClickListener() {
 
             pv_monstre -= calcul_degat_joueur()
-            PvMonstre.text = String.format("%f", pv_monstre)
+            PvMonstre.text = String.format("%.2f", pv_monstre)
             if (pv_monstre <= 0) {
                 victoireText.visibility = View.VISIBLE
                 var id:Int
@@ -174,7 +175,7 @@ class MarkerDialog : DialogFragment () {
             }
 
             pv_joueur -= calcul_degat_monstre(mob)
-            PvJoueur.text = String.format("%f", pv_joueur)
+            PvJoueur.text = String.format("%.2f", pv_joueur)
 
 
             if (pv_joueur <= 0) {
