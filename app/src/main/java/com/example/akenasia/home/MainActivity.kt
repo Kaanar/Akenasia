@@ -2,6 +2,7 @@ package com.example.akenasia.home
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.location.LocationRequest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +20,7 @@ import com.example.akenasia.R
 import com.example.akenasia.achievement.Achievement
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.database.Position
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.LatLng
 import java.util.concurrent.ThreadLocalRandom
 

@@ -96,6 +96,7 @@ class Personnage: AppCompatActivity() {
                     val intent = Intent(this, Forge::class.java)
                     this.startActivity(intent)
                 }
+
                 else -> {
                     val intent = Intent(this, Personnage::class.java)
                     this.startActivity(intent)

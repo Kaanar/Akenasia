@@ -108,6 +108,11 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
         binding.NavigationView.selectedItemId = com.example.akenasia.R.id.MapClick
 
+        MapShopButton.setOnClickListener() {
+            val intent = Intent(this, Shop::class.java)
+            this.startActivity(intent)
+        }
+
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -127,6 +132,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         val intent = Intent(this, Forge::class.java)
                         this.startActivity(intent)
                     }
+
                     else -> {
                         val intent = Intent(this, Personnage::class.java)
                         this.startActivity(intent)
@@ -422,7 +428,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                     .zIndex(1.0f))
             }
             spawnTime+=1
-
         }
 
     //Méthode qui identifie le type de lieu et qui drop l'item correspondant
@@ -439,16 +444,16 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         //Toast.makeText(this, currentPersonnage.getArgent().toString(), Toast.LENGTH_LONG).show()
         when (index %4) {
             0 -> { Toast.makeText(this,"Vous trouvez un vieux bouclier dans un buisson",Toast.LENGTH_LONG).show()
-                this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0))
+                this.itemHandler.add(Item(id, ListItems.BOUCLIER.toString(),"Bouclier simple","Parfait pour les débutants",1.0,2.0, 0, 0))
             }
             1 -> {Toast.makeText(this,"Une épée rouillée jonche le sol. Vous la ramassez.",Toast.LENGTH_LONG).show()
-                this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0))
+                this.itemHandler.add(Item(id, ListItems.EPEE.toString(),"Epee de combat","Une épée basique",3.0,1.0, 0, 0))
             }
             2 -> { Toast.makeText(this,"Vous avez trouvé des chaussures en cuir abandonnées. Ca peut toujours servir",Toast.LENGTH_LONG).show()
-                this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0))
+                this.itemHandler.add(Item(id, ListItems.CHAUSSURES.toString(),"Bottes basiques","Pas très confortable",1.0,1.0, 0, 0))
             }
             3 -> { Toast.makeText(this,"Une armure en cuir ! Quelle chance !",Toast.LENGTH_LONG).show()
-                this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0))
+                this.itemHandler.add(Item(id, ListItems.ARMURE.toString(),"Armure simple","une armure en cuivre",0.0,3.0, 0, 0))
             }
         }
     }

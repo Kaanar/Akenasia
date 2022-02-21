@@ -12,7 +12,7 @@
     <item
         android:id="@+id/BagClick"
         android:title="Sac"
-        android:icon="@drawable/ic_bag"/>
+        android:icon="@drawable/ic_backpack"/>
     <item
         android:id="@+id/PersonnageClick"
         android:title="Profil"
@@ -21,6 +21,5 @@
     <item
         android:id="@+id/ForgeClick"
         android:title="Forge"
-        android:icon="@drawable/ic_quit"/>
-
+        android:icon="@drawable/ic_build"/>
 </menu>

@@ -22,6 +22,8 @@ class ItemHandler(var context: Context): Handler {
         contentValues.put(KEY_DESC, emp.getItemDesc())
         contentValues.put(KEY_ATT, emp.getItemAtt())
         contentValues.put(KEY_DEF, emp.getItemDef())
+        contentValues.put(KEY_UPGRADE, emp.getItemNbUpgrade())
+        contentValues.put(KEY_PRIX, emp.getItemPrix())
 
         // Inserting Row
         val success = db.insert(dbHandler.TABLE_ITEM, null,  contentValues)
@@ -47,6 +49,8 @@ class ItemHandler(var context: Context): Handler {
         val itemDesc: String
         val itemAtt: Double
         val itemDef: Double
+        val itemNbUpgrade: Int
+        val itemPrix : Int
 
 
         if (cursor != null) {
@@ -57,12 +61,15 @@ class ItemHandler(var context: Context): Handler {
                 itemDesc = cursor.getString(cursor.getColumnIndex("name").toInt())
                 itemAtt = cursor.getDouble(cursor.getColumnIndex("ATT").toInt())
                 itemDef = cursor.getDouble(cursor.getColumnIndex("DEF").toInt())
+                itemNbUpgrade = cursor.getInt(cursor.getColumnIndex("upgrade").toInt())
+                itemPrix = cursor.getInt(cursor.getColumnIndex("prix").toInt())
 
-                return Item(itemId,itemType, itemName, itemDesc, itemAtt, itemDef)
+
+                return Item(itemId,itemType, itemName, itemDesc, itemAtt, itemDef, itemNbUpgrade, itemPrix)
             }
-            else return Item(-1,"none", "vide", "", 0.0, 0.0)
+            else return Item(-1,"none", "vide", "", 0.0, 0.0, 0, 0)
         }
-        else return Item(-1,"none", "vide", "", 0.0, 0.0)
+        else return Item(-1,"none", "vide", "", 0.0, 0.0, 0, 0)
     }
 
     //method to read an Item
@@ -83,6 +90,8 @@ class ItemHandler(var context: Context): Handler {
         var itemDesc: String
         var itemAtt: Double
         var itemDef: Double
+        var itemNbUpgrade: Int
+        var itemPrix : Int
 
         if (cursor != null) {
             if(cursor.moveToFirst()){
@@ -93,6 +102,8 @@ class ItemHandler(var context: Context): Handler {
                     itemDesc = cursor.getString(cursor.getColumnIndex("name").toInt())
                     itemAtt = cursor.getDouble(cursor.getColumnIndex("ATT").toInt())
                     itemDef = cursor.getDouble(cursor.getColumnIndex("DEF").toInt())
+                    itemNbUpgrade = cursor.getInt(cursor.getColumnIndex("upgrade").toInt())
+                    itemPrix = cursor.getInt(cursor.getColumnIndex("prix").toInt())
 
                     val emp = Item(
                         Itemid = itemId,
@@ -101,6 +112,8 @@ class ItemHandler(var context: Context): Handler {
                         ItemDesc = itemDesc,
                         ItemAtt=itemAtt,
                         ItemDef=itemDef,
+                        nb_Upgrade = itemNbUpgrade,
+                        ItemPrix = itemPrix
                     )
                     empList.add(emp)
                 } while (cursor.moveToNext())
@@ -127,6 +140,8 @@ class ItemHandler(var context: Context): Handler {
         var itemDesc: String
         var itemAtt: Double
         var itemDef: Double
+        var itemNbUpgrade : Int
+        var itemPrix : Int
 
         if (cursor != null) {
             if(cursor.moveToFirst()){
@@ -137,6 +152,8 @@ class ItemHandler(var context: Context): Handler {
                     itemDesc = cursor.getString(cursor.getColumnIndex("name").toInt())
                     itemAtt = cursor.getDouble(cursor.getColumnIndex("ATT").toInt())
                     itemDef = cursor.getDouble(cursor.getColumnIndex("DEF").toInt())
+                    itemNbUpgrade = cursor.getInt(cursor.getColumnIndex("upgrade").toInt())
+                    itemPrix = cursor.getInt(cursor.getColumnIndex("prix").toInt())
 
                     val emp = Item(
                         Itemid = itemId,
@@ -145,6 +162,8 @@ class ItemHandler(var context: Context): Handler {
                         ItemDesc = itemDesc,
                         ItemAtt=itemAtt,
                         ItemDef=itemDef,
+                        nb_Upgrade = itemNbUpgrade,
+                        ItemPrix = itemPrix
                     )
                     empList.add(emp)
                 } while (cursor.moveToNext())
@@ -174,26 +193,11 @@ class ItemHandler(var context: Context): Handler {
         contentValues.put(KEY_DESC, emp.ItemDesc)
         contentValues.put(KEY_ATT, emp.ItemAtt+1)
         contentValues.put(KEY_DEF, emp.ItemDef+1)
+        contentValues.put(KEY_UPGRADE, emp.nb_Upgrade+1)
+        contentValues.put(KEY_PRIX, emp.ItemPrix)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_ITEM, contentValues,"id= "+ emp.Itemid,null)
-        //2nd argument is String containing nullColumnHack
-        db.close() // Closing database connection
-        return success
-    }
-
-    fun update(emp: Item):Int{
-        val db = dbHandler.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(KEY_ID, emp.Itemid-1)
-        contentValues.put(KEY_TYPE, emp.ItemType)
-        contentValues.put(KEY_NAME, emp.ItemName)
-        contentValues.put(KEY_DESC, emp.ItemDesc)
-        contentValues.put(KEY_ATT, emp.ItemAtt)
-        contentValues.put(KEY_DEF, emp.ItemDef)
-
-        // Updating Row
-        val success = db.update(dbHandler.TABLE_ITEM, contentValues,"id="+emp.Itemid,null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success
