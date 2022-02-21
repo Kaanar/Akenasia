@@ -275,6 +275,15 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         val pseudo =database.getReference("User").child(Marker.title.toString()).child("pseudo").toString()
                         Toast.makeText(this, "Oh, voici un autre joueur ! Bonjour :)",Toast.LENGTH_LONG).show()
                         database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(Marker.title.toString()).setValue(pseudo)
+                        //On affiche le dialog de l'entrainement
+                        val dialog = PlayerInteractionDialog()
+                        //START on transfère le uid du joueur rencontré dans le dialog
+                        val bundle = Bundle()
+                        bundle.putString("uid",Marker.title.toString())
+                        dialog.arguments = bundle
+                        val navHostFragment = supportFragmentManager
+                        //END
+                        dialog.show(navHostFragment, "PlayerInteractionDialog")
                     }
                     //Et si il click sur un lieu
                     else -> {
