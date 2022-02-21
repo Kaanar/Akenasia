@@ -75,7 +75,7 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
             true
         }
 
-        binding.ArgentTxt.text = currentPersonnage.getArgent().toString()
+        binding.ArgentTxt.text = currentPersonnage.argent.toString()
         //Chaque bouton permet d'appliquer un filtre en fonction du type de l'objet
         binding.CBEpee.setOnClickListener {
             if (CBEpee.isChecked) {

@@ -21,7 +21,7 @@ class HistoriqueDialog : DialogFragment () {
 
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
             View? {
-        var rootView: View = inflater.inflate(R.layout.historique_dialog, container, false)
+        val rootView: View = inflater.inflate(R.layout.historique_dialog, container, false)
         rootView.HistoriqueTitle.text = title
         rootView.HistoriqueInfo.text = info
         rootView.BtnOk.setOnClickListener() {

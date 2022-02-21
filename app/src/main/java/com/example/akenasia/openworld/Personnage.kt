@@ -3,6 +3,7 @@ package com.example.akenasia.openworld
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -13,7 +14,15 @@ import com.example.akenasia.R
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.achievement.AchievementFragment
+import com.example.akenasia.authentication.Authentication.Companion.TAG
 import com.example.akenasia.database.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 
 
 class Personnage: AppCompatActivity() {
@@ -22,14 +31,42 @@ class Personnage: AppCompatActivity() {
     private lateinit var itemHandler: ItemHandler
     private lateinit var currentPersonnage: PersonnageTable
 
+    // [START declare_auth]
+    private lateinit var auth: FirebaseAuth
+    // [END declare_auth]
+    //Start Firebase connection
+    private lateinit var database: FirebaseDatabase
+    //End Firebase connection
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PersonnageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         personnageHandler = PersonnageHandler(this)
         itemHandler = ItemHandler(this)
+
+        // [START initialize_auth]
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+        // [END initialize_auth]
+        // Initialize Firebase Realtime Database connection
+        database= FirebaseDatabase.getInstance()
+
+
+        val totalJoueursRencontres =database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalJoueurs")
+
+        totalJoueursRencontres.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val total=snapshot.childrenCount-1
+                binding.totalPlayersSeen.text= "Joueurs rencontrés: $total"
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.i(TAG, "onCancelled: Error: " + error.message);
+            }
+
+        })
 
 
 
@@ -124,9 +161,9 @@ class Personnage: AppCompatActivity() {
         currentPersonnage=personnageHandler.get(1)
 
         //Affichage des stats du personnage
-        binding.personnagePv.text="PV: "+currentPersonnage.getpersoHp().toString()
-        binding.personnageAtt.text="ATT: "+currentPersonnage.getpersoAtt().toString()
-        binding.personnageDef.text="DEF: "+currentPersonnage.getpersoDef().toString()
+        binding.personnagePv.text="PV: "+currentPersonnage.persoHp.toString()
+        binding.personnageAtt.text="ATT: "+currentPersonnage.persoAtt.toString()
+        binding.personnageDef.text="DEF: "+currentPersonnage.persoDef.toString()
 
         //Affichage des stats de l'armure
         binding.armureAtt.text="ATT: "+itemHandler.get(currentPersonnage.armure).ItemAtt.toString()

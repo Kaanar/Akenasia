@@ -199,7 +199,7 @@ class PersonnageHandler(var context: Context): Handler {
                 chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
                 argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
 
-                val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
+                val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
                     bouclier=bouclier,epee=epee,chaussures=chaussures, argent = argent)
                 empList.add(emp)
             } while (cursor.moveToNext())
@@ -238,7 +238,7 @@ class PersonnageHandler(var context: Context): Handler {
             epee = cursor.getInt(cursor.getColumnIndex("epee").toInt())
             chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
             argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
-            val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
+            val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
                 bouclier=bouclier,epee=epee,chaussures=chaussures, argent = argent)
             return emp
         }

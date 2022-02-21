@@ -65,10 +65,10 @@ class MarkerDialog : DialogFragment () {
         personnageHandler = PersonnageHandler(thiscontext!!)
         itemHandler = ItemHandler(thiscontext!!)
         personnageTable = personnageHandler.get(1)
-        pv_joueur = personnageTable.getpersoHp()
-        att_joueur = personnageTable.getpersoAtt()
-        def_joueur = personnageTable.getpersoDef()
-        var rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
+        pv_joueur = personnageTable.persoHp
+        att_joueur = personnageTable.persoAtt
+        def_joueur = personnageTable.persoDef
+        val rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
 
         rootView.BtnAttaque.setOnClickListener() {
             //On lance le combat
