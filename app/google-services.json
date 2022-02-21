@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "653757635066",
+    "firebase_url": "https://akenasia-a21ab-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "akenasia-a21ab",
+    "storage_bucket": "akenasia-a21ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653757635066:android:ae9f2ae0f8d59d39f36c43",
+        "android_client_info": {
+          "package_name": "com.example.akenasia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653757635066-chslk9bsgo9cvf0t3se65bsmgq8oka1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1uBgj1uNu1EfNBs_8iDBJIvQ8XgdSHBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653757635066-chslk9bsgo9cvf0t3se65bsmgq8oka1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
