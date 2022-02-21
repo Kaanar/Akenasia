@@ -33,6 +33,10 @@ interface Handler {
         get() = "type"
     val KEY_ARGENT: String
         get() = "argent"
+    val KEY_POINT : String
+        get() = "point"
+    val KEY_LEVEL : String
+        get() = "level"
     val KEY_VISIBLE: String
         get() = "visible"
     val KEY_LASTUPDATED: String

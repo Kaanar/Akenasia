@@ -18,8 +18,8 @@
 
     <LinearLayout
         android:id="@+id/player_stats_linear_layout"
-        android:layout_width="209dp"
-        android:layout_height="66dp"
+        android:layout_width="212dp"
+        android:layout_height="106dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/armure"
@@ -47,6 +47,22 @@
             android:layout_height="wrap_content"
             android:text="DEF: "
             android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/personnage_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="POINTS: "
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/personnage_level"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LEVEL: "
+            android:textAlignment="center" />
+
+
     </LinearLayout>
 
 

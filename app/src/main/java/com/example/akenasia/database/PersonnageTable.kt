@@ -7,5 +7,4 @@ class PersonnageTable (var persoId: String, var persoHp: Double, var persoAtt: D
     fun setArgent(argent: Int){
         this.argent= argent
     }
-
 }
