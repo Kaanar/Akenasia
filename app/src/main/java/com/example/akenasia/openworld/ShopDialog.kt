@@ -36,12 +36,12 @@ class ShopDialog : DialogFragment() {
         rootView.ShopDialogCout.text = "Cout de l'achat : " + item.getItemPrix()
 
         rootView.ShopDialogOk.setOnClickListener() {
-            if(currentPersonnage.getArgent()<item.getItemPrix()) {
+            if(currentPersonnage.argent<item.getItemPrix()) {
                 Toast.makeText(context, "Pas assez d'argent", Toast.LENGTH_LONG).show()
             }
             else {
                 item.Itemid = this.itemHandler.view().last().getItemid() + 1
-                personnage.upArgent(currentPersonnage.getArgent()-item.getItemPrix())
+                personnage.upArgent(currentPersonnage.argent-item.getItemPrix())
                 currentPersonnage = personnage.get(1)
                 this.itemHandler.add(item)
                 Toast.makeText(context, "L'achat a été effectué",Toast.LENGTH_LONG).show()

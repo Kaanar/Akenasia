@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.akenasia.R
 
-class AchievementAdapter (private val context: Activity,private val id: Array<String>, private val description: Array<String>, private val unlocked: Array<String>)
+class AchievementAdapter (private val context: Activity,private val id: ArrayList<String>, private val description: ArrayList<String>, private val unlocked: ArrayList<String>)
     : ArrayAdapter<String>(context, R.layout.achievements_listview,id) {
 
 

@@ -45,7 +45,7 @@ class Shop : AppCompatActivity(), AdapterView.OnItemClickListener,
         personnage = PersonnageHandler(this)
         currentPersonnage=personnage.get(1)
         listShop = ShopInit().initItem()
-        ShopArgentTxt.text = currentPersonnage.getArgent().toString()
+        ShopArgentTxt.text = currentPersonnage.argent.toString()
 
         val spinnerList = ArrayList<ListItems>()
         spinnerList.add(ListItems.POTION)
@@ -143,7 +143,7 @@ class Shop : AppCompatActivity(), AdapterView.OnItemClickListener,
 
     fun refresh() {
         currentPersonnage = personnage.get(1)
-        ShopArgentTxt.text = currentPersonnage.getArgent().toString()
+        ShopArgentTxt.text = currentPersonnage.argent.toString()
     }
 
     fun updateShop() : Shop {

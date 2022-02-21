@@ -43,14 +43,14 @@ class ForgeDialog : DialogFragment() {
         rootView.ForgeDialogNiveau.text = "Level : " + item.getItemNbUpgrade().toString() + "/5"
 
         rootView.ForgeDialogOk.setOnClickListener() {
-            if(currentPersonnage.getArgent()<upgradeCost(item.nb_Upgrade)) {
+            if(currentPersonnage.argent<upgradeCost(item.nb_Upgrade)) {
                 Toast.makeText(context, "Pas assez d'argent", Toast.LENGTH_LONG).show()
             }
             else if(item.getItemNbUpgrade()>=5) {
                 Toast.makeText(context, "Niveau max atteint", Toast.LENGTH_LONG).show()
             }
             else {
-                personnage.upArgent(currentPersonnage.getArgent()-upgradeCost(item.nb_Upgrade))
+                personnage.upArgent(currentPersonnage.argent-upgradeCost(item.nb_Upgrade))
                 currentPersonnage = personnage.get(1)
                 Toast.makeText(context, "L'upgrade est un succès",Toast.LENGTH_LONG).show()
                 itemHandler.upItem(item)
