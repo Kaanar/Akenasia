@@ -53,51 +53,48 @@ class PlayerInteractionDialog : DialogFragment() {
         //Si il décide de s'entrainer
         rootView.BtnEntrainement.setOnClickListener{
             val ref= database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).child("visited")
-            var visited= -1
             //START on vérifie si le joueur s'est déjà entrainé avec le joueur rencontré
             ref.addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    visited = if (snapshot.value.toString()=="1"){
-                        1
+                    Toast.makeText(thiscontext,snapshot.value.toString(),Toast.LENGTH_LONG).show()
+                    if (snapshot.value=="1"){
+                        Toast.makeText(thiscontext,"Vous vous êtes déjà entrainés avec ce joueur",Toast.LENGTH_SHORT).show()
+                        dismiss()
                     }
                     //sinon on augmente une stat de manière aléatoire
                     else{
-                        ref.setValue("1")
-                        0
+                        database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).child("visited").setValue("1")
+                        for (e in 1..5){
+                            handler.upPoint(1) //ICI on donne 30 points d'exp au joueur
+                        }
+                        val stat = (0..2).random()
+                        val value = (1..3).random()
+                        when (stat){
+                            0->{
+                                handler.UpHP(1,value.toDouble())
+                                Toast.makeText(thiscontext,
+                                    "Votre entrainement vous a fait acquérir 30 exp et $value HP!",Toast.LENGTH_SHORT).show()
+                                dismiss()
+                            }
+                            1->{
+                                handler.UpATT(1,value.toDouble())
+                                Toast.makeText(thiscontext,
+                                    "Votre entrainement vous a fait acquérir 30 exp et $value points d'ATT!",Toast.LENGTH_SHORT).show()
+                                dismiss()
+                            }
+                            2->{
+                                handler.UpDEF(1,value.toDouble())
+                                Toast.makeText(thiscontext,
+                                    "Votre entrainement vous a fait acquérir 30 exp et $value points de DEF!",Toast.LENGTH_SHORT).show()
+                                dismiss()
+                            }
+                        }
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
                     Log.i(TAG, "onCancelled: Error: " + error.message);
                 }
             })
-            if(visited==1){
-                Toast.makeText(thiscontext,"Vous vous êtes déjà entrainés avec ce joueur",Toast.LENGTH_LONG).show()
-                dismiss()
-            }
-            else if(visited==0){
-                for (e in 1..5){
-                    handler.upPoint(1) //ICI on donne 30 points d'exp au joueur
-                }
-                val stat = (0..2).random()
-                val value = (1..3).random()
-                when (stat){
-                    0->{
-                        handler.UpHP(1,value.toDouble())
-                        Toast.makeText(thiscontext,"Votre entrainement vous a fait acquérir 30 exp et "+ value.toString() + " HP!",Toast.LENGTH_LONG).show()
-                        dismiss()
-                    }
-                    1->{
-                        handler.UpATT(1,value.toDouble())
-                        Toast.makeText(thiscontext,"Votre entrainement vous a fait acquérir 30 exp et "+ value.toString() + " points d'ATT!",Toast.LENGTH_LONG).show()
-                        dismiss()
-                    }
-                    2->{
-                        handler.UpDEF(1,value.toDouble())
-                        Toast.makeText(thiscontext,"Votre entrainement vous a fait acquérir 30 exp et "+ value.toString() + " points de DEF!",Toast.LENGTH_LONG).show()
-                        dismiss()
-                    }
-                }
-            }
         }
         return rootView
     }
