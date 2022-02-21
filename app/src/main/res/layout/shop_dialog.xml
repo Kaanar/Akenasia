@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/ShopDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Text"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/ShopDialogDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ShopDialogTitle"
+        android:ems="10"
+        android:hint="Title"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/ShopDialogCout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/ShopDialogDesc"
+        android:hint="Cout" />
+
+    <Button
+        android:id="@+id/ShopDialogOk"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/ShopDialogCout"
+        android:text="Ok" />
+
+    <Button
+        android:id="@+id/ShopDialogCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ShopDialogCout"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/ShopDialogOk"
+        android:text="Annuler" />
+
+</RelativeLayout>

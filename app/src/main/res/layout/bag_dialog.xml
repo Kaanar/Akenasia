@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/BagDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Text"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/BagDialogDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="22sp"
+        android:hint="Title"
+        android:layout_below="@+id/BagDialogTitle"/>
+
+    <TextView
+        android:id="@+id/BagDialogAtk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/BagDialogDesc"
+        android:hint="Atk" />
+
+    <TextView
+        android:id="@+id/BagDialogDef"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_below="@+id/BagDialogAtk"
+        android:hint="Def" />
+
+    <Button
+        android:id="@+id/BagDialogOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/BagDialogDef"
+        android:text="Supprimer" />
+
+    <Button
+        android:id="@+id/BagDialogCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BagDialogDef"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/BagDialogOk"
+        android:text="Annuler" />
+
+</RelativeLayout>

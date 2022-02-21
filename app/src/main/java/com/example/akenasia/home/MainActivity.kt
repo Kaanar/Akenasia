@@ -2,6 +2,7 @@ package com.example.akenasia.home
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.location.LocationRequest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +20,7 @@ import com.example.akenasia.R
 import com.example.akenasia.achievement.Achievement
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.database.Position
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.LatLng
 import java.util.concurrent.ThreadLocalRandom
 
@@ -28,16 +30,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var appSettingPrefs: SharedPreferences
-    lateinit var locationRequest: LocationRequest
     lateinit var marqueurHandler: MarqueurHandler
     lateinit var achievementHandler: AchievementHandler
     lateinit var personnageHandler: PersonnageHandler
     lateinit var statsHandler: StatsHandler
     private lateinit var pos: Position
     private lateinit var markers: HashMap<Int, LatLng>
-    val PERMISSION_ID = 1
 
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,10 +82,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initialisation(){
 
-        if(achievementHandler.view().isEmpty()){
-            val achievements = Achievement(this)
-            achievements.init()
-        }
         if (personnageHandler.view().isEmpty()) {
             personnageHandler.create()
         }

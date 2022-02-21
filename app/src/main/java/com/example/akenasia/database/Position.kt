@@ -18,11 +18,16 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.LocationSettingsResponse
 import androidx.core.app.ActivityCompat.requestPermissions
+import com.example.akenasia.databinding.SignupBinding
 import com.example.akenasia.home.MainActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 
 class Position(context: Context) {
@@ -34,6 +39,14 @@ class Position(context: Context) {
     val PERMISSION_ID = 1010
     private lateinit var activity: MainActivity
     private lateinit var locationRequest: LocationRequest
+    // [START declare_auth]
+    private var auth: FirebaseAuth = Firebase.auth
+    // [END declare_auth]
+    //Start Firebase connection
+    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    //End Firebase connection
+    lateinit var binding: SignupBinding
+
 
 
     init {
@@ -97,6 +110,7 @@ class Position(context: Context) {
     }
 
     fun refreshLocation() {
+        auth.currentUser
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -115,6 +129,10 @@ class Position(context: Context) {
                             val longitude= locationResult.lastLocation.longitude
                             setLatitude(latitude)
                             setLongitude(longitude)
+                            //START Transfert de la position vers le backend
+                            database.getReference("User").child(auth.uid.toString()).child("Position").child("latitude").setValue(latitude)
+                            database.getReference("User").child(auth.uid.toString()).child("Position").child("longitude").setValue(longitude)
+
                         }
                         else{
                             setLatitude(0.0)

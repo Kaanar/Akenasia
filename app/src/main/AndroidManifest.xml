@@ -40,11 +40,6 @@
             android:exported="true"
             android:label="@string/app_name"
             tools:ignore="Instantiatable">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".game.Game"
@@ -56,6 +51,12 @@
             android:name=".openworld.OpenWorld"
             android:exported="true"
             android:label="openworld"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".openworld.Shop"
+            android:exported="true"
+            android:label="shop"
             tools:ignore="Instantiatable" />
 
         <activity
@@ -86,6 +87,32 @@
             android:name=".achievement.AchievementFragment"
             android:exported="true"
             android:label="achievement"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".authentication.Authentication"
+            android:exported="true"
+            android:label="authentication"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity
+            android:name=".authentication.SignIn"
+            android:exported="true"
+            android:label="signin"
+            tools:ignore="Instantiatable" />
+
+        <activity
+                android:name=".authentication.SignUp"
+            android:exported="true"
+            android:label="signup"
             tools:ignore="Instantiatable" />
 
     </application>

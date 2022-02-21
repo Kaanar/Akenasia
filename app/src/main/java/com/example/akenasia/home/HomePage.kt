@@ -17,10 +17,6 @@ import com.google.android.gms.maps.SupportMapFragment
 
 
 class HomePage : Fragment(){
-
-    lateinit var mapFragment: SupportMapFragment
-    lateinit var googleMap: GoogleMap
-
     private var _binding: HomepageBinding? = null
     private lateinit var pos: Position
 

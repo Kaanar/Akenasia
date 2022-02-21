@@ -37,7 +37,7 @@ class MarqueurHandler(var context : Context): Handler {
             Long = cursor.getDouble(cursor.getColumnIndex("longitude").toInt())
             visible = cursor.getInt(cursor.getColumnIndex("visible").toInt())
             lastUpdated = cursor.getLong(cursor.getColumnIndex("last_updated").toInt())
-            return Marqueur(id, LatLng(Lat, Long), visible, lastUpdated)
+            return Marqueur(id, Lat.toString(),Long.toString(), lastUpdated, visible)
         }
         exitProcess(0)
     }
@@ -84,7 +84,7 @@ class MarqueurHandler(var context : Context): Handler {
                     visible = cursor.getInt(cursor.getColumnIndex("visible").toInt())
                     lastUpdated = cursor.getLong(cursor.getColumnIndex("last_updated").toInt())
 
-                    val emp = Marqueur(posId,LatLng(posLat,posLong),visible,lastUpdated)
+                    val emp = Marqueur(posId,posLat.toString(), posLong.toString(),lastUpdated,visible)
                     empList.add(emp)
                 } while (cursor.moveToNext())
             }
@@ -115,14 +115,14 @@ class MarqueurHandler(var context : Context): Handler {
     fun update(emp: Marqueur): Int {
         val db = dbHandler.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_ID, emp.getMarqueurId())
-        contentValues.put(KEY_LATITUDE, emp.getMarqueurLocation().latitude)
-        contentValues.put(KEY_LONGITUDE, emp.getMarqueurLocation().longitude)
-        contentValues.put(KEY_VISIBLE, emp.getMarqueurVisible())
-        contentValues.put(KEY_LASTUPDATED,emp.getMarqueurLastUpdated())
+        contentValues.put(KEY_ID, emp.id)
+        contentValues.put(KEY_LATITUDE, emp.latitude)
+        contentValues.put(KEY_LONGITUDE, emp.longitude)
+        contentValues.put(KEY_VISIBLE, emp.visible)
+        contentValues.put(KEY_LASTUPDATED,emp.last_updated)
 
         // Updating Row
-        val success = db.update(dbHandler.TABLE_MARQUEUR, contentValues,"id="+emp.getMarqueurId(),null)
+        val success = db.update(dbHandler.TABLE_MARQUEUR, contentValues,"id="+emp.id,null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success

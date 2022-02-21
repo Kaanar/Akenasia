@@ -6,6 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/total_players_seen"
+        android:layout_width="196dp"
+        android:layout_height="22dp"
+        android:text="Joueurs rencontrés: "
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/achievements"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/player_stats_linear_layout"
         android:layout_width="212dp"

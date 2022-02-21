@@ -243,8 +243,9 @@ class PersonnageHandler(var context: Context): Handler {
                 level = cursor.getInt(cursor.getColumnIndex("level").toInt())
                 argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
 
-                val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
+                val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
                     bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level,  argent = argent)
+
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
@@ -287,10 +288,11 @@ class PersonnageHandler(var context: Context): Handler {
             chaussures = cursor.getInt(cursor.getColumnIndex("chaussures").toInt())
             point = cursor.getInt(cursor.getColumnIndex("point").toInt())
             level = cursor.getInt(cursor.getColumnIndex("level").toInt())
-
             argent = cursor.getInt(cursor.getColumnIndex("argent").toInt())
-            val emp= PersonnageTable(persoId= persoId, persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
+            
+            val emp= PersonnageTable(persoId= persoId.toString(), persoHp= persoHp, persoAtt= persoAtt, persoDef=persoDef,armure=armure,
                 bouclier=bouclier,epee=epee,chaussures=chaussures, point=point, level=level, argent = argent)
+
             return emp
         }
         exitProcess(0)

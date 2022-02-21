@@ -4,7 +4,6 @@ import android.content.Context
 import android.widget.Toast
 import com.example.akenasia.Handler.AchievementHandler
 import com.example.akenasia.Handler.StatsHandler
-import com.example.akenasia.database.Marqueur
 
 class Stats(context:Context, idJoueur: Int) {
         var thiscontext=context

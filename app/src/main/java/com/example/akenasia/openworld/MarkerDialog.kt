@@ -65,10 +65,10 @@ class MarkerDialog : DialogFragment () {
         personnageHandler = PersonnageHandler(thiscontext!!)
         itemHandler = ItemHandler(thiscontext!!)
         personnageTable = personnageHandler.get(1)
-        pv_joueur = personnageTable.getpersoHp()
-        att_joueur = personnageTable.getpersoAtt()
-        def_joueur = personnageTable.getpersoDef()
-        var rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
+        pv_joueur = personnageTable.persoHp
+        att_joueur = personnageTable.persoAtt
+        def_joueur = personnageTable.persoDef
+        val rootView: View = inflater.inflate(R.layout.marker_dialog, container, false)
 
         rootView.BtnAttaque.setOnClickListener() {
             //On lance le combat
@@ -108,7 +108,7 @@ class MarkerDialog : DialogFragment () {
                 val pick: Int = Random().nextInt(ListItems.values().size)
                 val att = ThreadLocalRandom.current().nextInt(0,5)
                 val def = ThreadLocalRandom.current().nextInt(0,5)
-                this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble()))
+                this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble(), 0, 0))
                 Toast.makeText(context,"Vous avez gagné un item surprise", Toast.LENGTH_LONG).show()
                 
                  //MAJ des stats, +1 monstre vaincu et +1 item récupéré

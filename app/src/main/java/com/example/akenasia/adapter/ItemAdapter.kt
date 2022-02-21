@@ -22,7 +22,7 @@ class ItemAdapter (private val context: Activity, private val id: Array<String>,
 
         val idItem = rowView.findViewById<View>(R.id.ItemId) as TextView
         val nomItem = rowView.findViewById<View>(R.id.ItemName) as TextView
-        val descrItem = rowView.findViewById<View>(R.id.ItemDesc) as TextView
+        val descrItem = rowView.findViewById<View>(R.id.ItemDes) as TextView
         val attItem = rowView.findViewById<View>(R.id.ItemAtt) as TextView
         val defItem = rowView.findViewById<View>(R.id.ItemDef) as TextView
 
