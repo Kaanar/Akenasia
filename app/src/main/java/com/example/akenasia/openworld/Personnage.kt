@@ -59,7 +59,8 @@ class Personnage: AppCompatActivity() {
 
         totalJoueursRencontres.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                binding.totalPlayersSeen.text= "Joueurs rencontrés: " +snapshot.childrenCount.toString()
+                val total=snapshot.childrenCount-1
+                binding.totalPlayersSeen.text= "Joueurs rencontrés: $total"
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.i(TAG, "onCancelled: Error: " + error.message);
