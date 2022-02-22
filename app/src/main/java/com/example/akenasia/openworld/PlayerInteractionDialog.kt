@@ -71,9 +71,6 @@ class PlayerInteractionDialog : DialogFragment() {
                     else{
                         //MAJ du last_visited à la date actuelle
                         database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).setValue(System.currentTimeMillis())
-                        for (e in 1..5){
-                            handler.upPoint(1) //ICI on donne 30 points d'exp au joueur
-                        }
                         Toast.makeText(thiscontext,time.div(1000).toString(),Toast.LENGTH_LONG).show()
                         val stat = (0..2).random()
                         val value = (1..3).random()

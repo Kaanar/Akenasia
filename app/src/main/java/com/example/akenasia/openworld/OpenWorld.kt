@@ -250,8 +250,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             //Différentiation des use case en fonction du type de marker
             //Si le joueur click sur son marker
             googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { Marker ->
-                // Quand le joueur clique sur un marker, ses points et son niveau sont recalculés
-                UpdatePointLevel()
                 //Si le joueur click sur son marker
                 when {
                     Marker.title.toString() == "Current Position" -> {
@@ -296,6 +294,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                             database.getReference("Marqueur").child(Marker.title.toString())
                                 .updateChildren(update)
                             Marker.isVisible = false
+                            // Quand le joueur clique sur un marker, ses points et son niveau sont recalculés
+                            UpdatePointLevel()
                         }
                         //MAJ des stats, +1 lieu fouillé et +1 item récupéré
                         Stats(this, 1).upMarqueurs()
