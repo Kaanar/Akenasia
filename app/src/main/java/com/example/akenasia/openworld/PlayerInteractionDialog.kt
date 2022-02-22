@@ -49,23 +49,32 @@ class PlayerInteractionDialog : DialogFragment() {
 
         //Si il décide de s'entrainer
         rootView.BtnEntrainement.setOnClickListener{
-           // database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).setValue("-1")
+
             val ref = database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid)
             //START on vérifie si le joueur s'est déjà entrainé avec le joueur rencontré
             val query: Query = ref
             query.addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    Toast.makeText(thiscontext,snapshot.value.toString(),Toast.LENGTH_LONG).show()
-                    if (snapshot.value=="1"){
-                        Toast.makeText(thiscontext,"Vous vous êtes déjà entrainés avec ce joueur",Toast.LENGTH_SHORT).show()
+                    //Si c'est la première fois ie la valeur est null
+                    val time: Long = if(snapshot.value == null){
+                        0
+                    } else{
+                        //Sinon on on prend la valeur stockée
+                        snapshot.value.toString().toLong()
+                    }
+                    //Si (temps actuel - last_visited du joueur) converti en seconde < 1 jour, alors on refuse l'entrainement
+                    if (System.currentTimeMillis().minus(time)/ 1000 <= 86400){
+                        Toast.makeText(thiscontext,"Vous vous êtes déjà entrainés avec ce joueur aujourd'hui",Toast.LENGTH_SHORT).show()
                         dismiss()
                     }
                     //sinon on augmente une stat de manière aléatoire
                     else{
-                        database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).setValue("1")
+                        //MAJ du last_visited à la date actuelle
+                        database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).setValue(System.currentTimeMillis())
                         for (e in 1..5){
                             handler.upPoint(1) //ICI on donne 30 points d'exp au joueur
                         }
+                        Toast.makeText(thiscontext,time.div(1000).toString(),Toast.LENGTH_LONG).show()
                         val stat = (0..2).random()
                         val value = (1..3).random()
                         when (stat){

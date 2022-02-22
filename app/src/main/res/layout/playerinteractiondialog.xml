@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
-        android:text="Vous rencontrez un autre joueur sur votre chemin, voulez-vous vous entrainer avec ?(1x par joueur)"
+        android:text="Vous rencontrez un autre joueur sur votre chemin, voulez-vous vous entrainer avec ?(1x par jour)"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
