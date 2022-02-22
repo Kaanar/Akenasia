@@ -61,18 +61,21 @@ class UpLevelDialog : DialogFragment() {
 
         rootView.btnUpLevelHp.setOnClickListener() {
 
+            personnageHandler.UpHP(1,3.0)
             txtUpLevel2.visibility = View.VISIBLE
             btnUpLevelRetour.visibility = View.VISIBLE
         }
 
         rootView.btnUpLevelAttaque.setOnClickListener() {
 
+            personnageHandler.UpATT(1,5.0)
             txtUpLevel2.visibility = View.VISIBLE
             btnUpLevelRetour.visibility = View.VISIBLE
         }
 
         rootView.btnUpLevelDefense.setOnClickListener() {
 
+            personnageHandler.UpDEF(1,5.0)
             txtUpLevel2.visibility = View.VISIBLE
             btnUpLevelRetour.visibility = View.VISIBLE
         }
