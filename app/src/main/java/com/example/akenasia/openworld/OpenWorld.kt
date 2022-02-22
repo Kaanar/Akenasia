@@ -442,8 +442,11 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     fun UpdatePointLevel(){
 
         personnage.upPoint(1)
-        if(personnage.get(1).points%150==0){
+        if(personnage.get(1).points>=150){
             personnage.upLevel(1)
+            val dialog = UpLevelDialog()
+            val navHostFragment = supportFragmentManager
+            dialog.show(navHostFragment, "UpLevelDialog")
         }
 
     }
