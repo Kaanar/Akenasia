@@ -102,7 +102,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_BOUCLIER, personnage.bouclier)
         contentValues.put(KEY_EPEE, personnage.epee)
         contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
-        contentValues.put(KEY_POINT,personnage.points+5)
+        contentValues.put(KEY_POINT,personnage.points+2)
         contentValues.put(KEY_LEVEL, personnage.level)
 
 
