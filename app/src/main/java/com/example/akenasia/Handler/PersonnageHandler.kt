@@ -150,7 +150,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_EPEE, personnage.epee)
         contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
         contentValues.put(KEY_POINT,0)
-        contentValues.put(KEY_LEVEL, personnage.level+1)
+        contentValues.put(KEY_LEVEL, personnage.level)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
@@ -173,7 +173,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_EPEE, personnage.epee)
         contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
         contentValues.put(KEY_POINT,0)
-        contentValues.put(KEY_LEVEL, personnage.level+1)
+        contentValues.put(KEY_LEVEL, personnage.level)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
@@ -196,7 +196,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_EPEE, personnage.epee)
         contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
         contentValues.put(KEY_POINT,0)
-        contentValues.put(KEY_LEVEL, personnage.level+1)
+        contentValues.put(KEY_LEVEL, personnage.level)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)

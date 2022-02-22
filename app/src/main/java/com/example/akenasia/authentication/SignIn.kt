@@ -13,12 +13,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.akenasia.databinding.SigninBinding
 import com.example.akenasia.home.MainActivity
+import com.google.firebase.database.FirebaseDatabase
 
 class SignIn: AppCompatActivity() {
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
+    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+
 
     lateinit var binding: SigninBinding
 
@@ -60,6 +63,6 @@ class SignIn: AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-
+        database.getReference("User").child(auth.uid.toString()).child("last_visited").setValue(System.currentTimeMillis())
     }
 }

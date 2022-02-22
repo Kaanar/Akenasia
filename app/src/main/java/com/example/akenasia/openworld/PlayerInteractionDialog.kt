@@ -13,10 +13,7 @@ import com.example.akenasia.R
 import com.example.akenasia.authentication.Authentication.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.playerinteractiondialog.view.*
 
@@ -52,9 +49,11 @@ class PlayerInteractionDialog : DialogFragment() {
 
         //Si il décide de s'entrainer
         rootView.BtnEntrainement.setOnClickListener{
-            val ref= database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).child("visited")
+           // database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).setValue("-1")
+            val ref = database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid)
             //START on vérifie si le joueur s'est déjà entrainé avec le joueur rencontré
-            ref.addListenerForSingleValueEvent(object : ValueEventListener{
+            val query: Query = ref
+            query.addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     Toast.makeText(thiscontext,snapshot.value.toString(),Toast.LENGTH_LONG).show()
                     if (snapshot.value=="1"){
@@ -63,7 +62,7 @@ class PlayerInteractionDialog : DialogFragment() {
                     }
                     //sinon on augmente une stat de manière aléatoire
                     else{
-                        database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).child("visited").setValue("1")
+                        database.getReference("User").child(user.uid.toString()).child("Stats").child("TotalJoueurs").child(playeruid).setValue("1")
                         for (e in 1..5){
                             handler.upPoint(1) //ICI on donne 30 points d'exp au joueur
                         }
