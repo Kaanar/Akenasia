@@ -20,6 +20,7 @@ class DataInitialisation(val id: String, val email: String, val password: String
         //Création de l'objet user pour le jeu
         val user= User(email, password, pseudo)
         database.getReference("User").child(auth.uid.toString()).setValue(user)
+        database.getReference("User").child(auth.uid.toString()).child("last_visited").setValue(System.currentTimeMillis())
         //START initialisation des Achievements
         for ((index, e) in achievements.data_init().withIndex()){
             val achievement: com.example.akenasia.database.Achievement = com.example.akenasia.database.Achievement(index,e,0)

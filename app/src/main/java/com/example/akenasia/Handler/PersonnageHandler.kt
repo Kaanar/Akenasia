@@ -70,9 +70,17 @@ class PersonnageHandler(var context: Context): Handler {
         val contentValues = ContentValues()
         val personnage= this.get(emp)
 
-        contentValues.put(KEY_POINT,personnage.points+5)
 
-        contentValues.put(KEY_ARGENT, 0)
+        contentValues.put(KEY_ID, emp)
+        contentValues.put(KEY_HP, personnage.persoHp)
+        contentValues.put(KEY_ATT,personnage.persoAtt)
+        contentValues.put(KEY_DEF, personnage.persoDef)
+        contentValues.put(KEY_ARMURE,personnage.armure)
+        contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+        contentValues.put(KEY_EPEE, personnage.epee)
+        contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+        contentValues.put(KEY_POINT,personnage.points+5)
+        contentValues.put(KEY_LEVEL, personnage.level)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id = $emp ",null)
@@ -109,9 +117,86 @@ class PersonnageHandler(var context: Context): Handler {
         val contentValues = ContentValues()
         val personnage= this.get(emp)
 
+        contentValues.put(KEY_ID, emp)
+        contentValues.put(KEY_HP, personnage.persoHp)
+        contentValues.put(KEY_ATT,personnage.persoAtt)
+        contentValues.put(KEY_DEF, personnage.persoDef)
+        contentValues.put(KEY_ARMURE,personnage.armure)
+        contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+        contentValues.put(KEY_EPEE, personnage.epee)
+        contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
         contentValues.put(KEY_POINT,0)
-        contentValues.put(KEY_LEVEL,personnage.level+1)
+        contentValues.put(KEY_LEVEL, personnage.level+1)
 
+
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    fun UpHP(emp:Int, hp: Double): Int{
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        val personnage= this.get(emp)
+
+        contentValues.put(KEY_ID, emp)
+        contentValues.put(KEY_HP,personnage.persoHp+hp)
+        contentValues.put(KEY_ATT,personnage.persoAtt)
+        contentValues.put(KEY_DEF, personnage.persoDef)
+        contentValues.put(KEY_ARMURE,personnage.armure)
+        contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+        contentValues.put(KEY_EPEE, personnage.epee)
+        contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+        contentValues.put(KEY_POINT,0)
+        contentValues.put(KEY_LEVEL, personnage.level)
+
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    fun UpATT(emp:Int, att: Double): Int{
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        val personnage= this.get(emp)
+
+        contentValues.put(KEY_ID, emp)
+        contentValues.put(KEY_HP,personnage.persoHp)
+        contentValues.put(KEY_ATT,personnage.persoAtt+att)
+        contentValues.put(KEY_DEF, personnage.persoDef)
+        contentValues.put(KEY_ARMURE,personnage.armure)
+        contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+        contentValues.put(KEY_EPEE, personnage.epee)
+        contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+        contentValues.put(KEY_POINT,0)
+        contentValues.put(KEY_LEVEL, personnage.level)
+
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    fun UpDEF(emp:Int, def: Double): Int{
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        val personnage= this.get(emp)
+
+        contentValues.put(KEY_ID, emp)
+        contentValues.put(KEY_HP,personnage.persoHp)
+        contentValues.put(KEY_ATT,personnage.persoAtt)
+        contentValues.put(KEY_DEF,personnage.persoDef+def)
+        contentValues.put(KEY_ARMURE,personnage.armure)
+        contentValues.put(KEY_BOUCLIER, personnage.bouclier)
+        contentValues.put(KEY_EPEE, personnage.epee)
+        contentValues.put(KEY_CHAUSSURES, personnage.chaussures)
+        contentValues.put(KEY_POINT,0)
+        contentValues.put(KEY_LEVEL, personnage.level)
 
         // Updating Row
         val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
