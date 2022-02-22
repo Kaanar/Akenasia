@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/total_players_seen"
-        android:layout_width="196dp"
+        android:layout_width="312dp"
         android:layout_height="22dp"
-        android:text="Joueurs rencontrés: "
-        android:textAlignment="center"
+        android:text="Partenaires d'entrainement différents: "
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toStartOf="@+id/achievements"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
