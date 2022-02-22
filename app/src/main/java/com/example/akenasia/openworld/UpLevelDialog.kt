@@ -63,6 +63,7 @@ class UpLevelDialog : DialogFragment() {
 
             personnageHandler.UpHP(1,3.0)
             txtUpLevel2.visibility = View.VISIBLE
+            Toast.makeText(context,"+3 HP",Toast.LENGTH_SHORT).show()
             dismiss()
         }
 
@@ -70,6 +71,7 @@ class UpLevelDialog : DialogFragment() {
 
             personnageHandler.UpATT(1,5.0)
             txtUpLevel2.visibility = View.VISIBLE
+            Toast.makeText(context,"+5 ATT",Toast.LENGTH_SHORT).show()
             dismiss()
         }
 
@@ -77,6 +79,7 @@ class UpLevelDialog : DialogFragment() {
 
             personnageHandler.UpDEF(1,5.0)
             txtUpLevel2.visibility = View.VISIBLE
+            Toast.makeText(context,"+5 DEF",Toast.LENGTH_SHORT).show()
             dismiss()
         }
 
