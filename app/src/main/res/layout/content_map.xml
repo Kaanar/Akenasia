@@ -43,6 +43,15 @@
         app:layout_constraintTop_toBottomOf="@+id/CameraSwitch"
         app:layout_constraintLeft_toLeftOf="@id/CameraSwitch" />
 
-
+    <ImageButton
+        android:id="@+id/ItemButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/CameraSwitch"
+        app:srcCompat="@drawable/ic_marker_orange"
+        app:layout_constraintLeft_toLeftOf="@+id/OWmap_view"
+        android:layout_marginBottom="75dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/OWmap_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

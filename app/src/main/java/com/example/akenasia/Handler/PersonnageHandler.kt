@@ -70,7 +70,6 @@ class PersonnageHandler(var context: Context): Handler {
         val db = dbHandler.writableDatabase
         val contentValues = ContentValues()
         val personnage = get(1)
-        val id = 1
 
         contentValues.put(KEY_ID, personnage.persoId)
         contentValues.put(KEY_HP, personnage.persoHp)
@@ -83,7 +82,7 @@ class PersonnageHandler(var context: Context): Handler {
         contentValues.put(KEY_ARGENT, emp)
 
         // Updating Row
-        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= $emp ",null)
+        val success = db.update(dbHandler.TABLE_PERSONNAGE, contentValues,"id= ${personnage.persoId} ",null)
         //2nd argument is String containing nullColumnHack
         db.close() // Closing database connection
         return success

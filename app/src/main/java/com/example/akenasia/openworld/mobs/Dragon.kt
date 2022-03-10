@@ -8,7 +8,7 @@ class Dragon : Monstre() {
 
 
     override fun attaque_spe(): Boolean{
-        var nb = (0..5).random()
+        var nb = (1..5).random()
         if(nb == 5){
             atk += 15.0 //le dragon se boost
             return true

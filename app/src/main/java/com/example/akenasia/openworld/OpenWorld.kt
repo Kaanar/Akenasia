@@ -113,6 +113,25 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             this.startActivity(intent)
         }
 
+        ItemButton.setOnClickListener() {
+            if (itemHandler.viewByType(ListItems.GADGET).isNotEmpty()) {
+                val a = itemHandler.viewByType(ListItems.GADGET)[0].getItemid()
+                itemHandler.delete(a)
+                googleMap.addMarker(MarkerOptions()
+                    .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
+                    .title("Un ennemi !")
+                    .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                    .zIndex(1.0f))
+            }
+            else {
+                Toast.makeText(
+                    this,
+                    "Vous n'avez pas de gadget",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -199,13 +218,18 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
                     for(children in snapshot.children){
                         if(children.key!=user.uid){
-                            val latitude = children.child("Position").child("latitude").value
-                            val longitude = children.child("Position").child("longitude").value
+                            var latitude = 0.0
+                            var longitude = 0.0
+                            if(children.child("Position").child("latitude").value  != null) {
+                                latitude = children.child("Position").child("latitude").value as Double
+                                longitude = children.child("Position").child("longitude").value as Double
+                            }
+
                             lesUsers.add(children.key.toString())
 
                             googleMap.addMarker(
                                 MarkerOptions()
-                                    .position(LatLng(latitude as Double,longitude as Double ))
+                                    .position(LatLng(latitude,longitude))
                                     .title(children.key.toString())
                                     .zIndex(1.0f).visible(true)
                             )?.let { playerMarqueurs.add(it) }
@@ -222,7 +246,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             //à chaque tik:
             chronometre.onChronometerTickListener = Chronometer.OnChronometerTickListener {
                 //START Si la position du joueur a changé alors on la met à jour
-                pos.refreshLocation()
+                pos.setLatitude(48.900002)
+                pos.setLongitude(2.2)
                 val loc = LatLng(pos.getLatitude(), pos.getLongitude())
                 CurrentMarkerPosition.remove()
                 CurrentMarkerPosition=googleMap.addMarker(MarkerOptions()
@@ -267,6 +292,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         spawnTime = 0
                         randomPosition = ThreadLocalRandom.current().nextInt(0, 4)
                         randomSpawnTime = ThreadLocalRandom.current().nextInt(40, 300)
+                        Marker.isVisible = false
                     }
                     //si il il click sur un autre joueur
                     Marker.title.toString() in lesUsers -> {
@@ -330,13 +356,19 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         val oldlatitude =playerMarqueurs[nbPlayers].position.latitude
                         val oldlongitude =playerMarqueurs[nbPlayers].position.longitude
                         //calcul de la distance entre les deux positions
-                        deltaPosition= pos.calcul_distance(latitude as Double,longitude as Double,oldlatitude,oldlongitude)
+                        if (latitude != null) {
+                            deltaPosition= pos.calcul_distance(latitude as Double,longitude as Double,oldlatitude,oldlongitude)
+
+                        }
+                        else {
+                            deltaPosition = 0.0
+                        }
                         //Si la distance est >=150 ALORS on remplace le marqueur de l'ancienne position par un nouveau
                         if(deltaPosition>=150){
                             playerMarqueurs[nbPlayers].remove()
                             googleMap.addMarker(
                                 MarkerOptions()
-                                    .position(LatLng(latitude,longitude))
+                                    .position(LatLng(latitude as Double, longitude as Double))
                                     .title(children.key.toString())
                                     .zIndex(1.0f).visible(true)
                             )?.let { playerMarqueurs.add(nbPlayers, it) }
@@ -385,7 +417,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
                     //Si la distance entre le joueur et le lieu est inférieure à 1500m, on affiche le lieu
                     //Ou si ça fait plus d'une minute que le lieu est caché car on a clické dessus
-                    if(distance <1500) {
+                    if(distance <15000000000000000 && marker.id <= 20) {
                         if (marker.visible == 1) {
                             if(markersAdded[index]?.isVisible==false){
                                 markersAdded[index]?.isVisible=true
@@ -461,8 +493,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         catch (e:java.util.NoSuchElementException){
             id=1
         }
-        currentPersonnage.setArgent(2000)
-        personnage.upArgent(currentPersonnage.argent)
+        personnage.upArgent(currentPersonnage.argent+2000)
+        currentPersonnage = personnage.get(1)
         //Toast.makeText(this, currentPersonnage.getArgent().toString(), Toast.LENGTH_LONG).show()
         when (index %4) {
             0 -> { when (type%3){
