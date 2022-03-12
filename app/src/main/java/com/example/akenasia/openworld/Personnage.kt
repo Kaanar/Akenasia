@@ -14,6 +14,7 @@ import com.example.akenasia.R
 import com.example.akenasia.Handler.ItemHandler
 import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.achievement.AchievementFragment
+import com.example.akenasia.amis.Amis
 import com.example.akenasia.authentication.Authentication.Companion.TAG
 import com.example.akenasia.database.*
 import com.google.firebase.auth.FirebaseAuth
@@ -74,6 +75,10 @@ class Personnage: AppCompatActivity() {
 
         binding.achievements.setOnClickListener{
             val intent= Intent(this,AchievementFragment::class.java)
+            this.startActivity(intent)
+        }
+        binding.amis.setOnClickListener{
+            val intent= Intent(this,Amis::class.java)
             this.startActivity(intent)
         }
 

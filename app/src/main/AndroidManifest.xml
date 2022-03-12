@@ -115,6 +115,12 @@
             android:label="signup"
             tools:ignore="Instantiatable" />
 
+        <activity
+            android:name=".amis.Amis"
+            android:exported="true"
+            android:label="amis"
+            tools:ignore="Instantiatable" />
+
     </application>
 
 </manifest>

@@ -76,8 +76,6 @@ class AchievementFragment : AppCompatActivity() {
 
 
     private fun viewRecord(){
-        //calling the viewPlace method of DatabaseHandler class to read the records
-
         //Référencement de la BD au niveau des suucès du user + on trie les succès par ID
         val achievements= database.getReference("User").child(user.uid.toString()).child("Achievement")
         val query: Query = achievements.orderByKey()
@@ -91,7 +89,6 @@ class AchievementFragment : AppCompatActivity() {
         nb =0
         //Query qui permet de récupérer tous les marqueurs de la table
         query.addListenerForSingleValueEvent(object : ValueEventListener {
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 //START on récupère tous les achievements et on stocke les infos dans des ArrayList pour les envoyer
                 //vers l'adapter
