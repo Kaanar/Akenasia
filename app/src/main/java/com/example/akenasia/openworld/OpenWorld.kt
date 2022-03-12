@@ -203,12 +203,22 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                             val longitude = children.child("Position").child("longitude").value
                             lesUsers.add(children.key.toString())
 
-                            googleMap.addMarker(
-                                MarkerOptions()
-                                    .position(LatLng(latitude as Double,longitude as Double ))
-                                    .title(children.key.toString())
-                                    .zIndex(1.0f).visible(true)
-                            )?.let { playerMarqueurs.add(it) }
+                            if(distanceMarker(LatLng(latitude as Double, longitude as Double))>=1500){
+                                googleMap.addMarker(
+                                    MarkerOptions()
+                                        .position(LatLng(latitude as Double,longitude as Double ))
+                                        .title(children.key.toString())
+                                        .zIndex(1.0f).visible(false)
+                                )?.let { playerMarqueurs.add(it) }
+                            }
+                            else {
+                                googleMap.addMarker(
+                                    MarkerOptions()
+                                        .position(LatLng(latitude, longitude))
+                                        .title(children.key.toString())
+                                        .zIndex(1.0f).visible(true)
+                                )?.let { playerMarqueurs.add(it) }
+                            }
                         }
                     }
                 }
@@ -319,6 +329,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var nbPlayers=0
                 var deltaPosition: Double
+                var deltaPositionWithUser: Double
                 //Pour chaque user...
                 for(children in snapshot.children){
                     if(children.key!=user.uid){
@@ -331,8 +342,9 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         val oldlongitude =playerMarqueurs[nbPlayers].position.longitude
                         //calcul de la distance entre les deux positions
                         deltaPosition= pos.calcul_distance(latitude as Double,longitude as Double,oldlatitude,oldlongitude)
+                        deltaPositionWithUser = pos.calcul_distance(latitude, longitude, pos.getLatitude(),pos.getLongitude())
                         //Si la distance est >=150 ALORS on remplace le marqueur de l'ancienne position par un nouveau
-                        if(deltaPosition>=150){
+                        if(deltaPosition>=150 && deltaPositionWithUser<=1500){
                             playerMarqueurs[nbPlayers].remove()
                             googleMap.addMarker(
                                 MarkerOptions()
