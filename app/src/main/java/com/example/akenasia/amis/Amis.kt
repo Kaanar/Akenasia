@@ -43,6 +43,13 @@ class Amis : AppCompatActivity(){
         //END
 
 
+        binding.socialStoreBtn.setOnClickListener{
+            val intent = Intent(this, SocialStore::class.java)
+            this.startActivity(intent)
+        }
+
+        binding.NavigationView.selectedItemId = com.example.akenasia.R.id.PersonnageClick
+
 
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
@@ -103,8 +110,6 @@ class Amis : AppCompatActivity(){
                 }
                 //END
                 ListViewAmis?.adapter= amisAdapter
-                Toast.makeText(this@Amis,empArrayid.size.toString(),Toast.LENGTH_SHORT).show()
-
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.i(Authentication.TAG, "onCancelled: Error: " + error.message);

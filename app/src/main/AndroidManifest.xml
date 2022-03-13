@@ -120,6 +120,11 @@
             android:exported="true"
             android:label="amis"
             tools:ignore="Instantiatable" />
+        <activity
+        android:name=".amis.SocialStore"
+        android:exported="true"
+        android:label="socialstore"
+        tools:ignore="Instantiatable" />
 
     </application>
 
