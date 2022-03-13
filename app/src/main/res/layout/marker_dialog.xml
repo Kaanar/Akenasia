@@ -218,6 +218,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PvMonstre" />
 
+    <TextView
+        android:id="@+id/TypeAttaqueJoueur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/AttaqueJoueur"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TexteJoueurAtt" />
+
+    <TextView
+        android:id="@+id/TypeAttaqueMonstre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text=""
+        app:layout_constraintLeft_toLeftOf="@id/TexteMonstreAtt"
+        app:layout_constraintTop_toBottomOf="@+id/TexteMonstreAtt" />
+
     <Button
         android:id="@+id/BtnRetour"
         android:layout_width="wrap_content"

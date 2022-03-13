@@ -6,6 +6,8 @@ import android.os.SystemClock
 import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.akenasia.databinding.ActivityOpenworldBinding
 import com.example.akenasia.home.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -14,10 +16,14 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.activity_openworld.*
 import kotlinx.android.synthetic.main.content_map.*
 import android.content.res.Resources
+import android.location.Location
+import android.location.LocationListener
+import android.system.Os.remove
 import android.util.Log
-import com.example.akenasia.handler.ItemHandler
-import com.example.akenasia.handler.MarqueurHandler
-import com.example.akenasia.handler.PersonnageHandler
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.akenasia.Handler.ItemHandler
+import com.example.akenasia.Handler.MarqueurHandler
+import com.example.akenasia.Handler.PersonnageHandler
 import com.example.akenasia.achievement.Stats
 import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*
@@ -105,6 +111,25 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         MapShopButton.setOnClickListener() {
             val intent = Intent(this, Shop::class.java)
             this.startActivity(intent)
+        }
+
+        ItemButton.setOnClickListener() {
+            if (itemHandler.viewByType(ListItems.GADGET).isNotEmpty()) {
+                val a = itemHandler.viewByType(ListItems.GADGET)[0].getItemid()
+                itemHandler.delete(a)
+                googleMap.addMarker(MarkerOptions()
+                    .position(LatLng(pos.getLatitude() + randomLat, pos.getLongitude() + randomLong))
+                    .title("Un ennemi !")
+                    .icon(BitmapDescriptorFactory.defaultMarker(HUE_ORANGE))
+                    .zIndex(1.0f))
+            }
+            else {
+                Toast.makeText(
+                    this,
+                    "Vous n'avez pas de gadget",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         //Implémentation des différents choix du menu
@@ -271,6 +296,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
                         spawnTime = 0
                         randomPosition = ThreadLocalRandom.current().nextInt(0, 4)
                         randomSpawnTime = ThreadLocalRandom.current().nextInt(40, 300)
+                        Marker.isVisible = false
                     }
                     //si il il click sur un autre joueur
                     Marker.title.toString() in lesUsers -> {
@@ -447,7 +473,6 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
     fun UpdatePointLevel(){
 
-
         personnage.upPoint(1)
         if(personnage.get(1).points>=150){
             personnage.upLevel(1)
@@ -468,8 +493,8 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         catch (e:java.util.NoSuchElementException){
             id=1
         }
-        currentPersonnage.setArgent(2000)
-        personnage.upArgent(currentPersonnage.argent)
+        personnage.upArgent(currentPersonnage.argent+2000)
+        currentPersonnage = personnage.get(1)
         //Toast.makeText(this, currentPersonnage.getArgent().toString(), Toast.LENGTH_LONG).show()
         when (index %4) {
             0 -> { when (type%3){

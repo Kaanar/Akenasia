@@ -153,7 +153,7 @@ class Forge :  AppCompatActivity(), AdapterView.OnItemClickListener {
     fun refresh() {
         searchRecord()
         currentPersonnage = personnage.get(1)
-        ArgentTxt.text = currentPersonnage.argent.toString()
+        ArgentTxt.text = personnage.get(1).argent.toString()
     }
 
     fun updateForge() : Forge {

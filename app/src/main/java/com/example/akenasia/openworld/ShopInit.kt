@@ -46,7 +46,7 @@ class ShopInit {
             0.0,
             0.0,
             0,
-            10000
+            0
         )
         listShop.add(potionSoin)
         listShop.add(potionDef)

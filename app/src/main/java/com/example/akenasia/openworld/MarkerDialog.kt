@@ -32,84 +32,57 @@ class MarkerDialog : DialogFragment () {
     private var pv_joueur : Double = 0.0
     private var att_joueur : Double = 0.0
     private var def_joueur : Double = 0.0
-    private var mob : Monstre = create_mob()
+    private var mob : Monstre = CreateMob().create_mob() //méthode qui va créer un monstre au hasard
     private var pv_monstre : Double = mob.hp
     private var att_monstre : Double = mob.atk
     private lateinit var itemHandler : ItemHandler
 
 
-    /*
-    On passe le titre et les infos présents de la classe Historique dans le dialog
-    Le dialoque affiche le titre (n° de la position) et les infos (latitude, longitude)
-    en fonction du marqueur sur lequel on clique sur la map de l'historique.
-     */
-
-    fun create_mob(): Monstre {
-        var nb = (0..10).random()
-        var mob : Monstre
-        if(nb == 0 || nb == 1 || nb == 2 || nb == 3 || nb ==4 || nb == 5){
-            mob = Slime()
-            return mob
-        }
-        if(nb == 6 || nb == 7 || nb == 8 || nb == 9){
-            mob = Orc()
-            return mob
-        }
-            mob = Dragon()
-            return mob
-    }
-
     fun crit(): Boolean {
-        var nb = (0..5).random()
+        val nb = (0..5).random()
         if(nb == 1){
             return true
         }
         return false
     }
 
-    fun calcul_degat_joueur(): Double {
-        var crit = crit()
+    private fun calcul_degat_joueur(): Double {
+        val crit = crit()
         if(crit){
-            attaqueInfoJoueur.text = "Vous infligez un coup critique !"
-            Toast.makeText(context,"Vous infligez un coup critique !", Toast.LENGTH_LONG).show()
-            //Thread.sleep(2_000)
-            //attaqueInfoJoueur.text = String.format("Vous infligez %d dégats", att_joueur)
-            //Thread.sleep(2_000)
-            attaqueInfoJoueur.text = ""
+            TypeAttaqueJoueur.text = "Coup critique !"
             return att_joueur*2 // ajouter un message si coup crit
         }
-        //attaqueInfoJoueur.text = String.format("Vous infligez %d dégats", att_joueur)
-        attaqueInfoJoueur.text = "Vous attaquez !"
-        //Thread.sleep(2_000)
-        attaqueInfoJoueur.text = ""
-        return att_joueur
+        else {
+            TypeAttaqueJoueur.text = "Vous attaquez !"
+            return att_joueur
+        }
     }
 
-    fun calcul_degat_monstre(m : Monstre): Double {
-        var crit = crit()
-        var spe = m.attaque_spe()
+    fun calcul_degat_monstre(monstre : Monstre): Double {
+        val crit = crit()
+        val spe = monstre.attaque_spe()
+        val def = def_joueur/5
         if(spe){
-            //Toast.makeText(context,m.texte_spe, Toast.LENGTH_LONG).show() //à remplacer dans un textview
-            attaqueInfoMonstre.text = "Le monstre utilise son attaque spéciale !"
-            //Thread.sleep(2_000)
-            attaqueInfoMonstre.text = String.format("%s", m.texte_spe)
-            //Thread.sleep(2_000)
-            attaqueInfoMonstre.text = ""
-            return m.atk - def_joueur
+            TypeAttaqueMonstre.text = "Attaque spéciale !"
+            if (monstre.atk - def > 1) {
+                return monstre.atk - def
+            }
+            else {
+                return 1.0
+            }
         }
-        if(crit){
-            attaqueInfoMonstre.text = "Le monstre vous inflige un coup critique !"
-            //Thread.sleep(2_000)
-            //attaqueInfoMonstre.text = String.format("Vous perdez %f points de vie.", m.atk*2)
-            attaqueInfoMonstre.text = "Vous prenez des dégats."
-            //Thread.sleep(2_000)
-            attaqueInfoMonstre.text = ""
-            return m.atk*2
+        else if (crit) {
+            TypeAttaqueMonstre.text = "Coup critique !"
+            return monstre.atk*2
         }
-        attaqueInfoMonstre.text = "test"
-        //Thread.sleep(2_000)
-        attaqueInfoMonstre.text = ""
-        return m.atk - def_joueur
+        else {
+            TypeAttaqueMonstre.text = "Attaque normale"
+            if (monstre.atk - def > 1) {
+                return monstre.atk - def
+            } else {
+                return 1.0
+            }
+        }
     }
 
     override fun onCreateView(inflater : LayoutInflater, container : ViewGroup?, saveInstanceState : Bundle?) :
@@ -150,21 +123,11 @@ class MarkerDialog : DialogFragment () {
         rootView.BtnAttaqueMonstre.setOnClickListener() {
 
             pv_monstre -= calcul_degat_joueur()
-            PvMonstre.text = String.format("%.2f", pv_monstre)
             if (pv_monstre <= 0) {
+                PvMonstre.text = "0.0"
                 victoireText.visibility = View.VISIBLE
-                var id:Int
-                try{
-                    id= itemHandler.view().last().getItemid()+1
-                }
-                catch (e:java.util.NoSuchElementException){
-                    id=1
-                }
-                val pick: Int = Random().nextInt(ListItems.values().size)
-                val att = ThreadLocalRandom.current().nextInt(0,5)
-                val def = ThreadLocalRandom.current().nextInt(0,5)
-                this.itemHandler.add(Item(id, ListItems.values()[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble(), 0, 0))
-                Toast.makeText(context,"Vous avez gagné un item surprise", Toast.LENGTH_LONG).show()
+
+                dropItem()
                 
                  //MAJ des stats, +1 monstre vaincu et +1 item récupéré
                 Stats(context!!, 1).upMonstres()
@@ -173,15 +136,25 @@ class MarkerDialog : DialogFragment () {
                 BtnRetour.visibility = View.VISIBLE
                 BtnAttaqueMonstre.visibility = View.INVISIBLE
             }
+            else {
+                PvMonstre.text = String.format("%.2f", pv_monstre)
+            }
 
-            pv_joueur -= calcul_degat_monstre(mob)
-            PvJoueur.text = String.format("%.2f", pv_joueur)
+            if(pv_monstre <= 0) {
 
+            }
+            else {
+                pv_joueur -= calcul_degat_monstre(mob)
 
-            if (pv_joueur <= 0) {
-                defaiteText.visibility = View.VISIBLE
-                BtnRetour.visibility = View.VISIBLE
-                BtnAttaqueMonstre.visibility = View.INVISIBLE
+                if (pv_joueur <= 0) {
+                    PvJoueur.text = "0.0"
+                    defaiteText.visibility = View.VISIBLE
+                    BtnRetour.visibility = View.VISIBLE
+                    BtnAttaqueMonstre.visibility = View.INVISIBLE
+                }
+                else {
+                    PvJoueur.text = String.format("%.2f", pv_joueur)
+                }
             }
         }
 
@@ -196,10 +169,16 @@ class MarkerDialog : DialogFragment () {
         return rootView
     }
 
-    fun setTitle (message : String) {
-        title = message
-    }
-    fun setInfo (message : String) {
-        info = message
+    fun dropItem() {
+        val spinnerList = ArrayList<ListItems>()
+        spinnerList.add(ListItems.BOUCLIER)
+        spinnerList.add(ListItems.EPEE)
+        spinnerList.add(ListItems.ARMURE)
+        spinnerList.add(ListItems.CHAUSSURES)
+        val pick: Int = Random().nextInt(spinnerList.size)
+        val att = ThreadLocalRandom.current().nextInt(0,5)
+        val def = ThreadLocalRandom.current().nextInt(0,5)
+        this.itemHandler.add(Item(itemHandler.view().last().getItemid()+1, spinnerList[pick].toString(),"Un item surprise!","A voir où vous allez pouvoir l'équiper",att.toDouble(),def.toDouble(), 0, 0))
+        Toast.makeText(context,"Vous avez gagné un item surprise", Toast.LENGTH_LONG).show()
     }
 }
