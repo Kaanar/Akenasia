@@ -77,6 +77,16 @@
         app:layout_constraintStart_toEndOf="@+id/player_stats_linear_layout"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/amis"
+        android:layout_width="98dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:text="Amis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/player_stats_linear_layout"
+        app:layout_constraintTop_toBottomOf="@+id/achievements" />
+
     <LinearLayout
         android:id="@+id/chaussures"
         android:layout_width="100dp"

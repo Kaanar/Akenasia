@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import com.example.akenasia.R
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.openworld.Personnage
 
 

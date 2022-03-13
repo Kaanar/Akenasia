@@ -9,18 +9,15 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.akenasia.Handler.DatabaseHandler
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.R
 import com.example.akenasia.adapter.ShopListAdapter
 import com.example.akenasia.database.Item
-import com.example.akenasia.database.ItemType
 import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.databinding.ShopBinding
 import com.example.akenasia.home.MainActivity
-import kotlinx.android.synthetic.main.bag.*
 import kotlinx.android.synthetic.main.shop.*
 import java.util.ArrayList
 

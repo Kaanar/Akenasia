@@ -6,11 +6,10 @@ import android.os.Looper
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.PlaceHandler
-import com.example.akenasia.Handler.PositionHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.PlaceHandler
+import com.example.akenasia.handler.PositionHandler
 import com.example.akenasia.database.Item
-import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.Place
 import com.example.akenasia.database.Position
 import com.example.akenasia.game.CoupsLimites

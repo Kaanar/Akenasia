@@ -1,4 +1,4 @@
-package com.example.akenasia.Handler
+package com.example.akenasia.handler
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

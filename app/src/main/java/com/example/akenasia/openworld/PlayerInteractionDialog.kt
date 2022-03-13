@@ -1,6 +1,7 @@
 package com.example.akenasia.openworld
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.R
 import com.example.akenasia.authentication.Authentication.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +17,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.playerinteractiondialog.view.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class PlayerInteractionDialog : DialogFragment() {
 
@@ -45,6 +48,14 @@ class PlayerInteractionDialog : DialogFragment() {
 
         rootView.BtnPartir.setOnClickListener {
             dismiss()
+        }
+
+        rootView.BtnAmi.setOnClickListener{
+            database.getReference("User").child(user.uid.toString()).child("Amis").child("Liste").child(playeruid).child("Date").setValue(LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE))
+            database.getReference("User").child(user.uid.toString()).child("Amis").child("Liste").child(playeruid).child("isSent").setValue(0)
+            Toast.makeText(thiscontext,"Ami ajouté!", Toast.LENGTH_SHORT).show()
+            rootView.BtnAmi.isClickable=false
+            rootView.BtnAmi.setBackgroundColor(Color.GRAY)
         }
 
         //Si il décide de s'entrainer

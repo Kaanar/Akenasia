@@ -1,19 +1,16 @@
 package com.example.akenasia.openworld
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.test.core.app.ApplicationProvider
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.database.PersonnageTable
-import kotlinx.android.synthetic.main.forge.*
 import kotlinx.android.synthetic.main.forge_dialog.view.*
 
 class ForgeDialog : DialogFragment() {

@@ -1,4 +1,4 @@
-package com.example.akenasia.Handler
+package com.example.akenasia.handler
 
 import android.content.ContentValues
 import android.content.Context
@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import com.example.akenasia.database.Item
 import com.example.akenasia.database.PersonnageTable
-import com.example.akenasia.openworld.Personnage
 import kotlin.system.exitProcess
 
 class PersonnageHandler(var context: Context): Handler {

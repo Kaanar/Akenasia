@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/PointsSociauxTv"
+        android:layout_width="189dp"
+        android:layout_height="30dp"
+        android:text="Points sociaux:"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/shopLinearLayout"
+        android:layout_width="409dp"
+        android:layout_height="639dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/NavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PointsSociauxTv">
+
+        <TextView
+            android:id="@+id/expTV"
+            android:layout_width="253dp"
+            android:layout_height="wrap_content"
+            android:text="30 exp"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/expBtn"
+            android:layout_width="152dp"
+            android:layout_height="74dp"
+            android:text="Echanger (10 pts)"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NavigationView"
+        android:layout_width="409dp"
+        android:layout_height="62dp"
+        android:layout_below="@+id/shopLinearLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:menu="@menu/menu_navigateur" />
+
+    <TextView
+        android:id="@+id/PointsSociauxNombreTv"
+        android:layout_width="220dp"
+        android:layout_height="28dp"
+        android:text=""
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PointsSociauxTv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
