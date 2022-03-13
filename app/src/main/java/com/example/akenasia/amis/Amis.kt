@@ -31,7 +31,6 @@ class Amis : AppCompatActivity(){
     private lateinit var database: FirebaseDatabase
     private lateinit var user: FirebaseAuth
     //END
-    private var usersPseudos: HashMap<String,String> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,20 +42,7 @@ class Amis : AppCompatActivity(){
         user = Firebase.auth
         //END
 
-        val users= database.getReference("User")
-        val query: Query = users.orderByKey()
 
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (children in snapshot.children) {
-                    usersPseudos[children.key.toString()] = children.child("pseudo").value.toString()
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Log.i(Authentication.TAG, "onCancelled: Error: " + error.message);
-            }
-
-        })
 
         //Implémentation des différents choix du menu
         binding.NavigationView.setOnItemSelectedListener { item ->
@@ -93,36 +79,32 @@ class Amis : AppCompatActivity(){
         //Référencement de la BD au niveau des suucès du user + on trie les succès par ID
         val amis= database.getReference("User").child(user.uid.toString()).child("Amis").child("Liste")
         val query: Query = amis.orderByKey()
-        var nb=1000
 
-        val empArrayid : Array<String> = Array(nb){"0"}
-        val empArrayPseudo : Array<String> = Array(nb){"0"}
-        val empArrayDate : Array<String> = Array(nb){"0"}
-        val empIsSent : Array<String> = Array(nb){"0"}
+        val empArrayid : ArrayList<String> = ArrayList()
+        val empArrayDate : ArrayList<String> = ArrayList()
+        val empIsSent : ArrayList<String> = ArrayList()
+        val amisAdapter = AmisAdapter(this,empArrayid,empArrayDate,empIsSent)
 
-        nb=0
+
         //Query qui permet de récupérer les infos des amis du joueurs
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 //START on récupère tous les achievements et on stocke les infos dans des ArrayList pour les envoyer
                 //vers l'adapter
                 for (children in snapshot.children) {
-                    val id = children.key.toString()
-                    val date = children.child("Date").value.toString()
-                    val isSent = children.child("isSent").value.toString()
-                    empArrayid[nb]=id
-                    empArrayDate[nb]=date
-                    empIsSent[nb]=isSent
-                    //On compare l'id de chaque user dans les amis aves la liste des joueurs
-                    //Si c'est le même (ils sont amis), alors on ajoute le pseudo dans l'arrayList
-                    for(pseudos in usersPseudos){
-                        if(pseudos.key==children.key){
-                            empArrayPseudo[nb]=pseudos.value
-                        }
+                    if(user.uid.toString()!=children.key.toString()){
+                        val id = children.key.toString()
+                        val date = children.child("Date").value.toString()
+                        val isSent = children.child("isSent").value.toString()
+                        empArrayid.add(id)
+                        empArrayDate.add(date)
+                        empIsSent.add(isSent)
                     }
-                    nb++
                 }
                 //END
+                ListViewAmis?.adapter= amisAdapter
+                Toast.makeText(this@Amis,empArrayid.size.toString(),Toast.LENGTH_SHORT).show()
+
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.i(Authentication.TAG, "onCancelled: Error: " + error.message);
@@ -130,11 +112,8 @@ class Amis : AppCompatActivity(){
 
 
         })
-        Toast.makeText(this@Amis,empArrayid.size.toString(),Toast.LENGTH_SHORT).show()
 
         //creating custom ArrayAdapter
-        val amisAdapter = AmisAdapter(this,empArrayid,empArrayPseudo,empArrayDate,empIsSent)
-        ListViewAmis?.adapter= amisAdapter
     }
 
     

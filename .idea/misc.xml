@@ -14,13 +14,8 @@
         <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/alexr/OneDrive/Bureau/Akenasia/Code/Akenasia/app/src/main/res/layout/geolocalisation.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_achievement_list.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_add_item.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_bag.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_baseline_backpack_24.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_build.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_checked.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_coin.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_map.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_more.xml" value="0.1" />
@@ -31,48 +26,29 @@
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_settings.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_stop.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_timer.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/ic_unchecked.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/drawable/shape_background.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/achievements_listview.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/activity_game.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/activity_openworld.xml" value="0.10052083333333334" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/bag.xml" value="0.10052083333333334" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/bag_dialog.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/chaud_froid.xml" value="0.22" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/content_map.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/custom_list.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/forge.xml" value="0.22" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/forge_dialog.xml" value="0.22" />
+        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/forge.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/item_dialog.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/items_listview.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/itemtype_listview.xml" value="0.10597826086956522" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/personnage.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/place_listview.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/poi_dialog.xml" value="0.1" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/shop.xml" value="0.12" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/shop_dialog.xml" value="0.22" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/shop_listview.xml" value="0.22" />
-        <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/layout/shop_test.xml" value="0.1" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/menu/menu_main.xml" value="0.10052083333333334" />
         <entry key="..\:/Users/paulg/Akenasia2/Akenasia/app/src/main/res/menu/menu_navigateur.xml" value="0.22" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/achievements.xml" value="0.2151268115942029" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/authentication.xml" value="0.1" />
+        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/achievements.xml" value="0.12604166666666666" />
+        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/achievements_listview.xml" value="0.12604166666666666" />
+        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/amis.xml" value="0.12604166666666666" />
+        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/amis_listview.xml" value="0.2" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/bag.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/database.xml" value="0.1766304347826087" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/historique_dialog.xml" value="0.22010869565217392" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/homepage.xml" value="0.1" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/item_dialog.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/items_list_2.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/items_listview.xml" value="0.536" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/itemtype_listview.xml" value="0.536" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/marker_dialog.xml" value="0.264" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/personnage.xml" value="0.1716485507246377" />
+        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/personnage.xml" value="0.4" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/place_listview.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/playerinteractiondialog.xml" value="0.2" />
         <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/poi_dialog.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/signin.xml" value="0.4" />
-        <entry key="..\:/Users/sefka/OneDrive/Bureau/Akenasia/app/src/main/res/layout/signup.xml" value="0.6414473684210527" />
       </map>
     </option>
   </component>

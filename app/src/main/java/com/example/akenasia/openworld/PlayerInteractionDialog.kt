@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.R
 import com.example.akenasia.authentication.Authentication.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth

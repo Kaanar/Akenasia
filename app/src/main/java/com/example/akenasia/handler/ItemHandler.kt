@@ -1,4 +1,4 @@
-package com.example.akenasia.Handler
+package com.example.akenasia.handler
 
 import android.content.ContentValues
 import android.content.Context

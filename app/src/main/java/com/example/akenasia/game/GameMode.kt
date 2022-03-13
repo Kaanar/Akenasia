@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.akenasia.R
-import com.example.akenasia.Handler.PlaceHandler
+import com.example.akenasia.handler.PlaceHandler
 import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.GameModeBinding
 

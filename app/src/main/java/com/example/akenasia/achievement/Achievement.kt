@@ -1,8 +1,5 @@
 package com.example.akenasia.achievement
 
-import android.content.Context
-import com.example.akenasia.Handler.AchievementHandler
-
 class Achievement() {
     //var achievementHandler= AchievementHandler(context)
 

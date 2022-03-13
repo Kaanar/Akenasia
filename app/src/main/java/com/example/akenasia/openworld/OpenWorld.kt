@@ -6,8 +6,6 @@ import android.os.SystemClock
 import android.widget.Chronometer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import com.example.akenasia.databinding.ActivityOpenworldBinding
 import com.example.akenasia.home.MainActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -16,14 +14,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.activity_openworld.*
 import kotlinx.android.synthetic.main.content_map.*
 import android.content.res.Resources
-import android.location.Location
-import android.location.LocationListener
-import android.system.Os.remove
 import android.util.Log
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.MarqueurHandler
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.MarqueurHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.achievement.Stats
 import com.example.akenasia.database.*
 import com.google.android.gms.maps.model.*

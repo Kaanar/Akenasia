@@ -1,25 +1,19 @@
 package com.example.akenasia.achievement
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.akenasia.Handler.AchievementHandler
+import com.example.akenasia.handler.AchievementHandler
 import com.example.akenasia.R
 import com.example.akenasia.adapter.AchievementAdapter
 import com.example.akenasia.authentication.Authentication.Companion.TAG
-import com.example.akenasia.database.Marqueur
 import com.example.akenasia.databinding.AchievementsBinding
 import com.example.akenasia.home.MainActivity
 import com.example.akenasia.openworld.Bag
 import com.example.akenasia.openworld.OpenWorld
 import com.example.akenasia.openworld.Personnage
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*

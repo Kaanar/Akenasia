@@ -1,4 +1,4 @@
-package com.example.akenasia.Handler
+package com.example.akenasia.handler
 
 interface Handler {
 

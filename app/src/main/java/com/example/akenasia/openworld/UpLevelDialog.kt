@@ -7,25 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.R
-import com.example.akenasia.achievement.Stats
-import com.example.akenasia.database.Item
-import com.example.akenasia.database.ListItems
 import com.example.akenasia.database.PersonnageTable
-import com.example.akenasia.openworld.mobs.Dragon
-import com.example.akenasia.openworld.mobs.Monstre
-import com.example.akenasia.openworld.mobs.Orc
-import com.example.akenasia.openworld.mobs.Slime
-import kotlinx.android.synthetic.main.marker_dialog.*
-import kotlinx.android.synthetic.main.marker_dialog.BtnRetour
-import kotlinx.android.synthetic.main.marker_dialog.view.*
-import kotlinx.android.synthetic.main.marker_dialog.view.BtnRetour
 import kotlinx.android.synthetic.main.uplevel_dialog.*
 import kotlinx.android.synthetic.main.uplevel_dialog.view.*
-import java.util.*
-import java.util.concurrent.ThreadLocalRandom
 
 class UpLevelDialog : DialogFragment() {
 
