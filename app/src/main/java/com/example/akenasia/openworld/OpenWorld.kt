@@ -339,6 +339,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         }
     }
 
+
     private fun viewPlayers() {
         //Référencement de la BD au niveau des users + on trie les users par ID
         val users= database.getReference("User")
