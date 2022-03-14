@@ -8,9 +8,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.akenasia.authentication.Authentication
+import com.example.akenasia.database.Item
 import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.databinding.AmisBinding
 import com.example.akenasia.databinding.SocialstoreBinding
+import com.example.akenasia.handler.ItemHandler
 import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.home.MainActivity
 import com.example.akenasia.openworld.*
@@ -27,6 +29,7 @@ class SocialStore : AppCompatActivity(){
     private lateinit var user: FirebaseAuth
     private lateinit var personnage: PersonnageHandler
     private lateinit var currentPersonnage: PersonnageTable
+    private lateinit var item: ItemHandler
 
 
 
@@ -40,6 +43,7 @@ class SocialStore : AppCompatActivity(){
         user = Firebase.auth
         //END
         personnage = PersonnageHandler(this)
+        item = ItemHandler(this)
 
         currentPersonnage=personnage.get(1)
 
@@ -107,7 +111,13 @@ class SocialStore : AppCompatActivity(){
         for (e in 1..10){
             personnage.upPoint(1)
             if(personnage.get(1).points>=150){
+                //on augmente de level
                 personnage.upLevel(1)
+                //on augmente les stats de tous les items
+                val listeItem= item.view()
+                for(e in listeItem){
+                    item.upItemStats(e)
+                }
                 val dialog = UpLevelDialog()
                 val navHostFragment = supportFragmentManager
                 dialog.show(navHostFragment, "UpLevelDialog")
