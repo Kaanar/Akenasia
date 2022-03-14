@@ -61,6 +61,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
     //END
     private lateinit var personnage: PersonnageHandler
     private lateinit var currentPersonnage: PersonnageTable
+    private lateinit var item: ItemHandler
     //Valeurs LatLong
     private var randomLat = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
     private var randomLong = ThreadLocalRandom.current().nextDouble(0.0001,0.0009)
@@ -79,6 +80,7 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
         itemHandler= ItemHandler(this)
         marqueurHandler= MarqueurHandler(this)
         personnage = PersonnageHandler(this)
+        item = ItemHandler(this)
 
         currentPersonnage=personnage.get(1)
         markers= HashMap()
@@ -470,7 +472,13 @@ class OpenWorld : AppCompatActivity(),OnMapReadyCallback {
 
         personnage.upPoint(1)
         if(personnage.get(1).points>=150){
+            //on augmente de level
             personnage.upLevel(1)
+            //on augmente les stats de tous les items
+            val listeItem= item.view()
+            for(e in listeItem){
+                item.upItemStats(e)
+            }
             val dialog = UpLevelDialog()
             val navHostFragment = supportFragmentManager
             dialog.show(navHostFragment, "UpLevelDialog")
