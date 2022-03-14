@@ -183,6 +183,7 @@ class ItemHandler(var context: Context): Handler {
         return success
     }
 
+
     //On augmente les stats de l'item de 1 en atk et 1 en déf
     fun upItem(emp: Item): Int {
         val db = dbHandler.writableDatabase
@@ -194,6 +195,26 @@ class ItemHandler(var context: Context): Handler {
         contentValues.put(KEY_ATT, emp.ItemAtt+1)
         contentValues.put(KEY_DEF, emp.ItemDef+1)
         contentValues.put(KEY_UPGRADE, emp.nb_Upgrade+1)
+        contentValues.put(KEY_PRIX, emp.ItemPrix)
+
+        // Updating Row
+        val success = db.update(dbHandler.TABLE_ITEM, contentValues,"id= "+ emp.Itemid,null)
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
+    //On augmente les stats de l'item de 1 en atk et 1 en déf
+    fun upItemStats(emp: Item): Int {
+        val db = dbHandler.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID, emp.Itemid)
+        contentValues.put(KEY_TYPE, emp.ItemType)
+        contentValues.put(KEY_NAME, emp.ItemName)
+        contentValues.put(KEY_DESC, emp.ItemDesc)
+        contentValues.put(KEY_ATT, emp.ItemAtt+1)
+        contentValues.put(KEY_DEF, emp.ItemDef+1)
+        contentValues.put(KEY_UPGRADE, emp.nb_Upgrade)
         contentValues.put(KEY_PRIX, emp.ItemPrix)
 
         // Updating Row
