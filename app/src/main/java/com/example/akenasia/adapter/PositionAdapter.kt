@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.akenasia.R
-import com.example.akenasia.Handler.DatabaseHandler
+import com.example.akenasia.handler.DatabaseHandler
 
 
 class PositionAdapter(private val context: Activity,private val id: Array<String>, private val lat: Array<String>, private val long: Array<String>, private val partie: Array<String>) : ArrayAdapter<String>(context,

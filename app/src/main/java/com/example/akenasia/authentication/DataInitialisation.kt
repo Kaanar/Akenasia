@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class DataInitialisation(val id: String, val email: String, val password: String, val pseudo: String) {
 
@@ -20,6 +22,7 @@ class DataInitialisation(val id: String, val email: String, val password: String
         //Création de l'objet user pour le jeu
         val user= User(email, password, pseudo)
         database.getReference("User").child(auth.uid.toString()).setValue(user)
+        database.getReference("User").child(auth.uid.toString()).child("last_visited").setValue(System.currentTimeMillis())
         //START initialisation des Achievements
         for ((index, e) in achievements.data_init().withIndex()){
             val achievement: com.example.akenasia.database.Achievement = com.example.akenasia.database.Achievement(index,e,0)
@@ -31,8 +34,11 @@ class DataInitialisation(val id: String, val email: String, val password: String
         database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalMonstre").setValue(0)
         database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalItem").setValue(0)
         database.getReference("User").child(auth.uid.toString()).child("Stats").child("TotalJoueurs").child(auth.uid.toString()).setValue(pseudo)
-
         //END
+        //START initialisation des ressources sociales
+        database.getReference("User").child(auth.uid.toString()).child("Amis").child("Social_Points").setValue(0.0)
+        database.getReference("User").child(auth.uid.toString()).child("Amis").child("Liste").child(auth.uid.toString()).child("Date").setValue(LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE))
+        database.getReference("User").child(auth.uid.toString()).child("Amis").child("Liste").child(auth.uid.toString()).child("isSent").setValue(0)
         //START initialisation de la position
         database.getReference("User").child(auth.uid.toString()).child("Position").child("latitude").setValue(0.0)
         database.getReference("User").child(auth.uid.toString()).child("Position").child("longitude").setValue(0.0)

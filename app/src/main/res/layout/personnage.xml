@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/total_players_seen"
-        android:layout_width="196dp"
+        android:layout_width="312dp"
         android:layout_height="22dp"
-        android:text="Joueurs rencontrés: "
-        android:textAlignment="center"
+        android:text="Partenaires d'entrainement différents: "
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toStartOf="@+id/achievements"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,6 +76,16 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/player_stats_linear_layout"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/amis"
+        android:layout_width="98dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:text="Amis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/player_stats_linear_layout"
+        app:layout_constraintTop_toBottomOf="@+id/achievements" />
 
     <LinearLayout
         android:id="@+id/chaussures"

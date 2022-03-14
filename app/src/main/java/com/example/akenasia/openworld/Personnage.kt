@@ -4,16 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
 import com.example.akenasia.databinding.PersonnageBinding
 import com.example.akenasia.home.MainActivity
 import com.example.akenasia.R
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.achievement.AchievementFragment
+import com.example.akenasia.amis.Amis
 import com.example.akenasia.authentication.Authentication.Companion.TAG
 import com.example.akenasia.database.*
 import com.google.firebase.auth.FirebaseAuth
@@ -74,6 +72,10 @@ class Personnage: AppCompatActivity() {
 
         binding.achievements.setOnClickListener{
             val intent= Intent(this,AchievementFragment::class.java)
+            this.startActivity(intent)
+        }
+        binding.amis.setOnClickListener{
+            val intent= Intent(this,Amis::class.java)
             this.startActivity(intent)
         }
 

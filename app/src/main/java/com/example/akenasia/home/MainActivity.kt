@@ -2,27 +2,21 @@ package com.example.akenasia.home
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import android.location.LocationRequest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.akenasia.databinding.ActivityMainBinding
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.gms.location.*
 
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.akenasia.Handler.AchievementHandler
-import com.example.akenasia.Handler.MarqueurHandler
-import com.example.akenasia.Handler.PersonnageHandler
-import com.example.akenasia.Handler.StatsHandler
+import com.example.akenasia.handler.AchievementHandler
+import com.example.akenasia.handler.MarqueurHandler
+import com.example.akenasia.handler.PersonnageHandler
+import com.example.akenasia.handler.StatsHandler
 import com.example.akenasia.R
-import com.example.akenasia.achievement.Achievement
-import com.example.akenasia.database.PersonnageTable
 import com.example.akenasia.database.Position
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.LatLng
-import java.util.concurrent.ThreadLocalRandom
 
 
 class MainActivity : AppCompatActivity() {

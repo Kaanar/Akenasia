@@ -12,9 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.akenasia.adapter.MyListAdapter
 import com.example.akenasia.R
-import com.example.akenasia.Handler.DatabaseHandler
 import com.example.akenasia.database.Place
-import com.example.akenasia.Handler.PlaceHandler
+import com.example.akenasia.handler.PlaceHandler
 import com.example.akenasia.database.Position
 import com.example.akenasia.databinding.DatabaseBinding
 import kotlinx.android.synthetic.main.database.*

@@ -1,4 +1,4 @@
-package com.example.akenasia.Handler
+package com.example.akenasia.handler
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -10,7 +10,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 ), Handler {
 
     companion object {
-        private val DATABASE_VERSION = 25
+        private val DATABASE_VERSION = 26
         private val DATABASE_NAME = "AkenasiaDatabase"
     }
 

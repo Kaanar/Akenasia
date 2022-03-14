@@ -8,10 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.akenasia.R
 import com.example.akenasia.database.Item
-import com.example.akenasia.Handler.ItemHandler
-import com.example.akenasia.Handler.PersonnageHandler
+import com.example.akenasia.handler.ItemHandler
+import com.example.akenasia.handler.PersonnageHandler
 import com.example.akenasia.database.PersonnageTable
-import kotlinx.android.synthetic.main.forge_dialog.view.*
 import kotlinx.android.synthetic.main.shop_dialog.view.*
 
 class ShopDialog : DialogFragment() {
@@ -40,7 +39,12 @@ class ShopDialog : DialogFragment() {
                 Toast.makeText(context, "Pas assez d'argent", Toast.LENGTH_LONG).show()
             }
             else {
-                item.Itemid = this.itemHandler.view().last().getItemid() + 1
+                try{
+                    item.Itemid = this.itemHandler.view().last().getItemid() + 1
+                }
+                catch (e:java.util.NoSuchElementException){
+                    item.Itemid = 1
+                }
                 personnage.upArgent(currentPersonnage.argent-item.getItemPrix())
                 currentPersonnage = personnage.get(1)
                 this.itemHandler.add(item)

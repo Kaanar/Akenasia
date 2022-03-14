@@ -10,7 +10,7 @@ class Slime : Monstre() {
 
 
     override fun attaque_spe(): Boolean{
-        var nb = (0..100).random()
+        var nb = (1..100).random()
         if(nb == 100){
             atk = 1000000.0 //attaque où le slime nous one shot (il nous mange)
             return true

@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.akenasia.home.MainActivity
 import com.example.akenasia.R
-import com.example.akenasia.Handler.PlaceHandler
-import com.example.akenasia.Handler.PositionHandler
+import com.example.akenasia.handler.PlaceHandler
+import com.example.akenasia.handler.PositionHandler
 import com.example.akenasia.database.*
 import com.example.akenasia.databinding.CoupsLimitesBinding
 import kotlinx.android.synthetic.main.coups_limites.*

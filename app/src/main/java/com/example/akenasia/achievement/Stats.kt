@@ -2,8 +2,8 @@ package com.example.akenasia.achievement
 
 import android.content.Context
 import android.widget.Toast
-import com.example.akenasia.Handler.AchievementHandler
-import com.example.akenasia.Handler.StatsHandler
+import com.example.akenasia.handler.AchievementHandler
+import com.example.akenasia.handler.StatsHandler
 
 class Stats(context:Context, idJoueur: Int) {
         var thiscontext=context
